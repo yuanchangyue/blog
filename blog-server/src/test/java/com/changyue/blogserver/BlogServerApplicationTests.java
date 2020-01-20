@@ -1,19 +1,10 @@
 package com.changyue.blogserver;
 
-import com.changyue.blogserver.elastic.model.Article;
-import io.searchbox.client.JestClient;
-import io.searchbox.core.Index;
-import io.searchbox.core.Search;
-import io.searchbox.core.SearchResult;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.io.IOException;
 
 @SpringBootTest
 class BlogServerApplicationTests {
-
+/*
     @Autowired
     JestClient jestClient;
 
@@ -50,6 +41,6 @@ class BlogServerApplicationTests {
         }
 
 
-    }
+    }*/
 
 }

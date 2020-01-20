@@ -1,5 +1,6 @@
 package com.changyue.esjpa;
 
+<<<<<<< HEAD
 import com.changyue.esjpa.model.EsBlog;
 import com.changyue.esjpa.repository.EsBlogRepository;
 import org.junit.Test;
@@ -7,6 +8,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+=======
+>>>>>>> 581777cc227a7ea37fc0411b3a7a9ad1ced306a4
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

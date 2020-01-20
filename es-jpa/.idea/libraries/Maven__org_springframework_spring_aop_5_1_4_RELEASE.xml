@@ -1,4 +1,5 @@
 <component name="libraryTable">
+<<<<<<< HEAD:es-jpa/.idea/libraries/Maven__org_springframework_spring_aop_5_1_4_RELEASE.xml
   <library name="Maven: org.springframework:spring-aop:5.1.4.RELEASE">
     <CLASSES>
       <root url="jar://$MAVEN_REPOSITORY$/org/springframework/spring-aop/5.1.4.RELEASE/spring-aop-5.1.4.RELEASE.jar!/" />
@@ -8,6 +9,17 @@
     </JAVADOC>
     <SOURCES>
       <root url="jar://$MAVEN_REPOSITORY$/org/springframework/spring-aop/5.1.4.RELEASE/spring-aop-5.1.4.RELEASE-sources.jar!/" />
+=======
+  <library name="Maven: org.springframework:spring-orm:5.2.3.RELEASE">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/springframework/spring-orm/5.2.3.RELEASE/spring-orm-5.2.3.RELEASE.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/springframework/spring-orm/5.2.3.RELEASE/spring-orm-5.2.3.RELEASE-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/springframework/spring-orm/5.2.3.RELEASE/spring-orm-5.2.3.RELEASE-sources.jar!/" />
+>>>>>>> 581777cc227a7ea37fc0411b3a7a9ad1ced306a4:blog-server/.idea/libraries/Maven__org_springframework_spring_orm_5_2_3_RELEASE.xml
     </SOURCES>
   </library>
 </component>

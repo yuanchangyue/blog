@@ -1,0 +1,26 @@
+#数据源 jpa
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://47.93.193.94:3306/blogdb?characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: root
+    password: 123456
+  jpa:
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: validate
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+        format_sql: true
+    show-sql: true
+
+#日志
+logging:
+  level:
+    com.changyue.blogserver: INFO
+  file:
+    path: ${user.home}/.blogserver/logs
+
+#端口号
+server:
+  port: 8089

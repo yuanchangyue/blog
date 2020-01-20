@@ -1,6 +1,6 @@
 package com.changyue.blogserver;
 
-import com.changyue.blogserver.elastic.model.Article;
+import com.changyue.blogserver.model.elsatic.Article;
 import io.searchbox.client.JestClient;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;

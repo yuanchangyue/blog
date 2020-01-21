@@ -2,6 +2,7 @@ package com.changyue.blogserver.repository;
 
 import com.changyue.blogserver.model.entity.User;
 import com.changyue.blogserver.repository.base.BaseRepository;
+import lombok.NonNull;
 
 import javax.validation.constraints.Null;
 import java.util.Optional;
@@ -20,7 +21,7 @@ public interface UserRepository extends BaseRepository<User, Integer> {
      * @param username 用户名
      * @return 用户
      */
-    Optional<User> findByUsername(@Null String username);
+    Optional<User> findByUsername(@NonNull String username);
 
     /**
      * 通过电子邮件获取用户.
@@ -28,6 +29,6 @@ public interface UserRepository extends BaseRepository<User, Integer> {
      * @param email 电子邮件不能为空
      * @return 用户
      */
-    Optional<User> findByEmail(@Null String email);
+    Optional<User> findByEmail(@NonNull String email);
 
 }

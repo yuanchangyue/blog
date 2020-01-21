@@ -38,7 +38,7 @@ public class Photo extends BaseEntity {
      */
     @Column(name = "take_time", columnDefinition = "timestamp default CURRENT_TIMESTAMP")
     @Temporal(TemporalType.TIMESTAMP)
-    private LocalDateTime takeTime;
+    private Date takeTime;
 
     /**
      * 照片地点

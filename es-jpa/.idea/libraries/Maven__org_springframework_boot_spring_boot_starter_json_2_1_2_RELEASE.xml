@@ -1,0 +1,25 @@
+<component name="libraryTable">
+<<<<<<< HEAD:es-jpa/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_json_2_1_2_RELEASE.xml
+  <library name="Maven: org.springframework.boot:spring-boot-starter-json:2.1.2.RELEASE">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-starter-json/2.1.2.RELEASE/spring-boot-starter-json-2.1.2.RELEASE.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-starter-json/2.1.2.RELEASE/spring-boot-starter-json-2.1.2.RELEASE-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-starter-json/2.1.2.RELEASE/spring-boot-starter-json-2.1.2.RELEASE-sources.jar!/" />
+=======
+  <library name="Maven: org.springframework.boot:spring-boot-starter-data-jpa:2.2.3.RELEASE">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-starter-data-jpa/2.2.3.RELEASE/spring-boot-starter-data-jpa-2.2.3.RELEASE.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-starter-data-jpa/2.2.3.RELEASE/spring-boot-starter-data-jpa-2.2.3.RELEASE-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-starter-data-jpa/2.2.3.RELEASE/spring-boot-starter-data-jpa-2.2.3.RELEASE-sources.jar!/" />
+>>>>>>> 581777cc227a7ea37fc0411b3a7a9ad1ced306a4:blog-server/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_data_jpa_2_2_3_RELEASE.xml
+    </SOURCES>
+  </library>
+</component>

@@ -8,6 +8,7 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 
 /**
@@ -19,7 +20,6 @@ import java.time.LocalDateTime;
 @Data
 @Entity()
 @Table(name = "posts")
-@DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.INTEGER, columnDefinition = "int default 0")
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public class Post extends BaseEntity {
@@ -107,7 +107,7 @@ public class Post extends BaseEntity {
      */
     @Column(name = "edit_time", columnDefinition = "timestamp default CURRENT_TIMESTAMP")
     @Temporal(TemporalType.TIMESTAMP)
-    private LocalDateTime editTime;
+    private Date editTime;
 
     @Override
     public void prePersist() {

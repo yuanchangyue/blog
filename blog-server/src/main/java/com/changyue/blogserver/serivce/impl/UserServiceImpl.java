@@ -1,13 +1,15 @@
 package com.changyue.blogserver.serivce.impl;
 
+import com.changyue.blogserver.even.UserEven;
 import com.changyue.blogserver.model.entity.User;
 import com.changyue.blogserver.model.params.UserParam;
 import com.changyue.blogserver.repository.UserRepository;
 import com.changyue.blogserver.serivce.UserService;
-import org.apache.catalina.startup.HomesUserDatabase;
+import com.changyue.blogserver.serivce.base.CurdServiceImpl;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
@@ -17,14 +19,14 @@ import java.util.Optional;
  * @author: ChangYue
  * @create: 2020-01-20 16:24
  */
-public class UserServiceImpl implements UserService {
+@Service
+public class UserServiceImpl extends CurdServiceImpl<User, Integer> implements UserService {
 
     @Autowired
     private UserRepository userRepository;
 
     @Autowired
     private ApplicationEventPublisher applicationEventPublisher;
-
 
     @Override
     public Optional<User> getCurrentUser() {
@@ -61,11 +63,8 @@ public class UserServiceImpl implements UserService {
 
         User user = new User();
         BeanUtils.copyProperties(userParam, user);
-
-
-
-        userRepository.save(user);
-
+        User saveUser = userRepository.save(user);
+        applicationEventPublisher.publishEvent(new UserEven(this, saveUser.getId()));
         return user;
     }
 

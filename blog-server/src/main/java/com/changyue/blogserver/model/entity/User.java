@@ -55,13 +55,6 @@ public class User extends BaseEntity {
     @Column(name = "description", columnDefinition = "varchar(1023) default ''")
     private String description;
 
-    /**
-     * 到期时间
-     */
-    @Column(name = "expire_time", columnDefinition = "timestamp default CURRENT_TIMESTAMP")
-    @Temporal(TemporalType.TIMESTAMP)
-    private LocalDateTime expireTime;
-
 
     @Override
     public void prePersist() {
@@ -81,8 +74,5 @@ public class User extends BaseEntity {
             description = "";
         }
 
-        if (expireTime == null) {
-            expireTime = LocalDateTime.now();
-        }
     }
 }

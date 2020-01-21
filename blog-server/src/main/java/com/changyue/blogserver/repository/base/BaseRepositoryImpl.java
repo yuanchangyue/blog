@@ -21,6 +21,7 @@ import java.util.List;
  */
 @Slf4j
 public class BaseRepositoryImpl<DOMAIN, ID> extends SimpleJpaRepository<DOMAIN, ID> implements BaseRepository<DOMAIN, ID> {
+
     private final JpaEntityInformation<DOMAIN, ID> entityInformation;
 
     private final EntityManager entityManager;
@@ -30,7 +31,6 @@ public class BaseRepositoryImpl<DOMAIN, ID> extends SimpleJpaRepository<DOMAIN, 
         this.entityInformation = entityInformation;
         this.entityManager = entityManager;
     }
-
 
     @Override
     public List<DOMAIN> findAllByIdIn(Collection<ID> ids, Sort sort) {
@@ -56,4 +56,6 @@ public class BaseRepositoryImpl<DOMAIN, ID> extends SimpleJpaRepository<DOMAIN, 
     public long deleteByIdIn(Collection collection) {
         return 0;
     }
+
+
 }

@@ -3,7 +3,6 @@ package com.changyue.blogserver.model.base;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -14,19 +13,20 @@ import java.util.Date;
  */
 @Data
 public class BaseEntity {
+
     /**
      * 创建时间
      */
     @Column(name = "create_time", columnDefinition = "timestamp default CURRENT_TIMESTAMP")
     @Temporal(TemporalType.TIMESTAMP)
-    private LocalDateTime createTime;
+    private Date createTime;
 
     /**
      * 更新时间
      */
     @Column(name = "update_time", columnDefinition = "timestamp default CURRENT_TIMESTAMP")
     @Temporal(TemporalType.TIMESTAMP)
-    private LocalDateTime updateTime;
+    private Date updateTime;
 
     /**
      * 删除标识
@@ -40,11 +40,10 @@ public class BaseEntity {
     @PrePersist
     protected void prePersist() {
         deleted = false;
-        LocalDateTime now = LocalDateTime.now();
+        Date now = new Date();
         if (createTime == null) {
             createTime = now;
         }
-
         if (updateTime == null) {
             updateTime = now;
         }
@@ -52,12 +51,12 @@ public class BaseEntity {
 
     @PreUpdate
     protected void preUpdate() {
-        updateTime = LocalDateTime.now();
+        updateTime = new Date();
     }
 
     @PreRemove
     protected void preRemove() {
-        updateTime = LocalDateTime.now();
+        updateTime = new Date();
     }
 
 

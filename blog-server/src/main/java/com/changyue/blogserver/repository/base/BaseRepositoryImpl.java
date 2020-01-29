@@ -49,12 +49,12 @@ public class BaseRepositoryImpl<DOMAIN, ID> extends SimpleJpaRepository<DOMAIN, 
 
     @Override
     public Page findAllByIdIn(Collection collection, Pageable pageable) {
+
         return null;
     }
 
     @Override
     public long deleteByIdIn(Collection collection) {
-
         return 0;
     }
 

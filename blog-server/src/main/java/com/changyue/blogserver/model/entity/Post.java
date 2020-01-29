@@ -20,7 +20,6 @@ import java.util.Date;
 @Data
 @Entity()
 @Table(name = "posts")
-@DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.INTEGER, columnDefinition = "int default 0")
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public class Post extends BaseEntity {

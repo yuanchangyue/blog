@@ -4,7 +4,7 @@ import com.changyue.blogserver.model.entity.Tag;
 import com.changyue.blogserver.repository.base.BaseRepository;
 import org.springframework.lang.NonNull;
 
-import javax.validation.constraints.NotNull;
+
 import java.util.Optional;
 
 /**
@@ -22,8 +22,7 @@ public interface TagRepository extends BaseRepository<Tag, Integer> {
      * @param slugName 标签别名不能为null
      * @return 标签数量
      */
-    long countByNameOrSlugName(@NotNull String name, @NotNull String slugName);
-
+    long countByNameOrSlugName(@NonNull String name, @NonNull String slugName);
 
     /**
      * 按别名获取标签
@@ -31,7 +30,7 @@ public interface TagRepository extends BaseRepository<Tag, Integer> {
      * @param slugName 别名
      * @return 标签
      */
-    Optional<Tag> getBySlugName(@NotNull String slugName);
+    Optional<Tag> getBySlugName(@NonNull String slugName);
 
     /**
      * 按名称获取标签
@@ -40,6 +39,5 @@ public interface TagRepository extends BaseRepository<Tag, Integer> {
      * @return 标签
      */
     Optional<Tag> getByName(@NonNull String name);
-
 
 }

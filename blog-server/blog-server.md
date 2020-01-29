@@ -48,7 +48,9 @@ show-sql 是否在日志中打印出自动生成的 SQL，方便调试的时候�
 
 
 
-
+## 角色管理系统
+`RBAC`: Role-Based Access Control  基于角色的访问控制
+### Spring Security 
 
 
 

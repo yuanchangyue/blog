@@ -4,6 +4,7 @@ import com.changyue.blogserver.model.dto.TagDTO;
 import com.changyue.blogserver.model.entity.Tag;
 import com.changyue.blogserver.model.params.TagParam;
 import com.changyue.blogserver.repository.TagRepository;
+import com.changyue.blogserver.serivce.PostTagService;
 import com.changyue.blogserver.serivce.TagService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -26,6 +27,9 @@ public class TagController {
 
     @Autowired
     private TagService tagService;
+
+    @Autowired
+    private PostTagService postTagService;
 
     @PostMapping
     public TagDTO createTag(@Valid @RequestBody TagParam tagParam) {
@@ -62,7 +66,10 @@ public class TagController {
     @DeleteMapping("/{tagTag}")
     public TagDTO deleteTag(@PathVariable("tagTag") Integer tagId) {
 
+        //删除tag
         Tag tag = tagService.removeById(tagId);
+
+        postTagService.removePostTag(tagId);
 
         return tagService.convertTo(tag);
     }

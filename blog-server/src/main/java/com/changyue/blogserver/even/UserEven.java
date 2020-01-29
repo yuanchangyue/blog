@@ -1,6 +1,7 @@
 package com.changyue.blogserver.even;
 
 import org.springframework.context.ApplicationEvent;
+
 import org.springframework.util.Assert;
 
 import javax.validation.constraints.NotNull;

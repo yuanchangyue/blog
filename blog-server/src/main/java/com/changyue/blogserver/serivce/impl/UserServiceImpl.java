@@ -64,7 +64,6 @@ public class UserServiceImpl extends CurdServiceImpl<User, Integer> implements U
         User user = new User();
         BeanUtils.copyProperties(userParam, user);
         User saveUser = userRepository.save(user);
-
         applicationEventPublisher.publishEvent(new UserEven(this, saveUser.getId()));
         return user;
     }

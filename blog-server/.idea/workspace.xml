@@ -3,6 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="bd5d3fba-cd88-41d7-b10b-952045a6ce54" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/even/UserEven.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/even/UserEven.java" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/base/BaseEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/base/BaseEntity.java" afterDir="false" />
+>>>>>>> 5e1b26bf0a4aa00aa4468be5b3c700b39f88b35b
+>>>>>>> f6998c3b7c74c0154344be149e2fda42a3639e0b
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -185,7 +193,8 @@
       <workItem from="1579398056903" duration="229000" />
       <workItem from="1579502284835" duration="669000" />
       <workItem from="1579502962116" duration="2126000" />
-      <workItem from="1579505150629" duration="8045000" />
+      <workItem from="1579505150629" duration="8229000" />
+      <workItem from="1579566572721" duration="131000" />
     </task>
     <servers />
   </component>

@@ -41,11 +41,6 @@ public class TagServiceImpl extends CurdServiceImpl<Tag, Integer> implements Tag
     }
 
     @Override
-    public Tag getBySlugNameOfNonNull(String slugName) {
-        return null;
-    }
-
-    @Override
     public Tag getBySlugName(String slugName) {
         return tagRepository.getBySlugName(slugName).orElse(null);
     }

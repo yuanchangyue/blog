@@ -18,13 +18,13 @@ import java.util.List;
 public interface TagService extends CrudService<Tag, Integer> {
 
     /**
-     * Get tag by slug name
+     * 按子弹名称获取标签
      *
      * @param slugName slug name
      * @return Tag
      */
-    @NonNull
-    Tag getBySlugNameOfNonNull(@NonNull String slugName);
+/*    @NonNull
+    Tag getBySlugNameOfNonNull(@NonNull String slugName);*/
 
     /**
      * Get tag by slug name

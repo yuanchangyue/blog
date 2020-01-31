@@ -2,14 +2,13 @@ package com.changyue.blogserver.serivce;
 
 import com.changyue.blogserver.model.entity.User;
 import com.changyue.blogserver.model.params.UserParam;
-import com.changyue.blogserver.serivce.base.CrudService;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 
 import java.util.Optional;
 
 
-public interface UserService extends CrudService<User, Integer> {
+public interface UserService extends BaseService<User, Integer> {
 
     /**
      * 获取当前用户。

@@ -24,8 +24,8 @@ public abstract class BlogException extends RuntimeException {
         super(message, cause);
     }
 
-    @NonNull
     public abstract HttpStatus getStatus();
+
     /**
      * 设置错误的数据
      *

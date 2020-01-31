@@ -3,7 +3,6 @@ package com.changyue.blogserver.repository;
 import com.changyue.blogserver.model.entity.PostTag;
 import com.changyue.blogserver.repository.base.BaseRepository;
 import lombok.NonNull;
-import org.springframework.data.jpa.repository.Query;
 
 import javax.annotation.Nonnull;
 import java.util.List;
@@ -22,7 +21,7 @@ public interface PostTagRepository extends BaseRepository<PostTag, Integer> {
      * @return List<PostTag>
      */
     @NonNull
-    @Query("select pt.tagId from PostTag pt where pt.postId =?1")
+    //@Query("select pt.tagId from PostTag pt where pt.postId =?1")
     Set<Integer> findAllByPostId(@NonNull Integer postId);
 
     /**

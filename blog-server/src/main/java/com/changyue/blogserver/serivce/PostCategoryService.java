@@ -3,7 +3,7 @@ package com.changyue.blogserver.serivce;
 import com.changyue.blogserver.model.entity.Category;
 import com.changyue.blogserver.model.entity.Post;
 import com.changyue.blogserver.model.entity.PostCategory;
-import com.changyue.blogserver.serivce.base.CrudService;
+import com.github.pagehelper.PageInfo;
 import lombok.NonNull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,7 +17,7 @@ import java.util.List;
  * @author: 袁阊越
  * @create: 2020-01-22 21:37
  */
-public interface PostCategoryService extends CrudService<PostCategory, Integer> {
+public interface PostCategoryService extends BaseService<PostCategory, Integer> {
     /**
      * 按文章ID列出类别。
      *
@@ -51,11 +51,10 @@ public interface PostCategoryService extends CrudService<PostCategory, Integer> 
      * 按类别信息名称命名(分页)。
      *
      * @param categoryId 类别ID不能为null
-     * @param pageable   分页
      * @return 文章页面
      */
     @NonNull
-    Page<Post> pagePostBy(@NonNull Integer categoryId, Pageable pageable);
+    PageInfo<Post> pagePostBy(@NonNull Integer categoryId);
 
     /**
      * 通过帖子ID删除文章类别。

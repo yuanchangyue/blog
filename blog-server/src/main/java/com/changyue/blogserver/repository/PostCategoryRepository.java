@@ -4,7 +4,6 @@ package com.changyue.blogserver.repository;
 import com.changyue.blogserver.model.entity.PostCategory;
 import com.changyue.blogserver.repository.base.BaseRepository;
 import lombok.NonNull;
-import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 import java.util.Set;
@@ -24,7 +23,7 @@ public interface PostCategoryRepository extends BaseRepository<PostCategory, Int
      * @return 文章类别列表
      */
     @NonNull
-    @Query("select pc.categoryId from PostCategory pc where pc.postId =?1")
+   /* @Query("select pc.categoryId from PostCategory pc where pc.postId =?1")*/
     Set<Integer> findAllCategoryIdsByPostId(@NonNull Integer postId);
 
     /**
@@ -34,7 +33,7 @@ public interface PostCategoryRepository extends BaseRepository<PostCategory, Int
      * @return 文章id
      */
     @NonNull
-    @Query("select pc.postId from PostCategory pc where pc.categoryId = ?1")
+    //@Query("select pc.postId from PostCategory pc where pc.categoryId = ?1")
     Set<Integer> findAllPostIdsByCategoryId(@NonNull Integer categoryId);
 
     /**
@@ -45,7 +44,7 @@ public interface PostCategoryRepository extends BaseRepository<PostCategory, Int
      * @return 文章id列表
      */
     @NonNull
-    @Query("select postCategory.postId from PostCategory postCategory, Post post where postCategory.categoryId = ?1 and post.id = postCategory.postId and post.status = ?2")
+    //@Query("select postCategory.postId from PostCategory postCategory, Post post where postCategory.categoryId = ?1 and post.id = postCategory.postId and post.status = ?2")
     Set<Integer> findAllPostIdsByCategoryId(@NonNull Integer categoryId, @NonNull Integer status);
 
     /**

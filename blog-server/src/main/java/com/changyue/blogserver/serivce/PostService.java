@@ -3,7 +3,6 @@ package com.changyue.blogserver.serivce;
 import com.changyue.blogserver.model.entity.Post;
 import com.changyue.blogserver.model.params.PostParam;
 import com.changyue.blogserver.model.params.PostQuery;
-import com.changyue.blogserver.serivce.base.CrudService;
 import lombok.NonNull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,7 +14,7 @@ import java.util.Set;
 /**
  * @author Administrator
  */
-public interface PostService extends CrudService<Post, Integer> {
+public interface PostService extends BaseService<Post, Integer> {
 
     /**
      * 分页的文章

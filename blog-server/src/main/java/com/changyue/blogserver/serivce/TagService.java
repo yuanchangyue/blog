@@ -2,63 +2,41 @@ package com.changyue.blogserver.serivce;
 
 import com.changyue.blogserver.model.dto.TagDTO;
 import com.changyue.blogserver.model.entity.Tag;
-import com.changyue.blogserver.serivce.base.CrudService;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 
-import java.util.List;
-
 /**
- * @program: blog-server
- * @description: 标签业务接口
- * @author: 袁阊越
- * @create: 2020-01-20 21:14
+ * @author : 袁阊越
+ * @date : 2020-01-20 21:14
+ * @description : 标签业务接口
  */
-
-public interface TagService extends CrudService<Tag, Integer> {
+public interface TagService extends BaseService<Tag, Integer> {
 
     /**
      * 按子弹名称获取标签
      *
      * @param slugName slug name
-     * @return Tag
-     */
-/*    @NonNull
-    Tag getBySlugNameOfNonNull(@NonNull String slugName);*/
-
-    /**
-     * Get tag by slug name
-     *
-     * @param slugName slug name
      * @return tag
      */
-    @NonNull
+    @Nullable
     Tag getBySlugName(@NonNull String slugName);
 
     /**
-     * Get tag by tag name.
+     * 按标签名称获取标签。
      *
-     * @param name name
+     * @param tagName 名称
      * @return Tag
      */
     @Nullable
-    Tag getByName(@NonNull String name);
+    Tag getByName(@NonNull String tagName);
 
     /**
-     * Converts to tag dto.
+     * 转换为标签dto。
      *
-     * @param tag tag must not be null
+     * @param tag 标记不能为null
      * @return tag dto
      */
     @NonNull
     TagDTO convertTo(@NonNull Tag tag);
 
-    /**
-     * Converts to tag dtos.
-     *
-     * @param tags tag list
-     * @return a list of tag output dto
-     */
-    @NonNull
-    List<TagDTO> convertTo(@Nullable List<Tag> tags);
 }

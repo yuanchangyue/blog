@@ -18,7 +18,7 @@ import org.springframework.test.context.junit4.SpringRunner;
  * @create: 2020-01-20 19:32
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest()
+@SpringBootTest
 public class UserServiceTest {
     @Autowired
     private UserService userService;

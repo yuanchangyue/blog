@@ -3,8 +3,6 @@ package com.changyue.blogserver.repository.base;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.lang.NonNull;
 
 import java.util.Collection;
@@ -17,8 +15,7 @@ import java.util.List;
  * @create: 2020-01-20 15:53
  */
 //
-@NoRepositoryBean
-public interface BaseRepository<DOMAIN, ID> extends JpaRepository<DOMAIN, ID> {
+public interface BaseRepository<DOMAIN, ID> {
     /**
      * 通过id查找全部
      *

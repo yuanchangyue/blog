@@ -1,5 +1,7 @@
 package com.changyue.blogserver.serivce.impl;
 
+import com.changyue.blogserver.dao.CategoryMapper;
+import com.changyue.blogserver.dao.PostCategoryMapper;
 import com.changyue.blogserver.model.entity.Category;
 import com.changyue.blogserver.model.entity.Post;
 import com.changyue.blogserver.model.entity.PostCategory;
@@ -7,13 +9,17 @@ import com.changyue.blogserver.repository.CategoryRepository;
 import com.changyue.blogserver.repository.PostCategoryRepository;
 import com.changyue.blogserver.repository.PostRepository;
 import com.changyue.blogserver.serivce.PostCategoryService;
-import com.changyue.blogserver.serivce.base.CurdServiceImpl;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.util.Assert;
+import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -22,25 +28,22 @@ import java.util.Set;
  * @author: 袁阊越
  * @create: 2020-01-22 21:36
  */
-public class PostCategoryServiceImpl extends CurdServiceImpl<PostCategory, Integer> implements PostCategoryService {
+public class PostCategoryServiceImpl implements PostCategoryService {
 
     @Autowired
-    private PostCategoryRepository postCategoryRepository;
+    private PostCategoryMapper postCategoryMapper;
 
     @Autowired
-    private PostRepository postRepository;
-
-    @Autowired
-    private CategoryRepository categoryRepository;
+    private CategoryMapper categoryMapper;
 
     @Override
     public List<Category> listCategoryPostId(Integer postId) {
 
         Assert.notNull(postId, "文章id不能为空");
 
-        Set<Integer> categoryIds = postCategoryRepository.findAllCategoryIdsByPostId(postId);
+        Set<Integer> categoryIds = postCategoryMapper.findAllCategoryIdsByPostId(postId);
 
-        return categoryRepository.findAllById(categoryIds);
+        return categoryMapper.findAllById(categoryIds);
     }
 
     @Override
@@ -48,9 +51,10 @@ public class PostCategoryServiceImpl extends CurdServiceImpl<PostCategory, Integ
 
         Assert.notNull(categoryId, "类别ID不能为空");
 
-        Set<Integer> postIds = postCategoryRepository.findAllPostIdsByCategoryId(categoryId);
+        Set<Integer> postIds = postCategoryMapper.findAllPostIdsByCategoryId(categoryId);
 
-        return postRepository.findAllById(postIds);
+        //return postRepository.findAllById(postIds);
+        return null;
     }
 
     @Override
@@ -59,31 +63,73 @@ public class PostCategoryServiceImpl extends CurdServiceImpl<PostCategory, Integ
         Assert.notNull(categoryId, "类别ID不能为空");
         Assert.notNull(categoryId, "文章状态不得为空");
 
-        Set<Integer> postIds = postCategoryRepository.findAllPostIdsByCategoryId(categoryId, status);
+        Set<Integer> postIds = postCategoryMapper.findAllPostIdsByCategoryId(categoryId, status);
 
-        return postRepository.findAllById(postIds);
+        //return postRepository.findAllById(postIds);
+        return null;
     }
 
     @Override
-    public Page<Post> pagePostBy(Integer categoryId, Pageable pageable) {
+    public PageInfo<Post> pagePostBy(Integer categoryId) {
 
         Assert.notNull(categoryId, "类别ID不能为空");
-        Assert.notNull(pageable, "页面信息不能为空");
 
-        Set<Integer> postIds = postCategoryRepository.findAllPostIdsByCategoryId(categoryId);
 
-        return postRepository.findAllByIdIn(postIds, pageable);
+        Set<Integer> postIds = postCategoryMapper.findAllPostIdsByCategoryId(categoryId);
+
+        return null;
     }
 
     @Override
     public List<PostCategory> removeByPostId(Integer postId) {
-        Assert.notNull(postId, "postId不能为null");
-        return postCategoryRepository.deleteByPostId(postId);
+        Assert.notNull(postId, "postId不能为空");
+        return postCategoryMapper.deleteByPostId(postId);
     }
 
     @Override
     public List<PostCategory> removeByCategoryId(Integer categoryId) {
         Assert.notNull(categoryId, "类别ID不能为空");
-        return postCategoryRepository.deleteByCategoryId(categoryId);
+        return postCategoryMapper.deleteByCategoryId(categoryId);
     }
+
+    /**
+     * 全部列表
+     *
+     * @return List
+     */
+    @Override
+    public List<PostCategory> listAll() {
+        return postCategoryMapper.listAll();
+    }
+
+    /**
+     * 列出所有页面
+     *
+     * @param pageIndex 页索引
+     * @param pageSize  页数
+     * @return 分页列表
+     */
+    @Override
+    public PageInfo<PostCategory> listAll(Integer pageIndex, Integer pageSize) {
+        Assert.notNull(pageIndex, "pageIndex 不能为空");
+        Assert.notNull(pageSize, "pageSize 不能为空");
+
+        PageHelper.startPage(pageIndex, 5);
+        List<PostCategory> postCategories = postCategoryMapper.listAll();
+
+        return new PageInfo<>(postCategories, 3);
+    }
+
+    /**
+     * 通过ID获取
+     *
+     * @param id id
+     * @return Optional
+     */
+    @Override
+    public Optional<PostCategory> getById(Integer id) {
+        Assert.notNull(id, "id 不能为空");
+        return postCategoryMapper.selectByPrimaryKey(id);
+    }
+
 }

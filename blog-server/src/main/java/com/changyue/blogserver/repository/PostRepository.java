@@ -3,8 +3,6 @@ package com.changyue.blogserver.repository;
 import com.changyue.blogserver.model.entity.Post;
 import com.changyue.blogserver.repository.base.BaseRepository;
 import com.tdunning.math.stats.Sort;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.lang.NonNull;
 
@@ -26,7 +24,7 @@ public interface PostRepository extends BaseRepository<Post, Integer> {
      *
      * @return 点赞数
      */
-    @Query("select sum(likes) from Post")
+    //@Query("select sum(likes) from Post")
     Long countLike();
 
     /**
@@ -71,8 +69,8 @@ public interface PostRepository extends BaseRepository<Post, Integer> {
      * @param postId 文章ID不能为null
      * @return 更新的行
      */
-    @Modifying
-    @Query("update Post p set p.likes=p.likes + :likes where p.id= :postId")
+    //@Modifying
+    ////@Query("update Post p set p.likes=p.likes + :likes where p.id= :postId")
     int updateLikes(@Param("likes") long likes, @Param("postId") @Nonnull Integer postId);
 
     /**
@@ -82,8 +80,8 @@ public interface PostRepository extends BaseRepository<Post, Integer> {
      * @param postId 文章Id
      * @return 更新的行
      */
-    @Modifying
-    @Query("update Post p set p.status = :status where p.id = :postId")
+    //@Modifying
+    //@Query("update Post p set p.status = :status where p.id = :postId")
     int updateStatus(@Param("status") @NonNull Integer status, @Param("postId") @NonNull Integer postId);
 
     /**
@@ -93,8 +91,8 @@ public interface PostRepository extends BaseRepository<Post, Integer> {
      * @param postId  文章Id不能为null
      * @return 更新的行
      */
-    @Modifying
-    @Query("update Post p set p.originalContent = :content where p.id = :postId")
+    //@Modifying
+    //@Query("update Post p set p.originalContent = :content where p.id = :postId")
     int updateOriginalContent(@Param("content") @NonNull String content, @Param("postId") @NonNull Integer postId);
 
 
@@ -105,8 +103,8 @@ public interface PostRepository extends BaseRepository<Post, Integer> {
      * @param postId        文章ID不能为null.
      * @return 更新的行
      */
-    @Modifying
-    @Query("update Post p set p.formatContent = :formatContent where p.id = :postId")
+    //@Modifying
+    //@Query("update Post p set p.formatContent = :formatContent where p.id = :postId")
     int updateFormatContent(@Param("formatContent") @NonNull String formatContent, @Param("postId") @NonNull Integer postId);
 
 }

@@ -3,13 +3,11 @@ package com.changyue.blogserver.controller;
 import com.changyue.blogserver.model.dto.TagDTO;
 import com.changyue.blogserver.model.entity.Tag;
 import com.changyue.blogserver.model.params.TagParam;
-import com.changyue.blogserver.repository.TagRepository;
 import com.changyue.blogserver.serivce.PostTagService;
 import com.changyue.blogserver.serivce.TagService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -47,7 +45,7 @@ public class TagController {
 
     @GetMapping("/{tagId}")
     public TagDTO getById(@PathVariable("tagId") Integer tagId) {
-        return tagService.convertTo(tagService.getById(tagId));
+        return tagService.convertTo(tagService.getById(tagId).orElse(null));
     }
 
     @PutMapping("/{tagId}")
@@ -55,7 +53,7 @@ public class TagController {
                            @Valid @RequestBody TagParam tagParam) {
 
         //获得tag
-        Tag tag = tagService.getById(tagId);
+        Tag tag = tagService.getById(tagId).orElse(null);
 
         //将tag中值更新为tagParam
         tagParam.update(tag);
@@ -64,13 +62,8 @@ public class TagController {
     }
 
     @DeleteMapping("/{tagTag}")
-    public TagDTO deleteTag(@PathVariable("tagTag") Integer tagId) {
-
+    public void deleteTag(@PathVariable("tagTag") Integer tagId) {
         //删除tag
-        Tag tag = tagService.removeById(tagId);
-
-        postTagService.removePostTag(tagId);
-
-        return tagService.convertTo(tag);
+        tagService.removeById(tagId);
     }
 }

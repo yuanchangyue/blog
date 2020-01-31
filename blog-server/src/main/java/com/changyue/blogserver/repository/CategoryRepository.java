@@ -3,6 +3,7 @@ package com.changyue.blogserver.repository;
 import com.changyue.blogserver.model.entity.Category;
 import com.changyue.blogserver.repository.base.BaseRepository;
 import org.springframework.lang.NonNull;
+import org.springframework.stereotype.Repository;
 
 import javax.annotation.Nonnull;
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.Optional;
  * @author: 袁阊越
  * @create: 2020-01-22 17:14
  */
+
 public interface CategoryRepository extends BaseRepository<Category, Integer> {
 
     /**

@@ -2,7 +2,6 @@ package com.changyue.blogserver.serivce;
 
 import com.changyue.blogserver.model.dto.CategoryDTO;
 import com.changyue.blogserver.model.entity.Category;
-import com.changyue.blogserver.serivce.base.CrudService;
 import org.springframework.lang.NonNull;
 
 import java.util.List;
@@ -13,7 +12,7 @@ import java.util.List;
  * @author: 袁阊越
  * @create: 2020-01-22 17:22
  */
-public interface CategoryService extends CrudService<Category, Integer> {
+public interface CategoryService extends BaseService<Category, Integer> {
 
     /**
      * 按别名获取类别
@@ -39,7 +38,6 @@ public interface CategoryService extends CrudService<Category, Integer> {
      * @return 类别列表
      */
     List<Category> listByParentId(@NonNull Integer id);
-
 
     /**
      * 装换为DTO

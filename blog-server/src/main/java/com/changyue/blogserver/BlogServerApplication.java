@@ -1,9 +1,8 @@
 package com.changyue.blogserver;
 
-import com.changyue.blogserver.repository.base.BaseRepositoryImpl;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 
 /**
@@ -11,7 +10,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
  * @date 2020/1/18/018
  */
 @SpringBootApplication
-@EnableJpaRepositories(basePackages = "com.changyue.blogserver.repository", repositoryBaseClass = BaseRepositoryImpl.class)
+//@EnableJpaRepositories(basePackages = "com.changyue.blogserver.repository", repositoryBaseClass = BaseRepositoryImpl.class)
+@MapperScan("com.changyue.blogserver.dao")
 public class BlogServerApplication {
 
     public static void main(String[] args) {

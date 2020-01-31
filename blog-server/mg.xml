@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+
+        <!-- 生成toString -->
+        <!--<plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>-->
+
+        <commentGenerator>
+            <!-- 注释生成 -->
+            <property value="true" name="suppressAllComments"/>
+            <!--生成的注释包含时间戳-->
+            <property name="suppressDate" value="true"/>
+        </commentGenerator>
+
+        <!-- 配置数据库连接信息 -->
+        <jdbcConnection password="123456" userId="root"
+                        connectionURL="jdbc:mysql://47.93.193.94:3306/blogdb"
+                        driverClass="com.mysql.jdbc.Driver"/>
+
+        <javaTypeResolver>
+            <property value="false" name="forceBigDecimals"/>
+        </javaTypeResolver>
+
+        <!-- 指定javabean 生成的位置 -->
+        <javaModelGenerator targetProject=".\src\main\java" targetPackage="com.changyue.blogserver.entity">
+            <property value="true" name="enableSubPackages"/>
+            <property value="true" name="trimStrings"/>
+        </javaModelGenerator>
+
+        <!-- 指定sql映射文件的位置 -->
+        <sqlMapGenerator targetPackage="mapper" targetProject=".\src\main\resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+
+        <!--指定dao生成的位置-->
+        <javaClientGenerator targetProject=".\src\main\java" targetPackage="com.changyue.blogserver.dao"
+                             type="XMLMAPPER">
+            <property value="true" name="enableSubPackages"/>
+        </javaClientGenerator>
+
+        <!--指定表-->
+        <table domainObjectName="User" tableName="users" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"
+               selectByExampleQueryId="false"/>
+
+        <table domainObjectName="Tag" tableName="tags" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"
+               selectByExampleQueryId="false"/>
+
+        <table domainObjectName="Category" tableName="categories" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"
+               selectByExampleQueryId="false"/>
+
+        <table domainObjectName="Photo" tableName="photos" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"
+               selectByExampleQueryId="false"/>
+
+        <table domainObjectName="Log" tableName="logs" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"
+               selectByExampleQueryId="false"/>
+
+        <table domainObjectName="PostTag" tableName="post_tags" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"
+               selectByExampleQueryId="false"/>
+
+        <table domainObjectName="PostCategory" tableName="post_categories" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"
+               selectByExampleQueryId="false"/>
+
+    </context>
+</generatorConfiguration>

@@ -2,8 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bd5d3fba-cd88-41d7-b10b-952045a6ce54" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mindrot_jbcrypt_0_4.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog-server.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog-server.iml" beforeDir="false" afterPath="$PROJECT_DIR$/blog-server.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/dao/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/dao/UserMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/entity/Category.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/entity/Log.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/entity/Photo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/entity/Post.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/entity/PostCategory.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/entity/PostTag.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/entity/PostWithBLOBs.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/entity/Tag.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/entity/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/UserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/UserMapper.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -236,7 +251,8 @@
       <workItem from="1580443008243" duration="27666000" />
       <workItem from="1580517365865" duration="14084000" />
       <workItem from="1580693862421" duration="4816000" />
-      <workItem from="1580699360845" duration="19030000" />
+      <workItem from="1580699360845" duration="19644000" />
+      <workItem from="1580729141838" duration="4170000" />
     </task>
     <servers />
   </component>
@@ -270,10 +286,10 @@
     </state>
     <state x="393" y="44" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1579525434735" />
     <state x="552" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1579506354533" />
-    <state x="544" y="129" key="#com.intellij.ide.util.MemberChooser" timestamp="1580720912739">
+    <state x="544" y="129" key="#com.intellij.ide.util.MemberChooser" timestamp="1580733121252">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="544" y="129" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1580720912739" />
+    <state x="544" y="129" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1580733121252" />
     <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1579509312320" />
     <state x="573" y="286" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1579518513168">
       <screen x="0" y="0" width="1366" height="728" />
@@ -284,10 +300,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="437" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1366.728@0.0.1366.728" timestamp="1580707422546" />
-    <state x="413" y="130" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1580461512394">
+    <state x="413" y="130" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1580729546915">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="413" y="130" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728@0.0.1366.728" timestamp="1580461512394" />
+    <state x="413" y="130" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728@0.0.1366.728" timestamp="1580729546915" />
     <state x="229" y="0" key="#org.jetbrains.kotlin.idea.refactoring.safeDelete.KotlinOverridingDialog" timestamp="1580456373265">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -369,10 +385,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="347" y="176" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1580481374436" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1580721366184">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1580731613112">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1580721366184" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1580731613112" />
     <state x="486" y="70" width="945" height="969" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1579507306804" />
   </component>
   <component name="XDebuggerManager">

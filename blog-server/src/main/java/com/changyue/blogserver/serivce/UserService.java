@@ -9,14 +9,14 @@ import java.util.Optional;
 
 
 public interface UserService extends BaseService<User, Integer> {
-
-    /**
+    /*
+     *//**
      * 获取当前用户。
      *
      * @return user
-     */
+     *//*
     @NonNull
-    Optional<User> getCurrentUser();
+    Optional<User> getCurrentUser();*/
 
     /**
      * 通过用户名获取用户。
@@ -27,14 +27,18 @@ public interface UserService extends BaseService<User, Integer> {
     @NonNull
     Optional<User> getByUsername(@NonNull String username);
 
-    /**
-     * 通过用户名获取非null用户。
-     *
-     * @param username 用户名
-     * @return 用户信息
+    /*
      */
+/**
+ * 通过用户名获取非null用户。
+ *
+ * @param username 用户名
+ * @return 用户信息
+ *//*
+
     @NonNull
     User getByUsernameOfNonNull(@NonNull String username);
+*/
 
     /**
      * 通过电子邮件获取用户。
@@ -45,14 +49,14 @@ public interface UserService extends BaseService<User, Integer> {
     @NonNull
     Optional<User> getByEmail(@NonNull String email);
 
-    /**
+    /*  *//**
      * 通过电子邮件获取非null用户。
      *
      * @param email 电子邮件
      * @return 用户信息
-     */
+     *//*
     @NonNull
-    User getByEmailOfNonNull(@NonNull String email);
+    User getByEmailOfNonNull(@NonNull String email);*/
 
     /**
      * 更新用户密码.
@@ -76,6 +80,14 @@ public interface UserService extends BaseService<User, Integer> {
     User createBy(@NonNull UserParam userParam);
 
     /**
+     * 通过userId查找用户
+     *
+     * @param userId 用户id
+     * @return 用户
+     */
+    User getByUserId(Integer userId);
+
+    /**
      * 检查密码是否与用户密码匹配。
      *
      * @param user          用户信息不能为空
@@ -83,6 +95,15 @@ public interface UserService extends BaseService<User, Integer> {
      * @return 如果给定的密码与用户密码匹配，则为true；否则为true。否则为假
      */
     boolean passwordMatch(@NonNull User user, @Nullable String plainPassword);
+
+    /**
+     * 验证用户
+     *
+     * @param username 用户名
+     * @param password 密码
+     * @return 是否信息匹配
+     */
+    boolean verifyUser(@NonNull String username, @NonNull String password);
 
 
 }

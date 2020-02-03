@@ -15,27 +15,22 @@ public class BaseEntity {
     /**
      * 创建时间
      */
-
     private Date createTime;
 
     /**
      * 更新时间
      */
-
     private Date updateTime;
 
     /**
      * 删除标识
      */
-
     private Boolean deleted = false;
 
     /**
      * 与业务无关值默认附上初值
      */
-
-    protected void prePersist() {
-        deleted = false;
+    public BaseEntity() {
         Date now = new Date();
         if (createTime == null) {
             createTime = now;
@@ -44,16 +39,4 @@ public class BaseEntity {
             updateTime = now;
         }
     }
-
-
-    protected void preUpdate() {
-        updateTime = new Date();
-    }
-
-
-    protected void preRemove() {
-        updateTime = new Date();
-    }
-
-
 }

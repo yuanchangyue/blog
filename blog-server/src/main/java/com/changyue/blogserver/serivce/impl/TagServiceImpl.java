@@ -14,10 +14,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.util.CollectionUtils;
 
+import javax.annotation.Nonnull;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * @author : 袁阊越
@@ -189,6 +193,15 @@ public class TagServiceImpl implements TagService {
         TagDTO tagDTO = new TagDTO();
         BeanUtils.copyProperties(tag, tagDTO);
         return tagDTO;
+    }
+
+    @Nonnull
+    @Override
+    public List<TagDTO> convertTo(List<Tag> tags) {
+        if (CollectionUtils.isEmpty(tags)) {
+            return Collections.emptyList();
+        }
+        return tags.stream().map(this::convertTo).collect(Collectors.toList());
     }
 
 }

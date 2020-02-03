@@ -20,9 +20,5 @@ public class Tag extends BaseEntity {
      */
     private String slugName;
 
-    @Override
-    protected void prePersist() {
-        super.prePersist();
-        id = null;
-    }
+
 }

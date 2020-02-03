@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.changyue.blogserver.dao.PostMapper">
+    <resultMap id="BaseResultMap" type="post">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="type" jdbcType="INTEGER" property="type"/>
+        <result column="disallow_comment" jdbcType="INTEGER" property="disallowComment"/>
+        <result column="edit_time" jdbcType="TIMESTAMP" property="editTime"/>
+        <result column="likes" jdbcType="BIGINT" property="likes"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="summary" jdbcType="VARCHAR" property="summary"/>
+        <result column="thumbnail" jdbcType="VARCHAR" property="thumbnail"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="top_priority" jdbcType="INTEGER" property="topPriority"/>
+        <result column="url" jdbcType="VARCHAR" property="url"/>
+        <result column="visits" jdbcType="BIGINT" property="visits"/>
+        <result column="format_content" jdbcType="LONGVARCHAR" property="formatContent"/>
+        <result column="original_content" jdbcType="LONGVARCHAR" property="originalContent"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, type, disallow_comment, edit_time, likes, password, status, summary, thumbnail,
+        title, top_priority, url, visits
+    </sql>
+
+    <sql id="Blob_Column_List">
+        format_content, original_content
+    </sql>
+
+    <select id="countLike">
+        select sum(likes)
+        from posts
+    </select>
+
+    <select id="countAllByStatus" parameterType="java.lang.Integer">
+        select sum(id)
+        from posts
+        where status = #{status,jdbcType=INTEGER}
+    </select>
+
+    <select id="findAllByStatus" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from posts
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from posts
+        where status = #{status,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from posts
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" parameterType="post">
+        insert into posts (id, type, disallow_comment,
+                           edit_time, likes, password,
+                           status, summary, thumbnail,
+                           title, top_priority, url,
+                           visits, format_content, original_content)
+        values (#{id,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{disallowComment,jdbcType=INTEGER},
+                #{editTime,jdbcType=TIMESTAMP}, #{likes,jdbcType=BIGINT}, #{password,jdbcType=VARCHAR},
+                #{status,jdbcType=INTEGER}, #{summary,jdbcType=VARCHAR}, #{thumbnail,jdbcType=VARCHAR},
+                #{title,jdbcType=VARCHAR}, #{topPriority,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR},
+                #{visits,jdbcType=BIGINT}, #{formatContent,jdbcType=LONGVARCHAR},
+                #{originalContent,jdbcType=LONGVARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="post">
+        insert into posts
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="disallowComment != null">
+                disallow_comment,
+            </if>
+            <if test="editTime != null">
+                edit_time,
+            </if>
+            <if test="likes != null">
+                likes,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="summary != null">
+                summary,
+            </if>
+            <if test="thumbnail != null">
+                thumbnail,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="topPriority != null">
+                top_priority,
+            </if>
+            <if test="url != null">
+                url,
+            </if>
+            <if test="visits != null">
+                visits,
+            </if>
+            <if test="formatContent != null">
+                format_content,
+            </if>
+            <if test="originalContent != null">
+                original_content,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=INTEGER},
+            </if>
+            <if test="disallowComment != null">
+                #{disallowComment,jdbcType=INTEGER},
+            </if>
+            <if test="editTime != null">
+                #{editTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="likes != null">
+                #{likes,jdbcType=BIGINT},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="summary != null">
+                #{summary,jdbcType=VARCHAR},
+            </if>
+            <if test="thumbnail != null">
+                #{thumbnail,jdbcType=VARCHAR},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="topPriority != null">
+                #{topPriority,jdbcType=INTEGER},
+            </if>
+            <if test="url != null">
+                #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="visits != null">
+                #{visits,jdbcType=BIGINT},
+            </if>
+            <if test="formatContent != null">
+                #{formatContent,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="originalContent != null">
+                #{originalContent,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="post">
+        update posts
+        <set>
+            <if test="type != null">
+                type = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="disallowComment != null">
+                disallow_comment = #{disallowComment,jdbcType=INTEGER},
+            </if>
+            <if test="editTime != null">
+                edit_time = #{editTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="likes != null">
+                likes = likes + #{likes,jdbcType=BIGINT},
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="summary != null">
+                summary = #{summary,jdbcType=VARCHAR},
+            </if>
+            <if test="thumbnail != null">
+                thumbnail = #{thumbnail,jdbcType=VARCHAR},
+            </if>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="topPriority != null">
+                top_priority = #{topPriority,jdbcType=INTEGER},
+            </if>
+            <if test="url != null">
+                url = #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="visits != null">
+                visits = #{visits,jdbcType=BIGINT},
+            </if>
+            <if test="formatContent != null">
+                format_content = #{formatContent,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="originalContent != null">
+                original_content = #{originalContent,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="post">
+        update posts
+        set type             = #{type,jdbcType=INTEGER},
+            disallow_comment = #{disallowComment,jdbcType=INTEGER},
+            edit_time        = #{editTime,jdbcType=TIMESTAMP},
+            likes            = #{likes,jdbcType=BIGINT},
+            password         = #{password,jdbcType=VARCHAR},
+            status           = #{status,jdbcType=INTEGER},
+            summary          = #{summary,jdbcType=VARCHAR},
+            thumbnail        = #{thumbnail,jdbcType=VARCHAR},
+            title            = #{title,jdbcType=VARCHAR},
+            top_priority     = #{topPriority,jdbcType=INTEGER},
+            url              = #{url,jdbcType=VARCHAR},
+            visits           = #{visits,jdbcType=BIGINT},
+            format_content   = #{formatContent,jdbcType=LONGVARCHAR},
+            original_content = #{originalContent,jdbcType=LONGVARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+</mapper>

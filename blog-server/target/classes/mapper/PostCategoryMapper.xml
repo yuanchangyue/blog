@@ -1,106 +1,160 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.changyue.blogserver.dao.PostCategoryMapper">
-  <resultMap id="BaseResultMap" type="com.changyue.blogserver.entity.PostCategory">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="deleted" jdbcType="TINYINT" property="deleted" />
-    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
-    <result column="category_id" jdbcType="INTEGER" property="categoryId" />
-    <result column="post_id" jdbcType="INTEGER" property="postId" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    id, create_time, deleted, update_time, category_id, post_id
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from post_categories
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from post_categories
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.changyue.blogserver.entity.PostCategory">
-    insert into post_categories (id, create_time, deleted, 
-      update_time, category_id, post_id
-      )
-    values (#{id,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=TINYINT}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{categoryId,jdbcType=INTEGER}, #{postId,jdbcType=INTEGER}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="com.changyue.blogserver.entity.PostCategory">
-    insert into post_categories
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="createTime != null">
-        create_time,
-      </if>
-      <if test="deleted != null">
-        deleted,
-      </if>
-      <if test="updateTime != null">
-        update_time,
-      </if>
-      <if test="categoryId != null">
-        category_id,
-      </if>
-      <if test="postId != null">
-        post_id,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="deleted != null">
-        #{deleted,jdbcType=TINYINT},
-      </if>
-      <if test="updateTime != null">
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="categoryId != null">
-        #{categoryId,jdbcType=INTEGER},
-      </if>
-      <if test="postId != null">
-        #{postId,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.changyue.blogserver.entity.PostCategory">
-    update post_categories
-    <set>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="deleted != null">
-        deleted = #{deleted,jdbcType=TINYINT},
-      </if>
-      <if test="updateTime != null">
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="categoryId != null">
-        category_id = #{categoryId,jdbcType=INTEGER},
-      </if>
-      <if test="postId != null">
-        post_id = #{postId,jdbcType=INTEGER},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.changyue.blogserver.entity.PostCategory">
-    update post_categories
-    set create_time = #{createTime,jdbcType=TIMESTAMP},
-      deleted = #{deleted,jdbcType=TINYINT},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      category_id = #{categoryId,jdbcType=INTEGER},
-      post_id = #{postId,jdbcType=INTEGER}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+
+    <resultMap id="BaseResultMap" type="postCategory">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="deleted" jdbcType="TINYINT" property="deleted"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="category_id" jdbcType="INTEGER" property="categoryId"/>
+        <result column="post_id" jdbcType="INTEGER" property="postId"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, create_time, deleted, update_time, category_id, post_id
+    </sql>
+
+    <select id="listAll">
+        select
+        <include refid="Base_Column_List"/>
+        from post_categories
+    </select>
+
+    <select id="findAllCategoryIdsByPostId" parameterType="java.lang.Integer">
+        select pc.category_id
+        from post_categories pc
+        where pc.post_id = #{postId,jdbcType=INTEGER}
+    </select>
+
+    <select id="findAllPostIdsByCategoryId" parameterType="java.lang.Integer">
+        select pc.post_id
+        from post_categories pc
+        where pc.category_id = #{categoryId,jdbcType=INTEGER}
+    </select>
+
+    <select id="findAllPostIdsByCategoryId">
+        select postCategory.post_id
+        from post_categories postCategory,
+             posts post
+        where postCategory.category_id = #{categoryId,jdbcType=INTEGER}
+          and post.id = postCategory.post_id
+          and post.status = #{status,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from post_categories
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <select id="findAllByPostId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from post_categories
+        where post_id = #{postId,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from post_categories
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByPostId" parameterType="java.lang.Integer">
+        delete
+        from post_categories
+        where post_id = #{postId,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByCategoryId" parameterType="java.lang.Integer">
+        delete
+        from post_categories
+        where category_id = #{categoryId,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" parameterType="postCategory">
+        insert into post_categories (id, create_time, deleted,
+                                     update_time, category_id, post_id)
+        values (#{id,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=TINYINT},
+                #{updateTime,jdbcType=TIMESTAMP}, #{categoryId,jdbcType=INTEGER}, #{postId,jdbcType=INTEGER})
+    </insert>
+
+    <insert id="insertSelective" parameterType="postCategory">
+        insert into post_categories
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="deleted != null">
+                deleted,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="categoryId != null">
+                category_id,
+            </if>
+            <if test="postId != null">
+                post_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deleted != null">
+                #{deleted,jdbcType=TINYINT},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="categoryId != null">
+                #{categoryId,jdbcType=INTEGER},
+            </if>
+            <if test="postId != null">
+                #{postId,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="postCategory">
+        update post_categories
+        <set>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deleted != null">
+                deleted = #{deleted,jdbcType=TINYINT},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="categoryId != null">
+                category_id = #{categoryId,jdbcType=INTEGER},
+            </if>
+            <if test="postId != null">
+                post_id = #{postId,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="postCategory">
+        update post_categories
+        set create_time = #{createTime,jdbcType=TIMESTAMP},
+            deleted     = #{deleted,jdbcType=TINYINT},
+            update_time = #{updateTime,jdbcType=TIMESTAMP},
+            category_id = #{categoryId,jdbcType=INTEGER},
+            post_id     = #{postId,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
 </mapper>

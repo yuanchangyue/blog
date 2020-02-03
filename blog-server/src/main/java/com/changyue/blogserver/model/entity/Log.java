@@ -32,9 +32,5 @@ public class Log extends BaseEntity {
     private String ipAddress;
 
 
-    @Override
-    public void prePersist() {
-        super.prePersist();
-        id = null;
-    }
+
 }

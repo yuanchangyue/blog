@@ -18,6 +18,16 @@
         from tags
     </select>
 
+    <select id="getTagByIds" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tags
+        where id in
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">
+            id = #{id,jdbcType=INTEGER}
+        </foreach>
+    </select>
+
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>

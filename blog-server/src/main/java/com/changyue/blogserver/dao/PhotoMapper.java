@@ -1,17 +1,29 @@
 package com.changyue.blogserver.dao;
 
-import com.changyue.blogserver.entity.Photo;
+import com.changyue.blogserver.dao.base.BaseMapper;
+import com.changyue.blogserver.model.entity.Photo;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
-public interface PhotoMapper {
-    int deleteByPrimaryKey(Integer id);
+import java.util.List;
 
-    int insert(Photo record);
+@Mapper
+public interface PhotoMapper extends BaseMapper<Photo> {
 
-    int insertSelective(Photo record);
+    /**
+     * 按分组查询照片
+     *
+     * @param team 分组
+     * @return 照片列表
+     */
+    List<Photo> findByTeam(@Param("team") String team);
 
-    Photo selectByPrimaryKey(Integer id);
+    /**
+     * 查找所有照片分组。
+     *
+     * @return 分组列表.
+     */
+    List<String> findAllTeams();
 
-    int updateByPrimaryKeySelective(Photo record);
 
-    int updateByPrimaryKey(Photo record);
 }

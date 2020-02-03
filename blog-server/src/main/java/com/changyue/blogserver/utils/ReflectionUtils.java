@@ -8,29 +8,29 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
 /**
- * @program: blog-server
- * @description: 反射工具类
- * @author: ChangYue
- * @create: 2020-01-20 16:59
+ * @author : 袁阊越
+ * @description : 反射工具类
+ * @date : 2020/2/1/001
  */
 public class ReflectionUtils {
+
     private ReflectionUtils() {
     }
 
     /**
-     * Gets parameterized type.
+     * 获取泛型
      *
-     * @param superType    super type must not be null (super class or super interface)
-     * @param genericTypes generic type array
-     * @return parameterized type of the interface or null if it is mismatch
+     * @param superType    父类型不能为空(父类类或父类接口）
+     * @param genericTypes 通用类型数组
+     * @return 接口的参数化类型；如果不匹配，则返回null
      */
     @Nullable
     public static ParameterizedType getParameterizedType(@NonNull Class<?> superType, Type... genericTypes) {
-        Assert.notNull(superType, "Interface or super type must not be null");
+        Assert.notNull(superType, "父类型不能为空");
 
         ParameterizedType currentType = null;
-
         for (Type genericType : genericTypes) {
+            //
             if (genericType instanceof ParameterizedType) {
                 ParameterizedType parameterizedType = (ParameterizedType) genericType;
                 if (parameterizedType.getRawType().getTypeName().equals(superType.getTypeName())) {
@@ -44,27 +44,26 @@ public class ReflectionUtils {
     }
 
     /**
-     * Gets parameterized type.
+     * 获取泛型
      *
-     * @param interfaceType       interface type must not be null
-     * @param implementationClass implementation class of the interface must not be null
-     * @return parameterized type of the interface or null if it is mismatch
+     * @param interfaceType       接口类型不能为空
+     * @param implementationClass 接口的实现类不能为空
+     * @return 接口的参数化类型；如果不匹配，则返回空
      */
     @Nullable
     public static ParameterizedType getParameterizedType(@NonNull Class<?> interfaceType, Class<?> implementationClass) {
-        Assert.notNull(interfaceType, "Interface type must not be null");
-        Assert.isTrue(interfaceType.isInterface(), "The give type must be an interface");
+        Assert.notNull(interfaceType, "接口类型不能为空");
+        Assert.isTrue(interfaceType.isInterface(), "给定类型必须是接口");
 
         if (implementationClass == null) {
-            // If the super class is Object parent then return null
             return null;
         }
 
-        // Get parameterized type
+        // 获取参数化类型  getGenericInterfaces包括泛型
         ParameterizedType currentType = getParameterizedType(interfaceType, implementationClass.getGenericInterfaces());
 
         if (currentType != null) {
-            // return the current type
+            // 返回当前类型
             return currentType;
         }
 

@@ -46,7 +46,7 @@
         </javaClientGenerator>
 
         <!--指定表-->
-        <table domainObjectName="User" tableName="users" enableCountByExample="false"
+        <!--<table domainObjectName="User" tableName="users" enableCountByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"
                selectByExampleQueryId="false"/>
 
@@ -73,6 +73,12 @@
         <table domainObjectName="PostCategory" tableName="post_categories" enableCountByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"
                selectByExampleQueryId="false"/>
+        -->
+
+        <table domainObjectName="Post" tableName="posts" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"
+               selectByExampleQueryId="false"/>
+
 
     </context>
 </generatorConfiguration>

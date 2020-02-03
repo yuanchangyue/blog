@@ -11,12 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
- * @program: blog-server
- * @description: 标签控制层
- * @author: 袁阊越
- * @create: 2020-01-20 22:14
+ * @author : 袁阊越
+ * @description : 标签控制层
+ * @date : 2020-01-20 22:14
  */
 @Slf4j
 @RestController
@@ -28,6 +28,11 @@ public class TagController {
 
     @Autowired
     private PostTagService postTagService;
+    
+    @GetMapping
+    public List<TagDTO> listTags(@RequestParam(name = "more", required = false, defaultValue = "false") Boolean more) {
+        return tagService.convertTo(tagService.listAll());
+    }
 
     @PostMapping
     public TagDTO createTag(@Valid @RequestBody TagParam tagParam) {
@@ -63,7 +68,12 @@ public class TagController {
 
     @DeleteMapping("/{tagTag}")
     public void deleteTag(@PathVariable("tagTag") Integer tagId) {
+
         //删除tag
         tagService.removeById(tagId);
+
+        //删除文章标签的关联
+        postTagService.removeByTagId(tagId);
+
     }
 }

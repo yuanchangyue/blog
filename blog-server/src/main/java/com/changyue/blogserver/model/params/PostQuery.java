@@ -10,6 +10,7 @@ import lombok.Data;
  */
 @Data
 public class PostQuery {
+
     /**
      * 关键词
      */

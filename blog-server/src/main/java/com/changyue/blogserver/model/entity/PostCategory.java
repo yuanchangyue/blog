@@ -28,10 +28,5 @@ public class PostCategory extends BaseEntity {
     private Integer postId;
 
 
-    @Override
-    public void prePersist() {
-        super.prePersist();
-        id = null;
-    }
 
 }

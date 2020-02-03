@@ -69,8 +69,6 @@ public interface PostRepository extends BaseRepository<Post, Integer> {
      * @param postId 文章ID不能为null
      * @return 更新的行
      */
-    //@Modifying
-    ////@Query("update Post p set p.likes=p.likes + :likes where p.id= :postId")
     int updateLikes(@Param("likes") long likes, @Param("postId") @Nonnull Integer postId);
 
     /**
@@ -89,7 +87,7 @@ public interface PostRepository extends BaseRepository<Post, Integer> {
      *
      * @param content 内容可以为空，但不允许为空
      * @param postId  文章Id不能为null
-     * @return 更新的行
+     * @return 更新的行po
      */
     //@Modifying
     //@Query("update Post p set p.originalContent = :content where p.id = :postId")

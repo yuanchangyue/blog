@@ -24,10 +24,5 @@ public class PostTag extends BaseEntity {
 
     private Integer tagId;
 
-    @Override
-    protected void prePersist() {
-        super.prePersist();
-        id = null;
-    }
 
 }

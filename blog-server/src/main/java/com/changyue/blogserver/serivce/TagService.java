@@ -5,6 +5,9 @@ import com.changyue.blogserver.model.entity.Tag;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 
+import javax.annotation.Nonnull;
+import java.util.List;
+
 /**
  * @author : 袁阊越
  * @date : 2020-01-20 21:14
@@ -38,5 +41,14 @@ public interface TagService extends BaseService<Tag, Integer> {
      */
     @NonNull
     TagDTO convertTo(@NonNull Tag tag);
+
+    /**
+     * list转换为标签dto
+     *
+     * @param tags 标签列表
+     * @return tag dto
+     */
+    @Nonnull
+    List<TagDTO> convertTo(@Nullable List<Tag> tags);
 
 }

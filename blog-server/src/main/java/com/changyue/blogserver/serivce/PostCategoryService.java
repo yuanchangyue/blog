@@ -7,8 +7,10 @@ import com.github.pagehelper.PageInfo;
 import lombok.NonNull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.xml.ws.ServiceMode;
 import java.util.List;
 
 /**
@@ -17,6 +19,7 @@ import java.util.List;
  * @author: 袁阊越
  * @create: 2020-01-22 21:37
  */
+@Service
 public interface PostCategoryService extends BaseService<PostCategory, Integer> {
     /**
      * 按文章ID列出类别。

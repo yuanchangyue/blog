@@ -2,9 +2,11 @@ package com.changyue.blogserver.model.dto.base;
 
 import com.changyue.blogserver.utils.ReflectionUtils;
 import org.springframework.beans.BeanUtils;
+import org.springframework.context.annotation.Bean;
 import org.springframework.lang.Nullable;
 
 import java.lang.reflect.ParameterizedType;
+import java.util.Objects;
 
 /**
  * @program: blog-server
@@ -15,12 +17,20 @@ import java.lang.reflect.ParameterizedType;
 public interface InputConvert<DOMAIN> {
 
     default DOMAIN converTo() {
+
+        //获取泛型
         ParameterizedType type = parameterizedType();
+
         Class<DOMAIN> domainClass = (Class<DOMAIN>) type.getActualTypeArguments()[0];
-        //domainClass.get
-        return null;
+
+        return com.changyue.blogserver.utils.BeanUtils.transformFrom(this, domainClass);
     }
 
+    /**
+     * 获得泛型
+     *
+     * @return ParameterizedType
+     */
     @Nullable
     default ParameterizedType parameterizedType() {
         return ReflectionUtils.getParameterizedType(InputConvert.class, this.getClass());

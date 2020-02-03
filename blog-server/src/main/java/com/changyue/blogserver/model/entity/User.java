@@ -42,24 +42,4 @@ public class User extends BaseEntity {
      */
     private String description;
 
-
-    @Override
-    public void prePersist() {
-        super.prePersist();
-
-        id = null;
-
-        if (email == null) {
-            email = "";
-        }
-
-        if (avatar == null) {
-            avatar = "";
-        }
-
-        if (description == null) {
-            description = "";
-        }
-
-    }
 }

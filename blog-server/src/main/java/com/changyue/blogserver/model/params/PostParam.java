@@ -10,10 +10,9 @@ import java.util.Date;
 import java.util.Set;
 
 /**
- * @program: blog-server
- * @description: 文章参数
- * @author: ChangYue
- * @create: 2020-01-21 09:53
+ * @author : ChangYue
+ * @description : 文章参数
+ * @date : 2020-01-21 09:53
  */
 public class PostParam implements InputConvert<Post> {
 
@@ -45,6 +44,6 @@ public class PostParam implements InputConvert<Post> {
     private Set<Integer> tagIds;
 
     private Set<Integer> categoryIds;
-    
+
 
 }

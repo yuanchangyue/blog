@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.changyue.blogserver.dao.LogMapper">
-  <resultMap id="BaseResultMap" type="com.changyue.blogserver.entity.Log">
+  <resultMap id="BaseResultMap" type="log">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="content" jdbcType="VARCHAR" property="content" />
     <result column="ip_address" jdbcType="VARCHAR" property="ipAddress" />
@@ -11,7 +11,7 @@
     id, content, ip_address, type
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from logs
     where id = #{id,jdbcType=BIGINT}
@@ -20,13 +20,13 @@
     delete from logs
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.changyue.blogserver.entity.Log">
-    insert into logs (id, content, ip_address, 
+  <insert id="insert" parameterType="log">
+    insert into logs (id, content, ip_address,
       type)
-    values (#{id,jdbcType=BIGINT}, #{content,jdbcType=VARCHAR}, #{ipAddress,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=BIGINT}, #{content,jdbcType=VARCHAR}, #{ipAddress,jdbcType=VARCHAR},
       #{type,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.changyue.blogserver.entity.Log">
+  <insert id="insertSelective" parameterType="log">
     insert into logs
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -57,7 +57,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.changyue.blogserver.entity.Log">
+  <update id="updateByPrimaryKeySelective" parameterType="log">
     update logs
     <set>
       <if test="content != null">
@@ -72,7 +72,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.changyue.blogserver.entity.Log">
+  <update id="updateByPrimaryKey" parameterType="log">
     update logs
     set content = #{content,jdbcType=VARCHAR},
       ip_address = #{ipAddress,jdbcType=VARCHAR},

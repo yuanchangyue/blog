@@ -33,15 +33,6 @@
         where pc.category_id = #{categoryId,jdbcType=INTEGER}
     </select>
 
-    <select id="findAllPostIdsByCategoryId">
-        select postCategory.post_id
-        from post_categories postCategory,
-             posts post
-        where postCategory.category_id = #{categoryId,jdbcType=INTEGER}
-          and post.id = postCategory.post_id
-          and post.status = #{status,jdbcType=INTEGER}
-    </select>
-
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
@@ -75,10 +66,20 @@
     </delete>
 
     <insert id="insert" parameterType="postCategory">
-        insert into post_categories (id, create_time, deleted,
+        insert into post_categories (create_time, deleted,
                                      update_time, category_id, post_id)
-        values (#{id,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=TINYINT},
+        values (#{createTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=TINYINT},
                 #{updateTime,jdbcType=TIMESTAMP}, #{categoryId,jdbcType=INTEGER}, #{postId,jdbcType=INTEGER})
+    </insert>
+
+    <insert id="insertInBatch">
+        insert into post_categories (create_time, deleted,
+        update_time, category_id, post_id)
+        values
+        <foreach collection="postCategories" index="index" item="postCategory" separator=",">
+            values (#{createTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=TINYINT},
+            #{updateTime,jdbcType=TIMESTAMP}, #{categoryId,jdbcType=INTEGER}, #{postId,jdbcType=INTEGER})
+        </foreach>
     </insert>
 
     <insert id="insertSelective" parameterType="postCategory">

@@ -33,15 +33,6 @@
         where pc.category_id = #{categoryId,jdbcType=INTEGER}
     </select>
 
-    <select id="findAllPostIdsByCategoryId">
-        select postCategory.post_id
-        from post_categories postCategory,
-             posts post
-        where postCategory.category_id = #{categoryId,jdbcType=INTEGER}
-          and post.id = postCategory.post_id
-          and post.status = #{status,jdbcType=INTEGER}
-    </select>
-
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>

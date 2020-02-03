@@ -6,17 +6,12 @@ import com.changyue.blogserver.exception.CreateException;
 import com.changyue.blogserver.model.entity.Category;
 import com.changyue.blogserver.model.entity.Post;
 import com.changyue.blogserver.model.entity.PostCategory;
-import com.changyue.blogserver.repository.CategoryRepository;
-import com.changyue.blogserver.repository.PostCategoryRepository;
-import com.changyue.blogserver.repository.PostRepository;
 import com.changyue.blogserver.serivce.PostCategoryService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.*;
 
@@ -26,6 +21,7 @@ import java.util.*;
  * @author: 袁阊越
  * @create: 2020-01-22 21:36
  */
+@Service
 public class PostCategoryServiceImpl implements PostCategoryService {
 
     @Autowired

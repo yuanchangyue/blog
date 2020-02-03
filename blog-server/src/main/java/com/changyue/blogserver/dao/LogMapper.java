@@ -1,6 +1,7 @@
 package com.changyue.blogserver.dao;
 
-import com.changyue.blogserver.entity.Log;
+
+import com.changyue.blogserver.model.entity.Log;
 
 public interface LogMapper {
     int deleteByPrimaryKey(Long id);

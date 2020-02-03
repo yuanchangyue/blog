@@ -5,19 +5,16 @@ import com.changyue.blogserver.dao.TagMapper;
 import com.changyue.blogserver.exception.CreateException;
 import com.changyue.blogserver.model.entity.PostTag;
 import com.changyue.blogserver.model.entity.Tag;
-import com.changyue.blogserver.repository.PostTagRepository;
 import com.changyue.blogserver.serivce.PostTagService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import javax.annotation.Nonnull;
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * @program: blog-server

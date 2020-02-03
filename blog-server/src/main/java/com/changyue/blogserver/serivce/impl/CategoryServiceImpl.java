@@ -6,17 +6,15 @@ import com.changyue.blogserver.exception.CreateException;
 import com.changyue.blogserver.exception.NotFindException;
 import com.changyue.blogserver.model.dto.CategoryDTO;
 import com.changyue.blogserver.model.entity.Category;
-import com.changyue.blogserver.repository.CategoryRepository;
 import com.changyue.blogserver.serivce.CategoryService;
-import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.lucene.queries.function.valuesource.IDFValueSource;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import java.util.*;
+import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**

@@ -25,13 +25,11 @@ import java.util.stream.Collectors;
 
 /**
  * @author : 袁阊越
- * @program : blog-server
  * @description : 标签业务实现
- * @create : 2020-01-20 21:23
+ * @date : 2020/2/3/003
  */
 @Slf4j
 @Service
-@Transactional
 public class TagServiceImpl implements TagService {
 
     @Autowired
@@ -112,24 +110,7 @@ public class TagServiceImpl implements TagService {
         return tag;
     }
 
-    /**
-     * 批量保存
-     *
-     * @param tags domains
-     * @return 列表
-     */
-    @Override
-    public List<Tag> createInBatch(Collection<Tag> tags) {
 
-        return null;
-    }
-
-    /**
-     * 通过实体更新
-     *
-     * @param tag domain
-     * @return DOMAIN
-     */
     @Override
     public Tag update(Tag tag) {
         Assert.notNull(tag, "tag 不能为空");
@@ -137,44 +118,11 @@ public class TagServiceImpl implements TagService {
         return tag;
     }
 
-    /**
-     * 按ID删除
-     *
-     * @param id id
-     * @return DOMAIN
-     */
+
     @Override
     public int removeById(Integer id) {
         Assert.notNull(id, "tag id 不能为空");
         return tagMapper.deleteByPrimaryKey(id);
-    }
-
-    /**
-     * 按实体删除
-     *
-     * @param tag domain
-     */
-    @Override
-    public void remove(Tag tag) {
-
-    }
-
-    /**
-     * 批量删除
-     *
-     * @param id ids
-     */
-    @Override
-    public void removeInBatch(Collection<Integer> id) {
-
-    }
-
-    /**
-     * 移除所有
-     */
-    @Override
-    public void removeAll() {
-
     }
 
     @Override

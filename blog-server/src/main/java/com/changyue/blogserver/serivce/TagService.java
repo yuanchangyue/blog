@@ -5,7 +5,7 @@ import com.changyue.blogserver.model.entity.Tag;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 
-import javax.annotation.Nonnull;
+
 import java.util.List;
 
 /**
@@ -48,7 +48,7 @@ public interface TagService extends BaseService<Tag, Integer> {
      * @param tags 标签列表
      * @return tag dto
      */
-    @Nonnull
+    @NonNull
     List<TagDTO> convertTo(@Nullable List<Tag> tags);
 
 }

@@ -57,6 +57,108 @@
         where status = #{status,jdbcType=INTEGER}
     </select>
 
+    <select id="findOneBySelective" parameterType="post" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>,
+        <include refid="Blob_Column_List"/>
+        from posts
+        <where>
+            <if test="type != null">
+                and type = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="disallowComment != null">
+                and disallow_comment = #{disallowComment,jdbcType=INTEGER},
+            </if>
+            <if test="editTime != null">
+                and edit_time = #{editTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="likes != null">
+                and likes = likes + #{likes,jdbcType=BIGINT},
+            </if>
+            <if test="password != null">
+                and password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                and status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="summary != null">
+                and summary = #{summary,jdbcType=VARCHAR},
+            </if>
+            <if test="thumbnail != null">
+                and thumbnail = #{thumbnail,jdbcType=VARCHAR},
+            </if>
+            <if test="title != null">
+                and title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="topPriority != null">
+                and top_priority = #{topPriority,jdbcType=INTEGER},
+            </if>
+            <if test="url != null">
+                and url = #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="visits != null">
+                and visits = #{visits,jdbcType=BIGINT},
+            </if>
+            <if test="formatContent != null">
+                and format_content = #{formatContent,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="originalContent != null">
+                and original_content = #{originalContent,jdbcType=LONGVARCHAR}
+            </if>
+        </where>
+    </select>
+
+    <select id="listAllBySelective" parameterType="post" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>,
+        <include refid="Blob_Column_List"/>
+        from posts
+        <where>
+            <if test="type != null">
+                and type = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="disallowComment != null">
+                and disallow_comment = #{disallowComment,jdbcType=INTEGER},
+            </if>
+            <if test="editTime != null">
+                and edit_time = #{editTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="likes != null">
+                and likes = likes + #{likes,jdbcType=BIGINT},
+            </if>
+            <if test="password != null">
+                and password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                and status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="summary != null">
+                and summary = #{summary,jdbcType=VARCHAR},
+            </if>
+            <if test="thumbnail != null">
+                and thumbnail = #{thumbnail,jdbcType=VARCHAR},
+            </if>
+            <if test="title != null">
+                and title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="topPriority != null">
+                and top_priority = #{topPriority,jdbcType=INTEGER},
+            </if>
+            <if test="url != null">
+                and url = #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="visits != null">
+                and visits = #{visits,jdbcType=BIGINT},
+            </if>
+            <if test="formatContent != null">
+                and format_content = #{formatContent,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="originalContent != null">
+                and original_content = #{originalContent,jdbcType=LONGVARCHAR}
+            </if>
+        </where>
+    </select>
+
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
         delete
         from posts

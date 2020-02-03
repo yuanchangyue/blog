@@ -6,12 +6,16 @@ import com.changyue.blogserver.model.entity.PostCategory;
 import lombok.NonNull;
 import org.springframework.data.repository.query.Param;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * @author : 袁阊越
+ * @description : 文章类别数据接口
+ * @date : 2020/2/3/003
+ */
 public interface PostCategoryMapper extends BaseMapper<PostCategory> {
-
-
 
     /**
      * 通过文章id 查询全部的类别
@@ -68,5 +72,13 @@ public interface PostCategoryMapper extends BaseMapper<PostCategory> {
      */
     @NonNull
     List<PostCategory> deleteByCategoryId(@NonNull @Param("categoryId") Integer categoryId);
+
+    /**
+     * 批量插入文章类别
+     *
+     * @param postCategories 文章类别
+     * @return 影响行数
+     */
+    int insertInBatch(@Param("postCategories") Collection<PostCategory> postCategories);
 
 }

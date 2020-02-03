@@ -7,8 +7,6 @@ import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-
-
 public class Category extends BaseEntity {
 
 

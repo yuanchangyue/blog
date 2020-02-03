@@ -75,10 +75,20 @@
     </delete>
 
     <insert id="insert" parameterType="postCategory">
-        insert into post_categories (id, create_time, deleted,
+        insert into post_categories (create_time, deleted,
                                      update_time, category_id, post_id)
-        values (#{id,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=TINYINT},
+        values (#{createTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=TINYINT},
                 #{updateTime,jdbcType=TIMESTAMP}, #{categoryId,jdbcType=INTEGER}, #{postId,jdbcType=INTEGER})
+    </insert>
+
+    <insert id="insertInBatch">
+        insert into post_categories (create_time, deleted,
+        update_time, category_id, post_id)
+        values
+        <foreach collection="postCategories" index="index" item="postCategory" separator=",">
+            values (#{createTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=TINYINT},
+            #{updateTime,jdbcType=TIMESTAMP}, #{categoryId,jdbcType=INTEGER}, #{postId,jdbcType=INTEGER})
+        </foreach>
     </insert>
 
     <insert id="insertSelective" parameterType="postCategory">

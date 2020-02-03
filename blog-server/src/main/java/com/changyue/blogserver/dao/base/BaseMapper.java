@@ -1,5 +1,6 @@
 package com.changyue.blogserver.dao.base;
 
+import com.changyue.blogserver.model.entity.Post;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.lang.NonNull;
 
@@ -20,6 +21,22 @@ public interface BaseMapper<DOMAIN> {
      * @return 全部列表
      */
     List<DOMAIN> listAll();
+
+    /**
+     * 查找全部(条件)
+     *
+     * @param domain 实体
+     * @return 实体
+     */
+    List<DOMAIN> listAllBySelective(DOMAIN domain);
+
+    /**
+     * 查找一个(条件)
+     *
+     * @param domain 实体
+     * @return 实体
+     */
+    Optional<DOMAIN> findOneBySelective(DOMAIN domain);
 
     /**
      * 根据id删除

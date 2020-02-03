@@ -9,10 +9,9 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 /**
- * @program: blog-server
- * @description: 用户参数
- * @author: ChangYue
- * @create: 2020-01-20 16:22
+ * @author : 袁阊越
+ * @description : 用户参数
+ * @date : 2020/2/3/003
  */
 @Data
 public class UserParam implements InputConvert<User> {

@@ -13,11 +13,9 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * @author 袁阊越
- * @title: BaseService
- * @package com.changyue.blogserver.serivce
- * @description 基础业务接口类
- * @date 2020/1/31/031
+ * @author : 袁阊越
+ * @description : 基础业务接口类
+ * @date : 2020/2/3/003
  */
 public interface BaseService<DOMAIN, ID> {
 
@@ -141,7 +139,8 @@ public interface BaseService<DOMAIN, ID> {
      * @param domain domain
      */
     @Transactional(rollbackFor = Exception.class)
-    default void remove(@NonNull DOMAIN domain) {}
+    default void remove(@NonNull DOMAIN domain) {
+    }
 
     /**
      * 批量删除

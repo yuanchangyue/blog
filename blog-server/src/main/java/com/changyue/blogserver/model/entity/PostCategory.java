@@ -5,13 +5,11 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * @program: blog-server
- * @description: 文章类别
- * @author: 袁阊越
- * @create: 2020-01-22 21:09
+ * @author : 袁阊越
+ * @description : 文章类别
+ * @date : 2020/2/3/003
  */
 @Data
-
 @EqualsAndHashCode(callSuper = true)
 public class PostCategory extends BaseEntity {
 
@@ -27,6 +25,8 @@ public class PostCategory extends BaseEntity {
      */
     private Integer postId;
 
-
-
+    public PostCategory(Integer categoryId, Integer postId) {
+        this.categoryId = categoryId;
+        this.postId = postId;
+    }
 }

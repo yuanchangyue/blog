@@ -2,6 +2,7 @@ package com.changyue.blogserver.serivce.impl;
 
 import com.changyue.blogserver.dao.CategoryMapper;
 import com.changyue.blogserver.dao.PostCategoryMapper;
+import com.changyue.blogserver.exception.CreateException;
 import com.changyue.blogserver.model.entity.Category;
 import com.changyue.blogserver.model.entity.Post;
 import com.changyue.blogserver.model.entity.PostCategory;
@@ -17,10 +18,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @program: blog-server
@@ -130,6 +128,24 @@ public class PostCategoryServiceImpl implements PostCategoryService {
     public Optional<PostCategory> getById(Integer id) {
         Assert.notNull(id, "id 不能为空");
         return postCategoryMapper.selectByPrimaryKey(id);
+    }
+
+    /**
+     * 批量保存
+     *
+     * @param postCategories domains
+     * @return 列表
+     */
+    @Override
+    public List<PostCategory> createInBatch(Collection<PostCategory> postCategories) {
+
+        Assert.notNull(postCategories, "文章类别批量插入,列表不能为空");
+
+        if (postCategoryMapper.insertInBatch(postCategories) <= 0) {
+            throw new CreateException("文章类别批量插入失败").setErrData(postCategories);
+        }
+
+        return new ArrayList<>(postCategories);
     }
 
 }

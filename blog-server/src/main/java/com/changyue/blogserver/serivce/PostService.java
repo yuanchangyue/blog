@@ -1,15 +1,11 @@
 package com.changyue.blogserver.serivce;
 
 import com.changyue.blogserver.model.entity.Post;
-import com.changyue.blogserver.model.params.PostParam;
-import com.changyue.blogserver.model.params.PostQuery;
+import com.changyue.blogserver.model.vo.PostVO;
 import com.github.pagehelper.PageInfo;
-import lombok.NonNull;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.lang.NonNull;
 
-import javax.annotation.Nonnull;
-import javax.validation.constraints.NotNull;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -22,22 +18,22 @@ public interface PostService extends BaseService<Post, Integer> {
     /**
      * 分页的文章
      *
-     * @param postQuery 文章查询的条件
-     * @return 分页的文章
+     * @param pageIndex 页索引
+     * @param pageSize  页数
      */
-    @Nonnull
-    PageInfo<Post> pageBy(@NonNull PostQuery postQuery, @NotNull Pageable pageable);
+    @NonNull
+    PageInfo<Post> pageBy(@NonNull Integer pageIndex, @NonNull Integer pageSize);
 
     /**
      * 创建文章
      *
-     * @param postParam  文化内容
-     * @param tagIds     标题Id集合
-     * @param categoryId 类别Id集合
+     * @param createdPost 文章内容
+     * @param tagIds      标题Id集合
+     * @param categoryId  类别Id集合
      * @return 文章
      */
-    @Nonnull
-    Post createBy(@Nonnull PostParam postParam, Set<Integer> tagIds, Set<Integer> categoryId);
+    @NonNull
+    PostVO createBy(@NonNull Post createdPost, Set<Integer> tagIds, Set<Integer> categoryId);
 
 
     /**
@@ -61,6 +57,14 @@ public interface PostService extends BaseService<Post, Integer> {
     @NonNull
     Post getBy(@NonNull Integer status, @NonNull String url);
 
+    /**
+     * 按文章状态列出所有
+     *
+     * @param status 文章状态不能为空
+     * @return 文章列表
+     */
+    @NonNull
+    List<Post> listAllBy(@NonNull Integer status);
 
     /**
      * 统计点赞数

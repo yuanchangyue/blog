@@ -2,9 +2,8 @@ package com.changyue.blogserver.serivce;
 
 import com.changyue.blogserver.model.entity.PostTag;
 import com.changyue.blogserver.model.entity.Tag;
-import lombok.NonNull;
+import org.springframework.lang.NonNull;
 
-import javax.annotation.Nonnull;
 import java.util.List;
 
 
@@ -30,7 +29,7 @@ public interface PostTagService extends BaseService<PostTag, Integer> {
      * @return List<Post>
      */
     @NonNull
-    int removeByPostTag(@Nonnull Integer postId);
+    int removeByPostId(@NonNull Integer postId);
 
     /**
      * 根据tag删除文章标签
@@ -39,6 +38,6 @@ public interface PostTagService extends BaseService<PostTag, Integer> {
      * @return List<Post>
      */
     @NonNull
-    int removeByTagId(@Nonnull Integer tagId);
+    int removeByTagId(@NonNull Integer tagId);
 
 }

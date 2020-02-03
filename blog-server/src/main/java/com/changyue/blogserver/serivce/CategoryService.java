@@ -47,4 +47,13 @@ public interface CategoryService extends BaseService<Category, Integer> {
      */
     @NonNull
     CategoryDTO convertTo(@NonNull Category category);
+
+    /**
+     * 装换为DTO
+     *
+     * @param category 类别不能为空
+     * @return 类别 dto
+     */
+    @NonNull
+    List<CategoryDTO> convertTo(@NonNull List<Category> category);
 }

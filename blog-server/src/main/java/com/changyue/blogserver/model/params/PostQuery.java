@@ -3,10 +3,9 @@ package com.changyue.blogserver.model.params;
 import lombok.Data;
 
 /**
- * @program: blog-server
- * @description: 文章搜索
- * @author: ChangYue
- * @create: 2020-01-21 10:07
+ * @author : 袁阊越
+ * @description : 文章搜索
+ * @date : 2020/2/3/003
  */
 @Data
 public class PostQuery {

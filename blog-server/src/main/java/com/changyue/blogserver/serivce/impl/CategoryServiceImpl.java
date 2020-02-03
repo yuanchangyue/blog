@@ -16,10 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @program: blog-server
@@ -88,4 +86,20 @@ public class CategoryServiceImpl implements CategoryService {
         BeanUtils.copyProperties(category, categoryDTO);
         return categoryDTO;
     }
+
+    /**
+     * 装换为DTO
+     *
+     * @param categories 类别不能为空
+     * @return 类别 dto
+     */
+    @Override
+    public List<CategoryDTO> convertTo(List<Category> categories) {
+
+        Assert.notNull(categories, "类别列表不能为空");
+
+        return categories.stream().map(this::convertTo).collect(Collectors.toList());
+    }
+
+
 }

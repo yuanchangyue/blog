@@ -4,20 +4,18 @@ import com.changyue.blogserver.model.entity.Category;
 import com.changyue.blogserver.model.entity.Post;
 import com.changyue.blogserver.model.entity.PostCategory;
 import com.github.pagehelper.PageInfo;
-import lombok.NonNull;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.xml.ws.ServiceMode;
+import java.util.Collection;
 import java.util.List;
 
 /**
- * @program: blog-server
- * @description: 文章类别业务接口
- * @author: 袁阊越
- * @create: 2020-01-22 21:37
+ * @author : 袁阊越
+ * @description : 文章类别业务接口
+ * @date : 2020/2/3/003
  */
 @Service
 public interface PostCategoryService extends BaseService<PostCategory, Integer> {
@@ -78,4 +76,6 @@ public interface PostCategoryService extends BaseService<PostCategory, Integer> 
     @NonNull
     @Transactional
     List<PostCategory> removeByCategoryId(@NonNull Integer categoryId);
+
+
 }

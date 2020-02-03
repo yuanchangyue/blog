@@ -8,10 +8,9 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 /**
- * @program: blog-server
- * @description: 标签参数
- * @author: 袁阊越
- * @create: 2020-01-20 22:18
+ * @author : 袁阊越
+ * @description : 标签参数
+ * @date : 2020/2/3/003
  */
 @Data
 public class TagParam implements InputConvert<Tag> {

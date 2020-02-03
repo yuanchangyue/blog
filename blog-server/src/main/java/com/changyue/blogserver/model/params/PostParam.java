@@ -45,5 +45,4 @@ public class PostParam implements InputConvert<Post> {
 
     private Set<Integer> categoryIds;
 
-
 }

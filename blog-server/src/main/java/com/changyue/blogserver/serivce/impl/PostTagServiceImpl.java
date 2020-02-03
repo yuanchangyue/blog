@@ -2,6 +2,7 @@ package com.changyue.blogserver.serivce.impl;
 
 import com.changyue.blogserver.dao.PostTagMapper;
 import com.changyue.blogserver.dao.TagMapper;
+import com.changyue.blogserver.exception.CreateException;
 import com.changyue.blogserver.model.entity.PostTag;
 import com.changyue.blogserver.model.entity.Tag;
 import com.changyue.blogserver.repository.PostTagRepository;
@@ -15,10 +16,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import javax.annotation.Nonnull;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @program: blog-server
@@ -46,7 +45,7 @@ public class PostTagServiceImpl implements PostTagService {
     }
 
     @Override
-    public int removeByPostTag(@Nonnull Integer postId) {
+    public int removeByPostId(@Nonnull Integer postId) {
 
         Assert.notNull(postId, "文章的id不能为空");
 
@@ -131,6 +130,21 @@ public class PostTagServiceImpl implements PostTagService {
         postTagMapper.updateByPrimaryKey(postTag);
 
         return postTag;
+    }
+
+    /**
+     * 批量保存
+     *
+     * @param postTags domains
+     * @return 列表
+     */
+    @Override
+    public List<PostTag> createInBatch(Collection<PostTag> postTags) {
+        Assert.notNull(postTags, "文章标签批量插入,列表不能为空");
+        if (postTagMapper.insetInBatch(postTags) <= 0) {
+            throw new CreateException("批量标签创建失败").setErrData(postTags);
+        }
+        return new ArrayList<>(postTags);
     }
 
 }

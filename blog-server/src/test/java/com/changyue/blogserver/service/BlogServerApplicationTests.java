@@ -1,4 +1,4 @@
-package com.changyue.blogserver;
+package com.changyue.blogserver.service;
 
 import org.springframework.boot.test.context.SpringBootTest;
 

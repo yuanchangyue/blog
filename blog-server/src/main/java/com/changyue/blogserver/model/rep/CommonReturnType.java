@@ -1,46 +1,33 @@
-package com.changyue.j2eefinal.response;
+package com.changyue.blogserver.model.rep;
+
+import lombok.Data;
+import org.springframework.http.HttpStatus;
 
 /**
- * @program: miaosha
- * @description:
- * @author: ChangYue
- * @create: 2019-07-19 22:49
+ * @author : 袁阊越
+ * @description : 返回通用错误
+ * @date : 2020/2/5/005
  */
-public class CommonReturnType {
+@Data
+public class CommonReturnType<T> {
     /**
      * 返回结果代码 错误或者是失败
      */
-    private String status;
+    private Integer status;
 
     /**
      * 顺着代码一起返回的数据
      */
-    private Object data;
+    private T data;
 
-    public static CommonReturnType create(Object result) {
-        return CommonReturnType.create(result, "success");
+    public static <T> CommonReturnType<T> create(T data) {
+        return CommonReturnType.create(HttpStatus.OK.value(), data);
     }
 
-    public static CommonReturnType create(Object result, String status) {
-        CommonReturnType type = new CommonReturnType();
-        type.setData(result);
-        type.setStatus(status);
-        return type;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public Object getData() {
-        return data;
-    }
-
-    private void setStatus(String status) {
-        this.status = status;
-    }
-
-    private void setData(Object data) {
-        this.data = data;
+    public static <T> CommonReturnType<T> create(Integer status, T data) {
+        CommonReturnType<T> commonReturnType = new CommonReturnType<>();
+        commonReturnType.setData(data);
+        commonReturnType.setStatus(status);
+        return commonReturnType;
     }
 }

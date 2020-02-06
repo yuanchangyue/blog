@@ -22,7 +22,7 @@ public class BeanUtils {
             //初始化
             T targetClassInstance = targetClass.newInstance();
             //复制属性
-            org.springframework.beans.BeanUtils.copyProperties(source, targetClass);
+            org.springframework.beans.BeanUtils.copyProperties(source,targetClassInstance);
             return targetClassInstance;
         } catch (Exception e) {
             throw new BeanException(targetClass.getName() + "初始化失败,或者属性转换失败");

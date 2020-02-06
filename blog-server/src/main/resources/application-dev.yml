@@ -27,6 +27,11 @@ spring:
       min-idle: 1
       max-active: 20
       max-wait: 60000
+  #热部署
+  devtools:
+    restart:
+      enabled: true
+      additional-paths: src/main/java
 
 #mybatis
 mybatis:
@@ -35,3 +40,5 @@ mybatis:
   #开启驼峰命名
   configuration:
     map-underscore-to-camel-case: true
+
+

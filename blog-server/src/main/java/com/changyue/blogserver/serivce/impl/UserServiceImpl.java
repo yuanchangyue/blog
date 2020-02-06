@@ -39,7 +39,6 @@ public class UserServiceImpl implements UserService {
         return userMapper.findOneBySelective(user);
     }
 
-
     @Override
     public User updatePassword(String oldPassword, String newPassword, Integer userId) {
         Assert.hasText(oldPassword, "旧密码不能为空");
@@ -71,7 +70,7 @@ public class UserServiceImpl implements UserService {
         Assert.notNull(userParam, "创建用户,用户属性不能为空!");
 
         //转换为用户实体
-        User user = userParam.converTo();
+        User user = userParam.convertTo();
 
         setPassword(user, userParam.getPassword());
 

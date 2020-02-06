@@ -1,4 +1,4 @@
-package com.changyue.j2eefinal.validator;
+package com.changyue.blogserver.validator;
 
 
 import org.apache.commons.lang3.StringUtils;
@@ -8,11 +8,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @program: j2eework-9
- * @description:
- * @author: 袁阊越
- * @create: 2019-12-12 21:53
- */
+ * @author : 袁阊越
+ * @description : 验证结果
+ * @date : 2020/2/5/005
+*/
 public class ValidatorResult {
     /**
      * 是否有错

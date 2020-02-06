@@ -63,7 +63,7 @@ public class PhotoServiceImpl implements PhotoService {
         Assert.notNull(photoParam, "photoParam的参数不能为空");
 
         //转换为DO
-        Photo photo = photoParam.converTo();
+        Photo photo = photoParam.convertTo();
 
         photoMapper.insert(photo);
 

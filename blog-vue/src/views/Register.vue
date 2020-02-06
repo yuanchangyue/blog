@@ -16,26 +16,29 @@
                                 <el-input prefix-icon="el-icon-user-solid" v-model="form.name" placeholder="请输入用户名称"/>
                             </el-form-item>
                             <el-form-item>
-                                <el-input prefix-icon="el-icon-user" v-model="form.nickname" placeholder="请输入用户昵称"/>
-                            </el-form-item>
-                            <el-form-item>
                                 <el-input prefix-icon="el-icon-message" v-model="form.email" placeholder="请输入用户邮箱"/>
                             </el-form-item>
                             <el-form-item>
-                                <el-input type="password" prefix-icon="el-icon-lock" v-model="form.password" placeholder="请输入用户密码"/>
+                                <el-input type="password" prefix-icon="el-icon-lock" v-model="form.password"
+                                          placeholder="请输入用户密码"/>
                             </el-form-item>
                             <el-form-item>
                                 <el-input type="password" prefix-icon="el-icon-lock" v-model="form.againPassword"
                                           placeholder="请输入再一次输入密码"/>
                             </el-form-item>
                         </div>
-                        <el-form-item v-if="isSecond">
-                            <el-input prefix-icon="el-icon-reading" v-model="form.title" placeholder="请输入博客标题"/>
-                        </el-form-item>
+                        <div v-show="isSecond">
+                            <el-form-item>
+                                <el-input prefix-icon="el-icon-user" v-model="form.nickname" placeholder="请输入博客昵称"/>
+                            </el-form-item>
+                            <el-form-item>
+                                <el-input prefix-icon="el-icon-user" v-model="form.description" placeholder="请输入博客昵称"/>
+                            </el-form-item>
+                        </div>
                         <el-form-item style="text-align: left">
                             <el-button v-if="isBack" @click="back">上一步</el-button>
                             <el-button type="primary" v-if="!isBack" @click="next">下一步</el-button>
-                            <el-button type="primary" v-if="isBack">注册</el-button>
+                            <el-button type="primary" v-if="isBack" @click="register">注册</el-button>
                         </el-form-item>
                     </el-form>
                 </transition>
@@ -52,8 +55,14 @@ export default {
   data () {
     return {
       form: {
-        name: ''
+        name: '',
+        password: '',
+        nickname: '',
+        email: '',
+        description: '',
+        againPassword: ''
       },
+      responseResult: [],
       active: 1,
       isFirst: true,
       isBack: false,
@@ -72,6 +81,26 @@ export default {
       this.isFirst = true
       this.isBack = false
       this.isSecond = false
+    },
+    register () {
+      this.$axios.post('/user', {
+        username: this.form.name,
+        password: this.form.password,
+        nickname: this.form.nickname,
+        email: this.form.email,
+        againPassword: this.form.againPassword,
+        description: this.form.description
+      }).then(successResponse => {
+        this.responseResult = JSON.stringify(successResponse.data)
+        console.log(this.responseResult)
+        if (successResponse.data.status === 200) {
+          this.$message({
+            message: this.form.name + '注册成功',
+            type: 'success'
+          })
+          this.$router.replace({ path: '/login' })
+        }
+      }).catch(() => {})
     }
   }
 }
@@ -89,11 +118,9 @@ export default {
     .text {
         font-size: 14px;
     }
-
     .item {
         padding: 18px 0;
     }
-
     .box-card {
         width: 480px;
     }

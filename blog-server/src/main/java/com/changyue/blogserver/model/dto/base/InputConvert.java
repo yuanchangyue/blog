@@ -9,14 +9,13 @@ import java.lang.reflect.ParameterizedType;
 import java.util.Objects;
 
 /**
- * @program: blog-server
- * @description: 转换传入的params为数据对象
- * @author: ChangYue
- * @create: 2020-01-20 16:50
+ * @author : 袁阊越
+ * @description : 转换传入的params为数据对象
+ * @date : 2020/2/5/005
  */
 public interface InputConvert<DOMAIN> {
 
-    default DOMAIN converTo() {
+    default DOMAIN convertTo() {
 
         //获取泛型
         ParameterizedType type = parameterizedType();

@@ -1,4 +1,4 @@
-package com.changyue.j2eefinal.validator;
+package com.changyue.blogserver.validator;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
@@ -10,10 +10,9 @@ import java.util.Set;
 
 
 /**
- * @program: j2eework-9
- * @description:
- * @author: 袁阊越
- * @create: 2019-12-12 21:59
+ * @author : 袁阊越
+ * @description : 验证JSR305
+ * @date : 2020/2/5/005
  */
 @Component
 public class ValidatorImpl implements InitializingBean {

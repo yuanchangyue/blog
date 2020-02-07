@@ -1,6 +1,5 @@
 package com.changyue.blogserver.dao.base;
 
-import com.changyue.blogserver.model.entity.Post;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.lang.NonNull;
 

@@ -2,7 +2,9 @@ package com.changyue.blogserver.serivce;
 
 import com.changyue.blogserver.model.dto.CategoryDTO;
 import com.changyue.blogserver.model.entity.Category;
+import com.github.pagehelper.PageInfo;
 import org.springframework.lang.NonNull;
+import org.springframework.lang.Nullable;
 
 import java.util.List;
 
@@ -38,6 +40,15 @@ public interface CategoryService extends BaseService<Category, Integer> {
      * @return 类别列表
      */
     List<Category> listByParentId(@NonNull Integer id);
+
+    /**
+     * 分页全部
+     * @param pageIndex 页索引
+     * @param pageSize  页数
+     * @return 分页类别
+     */
+    @NonNull
+    PageInfo<CategoryDTO> list(@NonNull Integer pageIndex,@NonNull Integer pageSize);
 
     /**
      * 装换为DTO

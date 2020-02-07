@@ -121,9 +121,9 @@ public class PostCategoryServiceImpl implements PostCategoryService {
      * @return Optional
      */
     @Override
-    public Optional<PostCategory> getById(Integer id) {
+    public PostCategory getById(Integer id) {
         Assert.notNull(id, "id 不能为空");
-        return postCategoryMapper.selectByPrimaryKey(id);
+        return postCategoryMapper.selectByPrimaryKey(id).orElse(null);
     }
 
     /**

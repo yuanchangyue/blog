@@ -64,7 +64,7 @@ public class TagController {
 
     @GetMapping("/{tagId}")
     public TagDTO getById(@PathVariable("tagId") Integer tagId) {
-        return tagService.convertTo(tagService.getById(tagId).orElse(null));
+        return tagService.convertTo(tagService.getById(tagId));
     }
 
     @PutMapping("/{tagId}")
@@ -73,7 +73,7 @@ public class TagController {
                            @Valid @RequestBody TagParam tagParam) {
 
         //获得tag
-        Tag tag = tagService.getById(tagId).orElse(null);
+        Tag tag = tagService.getById(tagId);
 
         //将tag中值更新为tagParam
         tagParam.update(tag);

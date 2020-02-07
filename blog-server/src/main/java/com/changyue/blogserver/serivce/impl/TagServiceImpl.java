@@ -77,9 +77,9 @@ public class TagServiceImpl implements TagService {
      * @return Optional
      */
     @Override
-    public Optional<Tag> getById(Integer id) {
+    public Tag getById(Integer id) {
         Assert.notNull(id, "tag id 不能为空");
-        return tagMapper.selectByPrimaryKey(id);
+        return tagMapper.selectByPrimaryKey(id).orElse(null);
     }
 
 

@@ -17,11 +17,10 @@ import javax.annotation.Nonnull;
 import java.util.*;
 
 /**
- * @program: blog-server
- * @description: 文章标签业务接口实现
- * @author: ChangYue
- * @create: 2020-01-21 09:11
- */
+ * @author : 袁阊越
+ * @description : 文章标签业务接口实现
+ * @date : 2020/2/7/007
+*/
 @Service
 public class PostTagServiceImpl implements PostTagService {
 
@@ -93,8 +92,8 @@ public class PostTagServiceImpl implements PostTagService {
      * @return Optional
      */
     @Override
-    public Optional<PostTag> getById(Integer id) {
-        return postTagMapper.selectByPrimaryKey(id);
+    public PostTag getById(Integer id) {
+        return postTagMapper.selectByPrimaryKey(id).orElse(null);
     }
 
     /**

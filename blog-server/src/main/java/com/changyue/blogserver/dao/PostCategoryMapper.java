@@ -4,7 +4,9 @@ import com.changyue.blogserver.dao.base.BaseMapper;
 
 import com.changyue.blogserver.model.entity.PostCategory;
 import lombok.NonNull;
+import org.apache.ibatis.annotations.Mapper;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
 import java.util.List;
@@ -15,6 +17,8 @@ import java.util.Set;
  * @description : 文章类别数据接口
  * @date : 2020/2/3/003
  */
+@Mapper
+@Repository
 public interface PostCategoryMapper extends BaseMapper<PostCategory> {
 
     /**

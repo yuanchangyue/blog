@@ -60,7 +60,7 @@ public interface BaseService<DOMAIN, ID> {
      * @return Optional
      */
     @NonNull
-    default Optional<DOMAIN> getById(@NonNull ID id) {
+    default DOMAIN getById(@NonNull ID id) {
         return null;
     }
 

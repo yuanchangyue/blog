@@ -14,6 +14,12 @@
         id, description, name, parent_id, slug_name
     </sql>
 
+    <select id="listAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from categories
+    </select>
+
     <select id="getTagByIds" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>

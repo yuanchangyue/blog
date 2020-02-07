@@ -12,7 +12,11 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
-
+/**
+ * @author : 袁阊越
+ * @description : 类别数据接口层
+ * @date : 2020/2/7/007
+ */
 @Mapper
 @Repository
 public interface CategoryMapper extends BaseMapper<Category> {
@@ -42,6 +46,7 @@ public interface CategoryMapper extends BaseMapper<Category> {
      * @return 类别
      */
     Optional<Category> getByName(@NonNull @Param("name") String name);
+
 
     /**
      * 按父ID列出类别。

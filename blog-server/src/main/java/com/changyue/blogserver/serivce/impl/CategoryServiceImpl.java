@@ -7,6 +7,8 @@ import com.changyue.blogserver.exception.NotFindException;
 import com.changyue.blogserver.model.dto.CategoryDTO;
 import com.changyue.blogserver.model.entity.Category;
 import com.changyue.blogserver.serivce.CategoryService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,13 +17,13 @@ import org.springframework.util.Assert;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
- * @program: blog-server
- * @description: 类别业务实现
- * @author: 袁阊越
- * @create: 2020-01-22 17:27
+ * @author : 袁阊越
+ * @description : 类别业务实现
+ * @date : 2020/2/7/007
  */
 @Slf4j
 @Service
@@ -59,7 +61,6 @@ public class CategoryServiceImpl implements CategoryService {
         return category;
     }
 
-
     @Override
     public Category getBySlugName(String slugName) {
         return Objects.requireNonNull(categoryMapper.getBySlugName(slugName).orElse(null));
@@ -72,9 +73,28 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    public Category getById(Integer id) {
+        Assert.notNull(id,"Id 不能为空");
+        return categoryMapper.selectByPrimaryKey(id).orElse(null);
+    }
+
+    @Override
     public List<Category> listByParentId(Integer id) {
         Assert.notNull(id, "类别Id不能为空");
         return categoryMapper.findByParentId(id);
+    }
+
+    @Override
+    public PageInfo<CategoryDTO> list(Integer pageIndex, Integer pageSize) {
+
+        Assert.notNull(pageIndex, "页索引不能为空");
+        Assert.notNull(pageSize, "页数不能为空");
+
+        PageHelper.startPage(pageIndex, pageSize);
+        List<Category> categoryList = categoryMapper.listAll();
+        List<CategoryDTO> categoryDTOS = convertTo(categoryList);
+
+        return new PageInfo<>(categoryDTOS, 3);
     }
 
     @Override

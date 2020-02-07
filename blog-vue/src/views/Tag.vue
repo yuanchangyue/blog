@@ -6,7 +6,7 @@
             <el-row :gutter="20">
                 <el-col :span="12">
                     <el-card class="tag-operation">
-                        <div slot="header" class="clearfix">
+                        <div slot="header">
                             <span>{{ title }}</span>
                         </div>
                         <el-form>
@@ -18,7 +18,7 @@
                             </el-form-item>
                             <el-form-item>
                                 <el-button size="small" type="primary" @click="insertTag">{{ button }}</el-button>
-                                <el-button v-if="isInsert" size="small" @click="returnInsert">返回添加</el-button>
+                                <el-button v-if="!isInsert" size="small" @click="returnInsert">返回添加</el-button>
                             </el-form-item>
                         </el-form>
                     </el-card>
@@ -29,12 +29,12 @@
                             <span>全部标签</span>
                         </div>
                         <div class="tags-list">
-                                 <el-tag v-for="item in items"
-                                   :key="item.name"
-                                   :id="item.id" @close="handleClose(item)" @click="update(item.id)"
-                                   closable>
-                               {{ item.name }}
-                           </el-tag>
+                            <el-tag v-for="item in items"
+                                    :key="item.name"
+                                    :id="item.id" @close="handleClose(item)" @click="update(item.id)"
+                                    closable>
+                                {{ item.name }}
+                            </el-tag>
                         </div>
                     </el-card>
                 </el-col>
@@ -47,7 +47,7 @@
 import TopNav from '../components/TopNav'
 import BreadCrumb from '../components/BreadCrumb'
 export default {
-  name: '',
+  name: 'Tag',
   components: { TopNav, BreadCrumb },
   mounted () {
     this.showTagList()
@@ -60,8 +60,9 @@ export default {
       },
       items: [],
       title: '新增标签',
-      button: '添加',
-      isInsert: false,
+      button: '新增',
+      isInsert: true,
+      currentTagId: '',
       form: {
         name: '',
         slugName: ''
@@ -69,12 +70,18 @@ export default {
     }
   },
   methods: {
+    showMessage: function (type, messageStr) {
+      this.$message({
+        type: type,
+        message: messageStr
+      })
+    },
     showTagList () {
       this.$axios.get('/tag').then(res => {
         console.info(res.data)
         this.items = res.data
-      }).catch(function (err) {
-        console.info(err)
+      }).catch(() => {
+        this.showMessage('error', '网络错误')
       })
     },
     handleClose (tag) {
@@ -84,22 +91,13 @@ export default {
         type: 'warning'
       }).then(() => {
         this.$axios.delete('/tag/' + tag.id).then(() => {
-          this.$message({
-            type: 'success',
-            message: '删除成功!'
-          })
+          this.showMessage('success', '删除成功')
           this.items.splice(this.items.indexOf(tag), 1)
         }).catch(() => {
-          this.$message({
-            type: 'info',
-            message: '已取消删除'
-          })
+          this.showMessage('info', '已取消删除')
         })
       }).catch(() => {
-        this.$message({
-          type: 'info',
-          message: '已取消删除'
-        })
+        this.showMessage('info', '已取消删除')
       })
     },
     update (tagId) {
@@ -108,7 +106,8 @@ export default {
         this.form.name = value.data.name
         this.form.slugName = value.data.slugName
         this.button = '更新'
-        this.isInsert = true
+        this.isInsert = false
+        this.currentTagId = tagId
       }).catch(reason => {
       })
     },
@@ -117,15 +116,27 @@ export default {
       this.form.name = ''
       this.form.slugName = ''
       this.button = '新增'
-      this.isInsert = false
+      this.isInsert = true
     },
     insertTag () {
-      this.$axios.post('/tag', {
+      var formData = {
         name: this.form.name,
         slugName: this.form.slugName
-      }).then(value => {
-        console.info(value.data)
-      }).catch(reason => {})
+      }
+      if (this.isInsert) {
+        this.$axios.post('/tag', formData).then(value => {
+          this.showMessage('success', '新增' + value.data.name + '标签成功!')
+          this.showTagList()
+        }).catch(reason => {
+          this.showMessage('info', '新增失败!')
+        })
+      } else {
+        this.$axios.put('/tag/' + this.currentTagId, formData).then(value => {
+          this.showMessage('success', '修改标签成功!')
+        }).catch(reason => {
+          this.showMessage('info', '修改失败!')
+        })
+      }
     }
   }
 }
@@ -136,14 +147,16 @@ export default {
         padding: 0;
         margin: 0;
     }
-    .all-warp{
+    .all-warp {
+        height: 100%;
+        box-sizing: border-box;
     }
     .tag-box {
-        background-color: #f0f2f5;
+        height: 100%;
         padding: 30px 80px;
     }
     .el-tag{
         padding:0 8px;
-        margin:0 8px;
+        margin:10px 8px;
     }
 </style>

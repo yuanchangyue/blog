@@ -2,42 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bd5d3fba-cd88-41d7-b10b-952045a6ce54" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/config/CrossConfig.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/model/rep/CommonReturnType.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/validator/ValidatorImpl.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/validator/ValidatorResult.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/META-INF/blog-server.kotlin_module" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/com/changyue/blogserver/service/BlogServerApplicationTests.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/com/changyue/blogserver/validator/ValidatorUtilsTest.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../blog-vue/src/views/Category.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog-server.iml" beforeDir="false" afterPath="$PROJECT_DIR$/blog-server.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/config/CrossConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/config/CrossConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/dto/base/InputConvert.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/dto/base/InputConvert.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/params/UserParam.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/params/UserParam.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/rep/CommonReturnType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/rep/CommonReturnType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/PhotoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/PhotoServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/UserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/utils/BeanUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/utils/BeanUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/validator/ValidatorImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/validator/ValidatorImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/validator/ValidatorResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/validator/ValidatorResult.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-dev.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/changyue/blogserver/ulits/ConvertorUtlis.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/changyue/blogserver/ulits/ConvertorUtlis.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/changyue/blogserver/validator/ValidatorUtilsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/changyue/blogserver/validator/ValidatorUtilsTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application-dev.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/controller/UserController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/model/dto/base/InputConvert.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/model/dto/base/InputConvert.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/model/params/UserParam.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/model/params/UserParam.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/impl/PhotoServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/impl/PhotoServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/controller/TagController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/controller/TagController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/TagServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/TagServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/PostTagMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/PostTagMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/controller/TagController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/controller/TagController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/impl/TagServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/impl/TagServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/impl/UserServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/impl/UserServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/utils/BeanUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/utils/BeanUtils.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/changyue/blogserver/BlogServerApplicationTests.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../blog-vue/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/../blog-vue/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mapper/PostTagMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mapper/PostTagMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../blog-vue/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../blog-vue/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../blog-vue/src/components/BreadCrumb.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../blog-vue/src/components/BreadCrumb.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../blog-vue/src/components/TopNav.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../blog-vue/src/components/TopNav.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../blog-vue/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../blog-vue/src/router/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../blog-vue/src/views/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../blog-vue/src/views/Login.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../blog-vue/src/views/Register.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../blog-vue/src/views/Register.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../blog-vue/vue.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/../blog-vue/vue.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../blog-vue/src/views/Tag.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../blog-vue/src/views/Tag.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -147,7 +125,7 @@
       <recent name="D:\毕业设计\blog\blog-server" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.ConvertorUtlis.testConvertTo">
+  <component name="RunManager" selected="Spring Boot.BlogServerApplication">
     <configuration name="MybatisGeneratorUtils" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.changyue.blogserver.utils.MybatisGeneratorUtils" />
       <module name="blog-server" />
@@ -281,6 +259,9 @@
       <workItem from="1580796750865" duration="6000" />
       <workItem from="1580816417585" duration="2596000" />
       <workItem from="1580865284844" duration="19253000" />
+      <workItem from="1580995263942" duration="5063000" />
+      <workItem from="1581038113621" duration="2304000" />
+      <workItem from="1581046572100" duration="6670000" />
     </task>
     <servers />
   </component>
@@ -344,54 +325,54 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="118" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1579360164593" />
-    <state width="1366" height="402" key="GridCell.Tab.0.bottom" timestamp="1580892587571">
+    <state width="1366" height="198" key="GridCell.Tab.0.bottom" timestamp="1581055569881">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1366" height="402" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1580892587571" />
-    <state width="1366" height="402" key="GridCell.Tab.0.center" timestamp="1580892587571">
+    <state width="1366" height="198" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1581055569881" />
+    <state width="1366" height="198" key="GridCell.Tab.0.center" timestamp="1581055569880">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1366" height="402" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1580892587571" />
-    <state width="1366" height="402" key="GridCell.Tab.0.left" timestamp="1580892587570">
+    <state width="1366" height="198" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1581055569880" />
+    <state width="1366" height="198" key="GridCell.Tab.0.left" timestamp="1581055569880">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1366" height="402" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1580892587570" />
-    <state width="1366" height="402" key="GridCell.Tab.0.right" timestamp="1580892587571">
+    <state width="1366" height="198" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1581055569880" />
+    <state width="1366" height="198" key="GridCell.Tab.0.right" timestamp="1581055569881">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1366" height="402" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1580892587571" />
-    <state width="1366" height="346" key="GridCell.Tab.1.bottom" timestamp="1580892587562">
+    <state width="1366" height="198" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1581055569881" />
+    <state width="1366" height="198" key="GridCell.Tab.1.bottom" timestamp="1581055569882">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1366" height="346" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1580892587562" />
-    <state width="1366" height="346" key="GridCell.Tab.1.center" timestamp="1580892587561">
+    <state width="1366" height="198" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1581055569882" />
+    <state width="1366" height="198" key="GridCell.Tab.1.center" timestamp="1581055569881">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1366" height="346" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1580892587561" />
-    <state width="1366" height="346" key="GridCell.Tab.1.left" timestamp="1580892587561">
+    <state width="1366" height="198" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1581055569881" />
+    <state width="1366" height="198" key="GridCell.Tab.1.left" timestamp="1581055569881">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1366" height="346" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1580892587561" />
-    <state width="1366" height="346" key="GridCell.Tab.1.right" timestamp="1580892587561">
+    <state width="1366" height="198" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1581055569881" />
+    <state width="1366" height="198" key="GridCell.Tab.1.right" timestamp="1581055569881">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1366" height="346" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1580892587561" />
-    <state width="1366" height="346" key="GridCell.Tab.2.bottom" timestamp="1580892587563">
+    <state width="1366" height="198" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1581055569881" />
+    <state width="1366" height="198" key="GridCell.Tab.2.bottom" timestamp="1581055569882">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1366" height="346" key="GridCell.Tab.2.bottom/0.0.1366.728@0.0.1366.728" timestamp="1580892587563" />
-    <state width="1366" height="346" key="GridCell.Tab.2.center" timestamp="1580892587562">
+    <state width="1366" height="198" key="GridCell.Tab.2.bottom/0.0.1366.728@0.0.1366.728" timestamp="1581055569882" />
+    <state width="1366" height="198" key="GridCell.Tab.2.center" timestamp="1581055569882">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1366" height="346" key="GridCell.Tab.2.center/0.0.1366.728@0.0.1366.728" timestamp="1580892587562" />
-    <state width="1366" height="346" key="GridCell.Tab.2.left" timestamp="1580892587562">
+    <state width="1366" height="198" key="GridCell.Tab.2.center/0.0.1366.728@0.0.1366.728" timestamp="1581055569882" />
+    <state width="1366" height="198" key="GridCell.Tab.2.left" timestamp="1581055569882">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1366" height="346" key="GridCell.Tab.2.left/0.0.1366.728@0.0.1366.728" timestamp="1580892587562" />
-    <state width="1366" height="346" key="GridCell.Tab.2.right" timestamp="1580892587562">
+    <state width="1366" height="198" key="GridCell.Tab.2.left/0.0.1366.728@0.0.1366.728" timestamp="1581055569882" />
+    <state width="1366" height="198" key="GridCell.Tab.2.right" timestamp="1581055569882">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1366" height="346" key="GridCell.Tab.2.right/0.0.1366.728@0.0.1366.728" timestamp="1580892587562" />
+    <state width="1366" height="198" key="GridCell.Tab.2.right/0.0.1366.728@0.0.1366.728" timestamp="1581055569882" />
     <state x="490" y="175" key="Maven.ArtifactSearchDialog" timestamp="1579398158043">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -417,14 +398,14 @@
     </state>
     <state x="24" y="89" key="new project wizard/0.0.1366.728@0.0.1366.728" timestamp="1579360026152" />
     <state x="398" y="219" key="new project wizard/0.0.1920.1040@0.0.1920.1040" timestamp="1579398283143" />
-    <state x="347" y="176" key="run.anything.popup" timestamp="1580481374436">
+    <state x="347" y="176" key="run.anything.popup" timestamp="1581000971588">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="347" y="176" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1580481374436" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1580886824716">
+    <state x="347" y="176" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1581000971588" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1581001052757">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1580886824716" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1581001052757" />
     <state x="486" y="70" width="945" height="969" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1579507306804" />
   </component>
   <component name="XDebuggerManager">
@@ -449,6 +430,21 @@
           <url>file://$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/UserServiceImpl.java</url>
           <line>69</line>
           <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/changyue/blogserver/controller/TagController.java</url>
+          <line>47</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/changyue/blogserver/controller/TagController.java</url>
+          <line>57</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/changyue/blogserver/controller/TagController.java</url>
+          <line>75</line>
+          <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

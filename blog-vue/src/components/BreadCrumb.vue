@@ -19,14 +19,11 @@ export default {
 </script>
 
 <style scoped>
-    *{
-        padding: 0;
-        margin: 0;
-    }
     .bread-box {
         margin-top: 10px;
         padding:15px 80px;
         box-shadow: 0 2px 2px -2px rgba(0, 0, 0, .2);
         background-color: #ffffff;
+        box-sizing: border-box;
     }
 </style>

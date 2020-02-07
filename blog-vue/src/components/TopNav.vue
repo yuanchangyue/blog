@@ -13,7 +13,7 @@
                 <template slot="title"><i class="el-icon-edit"/>文章</template>
                 <el-menu-item index="3-1">文章列表</el-menu-item>
                 <el-menu-item index="3-2">写文章</el-menu-item>
-                <el-menu-item index="3-3">分类目录</el-menu-item>
+                <el-menu-item index="/category">分类目录</el-menu-item>
                 <el-menu-item index="/tag">文章标签</el-menu-item>
             </el-submenu>
             <el-submenu index="5">

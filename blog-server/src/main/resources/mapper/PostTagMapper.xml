@@ -27,11 +27,11 @@
         from post_tags pt
     </select>
 
-    <select id="deleteByTagId" parameterType="java.lang.Integer">
+    <delete id="deleteByTagId" parameterType="java.lang.Integer">
         delete
         from post_tags
         where tag_id = #{tagId,jdbcType=INTEGER}
-    </select>
+    </delete>
 
     <select id="countPostTag" resultType="java.lang.Long">
         select COUNT(id)
@@ -39,11 +39,11 @@
         where post_id = #{postId,jdbcType=INTEGER}
     </select>
 
-    <select id="deleteByPostId" parameterType="java.lang.Integer">
+    <delete id="deleteByPostId" parameterType="java.lang.Integer">
         delete
         from post_tags
         where post_id = #{postId,jdbcType=INTEGER}
-    </select>
+    </delete>
 
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select

@@ -3,11 +3,15 @@ package com.changyue.blogserver.controller;
 import com.changyue.blogserver.model.dto.TagDTO;
 import com.changyue.blogserver.model.entity.Tag;
 import com.changyue.blogserver.model.params.TagParam;
+import com.changyue.blogserver.model.rep.CommonReturnType;
 import com.changyue.blogserver.serivce.PostTagService;
 import com.changyue.blogserver.serivce.TagService;
+import com.changyue.blogserver.validator.ValidatorImpl;
+import com.changyue.blogserver.validator.ValidatorResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -28,14 +32,24 @@ public class TagController {
 
     @Autowired
     private PostTagService postTagService;
-    
+
+    @Autowired
+    private ValidatorImpl validator;
+
     @GetMapping
     public List<TagDTO> listTags(@RequestParam(name = "more", required = false, defaultValue = "false") Boolean more) {
         return tagService.convertTo(tagService.listAll());
     }
 
     @PostMapping
+    @Transactional
     public TagDTO createTag(@Valid @RequestBody TagParam tagParam) {
+
+        ValidatorResult result = this.validator.validator(tagParam);
+        if (result.isHasError()) {
+            System.out.println(result.getErrorMsgMap());
+            log.debug("创建tag失败[{}]",result.getErrorMsgMap());
+        }
 
         Tag tag = new Tag();
 
@@ -54,6 +68,7 @@ public class TagController {
     }
 
     @PutMapping("/{tagId}")
+    @Transactional
     public TagDTO updateBy(@PathVariable("tagId") Integer tagId,
                            @Valid @RequestBody TagParam tagParam) {
 
@@ -67,7 +82,8 @@ public class TagController {
     }
 
     @DeleteMapping("/{tagTag}")
-    public void deleteTag(@PathVariable("tagTag") Integer tagId) {
+    @Transactional
+    public CommonReturnType<Integer> deleteTag(@PathVariable("tagTag") Integer tagId) {
 
         //删除tag
         tagService.removeById(tagId);
@@ -75,5 +91,6 @@ public class TagController {
         //删除文章标签的关联
         postTagService.removeByTagId(tagId);
 
+        return CommonReturnType.create(tagId);
     }
 }

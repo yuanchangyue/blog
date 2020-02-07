@@ -118,7 +118,6 @@ public class TagServiceImpl implements TagService {
         return tag;
     }
 
-
     @Override
     public int removeById(Integer id) {
         Assert.notNull(id, "tag id 不能为空");

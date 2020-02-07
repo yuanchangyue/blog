@@ -15,16 +15,16 @@
                             <div class="prompt-form">* 名称不能空,长度不能超过20</div>
                         </el-form-item>
                         <el-form-item label="别名: *">
-                            <el-input size="small" type="text" v-model="form.nickname" placeholder="请输入类别别名"/>
+                            <el-input size="small" type="text" v-model="form.slugName" placeholder="请输入类别别名"/>
                             <div class="prompt-form">* 别名不能空,长度不能超过20,不能重复</div>
                         </el-form-item>
                         <el-form-item label="父级类别">
-                            <el-select v-model="value" style="width: 100%;" size="small" placeholder="请选择类别">
+                            <el-select v-model="form.parentId" style="width: 100%;" size="small" placeholder="请选择类别">
                                 <el-option
-                                        v-for="item in options"
+                                        v-for="item in tableData"
                                         :key="item.value"
-                                        :label="item.label"
-                                        :value="item.value">
+                                        :label="item.name"
+                                        :value="item.id">
                                 </el-option>
                             </el-select>
                             <div class="prompt-form">* 选择父级类别(一级分类)</div>
@@ -34,7 +34,7 @@
                             <div class="prompt-form">* 关于类别描述</div>
                         </el-form-item>
                         <el-form-item>
-                            <el-button type="primary" @click="onSubmit">立即创建</el-button>
+                            <el-button type="primary" @click="createAndUpdate">立即创建</el-button>
                         </el-form-item>
                     </el-form>
                 </el-card>
@@ -45,8 +45,7 @@
                         <span>全部分类</span>
                     </div>
                     <div>
-                        <el-table
-                                :data="tableData"
+                        <el-table :data="tableData"
                                 style="width: 100%">
                             <el-table-column
                                     prop="name"
@@ -65,7 +64,8 @@
                             <el-table-column
                                     label="操作">
                                 <div>
-                                    <el-link type="primary">编辑</el-link>
+                                    <el-link type="primary">编辑</el-link>&nbsp;
+                                    <el-link type="primary">删除</el-link>
                                 </div>
                             </el-table-column>
                         </el-table>
@@ -91,9 +91,45 @@ export default {
       },
       categories: [],
       form: {
-        name: ''
+        name: '',
+        slugName: '',
+        description: '',
+        parentId: null
       },
       tableData: []
+    }
+  },
+  mounted () {
+    this.showList()
+  },
+  methods: {
+    showMessage: function (type, messageStr) {
+      this.$message({
+        type: type,
+        message: messageStr
+      })
+    },
+    showList () {
+      this.$axios.get('/category', {
+        pageIndex: 1,
+        pageSize: 1
+      }).then(value => {
+        this.tableData = value.data.list
+      }).catch(reason => {})
+    },
+    createAndUpdate () {
+      var formData = {
+        name: this.form.name,
+        slugName: this.form.slugName,
+        description: this.form.description,
+        parentId: this.form.description
+      }
+      this.$axios.post('/category', formData).then(value => {
+        this.showMessage('success', '类别添加成功')
+        this.showList()
+      }).catch(reason => {
+        this.showMessage('info', '类别添加失败')
+      })
     }
   }
 }

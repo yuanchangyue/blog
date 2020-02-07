@@ -17,7 +17,7 @@
                                 <el-input type="text" v-model="form.slugName" placeholder="请输入标签别名" size="small"/>
                             </el-form-item>
                             <el-form-item>
-                                <el-button size="small" type="primary" @click="insertTag">{{ button }}</el-button>
+                                <el-button size="small" type="primary" @click="createAndUpdate">{{ button }}</el-button>
                                 <el-button v-if="!isInsert" size="small" @click="returnInsert">返回添加</el-button>
                             </el-form-item>
                         </el-form>
@@ -118,7 +118,7 @@ export default {
       this.button = '新增'
       this.isInsert = true
     },
-    insertTag () {
+    createAndUpdate () {
       var formData = {
         name: this.form.name,
         slugName: this.form.slugName

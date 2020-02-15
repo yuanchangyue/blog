@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import ElementUI from 'element-ui'
 import './plugins/element.js'
+import './assets/common.css'
 
 Vue.use(ElementUI)
 

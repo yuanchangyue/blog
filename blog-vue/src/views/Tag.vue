@@ -2,9 +2,9 @@
     <div class="all-warp">
         <TopNav/>
         <BreadCrumb :bread1="bread.firstBread" :bread2="bread.secondBread"/>
-        <div class="tag-box">
+        <div class="content-warp">
             <el-row :gutter="20">
-                <el-col :span="12">
+                <el-col :md="12" :sm="24">
                     <el-card class="tag-operation">
                         <div slot="header">
                             <span>{{ title }}</span>
@@ -12,9 +12,11 @@
                         <el-form>
                             <el-form-item label="标签名称:*">
                                 <el-input type="text" v-model="form.name" placeholder="请输入标签名称" size="small"/>
+                                <div class="prompt-form">* 名称不能空,长度不能超过20</div>
                             </el-form-item>
                             <el-form-item label="标签别名:*">
                                 <el-input type="text" v-model="form.slugName" placeholder="请输入标签别名" size="small"/>
+                                <div class="prompt-form">* 别名不能空,长度不能超过20,不能重复</div>
                             </el-form-item>
                             <el-form-item>
                                 <el-button size="small" type="primary" @click="createAndUpdate">{{ button }}</el-button>
@@ -23,7 +25,7 @@
                         </el-form>
                     </el-card>
                 </el-col>
-                <el-col :span="12">
+                <el-col :md="12" :sm="24">
                     <el-card class="tag-view">
                         <div slot="header">
                             <span>全部标签</span>
@@ -85,7 +87,7 @@ export default {
       })
     },
     handleClose (tag) {
-      this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+      this.$confirm('此操作将永久删除该标签, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
@@ -150,10 +152,6 @@ export default {
     .all-warp {
         height: 100%;
         box-sizing: border-box;
-    }
-    .tag-box {
-        height: 100%;
-        padding: 30px 80px;
     }
     .el-tag{
         padding:0 8px;

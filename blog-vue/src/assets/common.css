@@ -1,0 +1,31 @@
+body {
+    background-color: #f0f2f5;
+}
+
+.prompt-form{
+    color: rgba(0,0,0,.45);
+    line-height: 1.524;
+    margin-top: -2px;
+}
+
+.content-warp {
+    height: 100%;
+    padding: 30px 80px;
+}
+
+@media only screen and (max-width: 768px) {
+    .content-warp{
+        padding: 10px;
+    }
+    .top-nav-bar{
+        padding: 0 10px;
+    }
+}
+@media screen and (min-width:768px) and (max-width:1024px){
+    .content-warp{
+        padding: 10px;
+    }
+    .top-nav-bar{
+        padding: 0 10px;
+    }
+}

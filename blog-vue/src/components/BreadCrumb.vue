@@ -26,4 +26,14 @@ export default {
         background-color: #ffffff;
         box-sizing: border-box;
     }
+    @media only screen and (max-width: 768px) {
+        .bread-box{
+            padding: 15px 10px;
+        }
+    }
+    @media screen and (min-width:768px) and (max-width:1024px){
+        .bread-box{
+            padding: 15px 10px;
+        }
+    }
 </style>

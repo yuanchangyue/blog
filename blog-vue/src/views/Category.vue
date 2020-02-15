@@ -2,9 +2,9 @@
 <div class="all-warp">
     <TopNav/>
     <BreadCrumb :bread1="bread.firstBread" :bread2="bread.secondBread"/>
-    <div class="category-warp">
+    <div class="content-warp">
         <el-row :gutter="20">
-            <el-col :span="10">
+            <el-col :md="12" :sm="24">
                 <el-card class="box-card">
                     <div slot="header">
                         <span>新增分类</span>
@@ -22,12 +22,12 @@
                             <el-select v-model="form.parentId" style="width: 100%;" size="small" placeholder="请选择类别">
                                 <el-option
                                         v-for="item in tableData"
-                                        :key="item.value"
+                                        :key="item.id"
                                         :label="item.name"
                                         :value="item.id">
                                 </el-option>
                             </el-select>
-                            <div class="prompt-form">* 选择父级类别(一级分类)</div>
+                            <div class="prompt-form">* 选择父级类别(一级分类), 一级分类默认不选</div>
                         </el-form-item>
                         <el-form-item label="描述">
                             <el-input type="textarea" v-model="form.description" placeholder="请输入描述内容"/>
@@ -39,34 +39,39 @@
                     </el-form>
                 </el-card>
             </el-col>
-            <el-col :span="14">
+            <el-col :md="12" :sm="24">
                 <el-card class="box-card">
                     <div slot="header">
                         <span>全部分类</span>
                     </div>
                     <div>
-                        <el-table :data="tableData"
+                        <el-table v-loading="loading"
+                                :data="tableData"
                                 style="width: 100%">
                             <el-table-column
                                     prop="name"
                                     label="名称"
-                                    width="180">
+                                    width="120">
                             </el-table-column>
                             <el-table-column
                                     prop="slugName"
                                     label="别名"
-                                    width="180">
+                                    width="120">
                             </el-table-column>
                             <el-table-column
                                     prop="description"
-                                    label="描述">
+                                    label="描述"
+                                    width="180">
                             </el-table-column>
                             <el-table-column
-                                    label="操作">
+                                    label="操作"
+                                    width="180">
+                                <template slot-scope="scope">
                                 <div>
                                     <el-link type="primary">编辑</el-link>&nbsp;
-                                    <el-link type="primary">删除</el-link>
+                                    <el-link type="primary" @click="handleDelete(scope.$index)">删除</el-link>
                                 </div>
+                                </template>
                             </el-table-column>
                         </el-table>
                     </div>
@@ -94,9 +99,10 @@ export default {
         name: '',
         slugName: '',
         description: '',
-        parentId: null
+        parentId: ''
       },
-      tableData: []
+      tableData: [],
+      loading: true
     }
   },
   mounted () {
@@ -115,6 +121,7 @@ export default {
         pageSize: 1
       }).then(value => {
         this.tableData = value.data.list
+        this.loading = false
       }).catch(reason => {})
     },
     createAndUpdate () {
@@ -122,13 +129,31 @@ export default {
         name: this.form.name,
         slugName: this.form.slugName,
         description: this.form.description,
-        parentId: this.form.description
+        parentId: this.form.parentId
       }
       this.$axios.post('/category', formData).then(value => {
         this.showMessage('success', '类别添加成功')
         this.showList()
       }).catch(reason => {
+        console.info(reason)
         this.showMessage('info', '类别添加失败')
+      })
+    },
+    handleDelete (index) {
+      var id = this.tableData[index].id
+      this.$confirm('此操作永久删除该类别以及使用该类别的文章, 是否继续?', '三思而行', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.$axios.delete('/category/' + id).then(() => {
+          this.showMessage('success', '删除成功')
+          this.tableData.splice(index, 1)
+        }).catch(() => {
+          this.showMessage('info', '已取消删除')
+        })
+      }).catch(() => {
+        this.showMessage('info', '已取消删除')
       })
     }
   }
@@ -136,8 +161,7 @@ export default {
 </script>
 
 <style scoped>
-    .category-warp {
-        height: 100%;
-        padding: 30px 80px;
+    .el-col{
+        margin:10px 0;
     }
 </style>

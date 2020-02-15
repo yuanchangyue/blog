@@ -1,58 +1,66 @@
 <template>
     <div class="top-nav-bar">
-        <span class="simple-menu-item logo-title">BLOG</span>
-        <el-menu :default-active="this.$route.path" router class="nav" mode="horizontal" @select="handleSelect">
-            <el-menu-item index="1" class="simple-menu-item">控制台</el-menu-item>
-            <el-submenu index="2">
+        <span @click="drawer = true" class="simple-menu-item logo-title">{{ navButton }}</span>
+        <el-menu :default-active="this.$route.path" router class="nav" mode="horizontal">
+            <el-menu-item index="1" class="simple-menu-item hidden-md-and-down">控制台</el-menu-item>
+            <el-submenu index="2" class="hidden-md-and-down">
                 <template slot="title">
                     <i class="el-icon-user"/>个人中心
                 </template>
                 <el-menu-item index="2-1">个人资料</el-menu-item>
             </el-submenu>
-            <el-submenu index="3">
+            <el-submenu index="3" class="hidden-md-and-down">
                 <template slot="title"><i class="el-icon-edit"/>文章</template>
                 <el-menu-item index="3-1">文章列表</el-menu-item>
                 <el-menu-item index="3-2">写文章</el-menu-item>
                 <el-menu-item index="/category">分类目录</el-menu-item>
                 <el-menu-item index="/tag">文章标签</el-menu-item>
             </el-submenu>
-            <el-submenu index="5">
+            <el-submenu index="4" class="hidden-md-and-down">
                 <template slot="title"><i class="el-icon-setting"/>看点</template>
-                <el-menu-item index="5-1">更多文章</el-menu-item>
+                <el-menu-item index="4-1">更多文章</el-menu-item>
             </el-submenu>
-            <el-menu-item index="3" class="simple-menu-item"><i class="el-icon-picture-outline"/>相册
+            <el-menu-item index="5" class="simple-menu-item hidden-md-and-down"><i class="el-icon-picture-outline"/>相册
             </el-menu-item>
-            <el-menu-item index="4" class="simple-menu-item"><i class="el-icon-chat-line-round"/>评价
+            <el-menu-item index="6" class="simple-menu-item hidden-md-and-down"><i class="el-icon-chat-line-round"/>评价
             </el-menu-item>
-            <el-submenu index="6">
+            <el-submenu class="hidden-md-and-down" index="7">
                 <template slot="title"><i class="el-icon-setting"/>设置</template>
-                <el-menu-item index="6-1">操作日志</el-menu-item>
+                <el-menu-item index="7-1">操作日志</el-menu-item>
             </el-submenu>
         </el-menu>
         <ul class="user-box">
-            <li><div class="block"><el-avatar :size="25"/></div></li>
-            <li><el-badge :value="0"><i class="el-icon-bell"/></el-badge></li>
+            <li>
+                <div class="block">
+                    <el-avatar :size="25"/>
+                </div>
+            </li>
+            <li>
+                <el-badge :value="0"><i class="el-icon-bell"/></el-badge>
+            </li>
         </ul>
     </div>
 </template>
 
 <script>
+import 'element-ui/lib/theme-chalk/display.css'
+
 export default {
   data () {
     return {
-      activeIndex: '1'
+      navButton: 'LOGO',
+      activeIndex: '1',
+      drawer: false,
+      direction: 'ltr',
+      menuMode: 'horizontal'
     }
   },
   methods: {
-    handleSelect (key, keyPath) {
-      console.log(key, keyPath)
-    }
   }
 }
 </script>
 
 <style scoped>
-
     .top-nav-bar {
         margin: -8px;
         padding: 0 80px;
@@ -60,16 +68,23 @@ export default {
         display: flex;
         background-color: #fff;
     }
-
+    @media only screen and (max-width: 768px) {
+        .top-nav-bar{
+            padding: 0 10px;
+        }
+    }
+    @media screen and (min-width:768px) and (max-width:1024px){
+        .top-nav-bar{
+            padding: 0 10px;
+        }
+    }
     .logo-title {
         line-height: 60px;
         font-size: 24px;
     }
-
     .nav {
         border-bottom: 0;
     }
-
     .simple-menu-item {
         margin: 0 5px;
     }

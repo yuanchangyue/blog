@@ -66,7 +66,7 @@ public interface PostCategoryMapper extends BaseMapper<PostCategory> {
      * @return 文章类别列表已删除
      */
     @NonNull
-    List<PostCategory> deleteByPostId(@NonNull @Param("postId") Integer postId);
+    int deleteByPostId(@NonNull @Param("postId") Integer postId);
 
     /**
      * 按类别ID删除文章类别。
@@ -75,7 +75,7 @@ public interface PostCategoryMapper extends BaseMapper<PostCategory> {
      * @return 文章类别列表已删除
      */
     @NonNull
-    List<PostCategory> deleteByCategoryId(@NonNull @Param("categoryId") Integer categoryId);
+    int deleteByCategoryId(@NonNull @Param("categoryId") Integer categoryId);
 
     /**
      * 批量插入文章类别

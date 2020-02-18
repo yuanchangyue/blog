@@ -109,7 +109,7 @@ public class PostServiceImpl implements PostService {
 
         if (post.getId() == null) {
             //创建文章
-            return this.create(post);
+            return postMapper.selectByPrimaryKey(create(post)).orElse(null);
         }
 
         post.setEditTime(new Date());
@@ -123,10 +123,9 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public Post create(Post post) {
+    public Integer create(Post post) {
         //插入文章到数据库
-        postMapper.insert(post);
-        return post;
+        return postMapper.insert(post);
     }
 
     @Override

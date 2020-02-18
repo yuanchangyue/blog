@@ -58,7 +58,7 @@
         where id = #{id,jdbcType=INTEGER}
     </delete>
 
-    <insert id="insert" parameterType="postTag">
+    <insert id="insert" parameterType="postTag" keyProperty="id" keyColumn="id" useGeneratedKeys="true">
         insert into post_tags (create_time, deleted,
                                update_time, post_id, tag_id)
         values (#{createTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=TINYINT},

@@ -1,34 +1,125 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bd5d3fba-cd88-41d7-b10b-952045a6ce54" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/params/CategoryParam.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+    <list default="true" id="bd5d3fba-cd88-41d7-b10b-952045a6ce54" name="Default Changelist" comment="&quot;category删除业务涉及post&quot;">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_beanutils_commons_beanutils_1_9_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_collections_commons_collections_3_2_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_shiro_shiro_cache_1_4_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_shiro_shiro_config_core_1_4_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_shiro_shiro_config_ogdl_1_4_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_shiro_shiro_core_1_4_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_shiro_shiro_crypto_cipher_1_4_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_shiro_shiro_crypto_core_1_4_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_shiro_shiro_crypto_hash_1_4_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_shiro_shiro_event_1_4_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_shiro_shiro_lang_1_4_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_shiro_shiro_spring_1_4_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_shiro_shiro_spring_boot_starter_1_4_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_shiro_shiro_spring_boot_web_starter_1_4_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_shiro_shiro_web_1_4_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/config/ShiroConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/controller/PostController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/dao/RoleMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/dao/UsersRoleMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/entity/Role.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/entity/UsersRole.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/enums/AuthorityStatus.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/params/LoginParam.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/security/ShiroRealm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/RoleService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/UserRoleService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/RoleServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/UserAuthorityServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/utils/ValidatorUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/RoleMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/UsersRoleMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/changyue/blogserver/mapper/UserUserRoleMapperTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/config/ShiroConfig.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/controller/PostController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/dao/RoleMapper.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/dao/UsersRoleMapper.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/model/entity/Role.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/model/entity/UsersRole.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/model/enums/AuthorityStatus.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/model/params/LoginParam.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/security/ShiroRealm.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/RoleService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/UserRoleService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/impl/RoleServiceImpl.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/impl/UserAuthorityServiceImpl.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/utils/ValidatorUtils.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/mapper/RoleMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/mapper/UsersRoleMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/test-classes/com/changyue/blogserver/mapper/TagMapperTest.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/test-classes/com/changyue/blogserver/mapper/UserUserRoleMapperTest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog-server.iml" beforeDir="false" afterPath="$PROJECT_DIR$/blog-server.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/mg.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/controller/CategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/controller/CategoryController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/controller/TagController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/controller/TagController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/dao/CategoryMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/dao/CategoryMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/controller/UserController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/dao/PostCategoryMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/dao/PostCategoryMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/dao/base/BaseMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/dao/base/BaseMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/dao/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/dao/UserMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/dto/CategoryDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/dto/CategoryDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/elsatic/Article.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/elsatic/Article.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/entity/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/entity/Category.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/entity/Photo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/entity/Photo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/entity/Tag.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/entity/Tag.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/entity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/params/CategoryParam.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/params/CategoryParam.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/BaseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/BaseService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/CategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/CategoryService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/PostCategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/PostCategoryService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/CategoryServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/CategoryServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/PhotoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/PhotoServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/PostCategoryServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/PostCategoryServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/PostServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/PostServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/PostTagServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/PostTagServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/TagServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/TagServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/CategoryMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/CategoryMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/LogMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/LogMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/PhotoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/PhotoMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/PostCategoryMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/PostCategoryMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/PostMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/PostMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/PostTagMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/PostTagMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/UserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/UserMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/changyue/blogserver/TagMapperTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/changyue/blogserver/mapper/TagMapperTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/controller/CategoryController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/controller/CategoryController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/controller/TagController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/controller/TagController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/controller/UserController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/dao/PostCategoryMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/dao/PostCategoryMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/dao/UserMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/dao/UserMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/model/dto/CategoryDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/model/dto/CategoryDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/model/elsatic/Article.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/model/elsatic/Article.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/model/entity/Category.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/model/entity/Category.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/model/entity/Photo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/model/entity/Photo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/model/entity/Tag.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/model/entity/Tag.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/model/entity/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/model/entity/User.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/BaseService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/BaseService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/CategoryService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/CategoryService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/PostCategoryService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/PostCategoryService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/UserService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/impl/CategoryServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/impl/CategoryServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/impl/PhotoServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/impl/PhotoServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/impl/PostCategoryServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/impl/PostCategoryServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/impl/PostServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/impl/PostServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/impl/PostTagServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/impl/PostTagServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/impl/TagServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/impl/TagServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/impl/UserServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/impl/UserServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/mapper/CategoryMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mapper/CategoryMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mapper/LogMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mapper/LogMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mapper/PhotoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mapper/PhotoMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mapper/PostCategoryMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mapper/PostCategoryMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mapper/PostMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mapper/PostMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mapper/PostTagMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mapper/PostTagMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mapper/UserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mapper/UserMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/changyue/blogserver/TagMapperTest.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../blog-vue/src/views/Category.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../blog-vue/src/views/Category.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../blog-vue/src/views/Tag.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../blog-vue/src/views/Tag.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,10 +172,12 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="changyue" />
+      </list>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
-  </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="dummy://restClient/response7.json" root0="SKIP_INSPECTION" />
   </component>
   <component name="JsbtTreeLayoutManager">
     <layout place="tools.popupGrunt">
@@ -118,7 +211,8 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/com/changyue/blogserver" />
+    <property name="database.data.extractors.current.id" value="HTML Table" />
+    <property name="last_opened_file_path" value="D:/Code/07 shiro 项目实战 - 权限管理系统/代码/i-admin" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Project" />
@@ -128,11 +222,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.changyue.blogserver.model.params" />
       <recent name="com.changyue.blogserver.model.rep" />
       <recent name="com.changyue.blogserver.exception" />
       <recent name="com.changyue.blogserver.model.dto" />
       <recent name="com.changyue.blogserver.serivce.base" />
-      <recent name="com.changyue.blogserver.model" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\毕业设计\blog\blog-server\src\main\java\com\changyue\blogserver" />
@@ -307,17 +401,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ValidatorUtilsTest.testUserParam" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="UserUserRoleMapperTest.testInsetUserAuthority" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="blog-server" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.changyue.blogserver.validator.*" />
+          <option name="PATTERN" value="com.changyue.blogserver.mapper.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.changyue.blogserver.validator" />
-      <option name="MAIN_CLASS_NAME" value="com.changyue.blogserver.validator.ValidatorUtilsTest" />
-      <option name="METHOD_NAME" value="testUserParam" />
+      <option name="PACKAGE_NAME" value="com.changyue.blogserver.mapper" />
+      <option name="MAIN_CLASS_NAME" value="com.changyue.blogserver.mapper.UserUserRoleMapperTest" />
+      <option name="METHOD_NAME" value="testInsetUserAuthority" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -332,11 +426,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.UserUserRoleMapperTest.testInsetUserAuthority" />
+        <item itemvalue="Application.MybatisGeneratorUtils" />
         <item itemvalue="HTTP Request.All in rest-api_5" />
         <item itemvalue="JUnit.ConvertorUtlis.testConvertTo" />
         <item itemvalue="JUnit.ConvertorUtlis.testConverTo" />
-        <item itemvalue="JUnit.ValidatorUtilsTest.testUserParam" />
-        <item itemvalue="Application.MybatisGeneratorUtils" />
       </list>
     </recent_temporary>
   </component>
@@ -344,18 +438,9 @@
     <option name="viewStates">
       <list>
         <serviceView>
+          <option name="contentProportion" value="0.20718026" />
           <treeState>
-            <expand>
-              <path>
-                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-                <item name="root:aliyun_blog" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-              </path>
-              <path>
-                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-                <item name="root:aliyun_blog" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-                <item name="com.intellij.database.console.session.MessageBusSession@2429ae14" type="9fbbdea:ServiceModel$ServiceNode" />
-              </path>
-            </expand>
+            <expand />
             <select />
           </treeState>
         </serviceView>
@@ -392,7 +477,15 @@
       <workItem from="1580995263942" duration="5063000" />
       <workItem from="1581038113621" duration="2304000" />
       <workItem from="1581046572100" duration="6670000" />
-      <workItem from="1581067983283" duration="9864000" />
+      <workItem from="1581067983283" duration="10316000" />
+      <workItem from="1581126508669" duration="4046000" />
+      <workItem from="1581522177066" duration="381000" />
+      <workItem from="1581739883487" duration="143000" />
+      <workItem from="1581740107349" duration="22599000" />
+      <workItem from="1581908414135" duration="4783000" />
+      <workItem from="1581991084959" duration="11308000" />
+      <workItem from="1582011588245" duration="4459000" />
+      <workItem from="1582018203053" duration="9619000" />
     </task>
     <servers />
   </component>
@@ -401,6 +494,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="&quot;category删除业务涉及post&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="&quot;category删除业务涉及post&quot;" />
   </component>
   <component name="WindowStateProjectService">
     <state x="393" y="44" key="#Assign_Data_Sources" timestamp="1579525442606">
@@ -426,20 +521,20 @@
     </state>
     <state x="393" y="44" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1579525434735" />
     <state x="552" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1579506354533" />
-    <state x="544" y="129" key="#com.intellij.ide.util.MemberChooser" timestamp="1581072012195">
+    <state x="544" y="129" key="#com.intellij.ide.util.MemberChooser" timestamp="1582026324307">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="544" y="129" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1581072012195" />
+    <state x="544" y="129" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1582026324307" />
     <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1579509312320" />
     <state x="573" y="286" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1579518513168">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="573" y="286" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1366.728@0.0.1366.728" timestamp="1579518513168" />
     <state x="806" y="409" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1579398079954" />
-    <state x="437" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1580707422546">
+    <state x="143" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1582024369146">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="437" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1366.728@0.0.1366.728" timestamp="1580707422546" />
+    <state x="143" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1366.728@0.0.1366.728" timestamp="1582024369146" />
     <state x="413" y="130" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1580729546915">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -448,62 +543,66 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="229" y="0" key="#org.jetbrains.kotlin.idea.refactoring.safeDelete.KotlinOverridingDialog/0.0.1366.728@0.0.1366.728" timestamp="1580456373265" />
+    <state x="283" y="0" width="879" height="728" key="CommitChangelistDialog2" timestamp="1581752988059">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="283" y="0" width="879" height="728" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1581752988059" />
     <state width="441" height="438" key="DebuggerActiveHint" timestamp="1580888820341">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="441" height="438" key="DebuggerActiveHint/0.0.1366.728@0.0.1366.728" timestamp="1580888820341" />
-    <state x="463" y="118" key="FileChooserDialogImpl" timestamp="1579360164593">
+    <state x="463" y="118" key="FileChooserDialogImpl" timestamp="1582016215114">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="463" y="118" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1579360164593" />
-    <state width="1366" height="254" key="GridCell.Tab.0.bottom" timestamp="1581077328744">
+    <state x="463" y="118" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1582016215114" />
+    <state width="1366" height="258" key="GridCell.Tab.0.bottom" timestamp="1582028403866">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1366" height="254" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1581077328744" />
-    <state width="1366" height="254" key="GridCell.Tab.0.center" timestamp="1581077328743">
+    <state width="1366" height="258" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1582028403866" />
+    <state width="1366" height="258" key="GridCell.Tab.0.center" timestamp="1582028403865">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1366" height="254" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1581077328743" />
-    <state width="1366" height="254" key="GridCell.Tab.0.left" timestamp="1581077328743">
+    <state width="1366" height="258" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1582028403865" />
+    <state width="1366" height="258" key="GridCell.Tab.0.left" timestamp="1582028403865">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1366" height="254" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1581077328743" />
-    <state width="1366" height="254" key="GridCell.Tab.0.right" timestamp="1581077328744">
+    <state width="1366" height="258" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1582028403865" />
+    <state width="1366" height="258" key="GridCell.Tab.0.right" timestamp="1582028403866">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1366" height="254" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1581077328744" />
-    <state width="1366" height="254" key="GridCell.Tab.1.bottom" timestamp="1581077328745">
+    <state width="1366" height="258" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1582028403866" />
+    <state width="1366" height="258" key="GridCell.Tab.1.bottom" timestamp="1582028403867">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1366" height="254" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1581077328745" />
-    <state width="1366" height="254" key="GridCell.Tab.1.center" timestamp="1581077328744">
+    <state width="1366" height="258" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1582028403867" />
+    <state width="1366" height="258" key="GridCell.Tab.1.center" timestamp="1582028403867">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1366" height="254" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1581077328744" />
-    <state width="1366" height="254" key="GridCell.Tab.1.left" timestamp="1581077328744">
+    <state width="1366" height="258" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1582028403867" />
+    <state width="1366" height="258" key="GridCell.Tab.1.left" timestamp="1582028403866">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1366" height="254" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1581077328744" />
-    <state width="1366" height="254" key="GridCell.Tab.1.right" timestamp="1581077328745">
+    <state width="1366" height="258" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1582028403866" />
+    <state width="1366" height="258" key="GridCell.Tab.1.right" timestamp="1582028403867">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1366" height="254" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1581077328745" />
-    <state width="1366" height="254" key="GridCell.Tab.2.bottom" timestamp="1581077328746">
+    <state width="1366" height="258" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1582028403867" />
+    <state width="1366" height="258" key="GridCell.Tab.2.bottom" timestamp="1582028403869">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1366" height="254" key="GridCell.Tab.2.bottom/0.0.1366.728@0.0.1366.728" timestamp="1581077328746" />
-    <state width="1366" height="254" key="GridCell.Tab.2.center" timestamp="1581077328745">
+    <state width="1366" height="258" key="GridCell.Tab.2.bottom/0.0.1366.728@0.0.1366.728" timestamp="1582028403869" />
+    <state width="1366" height="258" key="GridCell.Tab.2.center" timestamp="1582028403868">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1366" height="254" key="GridCell.Tab.2.center/0.0.1366.728@0.0.1366.728" timestamp="1581077328745" />
-    <state width="1366" height="254" key="GridCell.Tab.2.left" timestamp="1581077328745">
+    <state width="1366" height="258" key="GridCell.Tab.2.center/0.0.1366.728@0.0.1366.728" timestamp="1582028403868" />
+    <state width="1366" height="258" key="GridCell.Tab.2.left" timestamp="1582028403868">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1366" height="254" key="GridCell.Tab.2.left/0.0.1366.728@0.0.1366.728" timestamp="1581077328745" />
-    <state width="1366" height="254" key="GridCell.Tab.2.right" timestamp="1581077328746">
+    <state width="1366" height="258" key="GridCell.Tab.2.left/0.0.1366.728@0.0.1366.728" timestamp="1582028403868" />
+    <state width="1366" height="258" key="GridCell.Tab.2.right" timestamp="1582028403868">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1366" height="254" key="GridCell.Tab.2.right/0.0.1366.728@0.0.1366.728" timestamp="1581077328746" />
+    <state width="1366" height="258" key="GridCell.Tab.2.right/0.0.1366.728@0.0.1366.728" timestamp="1582028403868" />
     <state x="490" y="175" key="Maven.ArtifactSearchDialog" timestamp="1579398158043">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -512,14 +611,22 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="254" y="45" key="Registry/0.0.1366.728@0.0.1366.728" timestamp="1580880701838" />
-    <state x="174" y="11" key="SettingsEditor" timestamp="1580878911425">
+    <state x="174" y="11" key="SettingsEditor" timestamp="1582028172508">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="174" y="11" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1580878911425" />
-    <state x="399" y="0" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog" timestamp="1580519192582">
+    <state x="174" y="11" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1582028172508" />
+    <state x="413" y="188" key="com.intellij.database.dbimport.ImportUtil.MyDialog" timestamp="1581754042781">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="399" y="0" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/0.0.1366.728@0.0.1366.728" timestamp="1580519192582" />
+    <state x="413" y="188" key="com.intellij.database.dbimport.ImportUtil.MyDialog/0.0.1366.728@0.0.1366.728" timestamp="1581754042781" />
+    <state x="627" y="6" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog" timestamp="1582012975541">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="627" y="6" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/0.0.1366.728@0.0.1366.728" timestamp="1582012975541" />
+    <state x="359" y="122" width="647" height="524" key="find.popup" timestamp="1582023416779">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="359" y="122" width="647" height="524" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1582023416779" />
     <state x="826" y="386" width="250" height="278" key="jetbrains.javascript.buildTools.run-task-popup" timestamp="1579502292503">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -533,10 +640,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="347" y="176" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1581000971588" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1581072285740">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1582026223553">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1581072285740" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1582026223553" />
     <state x="486" y="70" width="945" height="969" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1579507306804" />
   </component>
   <component name="XDebuggerManager">
@@ -548,39 +655,24 @@
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/changyue/blogserver/controller/UserController.java</url>
-          <line>36</line>
+          <url>file://$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/UserAuthorityServiceImpl.java</url>
+          <line>26</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/changyue/blogserver/security/ShiroRealm.java</url>
+          <line>60</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/changyue/blogserver/controller/UserController.java</url>
-          <line>42</line>
+          <url>file://$PROJECT_DIR$/src/main/java/com/changyue/blogserver/security/ShiroRealm.java</url>
+          <line>34</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/UserServiceImpl.java</url>
-          <line>69</line>
+          <url>file://$PROJECT_DIR$/src/main/java/com/changyue/blogserver/controller/UserController.java</url>
+          <line>70</line>
           <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/changyue/blogserver/controller/TagController.java</url>
-          <line>47</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/changyue/blogserver/controller/TagController.java</url>
-          <line>57</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/changyue/blogserver/controller/TagController.java</url>
-          <line>75</line>
-          <option name="timeStamp" value="11" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/changyue/blogserver/controller/CategoryController.java</url>
-          <line>40</line>
-          <option name="timeStamp" value="15" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

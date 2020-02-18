@@ -1,4 +1,4 @@
-package com.changyue.blogserver;
+package com.changyue.blogserver.mapper;
 
 import com.changyue.blogserver.dao.TagMapper;
 import org.junit.Test;

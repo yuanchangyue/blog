@@ -42,12 +42,10 @@ public class TagController {
     }
 
     @PostMapping
-    @Transactional
-    public TagDTO createTag(@Valid @RequestBody TagParam tagParam) {
+    public TagDTO createTag(@RequestBody TagParam tagParam) {
 
         ValidatorResult result = this.validator.validator(tagParam);
         if (result.isHasError()) {
-            System.out.println(result.getErrorMsgMap());
             log.debug("创建tag失败[{}]",result.getErrorMsgMap());
         }
 
@@ -55,11 +53,11 @@ public class TagController {
 
         BeanUtils.copyProperties(tagParam, tag);
 
-        Tag createdTag = tagService.create(tag);
+        Integer insertId = tagService.create(tag);
 
-        log.debug("创建标签成功: [{}]", createdTag);
+        log.debug("创建标签成功: [{}]", insertId);
 
-        return tagService.convertTo(createdTag);
+        return tagService.convertTo(tagService.getById(insertId));
     }
 
     @GetMapping("/{tagId}")
@@ -68,7 +66,6 @@ public class TagController {
     }
 
     @PutMapping("/{tagId}")
-    @Transactional
     public TagDTO updateBy(@PathVariable("tagId") Integer tagId,
                            @Valid @RequestBody TagParam tagParam) {
 
@@ -82,7 +79,6 @@ public class TagController {
     }
 
     @DeleteMapping("/{tagTag}")
-    @Transactional
     public CommonReturnType<Integer> deleteTag(@PathVariable("tagTag") Integer tagId) {
 
         //删除tag

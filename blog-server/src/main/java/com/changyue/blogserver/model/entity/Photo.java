@@ -1,8 +1,6 @@
 package com.changyue.blogserver.model.entity;
 
-import com.changyue.blogserver.model.base.BaseEntity;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import java.util.Date;
 
@@ -12,8 +10,7 @@ import java.util.Date;
  * @date : 2020/2/1/001
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
-public class Photo extends BaseEntity {
+public class Photo{
 
     private Integer id;
 

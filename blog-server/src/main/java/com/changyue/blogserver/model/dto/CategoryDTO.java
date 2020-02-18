@@ -5,10 +5,9 @@ import lombok.Data;
 import java.util.Date;
 
 /**
- * @program: blog-server
- * @description: 类别
- * @author: 袁阊越
- * @create: 2020-01-22 17:26
+ * @author : 袁阊越
+ * @description : 类别
+ * @date : 2020/2/15/015
  */
 @Data
 public class CategoryDTO {

@@ -77,7 +77,7 @@
         </where>
     </select>
 
-    <insert id="insert" parameterType="category">
+    <insert id="insert" parameterType="category" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         insert into categories (description, name,
                                 parent_id, slug_name)
         values (#{description,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},

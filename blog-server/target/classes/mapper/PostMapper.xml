@@ -165,7 +165,7 @@
         where id = #{id,jdbcType=INTEGER}
     </delete>
 
-    <insert id="insert" parameterType="post">
+    <insert id="insert" parameterType="post" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
         insert into posts (id, type, disallow_comment,
                            edit_time, likes, password,
                            status, summary, thumbnail,

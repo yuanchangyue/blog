@@ -65,7 +65,7 @@ public interface PostCategoryService extends BaseService<PostCategory, Integer> 
      */
     @NonNull
     @Transactional
-    List<PostCategory> removeByPostId(@NonNull Integer postId);
+    int removeByPostId(@NonNull Integer postId);
 
     /**
      * 通过类别id删除文章类别
@@ -75,7 +75,7 @@ public interface PostCategoryService extends BaseService<PostCategory, Integer> 
      */
     @NonNull
     @Transactional
-    List<PostCategory> removeByCategoryId(@NonNull Integer categoryId);
+    int removeByCategoryId(@NonNull Integer categoryId);
 
 
 }

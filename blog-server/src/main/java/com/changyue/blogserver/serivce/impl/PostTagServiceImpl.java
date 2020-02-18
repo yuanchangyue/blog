@@ -100,16 +100,15 @@ public class PostTagServiceImpl implements PostTagService {
      * 按实体保存
      *
      * @param postTag 实体
-     * @return 实体
+     * @return id
      */
     @Override
-    public PostTag create(PostTag postTag) {
+    public Integer create(PostTag postTag) {
 
         Assert.notNull(postTag, "postTag不能为空");
 
-        postTagMapper.insert(postTag);
+        return postTagMapper.insert(postTag);
 
-        return postTag;
     }
 
     /**

@@ -4,6 +4,7 @@ import com.changyue.blogserver.dao.UserMapper;
 import com.changyue.blogserver.exception.UpdateException;
 import com.changyue.blogserver.model.entity.User;
 import com.changyue.blogserver.model.params.UserParam;
+import com.changyue.blogserver.serivce.RoleService;
 import com.changyue.blogserver.serivce.UserService;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * @author : 袁阊越
@@ -24,6 +26,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private RoleService roleService;
 
     @Override
     public Optional<User> getByUsername(String username) {
@@ -75,9 +80,9 @@ public class UserServiceImpl implements UserService {
         setPassword(user, userParam.getPassword());
 
         //创建用户
-        userMapper.insert(user);
+        int id = userMapper.insert(user);
 
-        return user;
+        return this.getById(id);
     }
 
     @Override
@@ -129,5 +134,16 @@ public class UserServiceImpl implements UserService {
         return userMapper.selectByPrimaryKey(userId).orElse(null);
     }
 
+    @Override
+    public Set<String> getUserRoleNames(Integer userId) {
+        Assert.notNull(userId, "用户Id不能为空");
+        return userMapper.findUserRoleName(userId);
+    }
+
+    @Override
+    public Set<String> getUserPermissionNames(Integer userId) {
+        Assert.notNull(userId, "用户Id不能为空");
+        return userMapper.findUserPermissionNames(userId);
+    }
 
 }

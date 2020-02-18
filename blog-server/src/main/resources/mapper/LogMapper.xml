@@ -20,12 +20,12 @@
     delete from logs
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="log">
+  <insert id="insert" parameterType="log" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
     insert into logs (id, content, ip_address,
       type)
     values (#{id,jdbcType=BIGINT}, #{content,jdbcType=VARCHAR}, #{ipAddress,jdbcType=VARCHAR},
       #{type,jdbcType=INTEGER})
-  </insert>
+  </insert  >
   <insert id="insertSelective" parameterType="log">
     insert into logs
     <trim prefix="(" suffix=")" suffixOverrides=",">

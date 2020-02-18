@@ -7,13 +7,16 @@ import com.changyue.blogserver.exception.NotFindException;
 import com.changyue.blogserver.model.dto.CategoryDTO;
 import com.changyue.blogserver.model.entity.Category;
 import com.changyue.blogserver.serivce.CategoryService;
+import com.changyue.blogserver.serivce.PostCategoryService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 import java.util.Objects;
@@ -32,8 +35,11 @@ public class CategoryServiceImpl implements CategoryService {
     @Autowired
     private CategoryMapper categoryMapper;
 
+    @Autowired
+    private PostCategoryService postCategoryService;
+
     @Override
-    public Category create(Category category) {
+    public Integer create(Category category) {
 
         Assert.notNull(category, "类别不能为空");
 
@@ -54,11 +60,11 @@ public class CategoryServiceImpl implements CategoryService {
         }
 
         //插入数据库
-        int insertNum = categoryMapper.insert(category);
-        if (insertNum < 0) {
+        int insertId = categoryMapper.insert(category);
+        if (insertId < 0) {
             throw new CreateException("创建类别失败").setErrData(category);
         }
-        return category;
+        return insertId;
     }
 
     @Override
@@ -74,7 +80,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Category getById(Integer id) {
-        Assert.notNull(id,"Id 不能为空");
+        Assert.notNull(id, "Id 不能为空");
         return categoryMapper.selectByPrimaryKey(id).orElse(null);
     }
 
@@ -90,11 +96,43 @@ public class CategoryServiceImpl implements CategoryService {
         Assert.notNull(pageIndex, "页索引不能为空");
         Assert.notNull(pageSize, "页数不能为空");
 
-        PageHelper.startPage(pageIndex, pageSize);
+        PageHelper.startPage(pageIndex,pageSize);
         List<Category> categoryList = categoryMapper.listAll();
         List<CategoryDTO> categoryDTOS = convertTo(categoryList);
 
         return new PageInfo<>(categoryDTOS, 3);
+    }
+
+    @Override
+    @Transactional
+    public void removeCategoryAndPostCategory(Integer categoryId) {
+
+        //处理如果是父级类别被使用
+        List<Category> categories = this.listByParentId(categoryId);
+        if (!CollectionUtils.isEmpty(categories)) {
+            categories.forEach(category -> {
+                category.setParentId(0);
+                this.update(category);
+            });
+        }
+
+        //删除类别
+        this.removeById(categoryId);
+        //删除文章类别
+        postCategoryService.removeByCategoryId(categoryId);
+    }
+
+    @Override
+    public int removeById(Integer categoryId) {
+        Assert.notNull(categoryId, "类别Id不能为空");
+        return categoryMapper.deleteByPrimaryKey(categoryId);
+    }
+
+    @Override
+    public Category update(Category category) {
+        Assert.notNull(category, "类别不能为空");
+        categoryMapper.updateByPrimaryKeySelective(category);
+        return category;
     }
 
     @Override
@@ -118,6 +156,5 @@ public class CategoryServiceImpl implements CategoryService {
 
         return categories.stream().map(this::convertTo).collect(Collectors.toList());
     }
-
 
 }

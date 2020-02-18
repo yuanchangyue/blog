@@ -1,12 +1,13 @@
 package com.changyue.blogserver.model.entity;
 
-import com.changyue.blogserver.model.base.BaseEntity;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-
+/**
+ * @author : 袁阊越
+ * @description : 标签
+ * @date : 2020/2/18/018
+*/
 @Data
-@EqualsAndHashCode(callSuper = true)
-public class Tag extends BaseEntity {
+public class Tag{
 
     private Integer id;
 
@@ -19,6 +20,5 @@ public class Tag extends BaseEntity {
      * 别名
      */
     private String slugName;
-
-
 }
+

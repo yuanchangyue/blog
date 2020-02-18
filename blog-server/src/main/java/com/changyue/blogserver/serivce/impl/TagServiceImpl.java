@@ -94,7 +94,7 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
-    public Tag create(Tag tag) {
+    public Integer create(Tag tag) {
 
         Assert.notNull(tag, "tag 不能为空");
 
@@ -107,7 +107,7 @@ public class TagServiceImpl implements TagService {
         if (id < 0) {
             throw new CreateException("标签创建失败").setErrData(tag);
         }
-        return tag;
+        return id;
     }
 
 

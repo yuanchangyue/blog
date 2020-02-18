@@ -65,7 +65,7 @@
         where category_id = #{categoryId,jdbcType=INTEGER}
     </delete>
 
-    <insert id="insert" parameterType="postCategory">
+    <insert id="insert" parameterType="postCategory" keyProperty="id" keyColumn="id" useGeneratedKeys="true">
         insert into post_categories (create_time, deleted,
                                      update_time, category_id, post_id)
         values (#{createTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=TINYINT},

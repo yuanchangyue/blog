@@ -6,9 +6,15 @@ import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 
 import java.util.Optional;
+import java.util.Set;
 
-
+/**
+ * @author : 袁阊越
+ * @description : 用户业务接口层
+ * @date : 2020/2/18/018
+ */
 public interface UserService extends BaseService<User, Integer> {
+
     /*
      *//**
      * 获取当前用户。
@@ -24,7 +30,6 @@ public interface UserService extends BaseService<User, Integer> {
      * @param username 用户名不能为空
      * @return user
      */
-    @NonNull
     Optional<User> getByUsername(@NonNull String username);
 
     /*
@@ -46,7 +51,6 @@ public interface UserService extends BaseService<User, Integer> {
      * @param email 电子邮件不能为空
      * @return user
      */
-    @NonNull
     Optional<User> getByEmail(@NonNull String email);
 
     /*  *//**
@@ -66,9 +70,7 @@ public interface UserService extends BaseService<User, Integer> {
      * @param userId      用户ID不能为空
      * @return 更新的用户详细信息
      */
-    @NonNull
     User updatePassword(@NonNull String oldPassword, @NonNull String newPassword, @NonNull Integer userId);
-
 
     /**
      * 创建一个用户。
@@ -76,7 +78,6 @@ public interface UserService extends BaseService<User, Integer> {
      * @param userParam 用户参数不能为空。
      * @return 创建的用户
      */
-    @NonNull
     User createBy(@NonNull UserParam userParam);
 
     /**
@@ -86,6 +87,22 @@ public interface UserService extends BaseService<User, Integer> {
      * @return 用户
      */
     User getByUserId(Integer userId);
+
+    /**
+     * 查找用户角色
+     *
+     * @param userId 用户id
+     * @return 用户角色集
+     */
+    Set<String> getUserRoleNames(Integer userId);
+
+    /**
+     * 查找用户权限
+     *
+     * @param userId 用户id
+     * @return 用户权限集
+     */
+    Set<String> getUserPermissionNames(Integer userId);
 
     /**
      * 检查密码是否与用户密码匹配。
@@ -104,6 +121,5 @@ public interface UserService extends BaseService<User, Integer> {
      * @return 是否信息匹配
      */
     boolean verifyUser(@NonNull String username, @NonNull String password);
-
 
 }

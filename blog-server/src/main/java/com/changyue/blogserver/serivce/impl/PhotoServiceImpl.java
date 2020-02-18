@@ -24,7 +24,6 @@ public class PhotoServiceImpl implements PhotoService {
     @Autowired
     private PhotoMapper photoMapper;
 
-
     @Override
     public List<PhotoDTO> listByTeam(String team) {
 
@@ -74,6 +73,5 @@ public class PhotoServiceImpl implements PhotoService {
     public List<String> findAllTeams() {
         return photoMapper.findAllTeams();
     }
-
 
 }

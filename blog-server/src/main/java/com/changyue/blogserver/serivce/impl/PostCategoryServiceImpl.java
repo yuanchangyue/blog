@@ -16,11 +16,10 @@ import org.springframework.util.Assert;
 import java.util.*;
 
 /**
- * @program: blog-server
- * @description: 文章类业务实现
- * @author: 袁阊越
- * @create: 2020-01-22 21:36
- */
+ * @author : 袁阊越
+ * @description : 文章类业务实现
+ * @date : 2020/2/15/015
+*/
 @Service
 public class PostCategoryServiceImpl implements PostCategoryService {
 
@@ -38,6 +37,7 @@ public class PostCategoryServiceImpl implements PostCategoryService {
         Set<Integer> categoryIds = postCategoryMapper.findAllCategoryIdsByPostId(postId);
 
         return categoryMapper.findAllById(categoryIds);
+
     }
 
     @Override
@@ -75,13 +75,13 @@ public class PostCategoryServiceImpl implements PostCategoryService {
     }
 
     @Override
-    public List<PostCategory> removeByPostId(Integer postId) {
+    public int removeByPostId(Integer postId) {
         Assert.notNull(postId, "postId不能为空");
         return postCategoryMapper.deleteByPostId(postId);
     }
 
     @Override
-    public List<PostCategory> removeByCategoryId(Integer categoryId) {
+    public int removeByCategoryId(Integer categoryId) {
         Assert.notNull(categoryId, "类别ID不能为空");
         return postCategoryMapper.deleteByCategoryId(categoryId);
     }

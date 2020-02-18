@@ -93,8 +93,8 @@ public interface BaseService<DOMAIN, ID> {
      */
     @NonNull
     @Transactional
-    default DOMAIN create(@NonNull DOMAIN domain) {
-        return domain;
+    default ID create(@NonNull DOMAIN domain) {
+        return null;
     }
 
     /**

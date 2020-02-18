@@ -39,5 +39,4 @@ public class CategoryParam implements InputConvert<Category> {
      */
     private Integer parentId = 0;
 
-
 }

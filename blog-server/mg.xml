@@ -69,13 +69,9 @@
         <table domainObjectName="PostTag" tableName="post_tags" enableCountByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"
                selectByExampleQueryId="false"/>
-
-        <table domainObjectName="PostCategory" tableName="post_categories" enableCountByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"
-               selectByExampleQueryId="false"/>
         -->
 
-        <table domainObjectName="Post" tableName="posts" enableCountByExample="false"
+        <table domainObjectName="UsersAuthority" tableName="users_authority" enableCountByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"
                selectByExampleQueryId="false"/>
 

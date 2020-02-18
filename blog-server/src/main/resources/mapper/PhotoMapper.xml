@@ -40,14 +40,13 @@
         where id = #{id,jdbcType=INTEGER}
     </select>
 
-
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
         delete
         from photos
         where id = #{id,jdbcType=INTEGER}
     </delete>
 
-    <insert id="insert" parameterType="photo">
+    <insert id="insert" parameterType="photo" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         insert into photos (id, description, location,
                             name, take_time, team,
                             thumbnail, url)

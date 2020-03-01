@@ -31,10 +31,10 @@ public class UserServiceImpl implements UserService {
     private RoleService roleService;
 
     @Override
-    public Optional<User> getByUsername(String username) {
+    public User getByUsername(String username) {
         User user = new User();
         user.setUsername(username);
-        return userMapper.findOneBySelective(user);
+        return userMapper.findOneBySelective(user).orElse(null);
     }
 
     @Override
@@ -80,9 +80,9 @@ public class UserServiceImpl implements UserService {
         setPassword(user, userParam.getPassword());
 
         //创建用户
-        int id = userMapper.insert(user);
+        userMapper.insert(user);
 
-        return this.getById(id);
+        return user;
     }
 
     @Override

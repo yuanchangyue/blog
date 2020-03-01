@@ -53,11 +53,11 @@ public class TagController {
 
         BeanUtils.copyProperties(tagParam, tag);
 
-        Integer insertId = tagService.create(tag);
+        Tag createdTag = tagService.create(tag);
 
-        log.debug("创建标签成功: [{}]", insertId);
+        log.debug("创建标签成功: [{}]", createdTag.getName());
 
-        return tagService.convertTo(tagService.getById(insertId));
+        return tagService.convertTo(createdTag);
     }
 
     @GetMapping("/{tagId}")

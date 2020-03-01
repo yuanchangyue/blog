@@ -1,5 +1,6 @@
 package com.changyue.blogserver.service;
 
+import com.changyue.blogserver.model.entity.User;
 import com.changyue.blogserver.model.params.UserParam;
 import com.changyue.blogserver.serivce.UserService;
 
@@ -9,6 +10,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.Optional;
 
 
 /**
@@ -20,6 +23,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class UserServiceTest {
+
     @Autowired
     private UserService userService;
 
@@ -33,6 +37,12 @@ public class UserServiceTest {
         userParam.setNickname("tom");
         userParam.setPassword("123123");
         userService.createBy(userParam);
+    }
+
+    @Test
+    public void test() {
+       User changyue = userService.getByUsername("changyue");
+        System.out.println(changyue);
     }
 
 }

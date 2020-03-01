@@ -30,7 +30,7 @@ public interface UserService extends BaseService<User, Integer> {
      * @param username 用户名不能为空
      * @return user
      */
-    Optional<User> getByUsername(@NonNull String username);
+    User getByUsername(@NonNull String username);
 
     /*
      */

@@ -11,7 +11,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
  */
 @Configuration
 public class CrossConfig extends WebMvcConfigurationSupport {
-    static final String[] OPTION = {"GET", "PUT", "POST", "DELETE"};
 
     /**
      * 添加跨域
@@ -20,7 +19,12 @@ public class CrossConfig extends WebMvcConfigurationSupport {
      */
     @Override
     protected void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**").allowedOrigins("*")
-                .allowCredentials(true).allowedMethods(OPTION).maxAge(3600);
+        registry.addMapping("/**")
+                .allowedOrigins("*")
+                .allowedMethods("*")
+                .allowCredentials(true)
+                .maxAge(3600)
+                .allowedHeaders("*");
     }
+
 }

@@ -20,11 +20,4 @@ public class Role {
      */
     private String name;
 
-/*
-    @Override
-    public String getAuthority() {
-        return name;
-    }
-*/
-
 }

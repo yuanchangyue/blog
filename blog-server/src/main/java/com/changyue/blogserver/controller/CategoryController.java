@@ -10,7 +10,6 @@ import com.changyue.blogserver.validator.ValidatorResult;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -49,13 +48,13 @@ public class CategoryController {
 
         ValidatorResult result = this.validator.validator(categoryParam);
         if (result.isHasError()) {
-            log.debug("创建category失败[{}]",result.getErrorMsgMap());
+            log.debug("创建category失败[{}]", result.getErrorMsgMap());
         }
         //入参转化
         Category category = categoryParam.convertTo();
 
         //创建类别
-        return categoryService.convertTo(categoryService.getById(categoryService.create(category)));
+        return categoryService.convertTo(categoryService.create(category));
     }
 
     @DeleteMapping("/{categoryId}")
@@ -64,11 +63,11 @@ public class CategoryController {
     }
 
     @PutMapping("/{categoryId}")
-    public void modifyCategory(@PathVariable("categoryId") Integer categoryId,@RequestBody CategoryParam categoryParam) {
+    public void modifyCategory(@PathVariable("categoryId") Integer categoryId, @RequestBody CategoryParam categoryParam) {
 
         ValidatorResult result = this.validator.validator(categoryParam);
         if (result.isHasError()) {
-            log.debug("修改category失败[{}]",result.getErrorMsgMap());
+            log.debug("修改category失败[{}]", result.getErrorMsgMap());
         }
 
         Category category = categoryService.getById(categoryId);

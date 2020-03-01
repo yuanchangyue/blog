@@ -13,7 +13,7 @@ public class CommonReturnType<T> {
     /**
      * 返回结果代码 错误或者是失败
      */
-    private Integer status;
+    private Integer code;
 
     /**
      * 顺着代码一起返回的数据
@@ -27,7 +27,7 @@ public class CommonReturnType<T> {
     public static <T> CommonReturnType<T> create(Integer status, T data) {
         CommonReturnType<T> commonReturnType = new CommonReturnType<>();
         commonReturnType.setData(data);
-        commonReturnType.setStatus(status);
+        commonReturnType.setCode(status);
         return commonReturnType;
     }
 }

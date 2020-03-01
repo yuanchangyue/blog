@@ -2,6 +2,7 @@ package com.changyue.blogserver.security;
 
 import com.changyue.blogserver.model.entity.User;
 import com.changyue.blogserver.serivce.UserService;
+import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -10,9 +11,12 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -63,13 +67,13 @@ public class ShiroRealm extends AuthorizingRealm {
         String username = token.getUsername();
         String password = new String(token.getPassword());
 
-        User user = userService.getByUsername(username).orElse(null);
+        User user = userService.getByUsername(username);
 
-        if (user == null) {
+        if (user == null && user.getId() == null) {
             throw new UnknownAccountException("用户名不存在");
         }
 
-        if (BCrypt.checkpw(password, user.getPassword())) {
+        if (!BCrypt.checkpw(password, user.getPassword())) {
             throw new CredentialsException("密码错误");
         }
 

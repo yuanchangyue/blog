@@ -39,7 +39,7 @@ public class CategoryServiceImpl implements CategoryService {
     private PostCategoryService postCategoryService;
 
     @Override
-    public Integer create(Category category) {
+    public Category create(Category category) {
 
         Assert.notNull(category, "类别不能为空");
 
@@ -60,11 +60,12 @@ public class CategoryServiceImpl implements CategoryService {
         }
 
         //插入数据库
-        int insertId = categoryMapper.insert(category);
-        if (insertId < 0) {
+        int effectNum = categoryMapper.insert(category);
+        if (effectNum < 0) {
             throw new CreateException("创建类别失败").setErrData(category);
         }
-        return insertId;
+
+        return category;
     }
 
     @Override
@@ -96,7 +97,7 @@ public class CategoryServiceImpl implements CategoryService {
         Assert.notNull(pageIndex, "页索引不能为空");
         Assert.notNull(pageSize, "页数不能为空");
 
-        PageHelper.startPage(pageIndex,pageSize);
+        PageHelper.startPage(pageIndex, pageSize);
         List<Category> categoryList = categoryMapper.listAll();
         List<CategoryDTO> categoryDTOS = convertTo(categoryList);
 

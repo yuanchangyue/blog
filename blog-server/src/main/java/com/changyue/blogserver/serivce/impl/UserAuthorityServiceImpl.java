@@ -1,6 +1,7 @@
 package com.changyue.blogserver.serivce.impl;
 
 import com.changyue.blogserver.dao.UsersRoleMapper;
+import com.changyue.blogserver.exception.CreateException;
 import com.changyue.blogserver.model.entity.UsersRole;
 import com.changyue.blogserver.serivce.UserRoleService;
 import lombok.extern.slf4j.Slf4j;
@@ -23,9 +24,13 @@ public class UserAuthorityServiceImpl implements UserRoleService {
 
     @Override
     @Transactional
-    public Integer create(UsersRole usersRole) {
+    public UsersRole create(UsersRole usersRole) {
         Assert.notNull(usersRole, "用户权限信息不能为空！");
-        return usersRoleMapper.insert(usersRole);
+        int effect = usersRoleMapper.insert(usersRole);
+        if (effect <= 0) {
+            throw new CreateException("用户的权限创建失败");
+        }
+        return usersRole;
     }
 
     @Override

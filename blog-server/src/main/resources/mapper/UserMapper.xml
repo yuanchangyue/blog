@@ -40,7 +40,7 @@
           AND ur.user_id = #{userId}
     </select>
 
-    <select id="findOneBySelective" parameterType="user">
+    <select id="findOneBySelective" parameterType="user" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from users
@@ -61,7 +61,7 @@
                 password = #{password,jdbcType=VARCHAR},
             </if>
             <if test="username != null">
-                username = #{username,jdbcType=VARCHAR},
+                username = #{username,jdbcType=VARCHAR}
             </if>
         </where>
     </select>

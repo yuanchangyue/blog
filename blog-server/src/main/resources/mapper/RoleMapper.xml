@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.changyue.blogserver.dao.RoleMapper">
-    <resultMap id="BaseResultMap" type="authority">
+    <resultMap id="BaseResultMap" type="role">
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
     </resultMap>
@@ -19,11 +19,11 @@
         from role
         where id = #{id,jdbcType=INTEGER}
     </delete>
-    <insert id="insert" parameterType="authority" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+    <insert id="insert" parameterType="role" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
         insert into role (id, name)
         values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR})
     </insert>
-    <insert id="insertSelective" parameterType="authority">
+    <insert id="insertSelective" parameterType="role">
         insert into role
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -42,7 +42,7 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="authority">
+    <update id="updateByPrimaryKeySelective" parameterType="role">
         update role
         <set>
             <if test="name != null">
@@ -51,7 +51,7 @@
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKey" parameterType="authority">
+    <update id="updateByPrimaryKey" parameterType="role">
         update role
         set name = #{name,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}

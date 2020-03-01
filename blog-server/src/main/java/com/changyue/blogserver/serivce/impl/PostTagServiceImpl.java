@@ -20,7 +20,7 @@ import java.util.*;
  * @author : 袁阊越
  * @description : 文章标签业务接口实现
  * @date : 2020/2/7/007
-*/
+ */
 @Service
 public class PostTagServiceImpl implements PostTagService {
 
@@ -103,12 +103,16 @@ public class PostTagServiceImpl implements PostTagService {
      * @return id
      */
     @Override
-    public Integer create(PostTag postTag) {
+    public PostTag create(PostTag postTag) {
 
         Assert.notNull(postTag, "postTag不能为空");
 
-        return postTagMapper.insert(postTag);
-
+        //新增文章标签
+        int effectNum = postTagMapper.insert(postTag);
+        if (effectNum <= 0) {
+            throw new CreateException("文章的标签创建失败").setErrData(postTag);
+        }
+        return postTag;
     }
 
     /**

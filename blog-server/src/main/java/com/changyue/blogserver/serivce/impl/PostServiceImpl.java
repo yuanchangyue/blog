@@ -1,6 +1,7 @@
 package com.changyue.blogserver.serivce.impl;
 
 import com.changyue.blogserver.dao.PostMapper;
+import com.changyue.blogserver.exception.CreateException;
 import com.changyue.blogserver.exception.NotFindException;
 import com.changyue.blogserver.exception.UpdateException;
 import com.changyue.blogserver.model.entity.*;
@@ -109,7 +110,7 @@ public class PostServiceImpl implements PostService {
 
         if (post.getId() == null) {
             //创建文章
-            return postMapper.selectByPrimaryKey(create(post)).orElse(null);
+            return create(post);
         }
 
         post.setEditTime(new Date());
@@ -123,9 +124,13 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public Integer create(Post post) {
+    public Post create(Post post) {
         //插入文章到数据库
-        return postMapper.insert(post);
+        int effectNum = postMapper.insert(post);
+        if (effectNum <= 0) {
+            throw new CreateException("文章创建失败").setErrData(post);
+        }
+        return post;
     }
 
     @Override

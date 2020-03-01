@@ -93,8 +93,9 @@ public class TagServiceImpl implements TagService {
         return tagMapper.countByNameOrSlugName(null, null);
     }
 
+    @Transactional
     @Override
-    public Integer create(Tag tag) {
+    public Tag create(Tag tag) {
 
         Assert.notNull(tag, "tag 不能为空");
 
@@ -103,14 +104,15 @@ public class TagServiceImpl implements TagService {
         if (count > 0) {
             throw new AlreadyExistsException("该标签已存在").setErrData(tag);
         }
-        int id = tagMapper.insert(tag);
-        if (id < 0) {
+        int effectNum = tagMapper.insert(tag);
+        if (effectNum < 0) {
             throw new CreateException("标签创建失败").setErrData(tag);
         }
-        return id;
+        return tag;
     }
 
 
+    @Transactional
     @Override
     public Tag update(Tag tag) {
         Assert.notNull(tag, "tag 不能为空");

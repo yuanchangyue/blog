@@ -1112,11 +1112,11 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="229" y="0" key="#org.jetbrains.kotlin.idea.refactoring.safeDelete.KotlinOverridingDialog/0.0.1366.728@0.0.1366.728" timestamp="1580456373265" />
-    <state x="398" y="0" width="879" height="728" key="CommitChangelistDialog2" timestamp="1583066663961">
+    <state x="398" y="0" width="879" height="728" key="CommitChangelistDialog2" timestamp="1583066709853">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="283" y="0" width="879" height="728" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1581752988059" />
-    <state x="398" y="0" key="CommitChangelistDialog2/0.0.1920.1080@0.0.1920.1080" timestamp="1583066663961" />
+    <state x="398" y="0" key="CommitChangelistDialog2/0.0.1920.1080@0.0.1920.1080" timestamp="1583066709853" />
     <state x="398" y="23" key="CommitChangelistDialog2/0.23.1920.977@0.23.1920.977" timestamp="1582793533615" />
     <state width="441" height="438" key="DebuggerActiveHint" timestamp="1580888820341">
       <screen x="0" y="0" width="1366" height="728" />
@@ -1233,6 +1233,10 @@
     <state x="418" y="82" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1583049943606" />
     <state x="514" y="70" key="SettingsEditor/0.23.1600.877@0.23.1600.877" timestamp="1582361210753" />
     <state x="418" y="97" key="SettingsEditor/0.23.1920.977@0.23.1920.977" timestamp="1583049318182" />
+    <state x="560" y="280" key="Vcs.Push.Dialog.v2" timestamp="1583066752547">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="560" y="280" key="Vcs.Push.Dialog.v2/0.0.1920.1080@0.0.1920.1080" timestamp="1583066752547" />
     <state x="413" y="188" key="com.intellij.database.dbimport.ImportUtil.MyDialog" timestamp="1581754042781">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

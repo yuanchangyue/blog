@@ -1,0 +1,11 @@
+{
+  "groups": [
+    {
+      "name": "constant.return",
+      "type": "com.changyue.blogserver.utils.constant.ConstantUtils",
+      "sourceType": "com.changyue.blogserver.utils.constant.ConstantUtils"
+    }
+  ],
+  "properties": [],
+  "hints": []
+}

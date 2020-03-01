@@ -19,7 +19,7 @@
                                 <div class="prompt-form">* 别名不能空,长度不能超过20,不能重复</div>
                             </el-form-item>
                             <el-form-item>
-                                <el-button size="small" type="primary" @click="createAndUpdate">{{ button }}</el-button>
+                                <el-button type="primary" size="small" @click="createAndUpdate">{{ button }}</el-button>
                                 <el-button v-if="!isInsert" size="small" @click="returnInsert">返回添加</el-button>
                             </el-form-item>
                         </el-form>
@@ -62,7 +62,7 @@ export default {
       },
       items: [],
       title: '新增标签',
-      button: '新增',
+      button: '立即创建',
       isInsert: true,
       currentTagId: '',
       form: {
@@ -117,7 +117,7 @@ export default {
       this.title = '新增标签'
       this.form.name = ''
       this.form.slugName = ''
-      this.button = '新增'
+      this.button = '立即创建'
       this.isInsert = true
     },
     createAndUpdate () {
@@ -145,10 +145,6 @@ export default {
 </script>
 
 <style scoped>
-    *{
-        padding: 0;
-        margin: 0;
-    }
     .all-warp {
         height: 100%;
         box-sizing: border-box;

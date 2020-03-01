@@ -4,11 +4,9 @@ import router from './router'
 import ElementUI from 'element-ui'
 import './plugins/element.js'
 import './assets/common.css'
+import axios from './config/axios-config'
 
 Vue.use(ElementUI)
-
-var axios = require('axios')
-axios.defaults.baseURL = 'http://localhost:8089/api'
 
 Vue.prototype.$axios = axios
 Vue.config.productionTip = false

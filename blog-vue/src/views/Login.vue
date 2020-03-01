@@ -13,7 +13,7 @@
                                       placeholder="请输入密码"/>
                         </el-form-item>
                         <el-form-item>
-                            <el-button style="width: 100%;" type="primary">登录</el-button>
+                            <el-button style="width: 100%;" @click="login()" type="primary">登录</el-button>
                         </el-form-item>
                         <p class="toregister">没有账号？点击马上
                             <router-link to="/register">注册</router-link>
@@ -32,8 +32,21 @@ export default {
   data () {
     return {
       form: {
-        name: ''
+        name: '',
+        password: ''
       }
+    }
+  },
+  methods: {
+    login () {
+      var formData = {
+        username: this.form.name,
+        password: this.form.password
+      }
+      this.$axios.post('/user/login', formData).then(value => {
+        console.info(value)
+        this.$router.push('/home')
+      }).catch(reason => {})
     }
   }
 }

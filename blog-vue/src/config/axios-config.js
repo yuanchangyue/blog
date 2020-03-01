@@ -27,7 +27,7 @@ axios.interceptors.response.use(function (response) {
     router.push({ path: '/login' })
   } else if (response.data.code !== 200) {
     Message.error({
-      message: response.data.message
+      message: response.data.data
     })
     return Promise.reject(response)
   }

@@ -45,6 +45,10 @@ export default {
       }
       this.$axios.post('/user/login', formData).then(value => {
         console.info(value)
+        this.$message({
+          message: this.form.name + '登陆成功',
+          type: 'success'
+        })
         this.$router.push('/home')
       }).catch(reason => {})
     }

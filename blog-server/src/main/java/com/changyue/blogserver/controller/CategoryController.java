@@ -31,7 +31,6 @@ public class CategoryController {
     @Autowired
     private ValidatorImpl validator;
 
-
     @GetMapping
     public PageInfo<CategoryDTO> listCategory(@RequestParam(name = "pageIndex", defaultValue = "1") Integer pageIndex,
                                               @RequestParam(name = "pageSize", defaultValue = "5") Integer pageSize) {

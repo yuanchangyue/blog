@@ -2,6 +2,7 @@ package com.changyue.blogserver.config;
 
 import com.changyue.blogserver.filter.LoginFilter;
 import com.changyue.blogserver.security.ShiroRealm;
+import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
@@ -39,24 +40,32 @@ public class ShiroConfig {
         filters.put("authc", new LoginFilter());
         shiroFilterFactoryBean.setFilters(filters);
 
-
         //设置拦截
         Map<String, String> map = new LinkedHashMap<>();
         //注意过滤器配置顺序 不能颠倒
         //anon. 配置不会被拦截的请求 顺序判断
         map.put("/api/user/login", "anon");
-//        map.put("/#/login", "anon");
-//        map.put("/#/logout", "anon");
+        map.put("/api/user/logout", "anon");
 
         //authc. 配置拦截的请求
-        map.put("/#/**", "authc");
-        map.put("/#/api/category/**", "authc");
-        map.put("/#/api/tag/**", "authc");
-        map.put("/#/api/user/**", "authc");
+        map.put("/**", "authc");
+
+        map.put("/#/api/**", "authc");
+        map.put("/api/**", "authc");
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(map);
 
         return shiroFilterFactoryBean;
+    }
+
+    /**
+     * 缓存
+     */
+    @Bean
+    public EhCacheManager ehCacheManager() {
+        EhCacheManager cacheManager = new EhCacheManager();
+        cacheManager.setCacheManagerConfigFile("classpath:ehcache-shiro.xml");
+        return cacheManager;
     }
 
     /**
@@ -66,6 +75,8 @@ public class ShiroConfig {
     public DefaultWebSecurityManager createSecurityManager(@Qualifier("myShrioRealm") ShiroRealm shiroRealm) {
         DefaultWebSecurityManager manager = new DefaultWebSecurityManager();
         manager.setRealm(shiroRealm);
+        // 注入缓存管理器;
+        manager.setCacheManager(ehCacheManager());// 这个如果执行多次，也是同样的一个对象;
         return manager;
     }
 

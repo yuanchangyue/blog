@@ -31,9 +31,12 @@
         </el-menu>
         <ul class="user-box">
             <li>
-                <div class="block">
-                    <el-avatar :size="25"/>
-                </div>
+              <el-dropdown>
+                <el-avatar :size="25"/>
+                <el-dropdown-menu slot="dropdown">
+                  <el-dropdown-item><el-link @click="logout">退出登陆</el-link></el-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
             </li>
             <li>
                 <el-badge :value="0"><i class="el-icon-bell"/></el-badge>
@@ -56,6 +59,17 @@ export default {
     }
   },
   methods: {
+    logout () {
+      console.info('aadf')
+      this.$axios.get('/user/logout').then(value => {
+        console.info(value.data)
+        this.$message({
+          message: '已经退出',
+          type: 'info'
+        })
+        this.$router.replace({ path: '/login' })
+      })
+    }
   }
 }
 </script>

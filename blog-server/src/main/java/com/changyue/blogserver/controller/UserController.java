@@ -1,5 +1,6 @@
 package com.changyue.blogserver.controller;
 
+import com.changyue.blogserver.model.dto.UserDTO;
 import com.changyue.blogserver.model.entity.User;
 import com.changyue.blogserver.model.entity.UsersRole;
 import com.changyue.blogserver.model.enums.AuthorityStatus;
@@ -15,6 +16,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -69,17 +71,30 @@ public class UserController {
         }
 
         //获取当前登录用户
+        Subject subject = SecurityUtils.getSubject();
         try {
-            Subject subject = SecurityUtils.getSubject();
             UsernamePasswordToken token = new UsernamePasswordToken(loginParam.getUsername(), loginParam.getPassword());
             subject.login(token);
             log.info("session id : [{}]", subject.getSession().getId());
         } catch (AuthenticationException e) {
             log.debug("登陆失败：[{}]", e.getMessage());
-            return CommonReturnType.create(404, "登录失败");
+            return CommonReturnType.create(404, "登录失败,用户名或者密码不正确！");
         }
 
-        return CommonReturnType.create("登录成功");
+        //转换为DTO
+        User user = (User) subject.getPrincipal();
+        UserDTO userDTO = new UserDTO();
+        BeanUtils.copyProperties(user, userDTO);
+
+        return CommonReturnType.create(userDTO);
+    }
+
+    @RequestMapping("/logout")
+    public CommonReturnType<Object> loginUser() {
+        Subject subject = SecurityUtils.getSubject();
+        log.info("用户已经退出");
+        subject.logout();
+        return CommonReturnType.create("用户已经退出");
     }
 
 }

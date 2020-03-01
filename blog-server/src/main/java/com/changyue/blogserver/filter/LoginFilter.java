@@ -2,11 +2,15 @@ package com.changyue.blogserver.filter;
 
 import com.alibaba.fastjson.JSONObject;
 import com.changyue.blogserver.model.entity.User;
-import com.changyue.blogserver.utils.constant.ConstantUtils;
+import com.changyue.blogserver.utils.constant.ConstantProperties;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.AccessControlFilter;
 import org.apache.shiro.web.util.WebUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -20,10 +24,13 @@ import java.util.Map;
  * @description : 登陆的过滤器
  * @date : 2020-03-01 15:48
  */
+@Configuration
+@Configurable
+@EnableConfigurationProperties(ConstantProperties.class)
 public class LoginFilter extends AccessControlFilter {
 
-    private HttpServletRequest request;
-    private HttpServletResponse response;
+    @Autowired
+    ConstantProperties constantProperties;
 
     @Override
     protected boolean isAccessAllowed(ServletRequest servletRequest, ServletResponse servletResponse, Object o) throws Exception {
@@ -41,8 +48,8 @@ public class LoginFilter extends AccessControlFilter {
             return Boolean.TRUE;
         }
 
-        this.request = (HttpServletRequest) servletRequest;
-        this.response = (HttpServletResponse) servletResponse;
+        HttpServletRequest request = (HttpServletRequest) servletRequest;
+        HttpServletResponse response = (HttpServletResponse) servletResponse;
 
         String basePath = request.getRequestURL().toString();
         // ajax请求
@@ -50,15 +57,17 @@ public class LoginFilter extends AccessControlFilter {
             Map<String, String> resultMap = new HashMap<>();
             // "当前用户没有登录，并且是Ajax请求！");
             resultMap.put("code", "300");
-            resultMap.put("message", "会话已经过期，请重新登录！");//当前用户没有登录！
-            resultMap.put("url", ConstantUtils.URL);
+            resultMap.put("message", "会话已经过期，请重新登录！");
+            resultMap.put("url", constantProperties.getURL());
             response.setCharacterEncoding("UTF-8");
             response.setContentType("application/json;charset=UTF-8");
             response.getWriter().write(JSONObject.toJSONString(resultMap));
             return false;
         }
+
+        //String login = constantProperties.getLOGIN();
         //重定向
-        WebUtils.issueRedirect(request, response, ConstantUtils.URL + "?redirect=" + basePath);
+        WebUtils.issueRedirect(request, response, "http://localhost:8081"+ "?redirect=" + "http://localhost:8081/#/login");
         return false;
     }
 

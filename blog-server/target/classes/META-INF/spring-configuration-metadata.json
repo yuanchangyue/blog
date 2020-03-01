@@ -1,11 +1,22 @@
 {
   "groups": [
     {
-      "name": "constant.return",
-      "type": "com.changyue.blogserver.utils.constant.ConstantUtils",
-      "sourceType": "com.changyue.blogserver.utils.constant.ConstantUtils"
+      "name": "constant",
+      "type": "com.changyue.blogserver.utils.constant.ConstantProperties",
+      "sourceType": "com.changyue.blogserver.utils.constant.ConstantProperties"
     }
   ],
-  "properties": [],
+  "properties": [
+    {
+      "name": "constant.l-o-g-i-n",
+      "type": "java.lang.String",
+      "sourceType": "com.changyue.blogserver.utils.constant.ConstantProperties"
+    },
+    {
+      "name": "constant.u-r-l",
+      "type": "java.lang.String",
+      "sourceType": "com.changyue.blogserver.utils.constant.ConstantProperties"
+    }
+  ],
   "hints": []
 }

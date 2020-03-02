@@ -59,7 +59,6 @@ public interface BaseService<DOMAIN, ID> {
      * @param id id
      * @return Optional
      */
-    @NonNull
     default DOMAIN getById(@NonNull ID id) {
         return null;
     }

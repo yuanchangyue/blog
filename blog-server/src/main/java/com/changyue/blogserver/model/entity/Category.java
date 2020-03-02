@@ -27,4 +27,9 @@ public class Category {
      */
     private Integer parentId;
 
+    /**
+     * 用户ID
+     */
+    private Integer userId;
+
 }

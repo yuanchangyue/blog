@@ -17,8 +17,6 @@ import java.util.Optional;
  * @date 2020/1/31/031
  * @description 标签接口
  */
-@Mapper
-@Repository
 public interface TagMapper extends BaseMapper<Tag> {
 
     /**

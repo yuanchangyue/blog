@@ -6,7 +6,6 @@ import com.changyue.blogserver.utils.constant.ConstantProperties;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.AccessControlFilter;
-import org.apache.shiro.web.util.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -21,22 +20,27 @@ import java.util.Map;
 
 /**
  * @author : 袁阊越
- * @description : 登陆的过滤器
+ * @description : 自定义访问控制过滤器
  * @date : 2020-03-01 15:48
  */
 @Configuration
 @Configurable
 @EnableConfigurationProperties(ConstantProperties.class)
-public class LoginFilter extends AccessControlFilter {
+public class CustomAccessControlFilter extends AccessControlFilter {
 
     @Autowired
     ConstantProperties constantProperties;
 
     @Override
-    protected boolean isAccessAllowed(ServletRequest request, ServletResponse servletResponse, Object o) throws Exception {
+    protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object o) throws Exception {
         return false;
     }
 
+    /**
+     * 放行Options请求。前后端分离中，跨域会发送preflighted请求，
+     * 于是在GET/POST之前会发送一个OPTIONS的请求，
+     * OPTIONS不带shiro的'Authorization'字段，导致不通过。返回未认证。
+     */
     @Override
     protected boolean onAccessDenied(ServletRequest servletRequest, ServletResponse servletResponse) throws Exception {
 
@@ -51,16 +55,21 @@ public class LoginFilter extends AccessControlFilter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
-        String basePath = request.getRequestURL().toString();
+        //放行options
+        if (request.getMethod().toUpperCase().equals("OPTIONS")) {
+            response.addHeader("Access-Control-Allow-Methods", "GET,HEAD,POST,PUT,DELETE,TRACE,OPTIONS,PATCH");
+            response.addHeader("Access-Control-Allow-Headers", "Content-Type, Accept, Authorization");
+            response.setHeader("Access-Control-Allow-Origin", "http://localhost:8081");
+            response.setHeader("Access-Control-Allow-Credentials", "true");
+            response.setHeader("Access-Control-Allow-Headers", "x-requested-with,content-type");
+        }
 
-        Map<String, String> resultMap = new HashMap<>();
-        // ajax请求
+        //当前用户没有登录，并且是Ajax请求
         if ("XMLHttpRequest".equalsIgnoreCase(request.getHeader("X-Requested-With"))) {
-            // "当前用户没有登录，并且是Ajax请求！");
+            Map<String, String> resultMap = new HashMap<>();
             resultMap.put("code", "300");
-            resultMap.put("message", "会话已经过期，请重新登录！");
-            resultMap.put("url", "http://localhost:8081/#/login");
-            response.setHeader("Access-Control-Allow-Origin","http://localhost:8081");
+            resultMap.put("data", "会话已经过期，请重新登录！");
+            response.setHeader("Access-Control-Allow-Origin", "http://localhost:8081");
             response.setHeader("Access-Control-Allow-Credentials", "true");
             response.setCharacterEncoding("UTF-8");
             response.setContentType("application/json");
@@ -68,8 +77,6 @@ public class LoginFilter extends AccessControlFilter {
             return false;
         }
 
-        //重定向
-        WebUtils.issueRedirect(request, response, "http://localhost:8081" + "?redirect=" + "http://localhost:8081/#/login");
         return false;
     }
 

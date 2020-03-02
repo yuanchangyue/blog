@@ -1,10 +1,14 @@
 package com.changyue.blogserver.controller;
 
 import com.changyue.blogserver.model.dto.CategoryDTO;
+import com.changyue.blogserver.model.dto.UserDTO;
 import com.changyue.blogserver.model.entity.Category;
+import com.changyue.blogserver.model.entity.UserCategory;
 import com.changyue.blogserver.model.params.CategoryParam;
 import com.changyue.blogserver.serivce.CategoryService;
 import com.changyue.blogserver.serivce.PostCategoryService;
+import com.changyue.blogserver.serivce.UserCategoryService;
+import com.changyue.blogserver.serivce.UserService;
 import com.changyue.blogserver.validator.ValidatorImpl;
 import com.changyue.blogserver.validator.ValidatorResult;
 import com.github.pagehelper.PageInfo;
@@ -29,6 +33,12 @@ public class CategoryController {
     private PostCategoryService postCategoryService;
 
     @Autowired
+    private UserCategoryService userCategoryService;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
     private ValidatorImpl validator;
 
     @GetMapping
@@ -49,11 +59,20 @@ public class CategoryController {
         if (result.isHasError()) {
             log.debug("创建category失败[{}]", result.getErrorMsgMap());
         }
+
         //入参转化
         Category category = categoryParam.convertTo();
 
         //创建类别
-        return categoryService.convertTo(categoryService.create(category));
+        Category createdCategory = categoryService.create(category);
+
+        UserDTO currentUser = userService.getCurrentUser();
+
+        //创建用户类别的关联
+        userCategoryService.create(new UserCategory(currentUser.getId(), createdCategory.getId()));
+
+        //创建类别
+        return categoryService.convertTo(createdCategory);
     }
 
     @DeleteMapping("/{categoryId}")

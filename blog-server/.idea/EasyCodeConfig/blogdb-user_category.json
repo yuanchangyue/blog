@@ -1,0 +1,31 @@
+{
+  "name" : "UserCategory",
+  "comment" : null,
+  "fullColumn" : [ {
+    "name" : "userCategoryId",
+    "comment" : null,
+    "type" : null,
+    "shortType" : null,
+    "custom" : false,
+    "ext" : { }
+  }, {
+    "name" : "userId",
+    "comment" : null,
+    "type" : null,
+    "shortType" : null,
+    "custom" : false,
+    "ext" : { }
+  }, {
+    "name" : "categoryId",
+    "comment" : null,
+    "type" : null,
+    "shortType" : null,
+    "custom" : false,
+    "ext" : { }
+  } ],
+  "pkColumn" : null,
+  "otherColumn" : null,
+  "savePackageName" : "com.changyue.blogserver.auto",
+  "savePath" : "./src/main/java/com/changyue/blogserver/auto",
+  "saveModelName" : "blog-server"
+}

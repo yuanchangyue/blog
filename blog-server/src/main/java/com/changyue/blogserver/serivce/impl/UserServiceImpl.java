@@ -2,12 +2,16 @@ package com.changyue.blogserver.serivce.impl;
 
 import com.changyue.blogserver.dao.UserMapper;
 import com.changyue.blogserver.exception.UpdateException;
+import com.changyue.blogserver.model.dto.UserDTO;
 import com.changyue.blogserver.model.entity.User;
 import com.changyue.blogserver.model.params.UserParam;
 import com.changyue.blogserver.serivce.RoleService;
 import com.changyue.blogserver.serivce.UserService;
+import org.apache.shiro.SecurityUtils;
 import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -29,6 +33,15 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private RoleService roleService;
+
+    @Override
+    public UserDTO getCurrentUser() {
+        User user = (User) SecurityUtils.getSubject().getPrincipal();
+        Assert.notNull(user, "当前用户为空");
+        UserDTO userDTO = new UserDTO();
+        BeanUtils.copyProperties(userDTO, user);
+        return userDTO;
+    }
 
     @Override
     public User getByUsername(String username) {
@@ -117,7 +130,6 @@ public class UserServiceImpl implements UserService {
         Assert.notNull(user, "用户不能为空");
         return !StringUtils.isEmpty(inputPassword) && BCrypt.checkpw(inputPassword, user.getPassword());
     }
-
 
     @Override
     public boolean verifyUser(String username, String password) {

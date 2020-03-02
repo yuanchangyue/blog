@@ -78,7 +78,7 @@ public class UserController {
             log.info("session id : [{}]", subject.getSession().getId());
         } catch (AuthenticationException e) {
             log.debug("登陆失败：[{}]", e.getMessage());
-            return CommonReturnType.create(404, "登录失败,用户名或者密码不正确！");
+            return CommonReturnType.create(-1001, "登录失败,用户名或者密码不正确！");
         }
 
         //转换为DTO

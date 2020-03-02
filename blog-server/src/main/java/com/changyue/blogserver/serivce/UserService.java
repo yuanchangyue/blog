@@ -1,5 +1,6 @@
 package com.changyue.blogserver.serivce;
 
+import com.changyue.blogserver.model.dto.UserDTO;
 import com.changyue.blogserver.model.entity.User;
 import com.changyue.blogserver.model.params.UserParam;
 import org.springframework.lang.NonNull;
@@ -15,14 +16,13 @@ import java.util.Set;
  */
 public interface UserService extends BaseService<User, Integer> {
 
-    /*
-     *//**
-     * 获取当前用户。
+    /**
+     * 获取当前用户
      *
-     * @return user
-     *//*
+     * @return 用户
+     */
     @NonNull
-    Optional<User> getCurrentUser();*/
+    UserDTO getCurrentUser();
 
     /**
      * 通过用户名获取用户。
@@ -32,18 +32,6 @@ public interface UserService extends BaseService<User, Integer> {
      */
     User getByUsername(@NonNull String username);
 
-    /*
-     */
-/**
- * 通过用户名获取非null用户。
- *
- * @param username 用户名
- * @return 用户信息
- *//*
-
-    @NonNull
-    User getByUsernameOfNonNull(@NonNull String username);
-*/
 
     /**
      * 通过电子邮件获取用户。
@@ -53,14 +41,6 @@ public interface UserService extends BaseService<User, Integer> {
      */
     Optional<User> getByEmail(@NonNull String email);
 
-    /*  *//**
-     * 通过电子邮件获取非null用户。
-     *
-     * @param email 电子邮件
-     * @return 用户信息
-     *//*
-    @NonNull
-    User getByEmailOfNonNull(@NonNull String email);*/
 
     /**
      * 更新用户密码.

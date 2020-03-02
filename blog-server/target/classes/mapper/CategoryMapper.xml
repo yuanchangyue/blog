@@ -8,6 +8,7 @@
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="parent_id" jdbcType="INTEGER" property="parentId"/>
         <result column="slug_name" jdbcType="VARCHAR" property="slugName"/>
+        <
     </resultMap>
 
     <sql id="Base_Column_List">

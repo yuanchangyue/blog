@@ -20,15 +20,19 @@ axios.interceptors.request.use(function (config) {
 })
 
 axios.interceptors.response.use(function (response) {
-  console.info(response.data)
-  if (response.data.code === undefined) {
+  if (response.data.code === undefined || response.data.code === 200) {
     return response
   }
-  if (response.data.code === 300) {
-    router.push({ path: '/login' })
-  } else if (response.data.code !== 200) {
+  if (response.data.code === '300') {
+    console.info('not login -> ' + response.data.data + response.data.code)
     Message.error({
-      message: response
+      message: response.data.data
+    })
+    router.push('/login')
+  } else if (response.data.code !== 200) {
+    console.info('error--->' + response.data.code)
+    Message.error({
+      message: response.data.data
     })
     return Promise.reject(response)
   }

@@ -32,9 +32,9 @@
         <ul class="user-box">
             <li>
               <el-dropdown>
-                <el-avatar :size="25"/>
+                <el-avatar :size="25" :src="logo"></el-avatar>
                 <el-dropdown-menu slot="dropdown">
-                  <el-dropdown-item><el-link @click="logout">退出登陆</el-link></el-dropdown-item>
+                  <el-dropdown-item><el-link @click="logout" :underline="false">退出登陆</el-link></el-dropdown-item>
                 </el-dropdown-menu>
               </el-dropdown>
             </li>
@@ -55,7 +55,8 @@ export default {
       activeIndex: '1',
       drawer: false,
       direction: 'ltr',
-      menuMode: 'horizontal'
+      menuMode: 'horizontal',
+      logo: require('../assets/logo.png')
     }
   },
   methods: {

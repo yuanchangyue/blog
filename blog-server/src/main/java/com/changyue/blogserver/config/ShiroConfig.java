@@ -1,7 +1,6 @@
 package com.changyue.blogserver.config;
 
-import com.changyue.blogserver.filter.LoginFilter;
-import com.changyue.blogserver.filter.OptionFilter;
+import com.changyue.blogserver.filter.CustomAccessControlFilter;
 import com.changyue.blogserver.security.ShiroRealm;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
@@ -17,7 +16,6 @@ import org.springframework.context.annotation.DependsOn;
 import javax.servlet.Filter;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.OptionalInt;
 
 /**
  * @author : 袁阊越
@@ -39,7 +37,7 @@ public class ShiroConfig {
         //添加过滤
         Map<String, Filter> filters = shiroFilterFactoryBean.getFilters();
         //将自定义的AuthenticationFilter注入shiroFilter中，注意是authc过滤器
-        filters.put("authc", new LoginFilter());
+        filters.put("authc", new CustomAccessControlFilter());
         shiroFilterFactoryBean.setFilters(filters);
 
         //设置拦截
@@ -48,6 +46,7 @@ public class ShiroConfig {
         //anon. 配置不会被拦截的请求 顺序判断
         map.put("/api/user/login", "anon");
         map.put("/api/user/logout", "anon");
+        map.put("/#/login","anon");
 
         //authc. 配置拦截的请求
         map.put("/**", "authc");

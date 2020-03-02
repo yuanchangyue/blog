@@ -2,6 +2,7 @@ package com.changyue.blogserver.dao.base;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.lang.NonNull;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,6 +13,7 @@ import java.util.Optional;
  * @description : 通用的mapper
  */
 @Mapper
+@Repository
 public interface BaseMapper<DOMAIN> {
 
     /**

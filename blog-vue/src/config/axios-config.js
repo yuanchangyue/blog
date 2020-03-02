@@ -20,6 +20,7 @@ axios.interceptors.request.use(function (config) {
 })
 
 axios.interceptors.response.use(function (response) {
+  console.info(response.data)
   if (response.data.code === undefined) {
     return response
   }
@@ -27,7 +28,7 @@ axios.interceptors.response.use(function (response) {
     router.push({ path: '/login' })
   } else if (response.data.code !== 200) {
     Message.error({
-      message: response.data.data
+      message: response
     })
     return Promise.reject(response)
   }

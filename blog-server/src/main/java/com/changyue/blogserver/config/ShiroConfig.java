@@ -1,6 +1,7 @@
 package com.changyue.blogserver.config;
 
 import com.changyue.blogserver.filter.LoginFilter;
+import com.changyue.blogserver.filter.OptionFilter;
 import com.changyue.blogserver.security.ShiroRealm;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
@@ -16,6 +17,7 @@ import org.springframework.context.annotation.DependsOn;
 import javax.servlet.Filter;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.OptionalInt;
 
 /**
  * @author : 袁阊越

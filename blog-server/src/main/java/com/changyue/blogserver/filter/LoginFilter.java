@@ -33,7 +33,7 @@ public class LoginFilter extends AccessControlFilter {
     ConstantProperties constantProperties;
 
     @Override
-    protected boolean isAccessAllowed(ServletRequest servletRequest, ServletResponse servletResponse, Object o) throws Exception {
+    protected boolean isAccessAllowed(ServletRequest request, ServletResponse servletResponse, Object o) throws Exception {
         return false;
     }
 
@@ -52,22 +52,24 @@ public class LoginFilter extends AccessControlFilter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
         String basePath = request.getRequestURL().toString();
+
+        Map<String, String> resultMap = new HashMap<>();
         // ajax请求
         if ("XMLHttpRequest".equalsIgnoreCase(request.getHeader("X-Requested-With"))) {
-            Map<String, String> resultMap = new HashMap<>();
             // "当前用户没有登录，并且是Ajax请求！");
             resultMap.put("code", "300");
             resultMap.put("message", "会话已经过期，请重新登录！");
-            resultMap.put("url", constantProperties.getURL());
+            resultMap.put("url", "http://localhost:8081/#/login");
+            response.setHeader("Access-Control-Allow-Origin","http://localhost:8081");
+            response.setHeader("Access-Control-Allow-Credentials", "true");
             response.setCharacterEncoding("UTF-8");
-            response.setContentType("application/json;charset=UTF-8");
+            response.setContentType("application/json");
             response.getWriter().write(JSONObject.toJSONString(resultMap));
             return false;
         }
 
-        //String login = constantProperties.getLOGIN();
         //重定向
-        WebUtils.issueRedirect(request, response, "http://localhost:8081"+ "?redirect=" + "http://localhost:8081/#/login");
+        WebUtils.issueRedirect(request, response, "http://localhost:8081" + "?redirect=" + "http://localhost:8081/#/login");
         return false;
     }
 

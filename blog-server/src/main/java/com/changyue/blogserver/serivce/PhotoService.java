@@ -53,6 +53,4 @@ public interface PhotoService extends BaseService<Photo, Integer> {
     PageInfo<PhotoDTO> pageDtos(@NonNull Integer pageIndex, @NonNull Integer pageSize);
 
 
-
-
 }

@@ -1,11 +1,15 @@
 package com.changyue.blogserver.controller;
 
+import com.changyue.blogserver.exception.CreateException;
 import com.changyue.blogserver.model.dto.TagDTO;
+import com.changyue.blogserver.model.dto.UserDTO;
 import com.changyue.blogserver.model.entity.Tag;
 import com.changyue.blogserver.model.params.TagParam;
 import com.changyue.blogserver.model.rep.CommonReturnType;
 import com.changyue.blogserver.serivce.PostTagService;
 import com.changyue.blogserver.serivce.TagService;
+import com.changyue.blogserver.serivce.UserService;
+import com.changyue.blogserver.serivce.impl.UserServiceImpl;
 import com.changyue.blogserver.validator.ValidatorImpl;
 import com.changyue.blogserver.validator.ValidatorResult;
 import lombok.extern.slf4j.Slf4j;
@@ -34,10 +38,13 @@ public class TagController {
     private PostTagService postTagService;
 
     @Autowired
+    private UserService userService;
+
+    @Autowired
     private ValidatorImpl validator;
 
     @GetMapping
-    public List<TagDTO> listTags(@RequestParam(name = "more", required = false, defaultValue = "false") Boolean more) {
+    public List<TagDTO> listTags() {
         return tagService.convertTo(tagService.listAll());
     }
 
@@ -46,12 +53,15 @@ public class TagController {
 
         ValidatorResult result = this.validator.validator(tagParam);
         if (result.isHasError()) {
-            log.debug("创建tag失败[{}]",result.getErrorMsgMap());
+            log.debug("创建tag失败[{}]", result.getErrorMsgMap());
+            throw new CreateException("创建tag失败:" + result.getErrMsg());
         }
 
-        Tag tag = new Tag();
+        Tag tag = tagParam.convertTo();
 
-        BeanUtils.copyProperties(tagParam, tag);
+        UserDTO currentUser = userService.getCurrentUser();
+
+        tag.setUserId(currentUser.getId());
 
         Tag createdTag = tagService.create(tag);
 

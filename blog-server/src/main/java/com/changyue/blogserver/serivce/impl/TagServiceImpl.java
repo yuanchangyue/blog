@@ -4,8 +4,10 @@ import com.changyue.blogserver.dao.TagMapper;
 import com.changyue.blogserver.exception.AlreadyExistsException;
 import com.changyue.blogserver.exception.CreateException;
 import com.changyue.blogserver.model.dto.TagDTO;
+import com.changyue.blogserver.model.dto.UserDTO;
 import com.changyue.blogserver.model.entity.Tag;
 import com.changyue.blogserver.serivce.TagService;
+import com.changyue.blogserver.serivce.UserService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +22,6 @@ import javax.annotation.Nonnull;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -35,6 +36,9 @@ public class TagServiceImpl implements TagService {
     @Autowired
     private TagMapper tagMapper;
 
+    @Autowired
+    private UserService userService;
+
     /**
      * 全部列表
      *
@@ -42,7 +46,8 @@ public class TagServiceImpl implements TagService {
      */
     @Override
     public List<Tag> listAll() {
-        return tagMapper.listAll();
+        UserDTO currentUser = userService.getCurrentUser();
+        return tagMapper.listAllByUserId(currentUser.getId());
     }
 
     /**
@@ -54,8 +59,9 @@ public class TagServiceImpl implements TagService {
      */
     @Override
     public PageInfo<Tag> listAll(Integer pageIndex, Integer pageSize) {
+        UserDTO currentUser = userService.getCurrentUser();
         PageHelper.startPage(pageIndex, 5);
-        List<Tag> tags = tagMapper.listAll();
+        List<Tag> tags = tagMapper.listAllByUserId(currentUser.getId());
         return new PageInfo<>(tags, 3);
     }
 
@@ -66,8 +72,8 @@ public class TagServiceImpl implements TagService {
      * @return 列表
      */
     @Override
-    public List<Tag> listAllByIds(Collection<Integer> id) {
-        return tagMapper.getTagByIds(id);
+    public List<Tag> listAllByIds(List<Integer> id) {
+        return tagMapper.findTagByIds(id);
     }
 
     /**
@@ -81,7 +87,6 @@ public class TagServiceImpl implements TagService {
         Assert.notNull(id, "tag id 不能为空");
         return tagMapper.selectByPrimaryKey(id).orElse(null);
     }
-
 
     /**
      * 计算全部
@@ -104,6 +109,8 @@ public class TagServiceImpl implements TagService {
         if (count > 0) {
             throw new AlreadyExistsException("该标签已存在").setErrData(tag);
         }
+
+
         int effectNum = tagMapper.insert(tag);
         if (effectNum < 0) {
             throw new CreateException("标签创建失败").setErrData(tag);
@@ -128,12 +135,12 @@ public class TagServiceImpl implements TagService {
 
     @Override
     public Tag getBySlugName(String slugName) {
-        return tagMapper.getBySlugName(slugName).orElse(null);
+        return tagMapper.findBySlugName(slugName).orElse(null);
     }
 
     @Override
     public Tag getByName(String name) {
-        return tagMapper.getByName(name).orElse(null);
+        return tagMapper.findByName(name).orElse(null);
     }
 
     @Override

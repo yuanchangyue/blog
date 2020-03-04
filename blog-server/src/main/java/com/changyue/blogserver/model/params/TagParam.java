@@ -16,10 +16,13 @@ import javax.validation.constraints.Size;
 public class TagParam implements InputConvert<Tag> {
 
     @NotBlank(message = "标签名称不能为空")
-    @Size(max = 255, message = "标签名称的字符长度不能超过 {max}")
+    @Size(max = 6, message = "标签名称的字符长度不能超过 {max}")
     private String name;
 
-    @Size(max = 255, message = "标签别名的字符长度不能超过 {max}")
+    @NotBlank(message = "标签类别不能为空")
+    @Size(max = 10, message = "标签别名的字符长度不能超过 {max}")
     private String slugName;
+
+    private Integer userId;
 
 }

@@ -22,7 +22,7 @@ public interface PostService extends BaseService<Post, Integer> {
      * @param pageSize  页数
      */
     @NonNull
-    PageInfo<Post> pageBy(@NonNull Integer pageIndex, @NonNull Integer pageSize);
+    PageInfo<PostVO> pageBy(@NonNull Integer pageIndex, @NonNull Integer pageSize);
 
     /**
      * 创建文章
@@ -81,5 +81,20 @@ public interface PostService extends BaseService<Post, Integer> {
      */
     long countByStatus(Integer status);
 
+    /**
+     * 转化成PostVO
+     *
+     * @param post 文章
+     * @return 文章视图
+     */
+    PostVO convertTO(Post post);
+
+    /**
+     * 批量转化成PostVO
+     *
+     * @param postList 文章列表
+     * @return 文章视图列表
+     */
+    List<PostVO> convertTO(List<Post> postList);
 
 }

@@ -5,6 +5,8 @@ import Login from '../views/Login'
 import Home from '../views/Home'
 import Category from '../views/Category'
 import Tag from '../views/Tag'
+import Post from '../views/Post'
+import PostList from '../views/PostList'
 
 Vue.use(VueRouter)
 
@@ -33,6 +35,16 @@ const routes = [
     path: '/category',
     name: 'Category',
     component: Category
+  },
+  {
+    path: '/post',
+    name: 'post',
+    component: Post
+  },
+  {
+    path: '/postlist',
+    name: 'postlist',
+    component: PostList
   }
 ]
 

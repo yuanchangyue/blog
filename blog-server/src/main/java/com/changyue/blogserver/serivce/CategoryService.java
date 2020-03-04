@@ -10,11 +10,11 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 /**
- * @program: blog-server
- * @description: 类别业务接口
- * @author: 袁阊越
- * @create: 2020-01-22 17:22
+ * @author : 袁阊越
+ * @description : 类别业务接口
+ * @date : 2020/3/4
  */
+@Transactional(readOnly = true)
 public interface CategoryService extends BaseService<Category, Integer> {
 
     /**
@@ -32,6 +32,7 @@ public interface CategoryService extends BaseService<Category, Integer> {
      * @param name 名字
      * @return 类别
      */
+    @Nullable
     Category getByName(@NonNull String name);
 
     /**
@@ -44,16 +45,21 @@ public interface CategoryService extends BaseService<Category, Integer> {
 
     /**
      * 分页全部
+     *
      * @param pageIndex 页索引
      * @param pageSize  页数
      * @return 分页类别
      */
     @NonNull
-    PageInfo<CategoryDTO> list(@NonNull Integer pageIndex,@NonNull Integer pageSize);
+    PageInfo<CategoryDTO> list(@NonNull Integer pageIndex, @NonNull Integer pageSize);
 
-
+    /**
+     * 删除类别同时删除文章类别
+     *
+     * @param categoryId 类别ID
+     */
     @Transactional
-    void removeCategoryAndPostCategory(Integer categoryId);
+    void removeCategoryAndPostCategory(@NonNull Integer categoryId);
 
     /**
      * 装换为DTO

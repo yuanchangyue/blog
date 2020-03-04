@@ -88,4 +88,13 @@ public class Post extends BaseEntity {
      */
     private Date editTime;
 
+    /**
+     * 创建时间
+     */
+    private Date createTime;
+
+    /**
+     * 用户ID
+     */
+    private Integer userId;
 }

@@ -2,6 +2,7 @@ package com.changyue.blogserver.model.params;
 
 import com.changyue.blogserver.model.dto.base.InputConvert;
 import com.changyue.blogserver.model.entity.Photo;
+import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
@@ -11,6 +12,7 @@ import java.util.Date;
  * @description : 照片参数
  * @date : 2020/2/1/001
  */
+@Data
 public class PhotoParam implements InputConvert<Photo> {
 
     @NotBlank(message = "照片名称不能为空")

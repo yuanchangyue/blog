@@ -8,26 +8,20 @@
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="parent_id" jdbcType="INTEGER" property="parentId"/>
         <result column="slug_name" jdbcType="VARCHAR" property="slugName"/>
-        <
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id, description, name, parent_id, slug_name
+        id, description, name, parent_id, slug_name, user_id
     </sql>
 
-    <select id="listAll" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from categories
-    </select>
-
-    <select id="getTagByIds" resultMap="BaseResultMap">
+    <select id="findCategoryByIds" parameterType="java.util.ArrayList" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from categories
         where id in
-        <foreach collection="ids" item="id" open="(" close=")" separator=",">
-            id = #{id,jdbcType=INTEGER}
+        <foreach item="id" index="index" collection="categoryIds" open="(" separator="," close=")">
+             #{id}
         </foreach>
     </select>
 
@@ -38,14 +32,14 @@
         where id = #{id,jdbcType=INTEGER}
     </select>
 
-    <select id="getBySlugName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <select id="findBySlugName" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from categories
         where slug_name = #{slugName,jdbcType=VARCHAR}
     </select>
 
-    <select id="getByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <select id="findByName" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from categories
@@ -59,13 +53,20 @@
         where parent_id = #{parentId,jdbcType=INTEGER}
     </select>
 
+    <select id="listAllByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from categories
+        where user_id = #{userId,jdbcType=INTEGER}
+    </select>
+
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
         delete
         from categories
         where id = #{id,jdbcType=INTEGER}
     </delete>
 
-    <select id="countByNameOrId" resultType="java.lang.Long">
+    <select id="count" parameterType="category" resultType="java.lang.Long">
         select count(id)
         from categories
         <where>
@@ -75,14 +76,17 @@
             <if test="name != null">
                 and name = #{name,jdbcType=VARCHAR}
             </if>
+            <if test="userId != null">
+                and userId = #{userId,jdbcType=VARCHAR}
+            </if>
         </where>
     </select>
 
     <insert id="insert" parameterType="category" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         insert into categories (description, name,
-                                parent_id, slug_name)
+                                parent_id, slug_name, user_id)
         values (#{description,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
-                #{parentId,jdbcType=INTEGER}, #{slugName,jdbcType=VARCHAR})
+                #{parentId,jdbcType=INTEGER}, #{slugName,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER})
     </insert>
 
     <insert id="insertSelective" parameterType="category">
@@ -103,6 +107,9 @@
             <if test="slugName != null">
                 slug_name,
             </if>
+            <if test="userId != null">
+                user_id,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -119,6 +126,9 @@
             </if>
             <if test="slugName != null">
                 #{slugName,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
             </if>
         </trim>
     </insert>
@@ -138,6 +148,9 @@
             <if test="slugName != null">
                 slug_name = #{slugName,jdbcType=VARCHAR},
             </if>
+            <if test="userId != null">
+                userId = #{userId,jdbcType=VARCHAR}
+            </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
@@ -147,7 +160,8 @@
         set description = #{description,jdbcType=VARCHAR},
             name        = #{name,jdbcType=VARCHAR},
             parent_id   = #{parentId,jdbcType=INTEGER},
-            slug_name   = #{slugName,jdbcType=VARCHAR}
+            slug_name   = #{slugName,jdbcType=VARCHAR},
+            user_id     = #{userId,jdbcType=INTEGER}
         where id = #{id,jdbcType=INTEGER}
     </update>
 

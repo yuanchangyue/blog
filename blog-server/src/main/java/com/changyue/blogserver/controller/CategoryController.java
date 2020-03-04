@@ -43,7 +43,7 @@ public class CategoryController {
 
     @GetMapping
     public PageInfo<CategoryDTO> listCategory(@RequestParam(name = "pageIndex", defaultValue = "1") Integer pageIndex,
-                                              @RequestParam(name = "pageSize", defaultValue = "5") Integer pageSize) {
+                                              @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize) {
         return categoryService.list(pageIndex, pageSize);
     }
 
@@ -60,13 +60,15 @@ public class CategoryController {
             log.debug("创建category失败[{}]", result.getErrorMsgMap());
         }
 
+        //获得当前的用户信息
+        UserDTO currentUser = userService.getCurrentUser();
+
         //入参转化
         Category category = categoryParam.convertTo();
+        category.setUserId(currentUser.getId());
 
         //创建类别
         Category createdCategory = categoryService.create(category);
-
-        UserDTO currentUser = userService.getCurrentUser();
 
         //创建用户类别的关联
         userCategoryService.create(new UserCategory(currentUser.getId(), createdCategory.getId()));

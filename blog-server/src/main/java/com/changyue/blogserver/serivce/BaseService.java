@@ -48,7 +48,7 @@ public interface BaseService<DOMAIN, ID> {
      * @return 列表
      */
     @NonNull
-    default List<DOMAIN> listAllByIds(@Nullable Collection<ID> ids) {
+    default List<DOMAIN> listAllByIds(@Nullable List<ID> ids) {
         return null;
     }
 

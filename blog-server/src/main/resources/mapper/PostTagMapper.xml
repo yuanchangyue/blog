@@ -65,11 +65,11 @@
                 #{updateTime,jdbcType=TIMESTAMP}, #{postId,jdbcType=INTEGER}, #{tagId,jdbcType=INTEGER})
     </insert>
 
-    <insert id="insetInBatch">
+    <insert id="insetInBatch" parameterType="java.util.Collection">
         insert into post_tags (create_time, deleted,
         update_time, post_id, tag_id)
         values
-        <foreach collection="postTags" item="postTag" index="index" separator=",">
+        <foreach collection="list" item="postTag" index="index" separator=",">
             (#{postTag.createTime}, #{postTag.deleted},
             #{postTag.updateTime}, #{postTag.postId},
             #{postTag.tagId})

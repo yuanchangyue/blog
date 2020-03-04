@@ -3,9 +3,9 @@
 <mapper namespace="com.changyue.blogserver.dao.PostMapper">
     <resultMap id="BaseResultMap" type="post">
         <id column="id" jdbcType="INTEGER" property="id"/>
-        <result column="type" jdbcType="INTEGER" property="type"/>
         <result column="disallow_comment" jdbcType="INTEGER" property="disallowComment"/>
         <result column="edit_time" jdbcType="TIMESTAMP" property="editTime"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="likes" jdbcType="BIGINT" property="likes"/>
         <result column="password" jdbcType="VARCHAR" property="password"/>
         <result column="status" jdbcType="INTEGER" property="status"/>
@@ -17,11 +17,12 @@
         <result column="visits" jdbcType="BIGINT" property="visits"/>
         <result column="format_content" jdbcType="LONGVARCHAR" property="formatContent"/>
         <result column="original_content" jdbcType="LONGVARCHAR" property="originalContent"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id, type, disallow_comment, edit_time, likes, password, status, summary, thumbnail,
-        title, top_priority, url, visits
+        id, disallow_comment, edit_time, create_time,likes, password, status, summary, thumbnail,
+        title, top_priority, url, visits ,user_id
     </sql>
 
     <sql id="Blob_Column_List">
@@ -63,14 +64,14 @@
         <include refid="Blob_Column_List"/>
         from posts
         <where>
-            <if test="type != null">
-                and type = #{type,jdbcType=INTEGER},
-            </if>
             <if test="disallowComment != null">
                 and disallow_comment = #{disallowComment,jdbcType=INTEGER},
             </if>
             <if test="editTime != null">
                 and edit_time = #{editTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime,jdbcType=TIMESTAMP},
             </if>
             <if test="likes != null">
                 and likes = likes + #{likes,jdbcType=BIGINT},
@@ -114,14 +115,14 @@
         <include refid="Blob_Column_List"/>
         from posts
         <where>
-            <if test="type != null">
-                and type = #{type,jdbcType=INTEGER},
-            </if>
             <if test="disallowComment != null">
                 and disallow_comment = #{disallowComment,jdbcType=INTEGER},
             </if>
             <if test="editTime != null">
                 and edit_time = #{editTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime,jdbcType=TIMESTAMP},
             </if>
             <if test="likes != null">
                 and likes = likes + #{likes,jdbcType=BIGINT},
@@ -159,6 +160,18 @@
         </where>
     </select>
 
+    <select id="listAllByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>,
+        <include refid="Blob_Column_List"/>
+        from posts
+        <where>
+            <if test="userId != null">
+                and user_id = #{userId,jdbcType=INTEGER}
+            </if>
+        </where>
+    </select>
+
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
         delete
         from posts
@@ -166,33 +179,33 @@
     </delete>
 
     <insert id="insert" parameterType="post" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
-        insert into posts (id, type, disallow_comment,
-                           edit_time, likes, password,
+        insert into posts (id, disallow_comment,
+                           edit_time, create_time,likes, password,
                            status, summary, thumbnail,
                            title, top_priority, url,
-                           visits, format_content, original_content)
-        values (#{id,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{disallowComment,jdbcType=INTEGER},
-                #{editTime,jdbcType=TIMESTAMP}, #{likes,jdbcType=BIGINT}, #{password,jdbcType=VARCHAR},
+                           visits, format_content, original_content, user_id)
+        values (#{id,jdbcType=INTEGER}, #{disallowComment,jdbcType=INTEGER},
+                #{editTime,jdbcType=TIMESTAMP},#{createTime,jdbcType=TIMESTAMP}, #{likes,jdbcType=BIGINT}, #{password,jdbcType=VARCHAR},
                 #{status,jdbcType=INTEGER}, #{summary,jdbcType=VARCHAR}, #{thumbnail,jdbcType=VARCHAR},
                 #{title,jdbcType=VARCHAR}, #{topPriority,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR},
                 #{visits,jdbcType=BIGINT}, #{formatContent,jdbcType=LONGVARCHAR},
-                #{originalContent,jdbcType=LONGVARCHAR})
+                #{originalContent,jdbcType=LONGVARCHAR}, #{userId,jdbcType=INTEGER})
     </insert>
 
-    <insert id="insertSelective" parameterType="post">
+    <insert id="insertSelective" parameterType="post" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
         insert into posts
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 id,
-            </if>
-            <if test="type != null">
-                type,
             </if>
             <if test="disallowComment != null">
                 disallow_comment,
             </if>
             <if test="editTime != null">
                 edit_time,
+            </if>
+            <if test="createTime != null">
+                create_time,
             </if>
             <if test="likes != null">
                 likes,
@@ -227,19 +240,22 @@
             <if test="originalContent != null">
                 original_content,
             </if>
+            <if test="userId != null">
+                user_id,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 #{id,jdbcType=INTEGER},
-            </if>
-            <if test="type != null">
-                #{type,jdbcType=INTEGER},
             </if>
             <if test="disallowComment != null">
                 #{disallowComment,jdbcType=INTEGER},
             </if>
             <if test="editTime != null">
                 #{editTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
             </if>
             <if test="likes != null">
                 #{likes,jdbcType=BIGINT},
@@ -274,20 +290,23 @@
             <if test="originalContent != null">
                 #{originalContent,jdbcType=LONGVARCHAR},
             </if>
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
         </trim>
     </insert>
 
     <update id="updateByPrimaryKeySelective" parameterType="post">
         update posts
         <set>
-            <if test="type != null">
-                type = #{type,jdbcType=INTEGER},
-            </if>
             <if test="disallowComment != null">
                 disallow_comment = #{disallowComment,jdbcType=INTEGER},
             </if>
             <if test="editTime != null">
                 edit_time = #{editTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
             </if>
             <if test="likes != null">
                 likes = likes + #{likes,jdbcType=BIGINT},
@@ -322,15 +341,18 @@
             <if test="originalContent != null">
                 original_content = #{originalContent,jdbcType=LONGVARCHAR},
             </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER}
+            </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
 
     <update id="updateByPrimaryKey" parameterType="post">
         update posts
-        set type             = #{type,jdbcType=INTEGER},
-            disallow_comment = #{disallowComment,jdbcType=INTEGER},
+        set disallow_comment = #{disallowComment,jdbcType=INTEGER},
             edit_time        = #{editTime,jdbcType=TIMESTAMP},
+            create_time      = #{createTime,jdbcType=TIMESTAMP},
             likes            = #{likes,jdbcType=BIGINT},
             password         = #{password,jdbcType=VARCHAR},
             status           = #{status,jdbcType=INTEGER},
@@ -341,7 +363,8 @@
             url              = #{url,jdbcType=VARCHAR},
             visits           = #{visits,jdbcType=BIGINT},
             format_content   = #{formatContent,jdbcType=LONGVARCHAR},
-            original_content = #{originalContent,jdbcType=LONGVARCHAR}
+            original_content = #{originalContent,jdbcType=LONGVARCHAR},
+            user_id          = #{userId,jdbcType=INTEGER}
         where id = #{id,jdbcType=INTEGER}
     </update>
 

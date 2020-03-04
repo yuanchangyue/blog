@@ -10,11 +10,11 @@
               <span>{{ title }}</span>
             </div>
             <el-form>
-              <el-form-item label="*名称:">
+              <el-form-item label="名称:">
                 <el-input size="small" v-model="form.name" placeholder="请输入类别名称"/>
                 <div class="prompt-form">* 名称不能空,长度不能超过20</div>
               </el-form-item>
-              <el-form-item label="*别名:">
+              <el-form-item label="别名:">
                 <el-input size="small" type="text" v-model="form.slugName" placeholder="请输入类别别名"/>
                 <div class="prompt-form">* 别名不能空,长度不能超过20,不能重复</div>
               </el-form-item>
@@ -34,7 +34,7 @@
                 <div class="prompt-form">* 关于类别描述</div>
               </el-form-item>
               <el-form-item>
-                <el-button type="primary" @click="createAndUpdate">{{button}}</el-button>
+                <el-button type="primary" size="small" @click="createAndUpdate">{{button}}</el-button>
                 <el-button v-if="!isInsert" size="small" @click="returnInsert()">返回新增</el-button>
               </el-form-item>
             </el-form>

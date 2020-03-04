@@ -72,13 +72,14 @@
                 #{updateTime,jdbcType=TIMESTAMP}, #{categoryId,jdbcType=INTEGER}, #{postId,jdbcType=INTEGER})
     </insert>
 
-    <insert id="insertInBatch">
+    <insert id="insertInBatch" parameterType="java.util.Collection">
         insert into post_categories (create_time, deleted,
         update_time, category_id, post_id)
         values
-        <foreach collection="postCategories" index="index" item="postCategory" separator=",">
-            values (#{createTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=TINYINT},
-            #{updateTime,jdbcType=TIMESTAMP}, #{categoryId,jdbcType=INTEGER}, #{postId,jdbcType=INTEGER})
+        <foreach collection="list" item="postCategory" index="index" separator=",">
+           (#{postCategory.createTime}, #{postCategory.deleted},
+            #{postCategory.updateTime}, #{postCategory.categoryId},
+            #{postCategory.postId})
         </foreach>
     </insert>
 

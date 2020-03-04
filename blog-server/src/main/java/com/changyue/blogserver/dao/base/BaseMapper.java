@@ -86,4 +86,5 @@ public interface BaseMapper<DOMAIN> {
      * @return 影响行数
      */
     int updateByPrimaryKey(DOMAIN domain);
+
 }

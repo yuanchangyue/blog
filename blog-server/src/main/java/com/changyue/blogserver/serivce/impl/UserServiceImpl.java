@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
         User user = (User) SecurityUtils.getSubject().getPrincipal();
         Assert.notNull(user, "当前用户为空");
         UserDTO userDTO = new UserDTO();
-        BeanUtils.copyProperties(userDTO, user);
+        BeanUtils.copyProperties(user, userDTO);
         return userDTO;
     }
 

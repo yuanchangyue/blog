@@ -5,9 +5,11 @@ import com.changyue.blogserver.exception.AlreadyExistsException;
 import com.changyue.blogserver.exception.CreateException;
 import com.changyue.blogserver.exception.NotFindException;
 import com.changyue.blogserver.model.dto.CategoryDTO;
+import com.changyue.blogserver.model.dto.UserDTO;
 import com.changyue.blogserver.model.entity.Category;
 import com.changyue.blogserver.serivce.CategoryService;
 import com.changyue.blogserver.serivce.PostCategoryService;
+import com.changyue.blogserver.serivce.UserService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
@@ -18,9 +20,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -38,20 +39,28 @@ public class CategoryServiceImpl implements CategoryService {
     @Autowired
     private PostCategoryService postCategoryService;
 
+    @Autowired
+    private UserService userService;
+
     @Override
     public Category create(Category category) {
 
         Assert.notNull(category, "类别不能为空");
+        Assert.notNull(category.getUserId(), "用户ID不能为空");
 
         //检查类别是否存在
-        long countByName = categoryMapper.countByNameOrId(category.getName(), null);
+        Category cateWithName = new Category();
+        cateWithName.setName(category.getName());
+        long countByName = categoryMapper.count(cateWithName);
         if (countByName > 0) {
             log.error("该分类已经存在{}", category);
             throw new AlreadyExistsException("该分类已经存在");
         }
         //检查父类别是否存在
         if (category.getParentId() != null) {
-            long countById = categoryMapper.countByNameOrId(null, category.getParentId());
+            Category cateWithParenId = new Category();
+            cateWithParenId.setParentId(category.getParentId());
+            long countById = categoryMapper.count(cateWithParenId);
 
             if (countById == 0) {
                 log.error("父id: [{}] 没有找到", category.getParentId());
@@ -70,18 +79,16 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Category getBySlugName(String slugName) {
-        return Objects.requireNonNull(categoryMapper.getBySlugName(slugName).orElse(null));
+        return categoryMapper.findBySlugName(slugName).orElse(null);
     }
 
     @Override
     public Category getByName(String name) {
-        Assert.notNull(name, "类别名称不能为空");
-        return categoryMapper.getByName(name).orElse(null);
+        return categoryMapper.findByName(name).orElse(null);
     }
 
     @Override
     public Category getById(Integer id) {
-        Assert.notNull(id, "Id 不能为空");
         return categoryMapper.selectByPrimaryKey(id).orElse(null);
     }
 
@@ -92,13 +99,22 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    public List<Category> listAllByIds(List<Integer> ids) {
+        return categoryMapper.findCategoryByIds(new ArrayList<>(ids));
+    }
+
+    @Override
     public PageInfo<CategoryDTO> list(Integer pageIndex, Integer pageSize) {
 
         Assert.notNull(pageIndex, "页索引不能为空");
         Assert.notNull(pageSize, "页数不能为空");
 
+        //获得当前用户
+        UserDTO currentUser = userService.getCurrentUser();
+
+        //分页
         PageHelper.startPage(pageIndex, pageSize);
-        List<Category> categoryList = categoryMapper.listAll();
+        List<Category> categoryList = categoryMapper.listAllByUserId(currentUser.getId());
         List<CategoryDTO> categoryDTOS = convertTo(categoryList);
 
         return new PageInfo<>(categoryDTOS, 3);

@@ -36,7 +36,7 @@ public class PostCategoryServiceImpl implements PostCategoryService {
 
         Set<Integer> categoryIds = postCategoryMapper.findAllCategoryIdsByPostId(postId);
 
-        return categoryMapper.findAllById(categoryIds);
+        return categoryMapper.findCategoryByIds(new ArrayList<>(categoryIds));
 
     }
 

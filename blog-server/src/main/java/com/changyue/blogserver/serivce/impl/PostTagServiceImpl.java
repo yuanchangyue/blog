@@ -37,7 +37,7 @@ public class PostTagServiceImpl implements PostTagService {
 
         Set<Integer> allByPostId = postTagMapper.findAllByPostId(postId);
 
-        return tagMapper.getTagByIds(allByPostId);
+        return tagMapper.findTagByIds(new ArrayList<>(allByPostId));
     }
 
     @Override

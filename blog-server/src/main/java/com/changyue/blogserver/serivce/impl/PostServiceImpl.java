@@ -4,6 +4,7 @@ import com.changyue.blogserver.dao.PostMapper;
 import com.changyue.blogserver.exception.CreateException;
 import com.changyue.blogserver.exception.NotFindException;
 import com.changyue.blogserver.exception.UpdateException;
+import com.changyue.blogserver.model.dto.UserDTO;
 import com.changyue.blogserver.model.entity.*;
 import com.changyue.blogserver.model.enums.PostStatus;
 import com.changyue.blogserver.model.vo.PostVO;
@@ -18,10 +19,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
+import java.util.concurrent.CyclicBarrier;
 import java.util.stream.Collectors;
 
 /**
@@ -48,16 +47,22 @@ public class PostServiceImpl implements PostService {
     @Autowired
     private CategoryService categoryService;
 
+    @Autowired
+    private UserService userService;
+
     @Override
-    public PageInfo<Post> pageBy(Integer pageIndex, Integer pageSize) {
+    public PageInfo<PostVO> pageBy(Integer pageIndex, Integer pageSize) {
 
         Assert.notNull(pageIndex, "页索引不能为空");
         Assert.notNull(pageSize, "页数不能为空");
 
-        PageHelper.startPage(pageIndex, 5);
-        List<Post> posts = postMapper.listAll();
+        UserDTO currentUser = userService.getCurrentUser();
 
-        return new PageInfo<>(posts, 3);
+        PageHelper.startPage(pageIndex, pageSize);
+        List<Post> posts = postMapper.listAllByUserId(currentUser.getId());
+        List<PostVO> postVOS = this.convertTO(posts);
+
+        return new PageInfo<>(postVOS, 3);
     }
 
     @Override
@@ -67,13 +72,13 @@ public class PostServiceImpl implements PostService {
         Post post = createOrUpdate(createdPost, tagIds, categoryId);
         PostVO postVO = new PostVO();
 
-        if (post.getId() != null) {
+        if (post.getId() != null && post.getStatus() != PostStatus.DRAFT.getStatusCode()) {
             //清空标签和类别
             postTagService.removeByPostId(post.getId());
             postCategoryService.removeByPostId(post.getId());
 
-            List<Tag> tags = tagService.listAllByIds(tagIds);
-            List<Category> categories = categoryService.listAllByIds(categoryId);
+            List<Tag> tags = tagService.listAllByIds(new ArrayList<>(tagIds));
+            List<Category> categories = categoryService.listAllByIds(new ArrayList<>(categoryId));
 
             //新增post tag
             log.debug("新增post tag : [{}]", tagIds);
@@ -99,12 +104,8 @@ public class PostServiceImpl implements PostService {
 
         Assert.notNull(post, "文章的参数不能为空");
 
-        if (post.getStatus() == PostStatus.PUBLISHED.getStatusCode()) {
-            post.setFormatContent("");
-        }
-
         //设置状态
-        if (!StringUtils.isEmpty(post.getPassword()) && post.getStatus() != PostStatus.DRAFT.getStatusCode()) {
+        if (!StringUtils.isEmpty(post.getPassword()) && post.getStatus() == PostStatus.DRAFT.getStatusCode()) {
             post.setStatus(PostStatus.Encrypt.getStatusCode());
         }
 
@@ -125,8 +126,14 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public Post create(Post post) {
+
+        //获取当前的用户
+        UserDTO currentUser = userService.getCurrentUser();
+        //赋值当前的用户ID
+        post.setUserId(currentUser.getId());
+
         //插入文章到数据库
-        int effectNum = postMapper.insert(post);
+        int effectNum = postMapper.insertSelective(post);
         if (effectNum <= 0) {
             throw new CreateException("文章创建失败").setErrData(post);
         }
@@ -193,6 +200,18 @@ public class PostServiceImpl implements PostService {
     @Override
     public long countByStatus(Integer status) {
         return Optional.ofNullable(postMapper.countAllByStatus(status)).orElse(0L);
+    }
+
+    @Override
+    public PostVO convertTO(Post post) {
+        PostVO postVO = new PostVO();
+        BeanUtils.copyProperties(post, postVO);
+        return postVO;
+    }
+
+    @Override
+    public List<PostVO> convertTO(List<Post> postList) {
+        return postList.stream().map(this::convertTO).collect(Collectors.toList());
     }
 
 }

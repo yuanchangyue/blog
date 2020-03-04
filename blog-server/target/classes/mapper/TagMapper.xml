@@ -6,25 +6,20 @@
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="slug_name" jdbcType="VARCHAR" property="slugName"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id, name, slug_name
+        id, name, slug_name, user_id
     </sql>
 
-    <select id="listAll" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from tags
-    </select>
-
-    <select id="getTagByIds" resultMap="BaseResultMap">
+    <select id="findTagByIds" parameterType="java.util.ArrayList" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from tags
         where id in
-        <foreach collection="ids" item="id" open="(" close=")" separator=",">
-            id = #{id,jdbcType=INTEGER}
+        <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+            #{item}
         </foreach>
     </select>
 
@@ -53,7 +48,7 @@
         </where>
     </select>
 
-    <select id="getBySlugName" parameterType="java.lang.String">
+    <select id="findBySlugName" parameterType="java.lang.String">
         select
         <include refid="Base_Column_List"/>
         from tags
@@ -61,16 +56,23 @@
     </select>
 
 
-    <select id="getByName" parameterType="java.lang.String">
+    <select id="findByName" parameterType="java.lang.String">
         select
         <include refid="Base_Column_List"/>
         from tags
         where slug_name = #{name,jdbcType=VARCHAR}
     </select>
 
+    <select id="listAllByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tags
+        where user_id = #{userId,jdbcType=INTEGER}
+    </select>
+
     <insert id="insert" parameterType="tag" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
-        insert into tags (name, slug_name)
-        values (#{name,jdbcType=VARCHAR}, #{slugName,jdbcType=VARCHAR})
+        insert into tags (name, slug_name, user_id)
+        values (#{name,jdbcType=VARCHAR}, #{slugName,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER})
     </insert>
 
     <insert id="insertSelective" parameterType="tag">

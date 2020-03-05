@@ -34,7 +34,6 @@ public interface PostMapper extends BaseMapper<Post> {
      */
     Long countAllByStatus(@Nonnull Integer status);
 
-
     /**
      * 通过状态找到全部的文章
      *

@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.changyue.blogserver.dao.PostMapper">
+
     <resultMap id="BaseResultMap" type="post">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="disallow_comment" jdbcType="INTEGER" property="disallowComment"/>
+        <result column="edit_time" jdbcType="TIMESTAMP" property="editTime"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="likes" jdbcType="BIGINT" property="likes"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="summary" jdbcType="VARCHAR" property="summary"/>
+        <result column="thumbnail" jdbcType="VARCHAR" property="thumbnail"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="top_priority" jdbcType="INTEGER" property="topPriority"/>
+        <result column="url" jdbcType="VARCHAR" property="url"/>
+        <result column="visits" jdbcType="BIGINT" property="visits"/>
+        <result column="format_content" jdbcType="LONGVARCHAR" property="formatContent"/>
+        <result column="original_content" jdbcType="LONGVARCHAR" property="originalContent"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+    </resultMap>
+
+    <resultMap id="VOResultMap" type="postVO">
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="disallow_comment" jdbcType="INTEGER" property="disallowComment"/>
         <result column="edit_time" jdbcType="TIMESTAMP" property="editTime"/>
@@ -180,12 +200,13 @@
 
     <insert id="insert" parameterType="post" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
         insert into posts (id, disallow_comment,
-                           edit_time, create_time,likes, password,
+                           edit_time, create_time, likes, password,
                            status, summary, thumbnail,
                            title, top_priority, url,
                            visits, format_content, original_content, user_id)
         values (#{id,jdbcType=INTEGER}, #{disallowComment,jdbcType=INTEGER},
-                #{editTime,jdbcType=TIMESTAMP},#{createTime,jdbcType=TIMESTAMP}, #{likes,jdbcType=BIGINT}, #{password,jdbcType=VARCHAR},
+                #{editTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{likes,jdbcType=BIGINT},
+                #{password,jdbcType=VARCHAR},
                 #{status,jdbcType=INTEGER}, #{summary,jdbcType=VARCHAR}, #{thumbnail,jdbcType=VARCHAR},
                 #{title,jdbcType=VARCHAR}, #{topPriority,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR},
                 #{visits,jdbcType=BIGINT}, #{formatContent,jdbcType=LONGVARCHAR},

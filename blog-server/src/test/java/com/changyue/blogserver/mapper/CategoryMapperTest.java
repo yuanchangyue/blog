@@ -25,9 +25,15 @@ public class CategoryMapperTest {
     private CategoryMapper categoryMapper;
 
     @Test
-    public void testCategory() {
+    public void testSelectByPrimaryKey() {
         Optional<Category> category = categoryMapper.selectByPrimaryKey(25);
         System.out.println("category = " + category.get());
+    }
+
+    @Test
+    public void testListCategoryByPostId() {
+        List<Category> categoryList = categoryMapper.listCategoryByPostId(7);
+        categoryList.forEach(System.out::println);
     }
 
     @Test
@@ -37,7 +43,7 @@ public class CategoryMapperTest {
         list.add(26);
         list.add(28);
 
-        List<Category> allById = categoryMapper.findCategoryByIds(list);
+        List<Category> allById = categoryMapper.listCategoryByIds(list);
         allById.forEach(System.out::println);
 
     }

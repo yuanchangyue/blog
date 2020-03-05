@@ -15,16 +15,6 @@
         id, description, name, parent_id, slug_name, user_id
     </sql>
 
-    <select id="findCategoryByIds" parameterType="java.util.ArrayList" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from categories
-        where id in
-        <foreach item="id" index="index" collection="categoryIds" open="(" separator="," close=")">
-             #{id}
-        </foreach>
-    </select>
-
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
@@ -46,7 +36,7 @@
         where name = #{name,jdbcType=VARCHAR}
     </select>
 
-    <select id="findByParentId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <select id="listByParentId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from categories
@@ -60,6 +50,25 @@
         where user_id = #{userId,jdbcType=INTEGER}
     </select>
 
+    <select id="listCategoryByIds" parameterType="java.util.ArrayList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from categories
+        where id in
+        <foreach item="id" index="index" collection="categoryIds" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+
+    <select id="listCategoryByPostId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        SELECT c.id, c.description, c.name, c.parent_id, c.slug_name, c.user_id
+        from post_categories pc,
+             categories c,
+             posts p
+        WHERE pc.post_id = p.id
+          and pc.category_id = c.id
+          and p.id = #{postId}
+    </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
         delete
         from categories

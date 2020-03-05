@@ -4,6 +4,7 @@ import com.changyue.blogserver.dao.PostMapper;
 import com.changyue.blogserver.exception.CreateException;
 import com.changyue.blogserver.exception.NotFindException;
 import com.changyue.blogserver.exception.UpdateException;
+import com.changyue.blogserver.model.dto.TagDTO;
 import com.changyue.blogserver.model.dto.UserDTO;
 import com.changyue.blogserver.model.entity.*;
 import com.changyue.blogserver.model.enums.PostStatus;
@@ -61,7 +62,10 @@ public class PostServiceImpl implements PostService {
         PageHelper.startPage(pageIndex, pageSize);
         List<Post> posts = postMapper.listAllByUserId(currentUser.getId());
         List<PostVO> postVOS = this.convertTO(posts);
-
+        for (int i = 0; i < posts.size(); i++) {
+            postVOS.get(i).setTags(tagService.getListByPostId(posts.get(i).getId()));
+            postVOS.get(i).setCategories(categoryService.getListCategoryByPostId(posts.get(i).getId()));
+        }
         return new PageInfo<>(postVOS, 3);
     }
 

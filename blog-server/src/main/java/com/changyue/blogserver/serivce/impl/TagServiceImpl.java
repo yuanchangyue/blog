@@ -144,6 +144,12 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
+    public List<TagDTO> getListByPostId(Integer postId) {
+        Assert.notNull(postId, "post id 不能为空");
+        return tagMapper.listAllByPostId(postId).stream().map(this::convertTo).collect(Collectors.toList());
+    }
+
+    @Override
     public TagDTO convertTo(Tag tag) {
         Assert.notNull(tag, "不能为空");
         TagDTO tagDTO = new TagDTO();

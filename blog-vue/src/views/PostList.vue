@@ -21,12 +21,17 @@
                 width="120">
               </el-table-column>
               <el-table-column
-                prop="status"
                 label="状态"
                 width="120">
+                <template slot-scope="scope">
+                  <div>
+                    <span></span>
+                    {{ scope.row.status===0 ? '已发布': scope.row.status===1 ? '草稿' : scope.row.status===2 ? '回收站' :
+                    scope.row.status===3? '加密': '无状态' }}
+                  </div>
+                </template>
               </el-table-column>
               <el-table-column
-                prop=""
                 label="分类"
                 show-overflow-tooltip>
               </el-table-column>
@@ -83,10 +88,14 @@ export default {
   methods: {
     showPostList () {
       this.$axios('/post').then(value => {
+        console.info(value.data)
         this.tableData = value.data.list
       }).catch(reason => {
       })
     }
+  },
+  mounted () {
+    this.showPostList()
   }
 }
 </script>

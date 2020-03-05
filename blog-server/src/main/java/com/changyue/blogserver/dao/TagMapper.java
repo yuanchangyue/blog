@@ -51,7 +51,7 @@ public interface TagMapper extends BaseMapper<Tag> {
      * @param tagIds id数组
      * @return 标签列表
      */
-    List<Tag> findTagByIds(@Param("tagIds")List<Integer> tagIds);
+    List<Tag> findTagByIds(@Param("tagIds") List<Integer> tagIds);
 
     /**
      * 通过userId查找标签类别
@@ -60,5 +60,13 @@ public interface TagMapper extends BaseMapper<Tag> {
      * @return 标签列表
      */
     List<Tag> listAllByUserId(@Param("userId") Integer userId);
+
+    /**
+     * 通过文章Id查找标签类别
+     *
+     * @param postId 文章id
+     * @return 标签列表
+     */
+    List<Tag> listAllByPostId(@Param("postId") Integer postId);
 
 }

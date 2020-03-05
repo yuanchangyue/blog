@@ -70,13 +70,11 @@ public class Post extends BaseEntity {
      * 文章密码
      */
     private String password;
-
-
+    
     /**
      * 优先权
      */
     private Integer topPriority;
-
 
     /**
      * 点赞

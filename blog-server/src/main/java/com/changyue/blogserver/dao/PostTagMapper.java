@@ -1,13 +1,16 @@
 package com.changyue.blogserver.dao;
 
 import com.changyue.blogserver.dao.base.BaseMapper;
+import com.changyue.blogserver.model.dto.TagDTO;
 import com.changyue.blogserver.model.entity.PostTag;
+import com.changyue.blogserver.model.entity.Tag;
 import lombok.NonNull;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Nonnull;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -26,6 +29,13 @@ public interface PostTagMapper extends BaseMapper<PostTag> {
      */
     @NonNull
     Set<Integer> findAllByPostId(@NonNull @Param("postId") Integer postId);
+
+    /**
+     * 通过用户id 查询到全部的用户列表
+     *
+     * @return 用户列表
+     */
+    List<TagDTO> findAllByUserId(@NonNull @Param("userId") Integer userId);
 
     /**
      * 通过标签id删除文章标签

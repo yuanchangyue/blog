@@ -60,7 +60,7 @@ public interface CategoryMapper extends BaseMapper<Category> {
      * @param parentId 父Id.
      * @return 类别列表
      */
-    List<Category> findByParentId(@NonNull @Param("parentId") Integer parentId);
+    List<Category> listByParentId(@NonNull @Param("parentId") Integer parentId);
 
     /**
      * 通过类别id的数组查询全部
@@ -68,6 +68,14 @@ public interface CategoryMapper extends BaseMapper<Category> {
      * @param categoryIds id数组
      * @return 类别列表
      */
-    List<Category> findCategoryByIds(@Param("categoryIds")List<Integer> categoryIds);
+    List<Category> listCategoryByIds(@Param("categoryIds") List<Integer> categoryIds);
+
+    /**
+     * 通过文章id查询全部
+     *
+     * @param postId 文章Id
+     * @return 类别列表
+     */
+    List<Category> listCategoryByPostId(@Param("postId") Integer postId);
 
 }

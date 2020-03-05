@@ -93,14 +93,14 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<Category> listByParentId(Integer id) {
+    public List<Category> getListByParentId(Integer id) {
         Assert.notNull(id, "类别Id不能为空");
-        return categoryMapper.findByParentId(id);
+        return categoryMapper.listByParentId(id);
     }
 
     @Override
     public List<Category> listAllByIds(List<Integer> ids) {
-        return categoryMapper.findCategoryByIds(new ArrayList<>(ids));
+        return categoryMapper.listCategoryByIds(new ArrayList<>(ids));
     }
 
     @Override
@@ -125,7 +125,7 @@ public class CategoryServiceImpl implements CategoryService {
     public void removeCategoryAndPostCategory(Integer categoryId) {
 
         //处理如果是父级类别被使用
-        List<Category> categories = this.listByParentId(categoryId);
+        List<Category> categories = this.getListByParentId(categoryId);
         if (!CollectionUtils.isEmpty(categories)) {
             categories.forEach(category -> {
                 category.setParentId(0);
@@ -137,6 +137,12 @@ public class CategoryServiceImpl implements CategoryService {
         this.removeById(categoryId);
         //删除文章类别
         postCategoryService.removeByCategoryId(categoryId);
+    }
+
+    @Override
+    public List<CategoryDTO> getListCategoryByPostId(Integer postId) {
+        List<Category> categories = categoryMapper.listCategoryByPostId(postId);
+        return categories.stream().map(this::convertTo).collect(Collectors.toList());
     }
 
     @Override

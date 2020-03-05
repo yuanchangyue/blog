@@ -36,6 +36,12 @@ public class TagMapperTest {
     }
 
     @Test
+    public void testListAllByPostId() {
+        List<Tag> tags = tagMapper.listAllByPostId(7);
+        tags.forEach(System.out::println);
+    }
+
+    @Test
     public void testFindTagByIds() {
         ArrayList<Integer> collect = new ArrayList<>();
         collect.add(39);

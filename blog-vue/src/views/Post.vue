@@ -27,6 +27,7 @@
                             :value="item.id">
                 </el-option>
               </el-select>
+              <div class="prompt-form">* 类别不能空</div>
             </el-form-item>
             <el-form-item label="文章标签">
               <el-select v-model="form.tagIds" placeholder="请选择标签" style="width: 100%;" multiple>
@@ -36,6 +37,7 @@
                             :value="item.id">
                 </el-option>
               </el-select>
+              <div class="prompt-form">* 标签不能空</div>
             </el-form-item>
             <el-form-item label="访问密码">
               <el-input type="password" v-model="form.password" suffix-icon="el-icon-lock" placeholder="可以设置访问密码"></el-input>
@@ -90,7 +92,8 @@ export default {
         formatContent: '',
         originalContent: '',
         status: 0
-      }
+      },
+      updateId: ''
     }
   },
   methods: {
@@ -107,7 +110,8 @@ export default {
           message: '文章已经移至草稿箱',
           type: 'success'
         })
-      }).catch(reason => {
+        this.$router.push({ path: '/postlist' })
+      }).catch(_ => {
       })
     },
     submit () {
@@ -118,7 +122,8 @@ export default {
           message: '文章发布成功',
           type: 'success'
         })
-      }).catch(reason => {
+        this.$router.push({ path: '/postlist' })
+      }).catch(_ => {
         this.$notify({
           title: '警告',
           message: '文章发布失败',
@@ -130,13 +135,12 @@ export default {
       this.$confirm('确认取消发布文章吗？')
         .then(_ => {
           done()
-        })
-        .catch(_ => {})
+        }).catch(_ => {})
     },
     showCategoryAndTag () {
       this.$axios.get('/category').then(value => {
         this.categoryList = value.data.list
-      }).catch(reason => {
+      }).catch(_ => {
         this.$notify({
           title: '警告',
           message: '分类获取失败',
@@ -145,7 +149,7 @@ export default {
       })
       this.$axios.get('/tag').then(value => {
         this.tagList = value.data
-      }).catch(reason => {
+      }).catch(_ => {
         this.$notify({
           title: '警告',
           message: '标签获取失败',
@@ -154,8 +158,18 @@ export default {
       })
     }
   },
-  mounted () {
+  created () {
     this.showCategoryAndTag()
+    this.updateId = this.$route.params.postId
+    if (this.updateId != null) {
+      this.$axios.get('/post/' + this.updateId).then(value => {
+        var data = value.data
+        if (data.code === 200) {
+          this.form.title = data.data.title
+          this.form.originalContent = data.data.originalContent
+        }
+      })
+    }
   }
 }
 

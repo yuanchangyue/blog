@@ -26,5 +26,6 @@ public class Tag {
      * 用户id
      */
     private Integer userId;
+
 }
 

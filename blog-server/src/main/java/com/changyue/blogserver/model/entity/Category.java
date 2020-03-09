@@ -32,4 +32,6 @@ public class Category {
      */
     private Integer userId;
 
+    public Category() {
+    }
 }

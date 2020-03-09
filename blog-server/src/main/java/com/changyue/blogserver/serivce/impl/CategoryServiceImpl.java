@@ -10,6 +10,7 @@ import com.changyue.blogserver.model.entity.Category;
 import com.changyue.blogserver.serivce.CategoryService;
 import com.changyue.blogserver.serivce.PostCategoryService;
 import com.changyue.blogserver.serivce.UserService;
+import com.changyue.blogserver.utils.ShiroUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
@@ -143,6 +144,11 @@ public class CategoryServiceImpl implements CategoryService {
     public List<CategoryDTO> getListCategoryByPostId(Integer postId) {
         List<Category> categories = categoryMapper.listCategoryByPostId(postId);
         return categories.stream().map(this::convertTo).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<CategoryDTO> getListCategoryByUserId() {
+        return categoryMapper.listAllByUserId(ShiroUtils.getUser().getId()).stream().map(this::convertTo).collect(Collectors.toList());
     }
 
     @Override

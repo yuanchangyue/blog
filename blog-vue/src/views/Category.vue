@@ -61,12 +61,10 @@
                 </el-table-column>
                 <el-table-column
                   prop="description"
-                  label="描述"
-                  width="120">
+                  label="描述">
                 </el-table-column>
                 <el-table-column
-                  label="操作"
-                  width="150">
+                  label="操作">
                   <template slot-scope="scope">
                     <div>
                       <el-link type="primary" @click="updateCategory(scope.$index)">编辑</el-link>&nbsp;

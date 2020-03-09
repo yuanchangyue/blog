@@ -2,6 +2,8 @@ package com.changyue.blogserver.dao;
 
 import com.changyue.blogserver.dao.base.BaseMapper;
 import com.changyue.blogserver.model.entity.Post;
+import com.changyue.blogserver.model.params.PostQuery;
+import com.changyue.blogserver.model.vo.PostVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.data.repository.query.Param;
 import org.springframework.lang.NonNull;
@@ -34,6 +36,7 @@ public interface PostMapper extends BaseMapper<Post> {
      */
     Long countAllByStatus(@Nonnull Integer status);
 
+
     /**
      * 通过状态找到全部的文章
      *
@@ -42,13 +45,22 @@ public interface PostMapper extends BaseMapper<Post> {
      */
     List<Post> findAllByStatus(@Nonnull Integer postId);
 
-  /**
+    /**
      * 通过状态用户Id找到全部的文章
      *
      * @param userId 用户id
      * @return 文章
      */
     List<Post> listAllByUserId(@Nonnull @Param("userId") Integer userId);
+
+    /**
+     * 通过状态用户Id找到全部的文章
+     *
+     * @param postQuery 文章查询条件
+     * @param userId    用户id
+     * @return 文章
+     */
+    List<PostVO> listAllByQuery(@Nonnull @Param("postQuery") PostQuery postQuery, @Param("userId") Integer userId);
 
     /**
      * 更新点赞。

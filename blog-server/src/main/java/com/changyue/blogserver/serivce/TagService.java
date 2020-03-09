@@ -43,6 +43,13 @@ public interface TagService extends BaseService<Tag, Integer> {
     List<TagDTO> getListByPostId(Integer postId);
 
     /**
+     * 通过文章Id查找标签类别
+     *
+     * @return 标签列表
+     */
+    List<TagDTO> getListByUserId();
+
+    /**
      * 转换为标签dto。
      *
      * @param tag 标记不能为null

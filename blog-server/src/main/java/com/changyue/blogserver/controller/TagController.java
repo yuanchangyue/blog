@@ -3,12 +3,11 @@ package com.changyue.blogserver.controller;
 import com.changyue.blogserver.exception.CreateException;
 import com.changyue.blogserver.model.dto.TagDTO;
 import com.changyue.blogserver.model.dto.UserDTO;
+import com.changyue.blogserver.model.entity.Category;
 import com.changyue.blogserver.model.entity.Tag;
 import com.changyue.blogserver.model.params.TagParam;
 import com.changyue.blogserver.model.rep.CommonReturnType;
-import com.changyue.blogserver.serivce.PostTagService;
-import com.changyue.blogserver.serivce.TagService;
-import com.changyue.blogserver.serivce.UserService;
+import com.changyue.blogserver.serivce.*;
 import com.changyue.blogserver.serivce.impl.UserServiceImpl;
 import com.changyue.blogserver.validator.ValidatorImpl;
 import com.changyue.blogserver.validator.ValidatorResult;
@@ -36,6 +35,7 @@ public class TagController {
 
     @Autowired
     private PostTagService postTagService;
+
 
     @Autowired
     private UserService userService;
@@ -97,6 +97,12 @@ public class TagController {
         //删除文章标签的关联
         postTagService.removeByTagId(tagId);
 
+
         return CommonReturnType.create(tagId);
+    }
+
+    @GetMapping("/list")
+    public CommonReturnType<List<TagDTO>> lisTagsByUserId() {
+        return CommonReturnType.create(tagService.getListByUserId());
     }
 }

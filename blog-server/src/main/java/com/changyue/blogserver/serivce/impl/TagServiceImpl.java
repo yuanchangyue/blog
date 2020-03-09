@@ -8,6 +8,7 @@ import com.changyue.blogserver.model.dto.UserDTO;
 import com.changyue.blogserver.model.entity.Tag;
 import com.changyue.blogserver.serivce.TagService;
 import com.changyue.blogserver.serivce.UserService;
+import com.changyue.blogserver.utils.ShiroUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
@@ -19,7 +20,6 @@ import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Nonnull;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -147,6 +147,11 @@ public class TagServiceImpl implements TagService {
     public List<TagDTO> getListByPostId(Integer postId) {
         Assert.notNull(postId, "post id 不能为空");
         return tagMapper.listAllByPostId(postId).stream().map(this::convertTo).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<TagDTO> getListByUserId() {
+        return tagMapper.listAllByUserId(ShiroUtils.getUser().getId()).stream().map(this::convertTo).collect(Collectors.toList());
     }
 
     @Override

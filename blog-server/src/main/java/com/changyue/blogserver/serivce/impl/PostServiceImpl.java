@@ -8,6 +8,7 @@ import com.changyue.blogserver.model.dto.TagDTO;
 import com.changyue.blogserver.model.dto.UserDTO;
 import com.changyue.blogserver.model.entity.*;
 import com.changyue.blogserver.model.enums.PostStatus;
+import com.changyue.blogserver.model.params.PostQuery;
 import com.changyue.blogserver.model.vo.PostVO;
 import com.changyue.blogserver.serivce.*;
 import com.github.pagehelper.PageHelper;
@@ -69,20 +70,56 @@ public class PostServiceImpl implements PostService {
         return new PageInfo<>(postVOS, 3);
     }
 
+
+    @Override
+    public PageInfo<PostVO> pageByQuery(Integer pageIndex, Integer pageSize, PostQuery postQuery) {
+
+        Assert.notNull(postQuery, "文章查询条件不能空");
+        Assert.notNull(pageSize, "页数不能为空");
+        Assert.notNull(pageIndex, "页索引不能为空");
+
+        UserDTO currentUser = userService.getCurrentUser();
+
+        PageHelper.startPage(pageIndex, pageSize);
+        List<PostVO> posts = postMapper.listAllByQuery(postQuery, currentUser.getId());
+
+        return new PageInfo<>(posts, 3);
+    }
+
+    @Override
+    public PostVO getByPostId(Integer postId) {
+        return convertTO(postMapper.selectByPrimaryKey(postId).get());
+    }
+
     @Override
     @Transactional
-    public PostVO createBy(Post createdPost, Set<Integer> tagIds, Set<Integer> categoryId) {
+    public PostVO createBy(Post createdPost, Set<Integer> tagIds, Set<Integer> categoryIds) {
 
-        Post post = createOrUpdate(createdPost, tagIds, categoryId);
+        Post post = createOrUpdate(createdPost, tagIds, categoryIds);
         PostVO postVO = new PostVO();
 
         if (post.getId() != null && post.getStatus() != PostStatus.DRAFT.getStatusCode()) {
+
             //清空标签和类别
             postTagService.removeByPostId(post.getId());
             postCategoryService.removeByPostId(post.getId());
 
             List<Tag> tags = tagService.listAllByIds(new ArrayList<>(tagIds));
-            List<Category> categories = categoryService.listAllByIds(new ArrayList<>(categoryId));
+            List<Category> categories = categoryService.listAllByIds(new ArrayList<>(categoryIds));
+
+            //没有选择标签
+            if (tagIds.isEmpty()) {
+                Tag tag = new Tag();
+                tag.setId(0);
+                tags.add(tag);
+            }
+
+            //没有选择类别
+            if (categoryIds.isEmpty()) {
+                Category category = new Category();
+                category.setId(0);
+                categories.add(category);
+            }
 
             //新增post tag
             log.debug("新增post tag : [{}]", tagIds);
@@ -150,6 +187,16 @@ public class PostServiceImpl implements PostService {
         return createOrUpdate(postToUpdate, tagIds, categoryIds);
     }
 
+    @Transactional
+    @Override
+    public void removeInBatch(Collection<Integer> ids) {
+        if (ids.isEmpty()) {
+            return;
+        }
+        //批量删除
+        ids.forEach(this::removeById);
+    }
+
     @Override
     @Transactional(rollbackFor = Exception.class)
     public int removeById(Integer id) {
@@ -164,10 +211,8 @@ public class PostServiceImpl implements PostService {
         log.debug("移除Id为[{}]文章相关联的类别", id);
 
         //移除文章
-        int delete = postMapper.deleteByPrimaryKey(id);
         log.debug("移除Id为[{}]文章", id);
-
-        return delete;
+        return postMapper.deleteByPrimaryKey(id);
     }
 
     @Override

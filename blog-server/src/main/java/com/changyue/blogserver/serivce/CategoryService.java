@@ -71,6 +71,13 @@ public interface CategoryService extends BaseService<Category, Integer> {
     List<CategoryDTO> getListCategoryByPostId(Integer postId);
 
     /**
+     * 通过用户id查询全部
+     *
+     * @return 类别列表
+     */
+    List<CategoryDTO> getListCategoryByUserId();
+
+    /**
      * 装换为DTO
      *
      * @param category 类别不能为空

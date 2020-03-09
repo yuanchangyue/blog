@@ -24,4 +24,11 @@ public class CategoryDTO {
 
     private Date createTime;
 
+
+    public CategoryDTO() {
+    }
+
+    public CategoryDTO(Integer id) {
+        this.id = id;
+    }
 }

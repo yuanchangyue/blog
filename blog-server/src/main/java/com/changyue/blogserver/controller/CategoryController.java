@@ -5,6 +5,7 @@ import com.changyue.blogserver.model.dto.UserDTO;
 import com.changyue.blogserver.model.entity.Category;
 import com.changyue.blogserver.model.entity.UserCategory;
 import com.changyue.blogserver.model.params.CategoryParam;
+import com.changyue.blogserver.model.rep.CommonReturnType;
 import com.changyue.blogserver.serivce.CategoryService;
 import com.changyue.blogserver.serivce.PostCategoryService;
 import com.changyue.blogserver.serivce.UserCategoryService;
@@ -15,6 +16,8 @@ import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author : 袁阊越
@@ -97,6 +100,11 @@ public class CategoryController {
 
         //更新
         categoryService.update(category);
+    }
+
+    @GetMapping("/list")
+    public CommonReturnType<List<CategoryDTO>> listByUserId() {
+        return CommonReturnType.create(categoryService.getListCategoryByUserId());
     }
 }
 

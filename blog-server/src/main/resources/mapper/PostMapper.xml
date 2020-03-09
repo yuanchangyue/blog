@@ -21,25 +21,6 @@
         <result column="user_id" jdbcType="INTEGER" property="userId"/>
     </resultMap>
 
-    <resultMap id="VOResultMap" type="postVO">
-        <id column="id" jdbcType="INTEGER" property="id"/>
-        <result column="disallow_comment" jdbcType="INTEGER" property="disallowComment"/>
-        <result column="edit_time" jdbcType="TIMESTAMP" property="editTime"/>
-        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
-        <result column="likes" jdbcType="BIGINT" property="likes"/>
-        <result column="password" jdbcType="VARCHAR" property="password"/>
-        <result column="status" jdbcType="INTEGER" property="status"/>
-        <result column="summary" jdbcType="VARCHAR" property="summary"/>
-        <result column="thumbnail" jdbcType="VARCHAR" property="thumbnail"/>
-        <result column="title" jdbcType="VARCHAR" property="title"/>
-        <result column="top_priority" jdbcType="INTEGER" property="topPriority"/>
-        <result column="url" jdbcType="VARCHAR" property="url"/>
-        <result column="visits" jdbcType="BIGINT" property="visits"/>
-        <result column="format_content" jdbcType="LONGVARCHAR" property="formatContent"/>
-        <result column="original_content" jdbcType="LONGVARCHAR" property="originalContent"/>
-        <result column="user_id" jdbcType="INTEGER" property="userId"/>
-    </resultMap>
-
     <sql id="Base_Column_List">
         id, disallow_comment, edit_time, create_time,likes, password, status, summary, thumbnail,
         title, top_priority, url, visits ,user_id
@@ -66,16 +47,15 @@
         ,
         <include refid="Blob_Column_List"/>
         from posts
-        where id = #{id,jdbcType=INTEGER}
+        where status = #{status,jdbcType=INTEGER}
     </select>
 
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
-        <include refid="Base_Column_List"/>
-        ,
+        <include refid="Base_Column_List"/>,
         <include refid="Blob_Column_List"/>
         from posts
-        where status = #{status,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
     </select>
 
     <select id="findOneBySelective" parameterType="post" resultMap="BaseResultMap">
@@ -188,6 +168,76 @@
         <where>
             <if test="userId != null">
                 and user_id = #{userId,jdbcType=INTEGER}
+            </if>
+        </where>
+    </select>
+
+    <resultMap id="OVResultMap" type="postVO">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="disallow_comment" jdbcType="INTEGER" property="disallowComment"/>
+        <result column="edit_time" jdbcType="TIMESTAMP" property="editTime"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="likes" jdbcType="BIGINT" property="likes"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="summary" jdbcType="VARCHAR" property="summary"/>
+        <result column="thumbnail" jdbcType="VARCHAR" property="thumbnail"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="top_priority" jdbcType="INTEGER" property="topPriority"/>
+        <result column="url" jdbcType="VARCHAR" property="url"/>
+        <result column="visits" jdbcType="BIGINT" property="visits"/>
+        <result column="format_content" jdbcType="LONGVARCHAR" property="formatContent"/>
+        <result column="original_content" jdbcType="LONGVARCHAR" property="originalContent"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <collection property="categories" javaType="java.util.List" ofType="category">
+            <id column="categoryId" jdbcType="INTEGER" property="id"/>
+            <result column="categoryDescription" jdbcType="VARCHAR" property="description"/>
+            <result column="categoryName" jdbcType="VARCHAR" property="name"/>
+            <result column="categorySlugName" jdbcType="VARCHAR" property="slugName"/>
+        </collection>
+        <collection property="tags" javaType="java.util.List" ofType="tag">
+            <id column="tagId" jdbcType="INTEGER" property="id"/>
+            <result column="tagName" jdbcType="VARCHAR" property="name"/>
+            <result column="tagSlugName" jdbcType="VARCHAR" property="slugName"/>
+        </collection>
+    </resultMap>
+
+    <sql id="Post_Column_List">
+        p.id, p.disallow_comment, p.edit_time, p.likes, p.status, p.summary, p.thumbnail,
+        p.title, p.top_priority, p.url, p.visits ,p.format_content, p.original_content
+    </sql>
+
+    <sql id="Category_Column_List">
+        c.id categoryId, c.description categoryDescription, c.name categoryName, c.slug_name categorySlugName
+    </sql>
+
+    <sql id="Tag_Column_List">
+        t.id tagId, t.name tagName, t.slug_name tagSlugName
+    </sql>
+
+    <select id="listAllByQuery" resultMap="OVResultMap">
+        select
+        <include refid="Post_Column_List"/>,
+        <include refid="Category_Column_List"/>,
+        <include refid="Tag_Column_List"/>
+        from
+        post_categories pc, post_tags pt, tags t,
+        categories c, posts p ,users u
+        <where>
+            u.id = #{userId,jdbcType=INTEGER}
+            and p.user_id = u.id
+            and pc.category_id = c.id
+            and pc.post_id = p.id
+            and pt.post_id = p.id
+            and pt.tag_id = t.id
+            <if test="postQuery.keyWords != null and postQuery.keyWords != ''">
+                and p.title LIKE CONCAT('%',#{postQuery.keyWords},'%')
+            </if>
+            <if test="postQuery.categoryId != null">
+                and pc.category_id = #{postQuery.categoryId,jdbcType=INTEGER}
+            </if>
+            <if test="postQuery.status != null">
+                and p.status = #{postQuery.status,jdbcType=INTEGER}
             </if>
         </where>
     </select>

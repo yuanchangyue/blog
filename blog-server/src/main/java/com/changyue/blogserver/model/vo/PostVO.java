@@ -86,4 +86,7 @@ public class PostVO {
      * 分类集合
      */
     private List<CategoryDTO> categories;
+
+    public PostVO() {
+    }
 }

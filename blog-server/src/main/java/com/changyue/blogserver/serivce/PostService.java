@@ -1,6 +1,8 @@
 package com.changyue.blogserver.serivce;
 
 import com.changyue.blogserver.model.entity.Post;
+import com.changyue.blogserver.model.enums.PostStatus;
+import com.changyue.blogserver.model.params.PostQuery;
 import com.changyue.blogserver.model.vo.PostVO;
 import com.github.pagehelper.PageInfo;
 import org.springframework.lang.NonNull;
@@ -25,6 +27,24 @@ public interface PostService extends BaseService<Post, Integer> {
     PageInfo<PostVO> pageBy(@NonNull Integer pageIndex, @NonNull Integer pageSize);
 
     /**
+     * 分页的文章
+     *
+     * @param pageIndex 页索引
+     * @param pageSize  页数
+     * @param postQuery 文章查询
+     */
+    @NonNull
+    PageInfo<PostVO> pageByQuery(@NonNull Integer pageIndex, @NonNull Integer pageSize, @NonNull PostQuery postQuery);
+
+    /**
+     * 通过id查找文章
+     * @param postId 文章id（条件）
+     * @return
+     */
+    @NonNull
+    PostVO getByPostId(@NonNull Integer postId);
+
+    /**
      * 创建文章
      *
      * @param createdPost 文章内容
@@ -34,7 +54,6 @@ public interface PostService extends BaseService<Post, Integer> {
      */
     @NonNull
     PostVO createBy(@NonNull Post createdPost, Set<Integer> tagIds, Set<Integer> categoryId);
-
 
     /**
      * 按文章，标签ID集和类别ID集更新文章。

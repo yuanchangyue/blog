@@ -68,7 +68,7 @@ public class CustomAccessControlFilter extends AccessControlFilter {
         if ("XMLHttpRequest".equalsIgnoreCase(request.getHeader("X-Requested-With"))) {
             Map<String, String> resultMap = new HashMap<>();
             resultMap.put("code", "300");
-            resultMap.put("data", "会话已经过期，请重新登录！");
+            resultMap.put("data", "登陆已经过期，请重新登录！");
             response.setHeader("Access-Control-Allow-Origin", "http://localhost:8081");
             response.setHeader("Access-Control-Allow-Credentials", "true");
             response.setCharacterEncoding("UTF-8");

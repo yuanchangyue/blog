@@ -73,7 +73,7 @@ public class TagServiceImpl implements TagService {
      */
     @Override
     public List<Tag> listAllByIds(List<Integer> id) {
-        return tagMapper.findTagByIds(id);
+        return tagMapper.listAllTagByIds(id);
     }
 
     /**
@@ -141,6 +141,12 @@ public class TagServiceImpl implements TagService {
     @Override
     public Tag getByName(String name) {
         return tagMapper.findByName(name).orElse(null);
+    }
+
+    @Override
+    public List<TagDTO> getListByIds(List<Integer> ids) {
+        List<Tag> tags = tagMapper.listAllTagByIds(ids);
+        return tags.stream().map(this::convertTo).collect(Collectors.toList());
     }
 
     @Override

@@ -31,13 +31,18 @@ public class PostTagServiceImpl implements PostTagService {
     private TagMapper tagMapper;
 
     @Override
+    public Set<Integer> listTagsByPostId(Integer postId) {
+        return postTagMapper.findAllByPostId(postId);
+    }
+
+    @Override
     public List<Tag> listTags(@NonNull Integer postId) {
 
         Assert.notNull(postId, "文章的id不能为空");
 
         Set<Integer> allByPostId = postTagMapper.findAllByPostId(postId);
 
-        return tagMapper.findTagByIds(new ArrayList<>(allByPostId));
+        return tagMapper.listAllTagByIds(new ArrayList<>(allByPostId));
     }
 
     @Override

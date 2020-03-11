@@ -10,9 +10,9 @@
 #分页
 pagehelper:
   helperDialect: mysql
-  reasonable: true
-  supportMethodsArguments: true
-  params: count=countSql
+#  reasonable: true
+#  supportMethodsArguments: true
+#  params: count=countSql
 
 #数据源
 spring:

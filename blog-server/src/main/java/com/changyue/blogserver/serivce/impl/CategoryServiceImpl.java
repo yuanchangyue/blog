@@ -1,5 +1,6 @@
 package com.changyue.blogserver.serivce.impl;
 
+import com.alibaba.druid.sql.PagerUtils;
 import com.changyue.blogserver.dao.CategoryMapper;
 import com.changyue.blogserver.exception.AlreadyExistsException;
 import com.changyue.blogserver.exception.CreateException;
@@ -10,6 +11,7 @@ import com.changyue.blogserver.model.entity.Category;
 import com.changyue.blogserver.serivce.CategoryService;
 import com.changyue.blogserver.serivce.PostCategoryService;
 import com.changyue.blogserver.serivce.UserService;
+import com.changyue.blogserver.utils.PageInfoUtil;
 import com.changyue.blogserver.utils.ShiroUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -116,9 +118,18 @@ public class CategoryServiceImpl implements CategoryService {
         //分页
         PageHelper.startPage(pageIndex, pageSize);
         List<Category> categoryList = categoryMapper.listAllByUserId(currentUser.getId());
-        List<CategoryDTO> categoryDTOS = convertTo(categoryList);
+        PageInfo<Category> categoryPageInfo = new PageInfo<>(categoryList, 5);
 
-        return new PageInfo<>(categoryDTOS, 3);
+        //创建出DTO列表
+        PageInfo<CategoryDTO> categoryDTOPageInfo = PageInfoUtil.PageInfo2PageInfoDTO(categoryPageInfo);
+
+        //转化为DTO
+        List<CategoryDTO> categoryDTOList = categoryList.stream().map(this::convertTo).collect(Collectors.toList());
+
+        //添加进分页中
+        categoryDTOList.forEach(categoryDTO -> categoryDTOPageInfo.getList().add(categoryDTO));
+
+        return categoryDTOPageInfo;
     }
 
     @Override
@@ -149,6 +160,12 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public List<CategoryDTO> getListCategoryByUserId() {
         return categoryMapper.listAllByUserId(ShiroUtils.getUser().getId()).stream().map(this::convertTo).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<CategoryDTO> getListCategoryByIds(List<Integer> categoryIds) {
+        List<Category> categories = categoryMapper.listCategoryByIds(categoryIds);
+        return categories.stream().map(this::convertTo).collect(Collectors.toList());
     }
 
     @Override

@@ -21,7 +21,7 @@
         from post_categories
     </select>
 
-    <select id="findAllCategoryIdsByPostId" parameterType="java.lang.Integer">
+    <select id="findAllCategoryIdsByPostId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
         select pc.category_id
         from post_categories pc
         where pc.post_id = #{postId,jdbcType=INTEGER}

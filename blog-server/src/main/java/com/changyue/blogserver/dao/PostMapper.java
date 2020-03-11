@@ -36,6 +36,13 @@ public interface PostMapper extends BaseMapper<Post> {
      */
     Long countAllByStatus(@Nonnull Integer status);
 
+    /**
+     * 获得加密密码
+     *
+     * @param postId id
+     * @return 加密密码
+     */
+    String findPasswordById(@Nonnull Integer postId);
 
     /**
      * 通过状态找到全部的文章

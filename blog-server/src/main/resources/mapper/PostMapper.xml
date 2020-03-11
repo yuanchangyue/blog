@@ -58,6 +58,12 @@
         where id = #{id,jdbcType=INTEGER}
     </select>
 
+    <select id="findPasswordById" parameterType="java.lang.Integer" resultType="java.lang.String">
+        select password
+        from posts
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
     <select id="findOneBySelective" parameterType="post" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>,
@@ -382,7 +388,7 @@
             <if test="likes != null">
                 likes = likes + #{likes,jdbcType=BIGINT},
             </if>
-            <if test="password != null">
+            <if test="password != null and password != ''">
                 password = #{password,jdbcType=VARCHAR},
             </if>
             <if test="status != null">

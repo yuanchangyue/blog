@@ -75,8 +75,12 @@
               </el-table>
             </div>
             <el-pagination
-              align="center"
-              layout="prev, pager, next"
+              @current-change="handleCurrentChange"
+              @size-change="handleSizeChange"
+              layout="total, sizes,prev, pager, next"
+              :page-sizes="[5,8,12]"
+              :current-page.sync="currentPage"
+              :page-size="pageSize"
               :total="pageTotal">
             </el-pagination>
           </el-card>
@@ -128,19 +132,26 @@ export default {
       })
     },
     showList () {
-      this.$axios.get('/category', {
-        pageIndex: 1,
-        pageSize: 1
-      }).then(value => {
-        this.tableData = value.data.list
-        this.loading = false
-        this.pageTotal = value.data.total
-        this.pageSize = value.data.pageSize
-        this.currentPage = value.data.pageNum
-        console.info(value.data)
-        console.info(value)
-      }).catch(reason => {
+      this.$axios.get('/category').then(value => {
+        this.setPageValue(value)
+      }).catch(_ => {})
+    },
+    setPageValue (value) {
+      this.loading = false
+      this.tableData = value.data.list
+      this.pageTotal = value.data.total
+      this.pageSize = value.data.pageSize
+      this.currentPage = value.data.pageNum
+    },
+    handleCurrentChange (val) {
+      var page = { pageIndex: val, pageSize: this.pageSize }
+      this.$axios.get('/category', { params: page }).then(value => {
+        this.setPageValue(value)
       })
+    },
+    handleSizeChange (val) {
+      this.pageSize = val
+      this.handleCurrentChange()
     },
     createAndUpdate () {
       var formData = {
@@ -153,15 +164,14 @@ export default {
         this.$axios.post('/category', formData).then(value => {
           this.showMessage('success', '类别添加成功')
           this.showList()
-        }).catch(reason => {
-          console.info(reason)
+        }).catch(_ => {
           this.showMessage('info', '类别添加失败')
         })
       } else {
-        this.$axios.put('/category/' + this.currentCategoryId, formData).then(value => {
+        this.$axios.put('/category/' + this.currentCategoryId, formData).then(_ => {
           this.showMessage('success', '修改标签成功!')
           this.showList()
-        }).catch(reason => {
+        }).catch(_ => {
           this.showMessage('info', '修改失败!')
         })
       }
@@ -194,8 +204,7 @@ export default {
         this.form.slugName = value.data.slugName
         this.form.description = value.data.description
         this.form.parentId = value.data.parentId === 0 ? '' : value.data.parentId
-      }).catch(reason => {
-      })
+      }).catch(_ => {})
     },
     returnInsert () {
       this.title = '新增类别'

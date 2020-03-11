@@ -35,6 +35,7 @@
               </el-form-item>
             </el-form>
             <el-table
+              v-loading="loading"
               ref="multipleTable"
               :data="tableData"
               tooltip-effect="dark"
@@ -118,6 +119,18 @@
                 </template>
               </el-table-column>
             </el-table>
+            <el-pagination
+              align="right"
+              style="margin: 10px 0;"
+              background
+              @current-change="handleCurrentChange"
+              @size-change="handleSizeChange"
+              layout="total, sizes,prev, pager, next"
+              :page-sizes="[5,8,12]"
+              :current-page.sync="currentPage"
+              :page-size="pageSize"
+              :total="pageTotal">
+            </el-pagination>
           </el-card>
         </el-row>
       </div>
@@ -160,16 +173,36 @@ export default {
       }, {
         value: '3',
         label: '加密'
-      }]
+      }],
+      loading: true,
+      pageTotal: '',
+      currentPage: '',
+      pageSize: ''
     }
   },
   methods: {
     showPostList () {
       this.$axios.get('/post').then(value => {
-        console.info(value.data)
-        this.tableData = value.data.list
+        this.setPageValue(value)
       }).catch(_ => {
       })
+    },
+    setPageValue (value) {
+      this.loading = false
+      this.tableData = value.data.list
+      this.pageTotal = value.data.total
+      this.pageSize = value.data.pageSize
+      this.currentPage = value.data.pageNum
+    },
+    handleCurrentChange (val) {
+      var page = { pageIndex: val, pageSize: this.pageSize }
+      this.$axios.get('/post', { params: page }).then(value => {
+        this.setPageValue(value)
+      })
+    },
+    handleSizeChange (val) {
+      this.pageSize = val
+      this.handleCurrentChange()
     },
     showTagList () {
       this.$axios.get('/tag/list').then(value => {
@@ -209,6 +242,14 @@ export default {
     deletePost (id) {
       if (id !== null) {
         this.multipleDelete.push(id)
+      }
+      if (this.multipleDelete.length === 0) {
+        this.$notify({
+          title: '失败',
+          message: '没有选择对象',
+          type: 'error'
+        })
+        return
       }
       this.$confirm('此操作不可逆，确定删除吗？').then(_ => {
         this.$axios.delete('/post', {

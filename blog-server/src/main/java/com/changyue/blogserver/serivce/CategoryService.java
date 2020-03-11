@@ -54,6 +54,7 @@ public interface CategoryService extends BaseService<Category, Integer> {
     @NonNull
     PageInfo<CategoryDTO> list(@NonNull Integer pageIndex, @NonNull Integer pageSize);
 
+
     /**
      * 删除类别同时删除文章类别
      *
@@ -76,6 +77,14 @@ public interface CategoryService extends BaseService<Category, Integer> {
      * @return 类别列表
      */
     List<CategoryDTO> getListCategoryByUserId();
+
+    /**
+     * 通过ids查询类别
+     *
+     * @param categoryIds id集合
+     * @return 类别列表
+     */
+    List<CategoryDTO> getListCategoryByIds(List<Integer> categoryIds);
 
     /**
      * 装换为DTO

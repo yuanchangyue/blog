@@ -4,6 +4,7 @@ import com.changyue.blogserver.dao.PostMapper;
 import com.changyue.blogserver.exception.CreateException;
 import com.changyue.blogserver.exception.NotFindException;
 import com.changyue.blogserver.exception.UpdateException;
+import com.changyue.blogserver.model.dto.CategoryDTO;
 import com.changyue.blogserver.model.dto.TagDTO;
 import com.changyue.blogserver.model.dto.UserDTO;
 import com.changyue.blogserver.model.entity.*;
@@ -11,9 +12,12 @@ import com.changyue.blogserver.model.enums.PostStatus;
 import com.changyue.blogserver.model.params.PostQuery;
 import com.changyue.blogserver.model.vo.PostVO;
 import com.changyue.blogserver.serivce.*;
+import com.changyue.blogserver.utils.PageInfoUtil;
+import com.changyue.blogserver.utils.ShiroUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -58,18 +62,26 @@ public class PostServiceImpl implements PostService {
         Assert.notNull(pageIndex, "页索引不能为空");
         Assert.notNull(pageSize, "页数不能为空");
 
-        UserDTO currentUser = userService.getCurrentUser();
-
+        //分页
         PageHelper.startPage(pageIndex, pageSize);
-        List<Post> posts = postMapper.listAllByUserId(currentUser.getId());
-        List<PostVO> postVOS = this.convertTO(posts);
+        List<Post> posts = postMapper.listAllByUserId(ShiroUtils.getUser().getId());
+        PageInfo<Post> postPageInfo = new PageInfo<>(posts, 3);
+
+        //创建出VO列表
+        PageInfo<PostVO> postVOPageInfo = PageInfoUtil.PageInfo2PageInfoDTO(postPageInfo);
+
+        //转换成VO
+        List<PostVO> postVOS = posts.stream().map(this::convertTO).collect(Collectors.toList());
         for (int i = 0; i < posts.size(); i++) {
             postVOS.get(i).setTags(tagService.getListByPostId(posts.get(i).getId()));
             postVOS.get(i).setCategories(categoryService.getListCategoryByPostId(posts.get(i).getId()));
         }
-        return new PageInfo<>(postVOS, 3);
-    }
 
+        //添加到pageInfo中
+        postVOS.forEach(postVO -> postVOPageInfo.getList().add(postVO));
+
+        return postVOPageInfo;
+    }
 
     @Override
     public PageInfo<PostVO> pageByQuery(Integer pageIndex, Integer pageSize, PostQuery postQuery) {
@@ -88,21 +100,59 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public PostVO getByPostId(Integer postId) {
-        return convertTO(postMapper.selectByPrimaryKey(postId).get());
+
+        //获取类别
+        Set<Integer> categoryIds = postCategoryService.listCategoryPostId(postId);
+        List<CategoryDTO> listCategoryByIds = new ArrayList<>();
+        if (!categoryIds.isEmpty()) {
+            listCategoryByIds = categoryService.getListCategoryByIds(new ArrayList<>(categoryIds));
+        }
+
+        //获取标签
+        Set<Integer> tagsIds = postTagService.listTagsByPostId(postId);
+        List<TagDTO> listByTagIds = new ArrayList<>();
+        if (!tagsIds.isEmpty()) {
+            listByTagIds = tagService.getListByIds(new ArrayList<>(tagsIds));
+        }
+
+        //合并
+        PostVO postVO = this.convertTO(postMapper.selectByPrimaryKey(postId).orElse(null));
+        postVO.setCategories(listCategoryByIds);
+        postVO.setTags(listByTagIds);
+
+        return postVO;
+    }
+
+    @Override
+    public String getPasswordById(Integer postId) {
+        return null;
     }
 
     @Override
     @Transactional
     public PostVO createBy(Post createdPost, Set<Integer> tagIds, Set<Integer> categoryIds) {
+        return createOrUpdateBy(tagIds, categoryIds, createdPost);
+    }
 
-        Post post = createOrUpdate(createdPost, tagIds, categoryIds);
+    /**
+     * 处理文章分类和标签
+     *
+     * @param tagIds      标签的id集合
+     * @param categoryIds 分类的id集合
+     * @param post        文章
+     * @return 文章视图层
+     */
+    private PostVO createOrUpdateBy(Set<Integer> tagIds, Set<Integer> categoryIds, Post post) {
+
+        Post createdOrUpdate = this.createOrUpdate(post);
         PostVO postVO = new PostVO();
 
-        if (post.getId() != null && post.getStatus() != PostStatus.DRAFT.getStatusCode()) {
+        if (createdOrUpdate.getId() != null && createdOrUpdate.getStatus() != PostStatus.DRAFT.getStatusCode()) {
+
 
             //清空标签和类别
-            postTagService.removeByPostId(post.getId());
-            postCategoryService.removeByPostId(post.getId());
+            postTagService.removeByPostId(createdOrUpdate.getId());
+            postCategoryService.removeByPostId(createdOrUpdate.getId());
 
             List<Tag> tags = tagService.listAllByIds(new ArrayList<>(tagIds));
             List<Category> categories = categoryService.listAllByIds(new ArrayList<>(categoryIds));
@@ -124,14 +174,14 @@ public class PostServiceImpl implements PostService {
             //新增post tag
             log.debug("新增post tag : [{}]", tagIds);
             postTagService.createInBatch(tags.stream().map(tag ->
-                    new PostTag(post.getId(), tag.getId())).collect(Collectors.toList()));
+                    new PostTag(createdOrUpdate.getId(), tag.getId())).collect(Collectors.toList()));
 
             //新增post category
             log.debug("新增post category : [{}]", categories);
             postCategoryService.createInBatch(categories.stream().map(category ->
-                    new PostCategory(category.getId(), post.getId())).collect(Collectors.toList()));
+                    new PostCategory(category.getId(), createdOrUpdate.getId())).collect(Collectors.toList()));
 
-            BeanUtils.copyProperties(post, postVO);
+            BeanUtils.copyProperties(createdOrUpdate, postVO);
             postVO.setCategories(categoryService.convertTo(categories));
             postVO.setTags(tagService.convertTo(tags));
 
@@ -141,8 +191,7 @@ public class PostServiceImpl implements PostService {
         return postVO;
     }
 
-    private Post createOrUpdate(Post post, Set<Integer> tagIds, Set<Integer> categoryId) {
-
+    private Post createOrUpdate(Post post) {
         Assert.notNull(post, "文章的参数不能为空");
 
         //设置状态
@@ -157,11 +206,16 @@ public class PostServiceImpl implements PostService {
 
         post.setEditTime(new Date());
 
+        return update(post);
+    }
+
+    @Override
+    public Post update(Post post) {
+        Assert.notNull(post, "文章不能为空");
         //更新文章
         if (postMapper.updateByPrimaryKeySelective(post) <= 0) {
             throw new UpdateException("文章更新失败");
         }
-
         return post;
     }
 
@@ -178,17 +232,18 @@ public class PostServiceImpl implements PostService {
         if (effectNum <= 0) {
             throw new CreateException("文章创建失败").setErrData(post);
         }
+
         return post;
     }
 
     @Override
     @Transactional
-    public Post updateBy(Post postToUpdate, Set<Integer> tagIds, Set<Integer> categoryIds) {
-        return createOrUpdate(postToUpdate, tagIds, categoryIds);
+    public PostVO updateBy(Post postToUpdate, Set<Integer> tagIds, Set<Integer> categoryIds) {
+        return createOrUpdateBy(tagIds, categoryIds, postToUpdate);
     }
 
-    @Transactional
     @Override
+    @Transactional
     public void removeInBatch(Collection<Integer> ids) {
         if (ids.isEmpty()) {
             return;

@@ -13,7 +13,7 @@
         id, name, slug_name, user_id
     </sql>
 
-    <select id="findTagByIds" parameterType="java.util.ArrayList" resultMap="BaseResultMap">
+    <select id="listAllTagByIds" parameterType="java.util.ArrayList" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from tags

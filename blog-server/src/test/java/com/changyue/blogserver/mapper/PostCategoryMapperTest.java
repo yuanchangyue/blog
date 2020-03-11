@@ -36,4 +36,9 @@ public class PostCategoryMapperTest {
 
     }
 
+    @Test
+    public void test() {
+        postCategoryMapper.findAllCategoryIdsByPostId(26).forEach(System.out::println);
+    }
+
 }

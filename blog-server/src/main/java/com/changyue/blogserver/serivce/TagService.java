@@ -35,6 +35,14 @@ public interface TagService extends BaseService<Tag, Integer> {
     Tag getByName(@NonNull String tagName);
 
     /**
+     * 通过ids查询全部list
+     *
+     * @param ids id合集
+     * @return 标签列表
+     */
+    List<TagDTO> getListByIds(List<Integer> ids);
+
+    /**
      * 通过文章Id查找标签类别
      *
      * @param postId 文章id

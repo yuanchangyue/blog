@@ -15,7 +15,7 @@
         id, create_time, deleted, update_time, post_id, tag_id
     </sql>
 
-    <select id="findAllByPostId" parameterType="java.lang.Integer">
+    <select id="findAllByPostId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
         select pt.tag_id
         from post_tags pt
         where pt.post_id = #{postId}

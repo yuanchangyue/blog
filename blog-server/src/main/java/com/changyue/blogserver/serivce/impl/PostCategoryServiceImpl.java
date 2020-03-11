@@ -30,14 +30,11 @@ public class PostCategoryServiceImpl implements PostCategoryService {
     private CategoryMapper categoryMapper;
 
     @Override
-    public List<Category> listCategoryPostId(Integer postId) {
+    public Set<Integer> listCategoryPostId(Integer postId) {
 
         Assert.notNull(postId, "文章id不能为空");
 
-        Set<Integer> categoryIds = postCategoryMapper.findAllCategoryIdsByPostId(postId);
-
-        return categoryMapper.listCategoryByIds(new ArrayList<>(categoryIds));
-
+        return postCategoryMapper.findAllCategoryIdsByPostId(postId);
     }
 
     @Override

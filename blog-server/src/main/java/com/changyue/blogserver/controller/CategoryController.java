@@ -46,7 +46,7 @@ public class CategoryController {
 
     @GetMapping
     public PageInfo<CategoryDTO> listCategory(@RequestParam(name = "pageIndex", defaultValue = "1") Integer pageIndex,
-                                              @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize) {
+                                              @RequestParam(name = "pageSize", defaultValue = "5") Integer pageSize) {
         return categoryService.list(pageIndex, pageSize);
     }
 

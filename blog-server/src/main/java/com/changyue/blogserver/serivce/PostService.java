@@ -38,11 +38,20 @@ public interface PostService extends BaseService<Post, Integer> {
 
     /**
      * 通过id查找文章
+     *
      * @param postId 文章id（条件）
      * @return
      */
     @NonNull
     PostVO getByPostId(@NonNull Integer postId);
+
+    /**
+     * 获得password通过id
+     *
+     * @param postId id
+     * @return 加密密码
+     */
+    String getPasswordById(@NonNull Integer postId);
 
     /**
      * 创建文章
@@ -55,6 +64,7 @@ public interface PostService extends BaseService<Post, Integer> {
     @NonNull
     PostVO createBy(@NonNull Post createdPost, Set<Integer> tagIds, Set<Integer> categoryId);
 
+
     /**
      * 按文章，标签ID集和类别ID集更新文章。
      *
@@ -64,7 +74,7 @@ public interface PostService extends BaseService<Post, Integer> {
      * @return 更新的文章
      */
     @NonNull
-    Post updateBy(@NonNull Post postToUpdate, Set<Integer> tagIds, Set<Integer> categoryIds);
+    PostVO updateBy(@NonNull Post postToUpdate, Set<Integer> tagIds, Set<Integer> categoryIds);
 
     /**
      * 按文章状态和网址获取文章。

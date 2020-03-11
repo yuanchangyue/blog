@@ -10,12 +10,11 @@ import com.changyue.blogserver.serivce.PostService;
 import com.changyue.blogserver.validator.ValidatorImpl;
 import com.changyue.blogserver.validator.ValidatorResult;
 import com.github.pagehelper.PageInfo;
-import javafx.beans.binding.ObjectExpression;
 import lombok.extern.slf4j.Slf4j;
+import org.omg.CORBA.COMM_FAILURE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -36,20 +35,27 @@ public class PostController {
     @Autowired
     private ValidatorImpl validator;
 
+    @GetMapping
+    public PageInfo<PostVO> listPost(@RequestParam(name = "pageIndex", defaultValue = "1") Integer pageIndex,
+                                     @RequestParam(name = "pageSize", defaultValue = "5") Integer pageSize) {
+        return postService.pageBy(pageIndex, pageSize);
+    }
+
+    @GetMapping("/{postId}")
+    public CommonReturnType<Object> getPost(@PathVariable("postId") Integer postId) {
+        //按照postId查找
+        PostVO byPostId = postService.getByPostId(postId);
+        return CommonReturnType.create(byPostId);
+    }
+
     @PostMapping
     public PostVO createBy(@RequestBody PostParam postParam) {
         ValidatorResult result = this.validator.validator(postParam);
         if (result.isHasError()) {
-            log.debug("创建tag失败[{}]", result.getErrorMsgMap());
-            throw new CreateException("创建tag失败:" + result.getErrMsg());
+            log.debug("创建post失败[{}]", result.getErrorMsgMap());
+            throw new CreateException("创建post失败:" + result.getErrMsg());
         }
         return postService.createBy(postParam.convertTo(), postParam.getTagIds(), postParam.getCategoryIds());
-    }
-
-    @GetMapping
-    public PageInfo<PostVO> listPost(@RequestParam(name = "pageIndex", defaultValue = "1") Integer pageIndex,
-                                     @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize) {
-        return postService.pageBy(pageIndex, pageSize);
     }
 
     @PostMapping("/query")
@@ -74,11 +80,22 @@ public class PostController {
         return CommonReturnType.create("文章删除成功");
     }
 
-    @GetMapping("/{postId}")
-    public CommonReturnType<Object> getPost(@PathVariable("postId")Integer postId) {
-        //按照postId查找
-        PostVO byPostId = postService.getByPostId(postId);
-        return CommonReturnType.create(byPostId);
+    @PutMapping("/{postId}")
+    public CommonReturnType<Object> modifyPost(@PathVariable("postId") Integer postId,
+                                               @RequestBody PostParam postParam) {
+
+        ValidatorResult result = this.validator.validator(postParam);
+        if (result.isHasError()) {
+            log.debug("修改post失败[{}]", result.getErrorMsgMap());
+            throw new CreateException("修改post失败:" + result.getErrMsg());
+        }
+        //转化为文章入参，转化为文章类型，并设置上Id
+        Post postToUpdate = postParam.convertTo();
+        postToUpdate.setId(postId);
+
+        postService.updateBy(postToUpdate, postParam.getTagIds(), postParam.getCategoryIds());
+
+        return CommonReturnType.create("更新成功");
     }
 
 }

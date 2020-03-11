@@ -35,4 +35,9 @@ public class PostTagMapperTest {
         postTagMapper.insetInBatch(collect);
     }
 
+    @Test
+    public  void test() {
+        postTagMapper.findAllByPostId(26).forEach(System.out::println);
+    }
+
 }

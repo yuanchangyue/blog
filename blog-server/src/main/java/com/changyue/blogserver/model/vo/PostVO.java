@@ -87,6 +87,4 @@ public class PostVO {
      */
     private List<CategoryDTO> categories;
 
-    public PostVO() {
-    }
 }

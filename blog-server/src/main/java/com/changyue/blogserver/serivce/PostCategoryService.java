@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author : 袁阊越
@@ -26,7 +27,7 @@ public interface PostCategoryService extends BaseService<PostCategory, Integer> 
      * @return 类别列表
      */
     @NonNull
-    List<Category> listCategoryPostId(@NonNull Integer postId);
+    Set<Integer> listCategoryPostId(@NonNull Integer postId);
 
     /**
      * 通过类别id 查询全部的文章

@@ -2,7 +2,6 @@ package com.changyue.blogserver.mapper;
 
 import com.changyue.blogserver.dao.TagMapper;
 import com.changyue.blogserver.model.entity.Tag;
-import org.elasticsearch.action.get.TransportGetAction;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * @author : 袁阊越
@@ -47,7 +45,7 @@ public class TagMapperTest {
         collect.add(39);
         collect.add(40);
 
-        List<Tag> tagByIds = tagMapper.findTagByIds(collect);
+        List<Tag> tagByIds = tagMapper.listAllTagByIds(collect);
         tagByIds.forEach(System.out::println);
     }
 

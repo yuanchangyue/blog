@@ -2,6 +2,8 @@ package com.changyue.blogserver.mapper;
 
 import com.changyue.blogserver.dao.CategoryMapper;
 import com.changyue.blogserver.model.entity.Category;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +34,10 @@ public class CategoryMapperTest {
 
     @Test
     public void testListCategoryByPostId() {
-        List<Category> categoryList = categoryMapper.listCategoryByPostId(7);
-        categoryList.forEach(System.out::println);
+        PageHelper.startPage(1, 5);
+        List<Category> categoryList = categoryMapper.listAllByUserId(13);
+        PageInfo<Category> pageInfo = new PageInfo<>(categoryList);
+        System.out.println(pageInfo);
     }
 
     @Test

@@ -1,20 +1,12 @@
 package com.changyue.blogserver.controller;
 
-import com.changyue.blogserver.exception.CreateException;
+import com.changyue.blogserver.handler.Result;
 import com.changyue.blogserver.model.dto.TagDTO;
-import com.changyue.blogserver.model.dto.UserDTO;
-import com.changyue.blogserver.model.entity.Category;
 import com.changyue.blogserver.model.entity.Tag;
 import com.changyue.blogserver.model.params.TagParam;
-import com.changyue.blogserver.model.rep.CommonReturnType;
 import com.changyue.blogserver.serivce.*;
-import com.changyue.blogserver.serivce.impl.UserServiceImpl;
-import com.changyue.blogserver.validator.ValidatorImpl;
-import com.changyue.blogserver.validator.ValidatorResult;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -37,31 +29,15 @@ public class TagController {
     private PostTagService postTagService;
 
 
-    @Autowired
-    private UserService userService;
-
-    @Autowired
-    private ValidatorImpl validator;
-
     @GetMapping
     public List<TagDTO> listTags() {
         return tagService.convertTo(tagService.listAll());
     }
 
     @PostMapping
-    public TagDTO createTag(@RequestBody TagParam tagParam) {
-
-        ValidatorResult result = this.validator.validator(tagParam);
-        if (result.isHasError()) {
-            log.debug("创建tag失败[{}]", result.getErrorMsgMap());
-            throw new CreateException("创建tag失败:" + result.getErrMsg());
-        }
+    public TagDTO createTag(@Valid @RequestBody TagParam tagParam) {
 
         Tag tag = tagParam.convertTo();
-
-        UserDTO currentUser = userService.getCurrentUser();
-
-        tag.setUserId(currentUser.getId());
 
         Tag createdTag = tagService.create(tag);
 
@@ -89,7 +65,7 @@ public class TagController {
     }
 
     @DeleteMapping("/{tagTag}")
-    public CommonReturnType<Integer> deleteTag(@PathVariable("tagTag") Integer tagId) {
+    public Result deleteTag(@PathVariable("tagTag") Integer tagId) {
 
         //删除tag
         tagService.removeById(tagId);
@@ -97,12 +73,11 @@ public class TagController {
         //删除文章标签的关联
         postTagService.removeByTagId(tagId);
 
-
-        return CommonReturnType.create(tagId);
+        return Result.create(tagId);
     }
 
     @GetMapping("/list")
-    public CommonReturnType<List<TagDTO>> lisTagsByUserId() {
-        return CommonReturnType.create(tagService.getListByUserId());
+    public Result lisTagsByUserId() {
+        return Result.create(tagService.getListByUserId());
     }
 }

@@ -11,6 +11,7 @@
               </el-form-item>
               <el-form-item label="状态">
                 <el-select v-model="form.status" placeholder="文章状态">
+                  <el-option value="">全部</el-option>
                   <el-option
                     v-for="item in options"
                     :key="item.value"
@@ -20,6 +21,7 @@
               </el-form-item>
               <el-form-item label="文章分类">
                 <el-select v-model="form.categoryId" placeholder="文章分类">
+                  <el-option value="">全部</el-option>
                   <el-option v-for="item in categoryData"
                              :key="item.id"
                              :label="item.name"
@@ -47,9 +49,12 @@
                 width="80">
               </el-table-column>
               <el-table-column
-                prop="title"
                 label="标题"
                 width="120">
+                <template slot-scope="scope">
+                  <span v-if="scope.row.status===2" v-bind:style="titleColor">{{scope.row.title}}</span>
+                  <span v-else>{{scope.row.title}}</span>
+                </template>
               </el-table-column>
               <el-table-column
                 label="状态"
@@ -110,12 +115,13 @@
               </el-table-column>
               <el-table-column
                 prop="address"
-                label="操作"
-                show-overflow-tooltip>
+                label="操作">
                 <template slot-scope="scope">
-                <el-link type="primary" @click="updatePost(scope.row.id)">编辑</el-link>
-                <span class="divider">|</span>
-                <el-link type="primary" @click="deletePost(scope.row.id)">删除</el-link>
+                  <el-link type="primary" @click="updatePost(scope.row.id)">编辑</el-link>
+                  <el-divider v-if="scope.row.status!==2" direction="vertical"></el-divider>
+                  <el-link v-if="scope.row.status!==2" type="primary" @click="putIntoTrash(scope.row.id)">回收站</el-link>
+                  <el-divider direction="vertical"></el-divider>
+                  <el-link type="primary" @click="deletePost(scope.row.id)">删除</el-link>
                 </template>
               </el-table-column>
             </el-table>
@@ -175,9 +181,11 @@ export default {
         label: '加密'
       }],
       loading: true,
-      pageTotal: '',
-      currentPage: '',
-      pageSize: ''
+      pageTotal: 0,
+      currentPage: 0,
+      pageSize: 0,
+      titleColor: 'color:#e1e1e1',
+      statusCode: 2
     }
   },
   methods: {
@@ -244,11 +252,7 @@ export default {
         this.multipleDelete.push(id)
       }
       if (this.multipleDelete.length === 0) {
-        this.$notify({
-          title: '失败',
-          message: '没有选择对象',
-          type: 'error'
-        })
+        this.$notify('没有选择对象')
         return
       }
       this.$confirm('此操作不可逆，确定删除吗？').then(_ => {
@@ -262,19 +266,11 @@ export default {
         }).then(_ => {
           this.multipleDelete = []
           if (_.data.code === 200) {
-            this.$notify({
-              title: '成功',
-              message: '文章已经移至删除',
-              type: 'success'
-            })
+            this.$notify.success('文章已经移至删除')
             this.showPostList()
           }
         }).catch(_ => {
-          this.$notify({
-            title: '失败',
-            message: '文章删除失败',
-            type: 'error'
-          })
+          this.$notify.error('文章删除失败')
         })
       })
     },
@@ -287,6 +283,13 @@ export default {
     },
     updatePost (id) {
       this.$router.push({ name: 'post', params: { postId: id } })
+    },
+    putIntoTrash (id) {
+      var data = { postId: id, status: 2 }
+      this.$axios.post('/post/status', this.$qs.stringify(data)).then(_ => {
+        this.$notify.success('移至回收站')
+        this.showPostList()
+      })
     }
   },
   mounted () {

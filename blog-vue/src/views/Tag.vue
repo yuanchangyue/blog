@@ -72,19 +72,10 @@ export default {
     }
   },
   methods: {
-    showMessage: function (type, messageStr) {
-      this.$message({
-        type: type,
-        message: messageStr
-      })
-    },
     showTagList () {
       this.$axios.get('/tag').then(res => {
-        console.info(res.data)
         this.items = res.data
-      }).catch(() => {
-        this.showMessage('error', '网络错误')
-      })
+      }).catch(_ => {})
     },
     handleClose (tag) {
       this.$confirm('此操作将永久删除该标签, 是否继续?', '提示', {
@@ -93,13 +84,13 @@ export default {
         type: 'warning'
       }).then(() => {
         this.$axios.delete('/tag/' + tag.id).then(() => {
-          this.showMessage('success', '删除成功')
+          this.$notify.success('删除成功')
           this.items.splice(this.items.indexOf(tag), 1)
         }).catch(() => {
-          this.showMessage('info', '已取消删除')
+          this.$notify.info('已取消删除')
         })
       }).catch(() => {
-        this.showMessage('info', '已取消删除')
+        this.$notify.error('已取消删除')
       })
     },
     update (tagId) {
@@ -110,7 +101,7 @@ export default {
         this.button = '更新'
         this.isInsert = false
         this.currentTagId = tagId
-      }).catch(reason => {
+      }).catch(_ => {
       })
     },
     returnInsert () {
@@ -127,17 +118,13 @@ export default {
       }
       if (this.isInsert) {
         this.$axios.post('/tag', formData).then(value => {
-          this.showMessage('success', '新增' + value.data.name + '标签成功!')
+          this.$notify.success('新增' + value.data.name + '标签成功!')
           this.showTagList()
-        }).catch(reason => {
-          this.showMessage('info', '新增失败!')
-        })
+        }).catch(_ => {})
       } else {
-        this.$axios.put('/tag/' + this.currentTagId, formData).then(value => {
-          this.showMessage('success', '修改标签成功!')
-        }).catch(reason => {
-          this.showMessage('info', '修改失败!')
-        })
+        this.$axios.put('/tag/' + this.currentTagId, formData).then(_ => {
+          this.$notify.success('修改标签成功!')
+        }).catch(_ => {})
       }
     }
   }

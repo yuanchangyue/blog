@@ -445,4 +445,10 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
 
+
+    <update id="updateStatus">
+        update posts
+        set status = #{status}
+        where id = #{postId,jdbcType=INTEGER}
+    </update>
 </mapper>

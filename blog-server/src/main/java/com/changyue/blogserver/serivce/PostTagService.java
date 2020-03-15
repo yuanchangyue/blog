@@ -2,7 +2,7 @@ package com.changyue.blogserver.serivce;
 
 import com.changyue.blogserver.model.entity.PostTag;
 import com.changyue.blogserver.model.entity.Tag;
-import org.omg.CORBA.INTERNAL;
+import com.changyue.blogserver.serivce.base.BaseService;
 import org.springframework.lang.NonNull;
 
 import java.util.List;

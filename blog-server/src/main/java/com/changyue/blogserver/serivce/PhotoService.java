@@ -3,10 +3,11 @@ package com.changyue.blogserver.serivce;
 import com.changyue.blogserver.model.dto.PhotoDTO;
 import com.changyue.blogserver.model.entity.Photo;
 import com.changyue.blogserver.model.params.PhotoParam;
+import com.changyue.blogserver.model.rep.UploadResult;
+import com.changyue.blogserver.serivce.base.BaseService;
 import com.github.pagehelper.PageInfo;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.lang.NonNull;
+import org.springframework.web.multipart.MultipartFile;
 
 
 import java.util.List;
@@ -52,5 +53,12 @@ public interface PhotoService extends BaseService<Photo, Integer> {
     @NonNull
     PageInfo<PhotoDTO> pageDtos(@NonNull Integer pageIndex, @NonNull Integer pageSize);
 
+    /**
+     * 上传图  片
+     *
+     * @param file 文件
+     */
+    @NonNull
+    UploadResult upload(@NonNull MultipartFile file);
 
 }

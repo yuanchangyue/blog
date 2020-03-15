@@ -20,7 +20,7 @@ import java.util.Set;
 public class PostParam implements InputConvert<Post> {
 
     @NotBlank(message = "文章标题不能为空")
-    @Size(max = 32, message = "文章标题的字符长度不能超过 {max}")
+    @Size(max = 100, message = "文章标题的字符长度不能超过 {max}")
     private String title;
 
     private Integer status;

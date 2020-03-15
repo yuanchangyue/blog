@@ -1,15 +1,14 @@
 package com.changyue.blogserver.serivce;
 
-import com.changyue.blogserver.model.entity.Category;
 import com.changyue.blogserver.model.entity.Post;
 import com.changyue.blogserver.model.entity.PostCategory;
+import com.changyue.blogserver.serivce.base.BaseService;
 import com.github.pagehelper.PageInfo;
 
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -48,15 +47,6 @@ public interface PostCategoryService extends BaseService<PostCategory, Integer> 
      */
     @NonNull
     List<Post> listPostByCategoryIdAndStatus(@NonNull Integer categoryId, @NonNull Integer status);
-
-    /**
-     * 按类别信息名称命名(分页)。
-     *
-     * @param categoryId 类别ID不能为null
-     * @return 文章页面
-     */
-    @NonNull
-    PageInfo<Post> pagePostBy(@NonNull Integer categoryId);
 
     /**
      * 通过帖子ID删除文章类别。

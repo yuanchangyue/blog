@@ -53,6 +53,7 @@ public class ShiroConfig {
 
         map.put("/#/api/**", "authc");
         map.put("/api/**", "authc");
+        map.put("/upload/**", "authc");
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(map);
 

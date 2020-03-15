@@ -1,8 +1,7 @@
 package com.changyue.blogserver.serivce;
 
 import com.changyue.blogserver.model.entity.UserCategory;
-
-import java.util.List;
+import com.changyue.blogserver.serivce.base.BaseService;
 
 /**
  * @author : 袁阊越

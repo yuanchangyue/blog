@@ -43,14 +43,13 @@ export default {
         username: this.form.name,
         password: this.form.password
       }
-      this.$axios.post('/user/login', formData).then(value => {
-        console.info(value)
-        this.$message({
-          message: this.form.name + '登陆成功',
-          type: 'success'
-        })
-        this.$router.push('/home')
-      }).catch(reason => {})
+      this.$axios.post('/user/login', formData).then(_ => {
+        console.info(_)
+        this.$notify.success(this.form.name + '登陆成功')
+        this.$router.push('/postlist')
+      }).catch(err => {
+        this.$message.error('登陆失败， 原因：' + err.data.msg)
+      })
     }
   }
 }

@@ -60,16 +60,6 @@ public class PostCategoryServiceImpl implements PostCategoryService {
         return null;
     }
 
-    @Override
-    public PageInfo<Post> pagePostBy(Integer categoryId) {
-
-        Assert.notNull(categoryId, "类别ID不能为空");
-
-
-        Set<Integer> postIds = postCategoryMapper.findAllPostIdsByCategoryId(categoryId);
-
-        return null;
-    }
 
     @Override
     public int removeByPostId(Integer postId) {

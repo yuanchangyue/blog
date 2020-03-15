@@ -2,8 +2,8 @@ package com.changyue.blogserver.serivce;
 
 import com.changyue.blogserver.model.dto.CategoryDTO;
 import com.changyue.blogserver.model.entity.Category;
+import com.changyue.blogserver.serivce.base.BaseService;
 import com.github.pagehelper.PageInfo;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 import org.springframework.transaction.annotation.Transactional;
@@ -52,8 +52,7 @@ public interface CategoryService extends BaseService<Category, Integer> {
      * @return 分页类别
      */
     @NonNull
-    PageInfo<CategoryDTO> list(@NonNull Integer pageIndex, @NonNull Integer pageSize);
-
+    PageInfo<CategoryDTO> pageBy(@NonNull Integer pageIndex, @NonNull Integer pageSize);
 
     /**
      * 删除类别同时删除文章类别
@@ -77,6 +76,13 @@ public interface CategoryService extends BaseService<Category, Integer> {
      * @return 类别列表
      */
     List<CategoryDTO> getListCategoryByUserId();
+
+    /**
+     * 通过用户id查询一级目录
+     *
+     * @return 类别列表
+     */
+    List<CategoryDTO> getListCategoryByNull();
 
     /**
      * 通过ids查询类别

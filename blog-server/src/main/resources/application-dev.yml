@@ -32,6 +32,11 @@ spring:
     restart:
       enabled: true
       additional-paths: src/main/java
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 10MB
 
 #mybatis
 mybatis:
@@ -42,5 +47,3 @@ mybatis:
     map-underscore-to-camel-case: true
     #开启sql日志
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-
-

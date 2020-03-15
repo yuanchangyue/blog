@@ -21,7 +21,7 @@
               <el-form-item label="父级类别">
                 <el-select v-model="form.parentId" clearable style="width: 100%;" size="small" placeholder="请选择类别">
                   <el-option
-                    v-for="item in tableData"
+                    v-for="item in parentCategoryDate"
                     :key="item.id"
                     :label="item.name"
                     :value="item.id">
@@ -114,23 +114,19 @@ export default {
         description: '',
         parentId: ''
       },
+      parentCategoryDate: [],
       tableData: [],
       loading: true,
-      pageTotal: '',
-      currentPage: '',
-      pageSize: ''
+      pageTotal: 0,
+      currentPage: 0,
+      pageSize: 0
     }
   },
   mounted () {
     this.showList()
+    this.showParentCategory()
   },
   methods: {
-    showMessage: function (type, messageStr) {
-      this.$message({
-        type: type,
-        message: messageStr
-      })
-    },
     showList () {
       this.$axios.get('/category').then(value => {
         this.setPageValue(value)
@@ -161,19 +157,15 @@ export default {
         parentId: this.form.parentId
       }
       if (this.isInsert) {
-        this.$axios.post('/category', formData).then(value => {
-          this.showMessage('success', '类别添加成功')
+        this.$axios.post('/category', formData).then(_ => {
+          this.$notify.success('类别添加成功')
           this.showList()
-        }).catch(_ => {
-          this.showMessage('info', '类别添加失败')
-        })
+        }).catch(_ => {})
       } else {
         this.$axios.put('/category/' + this.currentCategoryId, formData).then(_ => {
-          this.showMessage('success', '修改标签成功!')
+          this.$notify.success('修改标签成功!')
           this.showList()
-        }).catch(_ => {
-          this.showMessage('info', '修改失败!')
-        })
+        }).catch(_ => {})
       }
     },
     handleDelete (index) {
@@ -184,7 +176,7 @@ export default {
         type: 'warning'
       }).then(() => {
         this.$axios.delete('/category/' + id).then(() => {
-          this.showMessage('success', '删除成功')
+          this.$notify.success('删除成功')
           this.tableData.splice(index, 1)
         }).catch(() => {
           this.showMessage('info', '已取消删除')
@@ -216,6 +208,11 @@ export default {
       this.form.description = ''
       this.form.parentId = ''
       this.isInsert = true
+    },
+    showParentCategory () {
+      this.$axios.get('/category/parent').then(value => {
+        this.parentCategoryDate = value.data.data
+      })
     }
   }
 }

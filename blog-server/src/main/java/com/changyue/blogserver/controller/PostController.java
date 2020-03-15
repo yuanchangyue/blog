@@ -1,20 +1,18 @@
 package com.changyue.blogserver.controller;
 
-import com.changyue.blogserver.exception.CreateException;
+import com.changyue.blogserver.handler.Result;
 import com.changyue.blogserver.model.entity.Post;
+import com.changyue.blogserver.model.enums.ResultStatus;
 import com.changyue.blogserver.model.params.PostParam;
 import com.changyue.blogserver.model.params.PostQuery;
-import com.changyue.blogserver.model.rep.CommonReturnType;
 import com.changyue.blogserver.model.vo.PostVO;
 import com.changyue.blogserver.serivce.PostService;
-import com.changyue.blogserver.validator.ValidatorImpl;
-import com.changyue.blogserver.validator.ValidatorResult;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
-import org.omg.CORBA.COMM_FAILURE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -32,9 +30,6 @@ public class PostController {
     @Autowired
     private PostService postService;
 
-    @Autowired
-    private ValidatorImpl validator;
-
     @GetMapping
     public PageInfo<PostVO> listPost(@RequestParam(name = "pageIndex", defaultValue = "1") Integer pageIndex,
                                      @RequestParam(name = "pageSize", defaultValue = "5") Integer pageSize) {
@@ -42,20 +37,14 @@ public class PostController {
     }
 
     @GetMapping("/{postId}")
-    public CommonReturnType<Object> getPost(@PathVariable("postId") Integer postId) {
+    public Result getPost(@PathVariable("postId") Integer postId) {
         //按照postId查找
-        PostVO byPostId = postService.getByPostId(postId);
-        return CommonReturnType.create(byPostId);
+        return Result.create(postService.getByPostId(postId));
     }
 
     @PostMapping
-    public PostVO createBy(@RequestBody PostParam postParam) {
-        ValidatorResult result = this.validator.validator(postParam);
-        if (result.isHasError()) {
-            log.debug("创建post失败[{}]", result.getErrorMsgMap());
-            throw new CreateException("创建post失败:" + result.getErrMsg());
-        }
-        return postService.createBy(postParam.convertTo(), postParam.getTagIds(), postParam.getCategoryIds());
+    public Result createBy(@Valid @RequestBody PostParam postParam) {
+        return Result.create(postService.createBy(postParam.convertTo(), postParam.getTagIds(), postParam.getCategoryIds()));
     }
 
     @PostMapping("/query")
@@ -69,33 +58,33 @@ public class PostController {
     }
 
     @DeleteMapping
-    public CommonReturnType<Object> deletePost(@RequestParam(name = "multipleDelete") Integer[] multipleDelete) {
+    public Result deletePost(@RequestParam(name = "multipleDelete") Integer[] multipleDelete) {
 
         //去重复，装化成list
         List<Integer> multipleDeleteList = Arrays.stream(multipleDelete).distinct().collect(Collectors.toList());
-
         //执行删除
         postService.removeInBatch(multipleDeleteList);
 
-        return CommonReturnType.create("文章删除成功");
+        return Result.create(ResultStatus.OPERATION_SUCCESS);
     }
 
     @PutMapping("/{postId}")
-    public CommonReturnType<Object> modifyPost(@PathVariable("postId") Integer postId,
-                                               @RequestBody PostParam postParam) {
+    public Result modifyPost(@PathVariable("postId") Integer postId,
+                             @Valid @RequestBody PostParam postParam) {
 
-        ValidatorResult result = this.validator.validator(postParam);
-        if (result.isHasError()) {
-            log.debug("修改post失败[{}]", result.getErrorMsgMap());
-            throw new CreateException("修改post失败:" + result.getErrMsg());
-        }
         //转化为文章入参，转化为文章类型，并设置上Id
         Post postToUpdate = postParam.convertTo();
         postToUpdate.setId(postId);
 
         postService.updateBy(postToUpdate, postParam.getTagIds(), postParam.getCategoryIds());
 
-        return CommonReturnType.create("更新成功");
+        return Result.create(ResultStatus.OPERATION_SUCCESS);
+    }
+
+    @PostMapping("/status")
+    public Result updateStatus(@RequestParam("postId") Integer postId, @RequestParam("status") Integer status) {
+        postService.updateStatus(postId, status);
+        return Result.create(ResultStatus.OPERATION_SUCCESS);
     }
 
 }

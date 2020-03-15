@@ -1,9 +1,9 @@
 package com.changyue.blogserver.serivce;
 
 import com.changyue.blogserver.model.entity.Post;
-import com.changyue.blogserver.model.enums.PostStatus;
 import com.changyue.blogserver.model.params.PostQuery;
 import com.changyue.blogserver.model.vo.PostVO;
+import com.changyue.blogserver.serivce.base.BaseService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.lang.NonNull;
 
@@ -94,6 +94,15 @@ public interface PostService extends BaseService<Post, Integer> {
      */
     @NonNull
     List<Post> listAllBy(@NonNull Integer status);
+
+    /**
+     * 更新文章状态
+     *
+     * @param postId 文章id
+     * @param status 文章状态
+     * @return 是否成功
+     */
+    boolean updateStatus(Integer postId, Integer status);
 
     /**
      * 统计点赞数

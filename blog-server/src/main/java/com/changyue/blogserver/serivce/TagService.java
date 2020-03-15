@@ -2,7 +2,7 @@ package com.changyue.blogserver.serivce;
 
 import com.changyue.blogserver.model.dto.TagDTO;
 import com.changyue.blogserver.model.entity.Tag;
-import org.springframework.data.repository.query.Param;
+import com.changyue.blogserver.serivce.base.BaseService;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 

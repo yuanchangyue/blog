@@ -14,11 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @program: blog-server
- * @description: mybatis代码生成
- * @author: 袁阊越
- * @create: 2020-01-31 11:55
- */
+ * @author : 袁阊越
+ * @description : mybatis代码生成
+ * @date : 2020/3/15
+*/
 public class MybatisGeneratorUtils {
     public static void main(String[] args) throws IOException, XMLParserException, InvalidConfigurationException, SQLException, InterruptedException {
         List<String> warnings = new ArrayList<String>();

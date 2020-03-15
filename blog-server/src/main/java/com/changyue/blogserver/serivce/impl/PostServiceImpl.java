@@ -149,7 +149,6 @@ public class PostServiceImpl implements PostService {
 
         if (createdOrUpdate.getId() != null && createdOrUpdate.getStatus() != PostStatus.DRAFT.getStatusCode()) {
 
-
             //清空标签和类别
             postTagService.removeByPostId(createdOrUpdate.getId());
             postCategoryService.removeByPostId(createdOrUpdate.getId());
@@ -195,7 +194,7 @@ public class PostServiceImpl implements PostService {
         Assert.notNull(post, "文章的参数不能为空");
 
         //设置状态
-        if (!StringUtils.isEmpty(post.getPassword()) && post.getStatus() == PostStatus.DRAFT.getStatusCode()) {
+        if (!StringUtils.isEmpty(post.getPassword()) && post.getStatus() != PostStatus.DRAFT.getStatusCode()) {
             post.setStatus(PostStatus.Encrypt.getStatusCode());
         }
 
@@ -270,6 +269,7 @@ public class PostServiceImpl implements PostService {
         return postMapper.deleteByPrimaryKey(id);
     }
 
+
     @Override
     public Post getBy(Integer status, String url) {
 
@@ -294,6 +294,13 @@ public class PostServiceImpl implements PostService {
         post.setStatus(status);
 
         return postMapper.listAllBySelective(post);
+    }
+
+    @Override
+    public boolean updateStatus(Integer postId, Integer status) {
+        Assert.notNull(postId, "post Id 不能为空");
+        Assert.notNull(status, "status Id 不能为空");
+        return postMapper.updateStatus(postId, status) > 0;
     }
 
     @Override

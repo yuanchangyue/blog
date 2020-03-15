@@ -7,10 +7,16 @@ import Category from '../views/Category'
 import Tag from '../views/Tag'
 import Post from '../views/Post'
 import PostList from '../views/PostList'
+import Attachment from '../views/Attachment'
 
 Vue.use(VueRouter)
 
 const routes = [
+  {
+    path: '/',
+    name: 'login',
+    component: Login
+  },
   {
     path: '/home',
     name: 'Home',
@@ -45,6 +51,10 @@ const routes = [
     path: '/postlist',
     name: 'postlist',
     component: PostList
+  }, {
+    path: '/attachment',
+    name: 'attachment',
+    component: Attachment
   }
 ]
 

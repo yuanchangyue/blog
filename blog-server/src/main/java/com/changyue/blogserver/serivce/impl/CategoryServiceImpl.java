@@ -8,6 +8,7 @@ import com.changyue.blogserver.exception.NotFindException;
 import com.changyue.blogserver.model.dto.CategoryDTO;
 import com.changyue.blogserver.model.dto.UserDTO;
 import com.changyue.blogserver.model.entity.Category;
+import com.changyue.blogserver.model.entity.User;
 import com.changyue.blogserver.serivce.CategoryService;
 import com.changyue.blogserver.serivce.PostCategoryService;
 import com.changyue.blogserver.serivce.UserService;
@@ -49,7 +50,9 @@ public class CategoryServiceImpl implements CategoryService {
     public Category create(Category category) {
 
         Assert.notNull(category, "类别不能为空");
-        Assert.notNull(category.getUserId(), "用户ID不能为空");
+
+        User user = ShiroUtils.getUser();
+        category.setUserId(user.getId());
 
         //检查类别是否存在
         Category cateWithName = new Category();
@@ -107,7 +110,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public PageInfo<CategoryDTO> list(Integer pageIndex, Integer pageSize) {
+    public PageInfo<CategoryDTO> pageBy(Integer pageIndex, Integer pageSize) {
 
         Assert.notNull(pageIndex, "页索引不能为空");
         Assert.notNull(pageSize, "页数不能为空");
@@ -160,6 +163,12 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public List<CategoryDTO> getListCategoryByUserId() {
         return categoryMapper.listAllByUserId(ShiroUtils.getUser().getId()).stream().map(this::convertTo).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<CategoryDTO> getListCategoryByNull() {
+        List<Category> categories = categoryMapper.listCategoryByNull(ShiroUtils.getUser().getId());
+        return categories.stream().map(this::convertTo).collect(Collectors.toList());
     }
 
     @Override

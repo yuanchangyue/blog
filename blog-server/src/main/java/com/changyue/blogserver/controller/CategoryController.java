@@ -1,23 +1,21 @@
 package com.changyue.blogserver.controller;
 
+import com.changyue.blogserver.handler.Result;
 import com.changyue.blogserver.model.dto.CategoryDTO;
-import com.changyue.blogserver.model.dto.UserDTO;
 import com.changyue.blogserver.model.entity.Category;
 import com.changyue.blogserver.model.entity.UserCategory;
 import com.changyue.blogserver.model.params.CategoryParam;
-import com.changyue.blogserver.model.rep.CommonReturnType;
 import com.changyue.blogserver.serivce.CategoryService;
 import com.changyue.blogserver.serivce.PostCategoryService;
 import com.changyue.blogserver.serivce.UserCategoryService;
 import com.changyue.blogserver.serivce.UserService;
-import com.changyue.blogserver.validator.ValidatorImpl;
-import com.changyue.blogserver.validator.ValidatorResult;
+import com.changyue.blogserver.utils.ShiroUtils;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import javax.validation.Valid;
 
 /**
  * @author : 袁阊越
@@ -41,13 +39,10 @@ public class CategoryController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private ValidatorImpl validator;
-
     @GetMapping
     public PageInfo<CategoryDTO> listCategory(@RequestParam(name = "pageIndex", defaultValue = "1") Integer pageIndex,
                                               @RequestParam(name = "pageSize", defaultValue = "5") Integer pageSize) {
-        return categoryService.list(pageIndex, pageSize);
+        return categoryService.pageBy(pageIndex, pageSize);
     }
 
     @GetMapping("/{categoryId}")
@@ -56,28 +51,18 @@ public class CategoryController {
     }
 
     @PostMapping
-    public CategoryDTO createCategory(@RequestBody CategoryParam categoryParam) {
-
-        ValidatorResult result = this.validator.validator(categoryParam);
-        if (result.isHasError()) {
-            log.debug("创建category失败[{}]", result.getErrorMsgMap());
-        }
-
-        //获得当前的用户信息
-        UserDTO currentUser = userService.getCurrentUser();
-
+    public Result createCategory(@Valid @RequestBody CategoryParam categoryParam) {
         //入参转化
         Category category = categoryParam.convertTo();
-        category.setUserId(currentUser.getId());
 
         //创建类别
         Category createdCategory = categoryService.create(category);
 
         //创建用户类别的关联
-        userCategoryService.create(new UserCategory(currentUser.getId(), createdCategory.getId()));
+        userCategoryService.create(new UserCategory(ShiroUtils.getUser().getId(), createdCategory.getId()));
 
         //创建类别
-        return categoryService.convertTo(createdCategory);
+        return Result.create(categoryService.convertTo(createdCategory));
     }
 
     @DeleteMapping("/{categoryId}")
@@ -86,13 +71,9 @@ public class CategoryController {
     }
 
     @PutMapping("/{categoryId}")
-    public void modifyCategory(@PathVariable("categoryId") Integer categoryId, @RequestBody CategoryParam categoryParam) {
+    public void modifyCategory(@PathVariable("categoryId") Integer categoryId, @Valid @RequestBody CategoryParam categoryParam) {
 
-        ValidatorResult result = this.validator.validator(categoryParam);
-        if (result.isHasError()) {
-            log.debug("修改category失败[{}]", result.getErrorMsgMap());
-        }
-
+        //查找需要修改类别
         Category category = categoryService.getById(categoryId);
 
         //入参转化
@@ -103,8 +84,14 @@ public class CategoryController {
     }
 
     @GetMapping("/list")
-    public CommonReturnType<List<CategoryDTO>> listByUserId() {
-        return CommonReturnType.create(categoryService.getListCategoryByUserId());
+    public Result listByUserId() {
+        return Result.create(categoryService.getListCategoryByUserId());
     }
+
+    @GetMapping("/parent")
+    public Result listByNull() {
+        return Result.create(categoryService.getListCategoryByNull());
+    }
+
 }
 

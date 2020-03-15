@@ -28,7 +28,7 @@
         </javaTypeResolver>
 
         <!-- 指定javabean 生成的位置 -->
-        <javaModelGenerator targetProject=".\src\main\java" targetPackage="com.changyue.blogserver.entity">
+        <javaModelGenerator targetProject=".\src\main\java" targetPackage="com.changyue.blogserver.model.entity">
             <property value="true" name="enableSubPackages"/>
             <property value="true" name="trimStrings"/>
         </javaModelGenerator>
@@ -71,10 +71,9 @@
                selectByExampleQueryId="false"/>
         -->
 
-        <table domainObjectName="UsersAuthority" tableName="users_authority" enableCountByExample="false"
+        <table domainObjectName="Attachments" tableName="attachments" enableCountByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"
                selectByExampleQueryId="false"/>
-
 
     </context>
 </generatorConfiguration>

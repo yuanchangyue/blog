@@ -85,7 +85,7 @@ public interface PostMapper extends BaseMapper<Post> {
      * @param postId 文章Id
      * @return 更新的行
      */
-    int updateStatus(@Param("status") @NonNull Integer status, @Param("postId") @NonNull Integer postId);
+    int updateStatus(@Param("postId") @NonNull Integer postId, @Param("status") @NonNull Integer status);
 
     /**
      * 更新发布原始内容.

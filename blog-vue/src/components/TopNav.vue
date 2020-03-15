@@ -20,7 +20,7 @@
                 <template slot="title"><i class="el-icon-setting"/>看点</template>
                 <el-menu-item index="4-1">更多文章</el-menu-item>
             </el-submenu>
-            <el-menu-item index="5" class="simple-menu-item hidden-md-and-down"><i class="el-icon-picture-outline"/>相册
+            <el-menu-item index="/attachment" class="simple-menu-item hidden-md-and-down"><i class="el-icon-picture-outline"/>附件
             </el-menu-item>
             <el-menu-item index="6" class="simple-menu-item hidden-md-and-down"><i class="el-icon-chat-line-round"/>评价
             </el-menu-item>
@@ -61,13 +61,8 @@ export default {
   },
   methods: {
     logout () {
-      console.info('aadf')
       this.$axios.get('/user/logout').then(value => {
-        console.info(value.data)
-        this.$message({
-          message: '已经退出',
-          type: 'info'
-        })
+        this.$notify('退出成功')
         this.$router.replace({ path: '/login' })
       })
     }

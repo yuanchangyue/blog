@@ -77,7 +77,7 @@ export default {
       },
       drawer: false,
       direction: 'rtl',
-      categoryList: '',
+      categoryList: [],
       tagList: '',
       form: {
         categoryIds: [],
@@ -156,8 +156,8 @@ export default {
         }).catch(_ => {})
     },
     showCategoryAndTag () {
-      this.$axios.get('/category').then(value => {
-        this.categoryList = value.data.list
+      this.$axios.get('/category/list').then(value => {
+        this.categoryList = value.data.data
       }).catch(_ => {
         this.$notify({
           title: '警告',

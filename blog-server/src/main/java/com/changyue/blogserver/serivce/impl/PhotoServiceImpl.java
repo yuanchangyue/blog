@@ -4,12 +4,18 @@ import com.changyue.blogserver.dao.PhotoMapper;
 import com.changyue.blogserver.model.dto.PhotoDTO;
 import com.changyue.blogserver.model.entity.Photo;
 import com.changyue.blogserver.model.params.PhotoParam;
+import com.changyue.blogserver.model.rep.UploadResult;
 import com.changyue.blogserver.serivce.PhotoService;
+import com.changyue.blogserver.utils.LocalImgUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.sun.imageio.plugins.common.ImageUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,10 +25,27 @@ import java.util.stream.Collectors;
  * @description : 照片业务接口实现
  * @date : 2020-02-01 10:15
  */
+@Slf4j
+@Service
 public class PhotoServiceImpl implements PhotoService {
 
     @Autowired
     private PhotoMapper photoMapper;
+
+
+    @Override
+    public UploadResult upload(MultipartFile file) {
+        Assert.notNull(file, "上传的文件不能为空");
+
+        log.info("开始上传图片：[{}]", file.getOriginalFilename());
+
+        UploadResult result = LocalImgUtils.upload(file);
+
+        log.info("上传的结果:[{}]", result);
+
+        return null;
+    }
+
 
     @Override
     public List<PhotoDTO> listByTeam(String team) {
@@ -55,6 +78,7 @@ public class PhotoServiceImpl implements PhotoService {
 
         return new PageInfo<>(photoDTOList, 3);
     }
+
 
     @Override
     public Photo createBy(PhotoParam photoParam) {

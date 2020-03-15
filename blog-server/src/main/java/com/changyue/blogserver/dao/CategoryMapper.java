@@ -71,6 +71,13 @@ public interface CategoryMapper extends BaseMapper<Category> {
     List<Category> listCategoryByIds(@Param("categoryIds") List<Integer> categoryIds);
 
     /**
+     * 查询用户所属类别为null的类别
+     * @param userId 用户id
+     * @return 类别列表
+     */
+    List<Category> listCategoryByNull(@NonNull @Param("userId") Integer userId);
+
+    /**
      * 通过文章id查询全部
      *
      * @param postId 文章Id

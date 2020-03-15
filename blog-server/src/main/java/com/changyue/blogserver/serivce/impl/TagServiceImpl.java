@@ -104,6 +104,8 @@ public class TagServiceImpl implements TagService {
 
         Assert.notNull(tag, "tag 不能为空");
 
+        tag.setUserId(ShiroUtils.getUser().getId());
+
         long count = tagMapper.countByNameOrSlugName(tag.getName(), tag.getSlugName());
         log.debug("标签数量:[{}]", count);
         if (count > 0) {

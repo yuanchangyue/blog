@@ -4,10 +4,13 @@ import com.changyue.blogserver.dao.base.BaseMapper;
 import com.changyue.blogserver.model.entity.Photo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RequestPart;
 
 import java.util.List;
 
 @Mapper
+@Repository
 public interface PhotoMapper extends BaseMapper<Photo> {
 
     /**

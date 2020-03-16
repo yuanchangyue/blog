@@ -1,7 +1,9 @@
 package com.changyue.blogserver.serivce;
 
 import com.changyue.blogserver.model.dto.AttachmentDTO;
+import com.changyue.blogserver.model.entity.AttachmentType;
 import com.changyue.blogserver.model.entity.Attachments;
+import com.changyue.blogserver.model.params.AttachmentQuery;
 import com.changyue.blogserver.serivce.base.BaseService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.lang.NonNull;
@@ -17,7 +19,15 @@ import java.util.List;
 public interface AttachmentsService extends BaseService<Attachments, Integer> {
 
     /**
+     * 获得附件类型
+     *
+     * @return 列表
+     */
+    List<String> geyAttachmentType();
+
+    /**
      * 通过ID查询
+     *
      * @param id id
      * @return DTO
      */
@@ -32,6 +42,17 @@ public interface AttachmentsService extends BaseService<Attachments, Integer> {
      */
     @NonNull
     PageInfo<AttachmentDTO> pageBy(@NonNull Integer pageIndex, @NonNull Integer pageSize);
+
+    /**
+     * 分页全部
+     *
+     * @param pageIndex       页索引
+     * @param pageSize        页数
+     * @param attachmentQuery 附件查询
+     * @return 分页类别
+     */
+    @NonNull
+    PageInfo<AttachmentDTO> pageByQuery(@NonNull Integer pageIndex, @NonNull Integer pageSize, @NonNull AttachmentQuery attachmentQuery);
 
     /**
      * 上传附件

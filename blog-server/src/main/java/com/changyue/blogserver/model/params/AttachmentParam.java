@@ -19,4 +19,6 @@ public class AttachmentParam implements InputConvert<Attachments> {
     @Size(max = 255, message = "附件名称的字符长度不能超过 {max}")
     private String name;
 
+
+
 }

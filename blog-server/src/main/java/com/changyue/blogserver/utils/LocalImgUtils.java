@@ -139,6 +139,46 @@ public class LocalImgUtils {
         }
     }
 
+
+    /**
+     * 删除文件
+     *
+     * @param filePath 文件路径
+     */
+    public static void delete(String filePath) {
+        Assert.notNull(filePath, "文件的路径不能为空");
+
+        Path path = Paths.get(WORK_PATH, filePath);
+
+        //删除文件
+        try {
+            Files.delete(path);
+            log.info("文件:[{}]删除成功！", filePath);
+        } catch (IOException e) {
+            e.printStackTrace();
+            log.info("文件:[{}]删除失败！", filePath);
+        }
+
+        //从文件路经中拿到名称
+        String basename = FileNameUtils.getBasename(filePath);
+        //从文件路径中拿到拓展名
+        String extension = FileNameUtils.getExtension(filePath);
+
+        //构造缩略图的名称
+        String thumbnailName = basename + THUMBNAIL_SUFFIX + "." + extension;
+
+        Path thumbnailPath = Paths.get(path.getParent().toString(), thumbnailName);
+
+        try {
+            boolean isDelete = Files.deleteIfExists(thumbnailPath);
+            if (!isDelete) {
+                log.info("文件不存在缩略图！");
+            }
+        } catch (IOException e) {
+            log.info("文件的缩略图删除失败！");
+        }
+    }
+
     /**
      * 生成缩略图
      *

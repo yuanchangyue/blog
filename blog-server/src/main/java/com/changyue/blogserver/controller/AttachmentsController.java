@@ -2,6 +2,7 @@ package com.changyue.blogserver.controller;
 
 import com.changyue.blogserver.handler.Result;
 import com.changyue.blogserver.model.dto.AttachmentDTO;
+import com.changyue.blogserver.model.params.AttachmentQuery;
 import com.changyue.blogserver.serivce.AttachmentsService;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
@@ -33,15 +34,26 @@ public class AttachmentsController {
         return attachmentsService.pageBy(pageIndex, pageSize);
     }
 
+    @PostMapping("/query")
+    public PageInfo<AttachmentDTO> getByQuery(@RequestParam(name = "pageIndex", defaultValue = "1") Integer pageIndex,
+                                              @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize,
+                                              @RequestBody AttachmentQuery attachmentQuery) {
+        return attachmentsService.pageByQuery(pageIndex, pageSize, attachmentQuery);
+    }
+
     @GetMapping("/{attachmentId}")
-    public Result getById(@PathVariable("attachmentId")Integer attachmentId) {
+    public Result getById(@PathVariable("attachmentId") Integer attachmentId) {
         return Result.create(attachmentsService.getByAttachmentId(attachmentId));
     }
 
     @GetMapping("/type")
     public Result getById() {
-        return Result.create(attachmentsService.getByAttachmentId(attachmentId));
+        return Result.create(attachmentsService.geyAttachmentType());
     }
 
+    @DeleteMapping("/{attachmentId}")
+    public Result remove(@PathVariable("attachmentId") Integer attachmentId) {
+        return Result.create(attachmentsService.removeById(attachmentId));
+    }
 
 }

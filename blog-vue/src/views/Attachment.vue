@@ -10,17 +10,17 @@
             <el-input v-model="form.keyWords" placeholder="关键字"></el-input>
           </el-form-item>
           <el-form-item label="附件类型">
-            <el-select v-model="form.type" placeholder="文章分类">
+            <el-select v-model="form.mediaType" placeholder="附件类型">
               <el-option value="">全部</el-option>
-              <el-option v-for="item in typeDate"
-                         :key="item.id"
-                         :label="item.name"
-                         :value="item.id"/>
+              <el-option v-for="item in attachmentTypeList"
+                         :key="item"
+                         :label="item"
+                         :value="item"/>
             </el-select>
           </el-form-item>
           <el-form-item>
             <el-button-group>
-              <el-button icon="el-icon-search" >查询</el-button>
+              <el-button icon="el-icon-search" @click="query" >查询</el-button>
               <el-button type="primary" icon="el-icon-upload" @click="dialogVisible = true" >上传</el-button>
             </el-button-group>
           </el-form-item>
@@ -32,7 +32,7 @@
           width="415px"
           center>
           <el-upload
-            :limit="3"
+            :limit="10"
             drag
             action="#"
             multiple
@@ -45,11 +45,18 @@
       </el-row>
       <el-row style="margin-top: 20px;">
         <el-col style="margin: 5px" :span="4" :sm="5" :xs="24" :lg="4" v-for="item in attachmentList" :key="item.id">
+        <transition name="el-fade-in">
           <el-card>
-            <el-image :src="handlerUrl(item.path)"  :lazy="true" :preview-src-list="srcList" style="width: 100%; height: 200px"/>
+            <el-image :src="handlerUrl(item.path)" fit="cover"  :lazy="true" :preview-src-list="srcList" style="width: 100%; height: 200px"/>
             <el-link @click="openDrawer(item.id)">{{item.name}}</el-link>
           </el-card>
+        </transition>
         </el-col>
+        <transition name="el-fade-in">
+          <el-col v-show="isEmpty" :span="24" style="text-align: center">
+            <el-image :src="empty" style="width: 500px;height: 500px;" align="center"/>
+          </el-col>
+        </transition>
       </el-row>
       <el-drawer
         title="附件基本信息"
@@ -76,7 +83,7 @@
           <p>附件大小</p>
           <p class="info-text" v-text="this.attachment.size"></p>
           <el-row type="flex" justify="end">
-            <el-button icon="el-icon-delete" type="danger" @click="removeAttachment">删除</el-button>
+            <el-button icon="el-icon-delete" type="danger" @click="remove" >删除</el-button>
           </el-row>
         </div>
       </el-drawer>
@@ -111,17 +118,21 @@ export default {
       },
       form: {
         keyWords: '',
-        type: ''
+        mediaType: ''
       },
+      isEmpty: true,
+      empty: require('../assets/empty.svg'),
+      currentId: 0,
       direction: 'rtl',
       drawer: false,
+      dialogVisible: false,
       pageTotal: 0,
       currentPage: 0,
       pageSize: 0,
       typeDate: [],
-      dialogVisible: false,
       attachmentList: [],
       srcList: [],
+      attachmentTypeList: [],
       attachment: {
         id: '',
         name: '',
@@ -138,6 +149,7 @@ export default {
   },
   mounted () {
     this.initList()
+    this.initType()
   },
   methods: {
     submitUpload (p) {
@@ -151,18 +163,21 @@ export default {
         this.initList()
       })
     },
+    initType () {
+      this.$axios.get('/attachment/type').then(value => {
+        console.info(value.data.data)
+        this.attachmentTypeList = value.data.data
+      })
+    },
     initList () {
       this.$axios.get('/attachment').then(value => {
         this.setPageValue(value)
         for (var n = 0; n < value.data.list.length; n++) {
           this.srcList.push(this.handlerUrl(value.data.list[n].path))
         }
-        console.info(value.data.list)
-        console.info(this.srcList)
       })
     },
     handlerUrl (url) {
-      console.info('http://localhost:8089/' + url)
       return 'http://localhost:8089/' + url
     },
     setPageValue (value) {
@@ -170,8 +185,12 @@ export default {
       this.pageTotal = value.data.total
       this.pageSize = value.data.pageSize
       this.currentPage = value.data.pageNum
+      if (this.attachmentList.length > 0) {
+        this.isEmpty = false
+      }
     },
     handleCurrentChange (val) {
+      this.currentPage = val
       var page = { pageIndex: val, pageSize: this.pageSize }
       this.$axios.get('/attachment', { params: page }).then(value => {
         this.setPageValue(value)
@@ -203,7 +222,6 @@ export default {
         this.attachment.thumbPath = value.data.data.thumbPath
         this.attachment.size = this.change2Mb(value.data.data.size)
         this.attachment.id = value.data.data.id
-        console.info(this.attachment.createTime)
       })
     },
     change2Mb (size) {
@@ -214,6 +232,19 @@ export default {
       if (size < Math.pow(num, 3)) return (size / Math.pow(num, 2)).toFixed(2) + 'M'
       if (size < Math.pow(num, 4)) return (size / Math.pow(num, 3)).toFixed(2) + 'G'
       return (size / Math.pow(num, 4)).toFixed(2) + 'T'
+    },
+    query () {
+      this.$axios.post('/attachment/query?pageIndex=' + this.currentPage + '&pageSize=' + this.pageSize, this.form).then(value => {
+        this.setPageValue(value)
+      })
+    },
+    remove () {
+      this.$axios.delete('/attachment/' + this.attachment.id).then(_ => {
+        this.$notify.success('附件删除成功')
+        this.isEmpty = true
+        this.initList()
+        this.drawer = false
+      })
     }
   }
 }
@@ -226,5 +257,8 @@ export default {
   .info-text{
     color: #909399;
     font-size: 14px;
+  }
+  .el-form-item{
+    margin-bottom: 0;
   }
 </style>

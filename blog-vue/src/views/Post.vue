@@ -2,7 +2,7 @@
   <div class="all-warp">
     <TopNav/>
     <BreadCrumb :bread1="bread.firstBread" :bread2="bread.secondBread"/>
-    <div class="content-warp">
+    <div class="content-warp" style="v-height:100%;">
       <el-input v-model="form.title" style="min-width: 600px;margin-bottom: 10px" placeholder="请输入文章的标题"/>
       <mavon-editor v-model="form.originalContent" ref="md" @change="change" style="min-height: 600px;margin-bottom: 10px"/>
       <el-row type="flex" justify="end">
@@ -10,6 +10,7 @@
         <el-button type="primary" icon="el-icon-upload" @click="drawer = true">发表文章</el-button>
       </el-row>
       <el-drawer
+        size="30%"
         title="文章基本设置"
         :visible.sync="drawer"
         :direction="direction"
@@ -49,12 +50,48 @@
                 <el-radio v-model="form.disallowComment" label="true">是</el-radio>
                 <el-radio v-model="form.disallowComment" label="false">否</el-radio>
             </el-form-item>
+            <el-divider/>
+            <div style="width: 100%;margin-bottom: 10px">
+              <span class="demonstration" style="color: #909399">缩略图</span>
+              <el-image :src="imgSrc" :fit="fit" style="width: 100%;height: 200px;" @click="innerDrawer = true"></el-image>
+            </div>
             <el-row type="flex" justify="end">
               <el-button icon="el-icon-edit" @click="saveDraft">移至草稿箱</el-button>
               <el-button icon="el-icon-upload" type="primary" @click="submit">发布</el-button>
             </el-row>
           </el-form>
         </div>
+        <el-drawer
+          title="缩略图列表"
+          :append-to-body="true"
+          style="height: 1200px;"
+          size="20%"
+          :before-close="handleInnerClose"
+          :visible.sync="innerDrawer">
+          <div class="autoScroll" style="width: 100%;height: 800px;overflow: auto">
+          <el-col style="margin: 5px" :span="11" v-for="item in attachmentList" :key="item.id">
+            <transition name="el-fade-in">
+              <el-card>
+                <el-image :src="handlerUrl(item.path)" :lazy="true" @click="handlerThumbnail(item.path)" style="width: 100%; height: 200px"/>
+              </el-card>
+            </transition>
+          </el-col>
+          <el-col :span="24">
+          <el-pagination
+            small
+            style="margin: 10px;"
+            background
+            @current-change="handleCurrentChange"
+            @size-change="handleSizeChange"
+            layout="total, sizes,prev, pager, next"
+            :page-sizes="[4,8,12]"
+            :current-page.sync="currentPage"
+            :page-size="pageSize"
+            :total="pageTotal">
+          </el-pagination>
+          </el-col>
+          </div>
+        </el-drawer>
       </el-drawer>
     </div>
   </div>
@@ -75,7 +112,9 @@ export default {
         firstBread: '文章',
         secondBread: '写文章'
       },
+      fit: '',
       drawer: false,
+      innerDrawer: false,
       direction: 'rtl',
       categoryList: [],
       tagList: '',
@@ -89,13 +128,32 @@ export default {
         summary: '',
         formatContent: '',
         originalContent: '',
-        status: 0
+        status: 0,
+        thumbnail: ''
       },
+      imgSrc: require('../assets/empty.svg'),
       updateId: '',
       disable: false,
       radio: '1',
       passwordHind: '可以设置访问密码',
-      isInsert: true
+      isInsert: true,
+      pageTotal: 0,
+      currentPage: 0,
+      pageSize: 4,
+      attachmentList: [],
+      attachmentTypeList: [],
+      attachment: {
+        id: '',
+        name: '',
+        path: '',
+        thumbPath: '',
+        mediaType: '',
+        suffix: '',
+        width: '',
+        height: '',
+        size: '',
+        createTime: ''
+      }
     }
   },
   methods: {
@@ -155,6 +213,12 @@ export default {
           done()
         }).catch(_ => {})
     },
+    handleInnerClose (done) {
+      this.$confirm('确认关闭缩略图吗？')
+        .then(_ => {
+          done()
+        }).catch(_ => {})
+    },
     showCategoryAndTag () {
       this.$axios.get('/category/list').then(value => {
         this.categoryList = value.data.data
@@ -174,9 +238,42 @@ export default {
           type: 'warning'
         })
       })
+    },
+    handleCurrentChange (val) {
+      this.currentPage = val
+      var page = { pageIndex: val, pageSize: this.pageSize }
+      this.$axios.get('/attachment', { params: page }).then(value => {
+        this.setPageValue(value)
+      })
+    },
+    handleSizeChange (val) {
+      this.pageSize = val
+      this.handleCurrentChange()
+    },
+    initList () {
+      this.$axios.get('/attachment?pageSize=' + this.pageSize).then(value => {
+        console.info(value.data)
+        this.setPageValue(value)
+      })
+    },
+    handlerUrl (url) {
+      return 'http://localhost:8089/' + url
+    },
+    setPageValue (value) {
+      this.attachmentList = value.data.list
+      this.pageTotal = value.data.total
+      this.pageSize = value.data.pageSize
+      this.currentPage = value.data.pageNum
+    },
+    handlerThumbnail (path) {
+      this.imgSrc = this.handlerUrl(path)
+      this.form.thumbnail = path
+      this.innerDrawer = false
+      this.fit = 'cover'
     }
   },
   created () {
+    this.initList()
     this.showCategoryAndTag()
     this.updateId = this.$route.params.postId
     if (this.updateId != null) {
@@ -190,6 +287,8 @@ export default {
           this.form.title = data.data.title
           this.form.originalContent = data.data.originalContent
           this.form.summary = data.data.summary
+          this.form.thumbnail = data.data.thumbnail
+          this.imgSrc = this.handlerUrl(data.data.thumbnail)
           this.form.disallowComment = data.data.disallowComment.toString()
           for (var n = 0; n < data.data.tags.length; n++) {
             this.form.tagIds.push(data.data.tags[n].id)
@@ -208,5 +307,8 @@ export default {
 <style scoped>
   .drawer-form{
     padding: 20px;
+  }
+  .el-col{
+    overflow:scroll;
   }
 </style>

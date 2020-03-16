@@ -3,12 +3,12 @@
 <mapper namespace="com.changyue.blogserver.dao.AttachmentsMapper">
     <resultMap type="attachments" id="AttachmentsMap">
         <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="mediaType" column="media_type" jdbcType="VARCHAR"/>
         <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
         <result property="deleted" column="deleted" jdbcType="INTEGER"/>
         <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
         <result property="fileKey" column="file_key" jdbcType="VARCHAR"/>
         <result property="height" column="height" jdbcType="INTEGER"/>
-        <result property="mediaType" column="media_type" jdbcType="VARCHAR"/>
         <result property="name" column="name" jdbcType="VARCHAR"/>
         <result property="path" column="path" jdbcType="VARCHAR"/>
         <result property="size" column="size" jdbcType="INTEGER"/>
@@ -19,13 +19,19 @@
         <result property="userId" column="user_id" jdbcType="INTEGER"/>
     </resultMap>
 
+    <resultMap id="attachmentTypeMap" type="attachmentType">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="type" column="media_type" jdbcType="VARCHAR"/>
+    </resultMap>
+
     <sql id="Base_Query_list">
         id,create_time,deleted,update_time,height,media_type,name,path,size,suffix,thumb_path,type,width,user_id
     </sql>
 
-    <select id="findAllMediaType">
+    <select id="listAllMediaType" resultType="java.lang.String">
         select distinct a.media_type
         from attachments a
+        where user_id = #{userId}
     </select>
 
     <select id="findAllType">
@@ -42,7 +48,8 @@
     </select>
 
     <select id="listAllByUserId" parameterType="java.lang.Integer" resultMap="AttachmentsMap">
-        select <include refid="Base_Query_list"/>
+        select
+        <include refid="Base_Query_list"/>
         from attachments
         where user_id = #{userId}
     </select>
@@ -91,6 +98,21 @@
             </if>
             <if test="width != null">
                 and width = #{width}
+            </if>
+        </where>
+    </select>
+
+    <select id="listAllByQuery" resultMap="AttachmentsMap">
+        select
+        <include refid="Base_Query_list"/>
+        from blogdb.attachments
+        <where>
+            user_id = #{userId}
+            <if test="attachmentQuery.mediaType != null and attachmentQuery.mediaType != ''">
+                and media_type = #{attachmentQuery.mediaType}
+            </if>
+            <if test="attachmentQuery.keyWords != null and attachmentQuery.keyWords != ''">
+                and name LIKE CONCAT('%',#{attachmentQuery.keyWords},'%')
             </if>
         </where>
     </select>

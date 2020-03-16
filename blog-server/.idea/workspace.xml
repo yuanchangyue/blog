@@ -2,124 +2,28 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bd5d3fba-cd88-41d7-b10b-952045a6ce54" name="Default Changelist" comment="&quot;VUE处理跨域并添加拦截器&quot;">
-      <change afterPath="$PROJECT_DIR$/.idea/EasyCodeConfig/blogdb-attachments.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_coobird_thumbnailator_0_4_8.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/null/upload/2020/MARCH/屏幕快照 2020-03-14 16.22.58-00a62119-13b3-449d-9eeb-57ae1ac60b58-thumbnail.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/null/upload/2020/MARCH/屏幕快照 2020-03-14 16.22.58-00a62119-13b3-449d-9eeb-57ae1ac60b58.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/config/properties/BlogProperties.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/controller/AttachmentsController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/dao/AttachmentsMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/handler/GlobalExceptionHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/handler/Result.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/dto/AttachmentDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/entity/AttachmentType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/entity/Attachments.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/enums/ResultStatus.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/params/AttachmentParam.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/rep/UploadResult.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/AttachmentsService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/AttachmentsServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/utils/FileNameUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/utils/LocalImgUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/AttachmentsMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/changyue/blogserver/mapper/AttachmentMapperTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/changyue/blogserver/ulits/OtherTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/changyue/blogserver/ulits/ReentrantLockTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/config/properties/BlogProperties.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/handler/GlobalExceptionHandler.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/handler/Result.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/model/entity/Attachments.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/model/enums/ResultStatus.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/impl/AttachmentsServiceImpl.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/utils/FileNameUtils.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/utils/LocalImgUtils.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../blog-vue/src/views/Attachment.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/params/AttachmentQuery.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../blog-vue/src/assets/empty.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog-server.iml" beforeDir="false" afterPath="$PROJECT_DIR$/blog-server.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/mg.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/BlogServerApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/BlogServerApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/config/CrossConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/config/WebMvcConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/config/ShiroConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/config/ShiroConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/controller/CategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/controller/CategoryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/controller/PostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/controller/PostController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/controller/TagController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/controller/TagController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/dao/CategoryMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/dao/CategoryMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/dao/PhotoMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/dao/PhotoMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/dao/PostMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/dao/PostMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/params/PostParam.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/params/PostParam.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/rep/CommonReturnType.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/BaseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/base/BaseService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/CategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/CategoryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/PhotoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/PhotoService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/PostCategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/PostCategoryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/PostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/PostService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/PostTagService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/PostTagService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/RoleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/RoleService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/TagService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/TagService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/UserCategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/UserCategoryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/UserRoleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/UserRoleService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/CategoryServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/CategoryServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/PhotoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/PhotoServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/PostCategoryServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/PostCategoryServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/PostServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/PostServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/TagServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/TagServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/utils/MybatisGeneratorUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/utils/MybatisGeneratorUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/utils/ValidatorUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/validator/ValidatorImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/validator/ValidatorResult.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-dev.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/CategoryMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/CategoryMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/PostMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/PostMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/changyue/blogserver/ulits/PwUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/changyue/blogserver/validator/ValidatorUtilsTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application-dev.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/BlogServerApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/BlogServerApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/config/CrossConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/config/ShiroConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/config/ShiroConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/controller/CategoryController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/controller/CategoryController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/controller/PostController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/controller/PostController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/controller/TagController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/controller/TagController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/controller/UserController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/dao/CategoryMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/dao/CategoryMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/dao/PhotoMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/dao/PhotoMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/dao/PostMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/dao/PostMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/model/params/PostParam.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/model/params/PostParam.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/model/rep/CommonReturnType.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/BaseService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/CategoryService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/CategoryService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/PhotoService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/PhotoService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/PostCategoryService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/PostCategoryService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/PostService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/PostService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/PostTagService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/PostTagService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/RoleService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/RoleService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/TagService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/TagService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/UserCategoryService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/UserCategoryService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/UserRoleService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/UserRoleService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/UserService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/impl/CategoryServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/impl/CategoryServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/impl/PhotoServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/impl/PhotoServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/impl/PostCategoryServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/impl/PostCategoryServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/impl/PostServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/impl/PostServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/impl/TagServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/impl/TagServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/utils/MybatisGeneratorUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/utils/MybatisGeneratorUtils.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/utils/ValidatorUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/validator/ValidatorImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/validator/ValidatorResult.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mapper/CategoryMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mapper/CategoryMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mapper/PostMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mapper/PostMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/changyue/blogserver/ulits/PwUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/changyue/blogserver/validator/ValidatorUtilsTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../blog-vue/src/components/TopNav.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../blog-vue/src/components/TopNav.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../blog-vue/src/config/axios-config.js" beforeDir="false" afterPath="$PROJECT_DIR$/../blog-vue/src/config/axios-config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../blog-vue/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../blog-vue/src/router/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../blog-vue/src/views/Category.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../blog-vue/src/views/Category.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../blog-vue/src/views/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../blog-vue/src/views/Login.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/controller/AttachmentsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/controller/AttachmentsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/dao/AttachmentsMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/dao/AttachmentsMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/entity/AttachmentType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/entity/AttachmentType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/params/AttachmentParam.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/params/AttachmentParam.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/AttachmentsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/AttachmentsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/AttachmentsServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/AttachmentsServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/utils/LocalImgUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/utils/LocalImgUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/AttachmentsMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/AttachmentsMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/changyue/blogserver/mapper/AttachmentMapperTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/changyue/blogserver/mapper/AttachmentMapperTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/changyue/blogserver/ulits/OtherTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/changyue/blogserver/ulits/OtherTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/dao/AttachmentsMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/dao/AttachmentsMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/AttachmentsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/AttachmentsService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/impl/AttachmentsServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/impl/AttachmentsServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/utils/LocalImgUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/utils/LocalImgUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mapper/AttachmentsMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mapper/AttachmentsMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/changyue/blogserver/mapper/AttachmentMapperTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/changyue/blogserver/mapper/AttachmentMapperTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/changyue/blogserver/ulits/OtherTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/changyue/blogserver/ulits/OtherTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../blog-vue/src/views/Attachment.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../blog-vue/src/views/Attachment.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../blog-vue/src/views/Post.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../blog-vue/src/views/Post.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../blog-vue/src/views/PostList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../blog-vue/src/views/PostList.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../blog-vue/src/views/Tag.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../blog-vue/src/views/Tag.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -368,7 +272,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.OtherTest">
+  <component name="RunManager" selected="Spring Boot.BlogServerApplication">
     <configuration name="MybatisGeneratorUtils" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.changyue.blogserver.utils.MybatisGeneratorUtils" />
       <module name="blog-server" />
@@ -453,9 +357,9 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.OtherTest" />
+        <item itemvalue="JUnit.AttachmentMapperTest.test" />
         <item itemvalue="JUnit.OtherTest.main" />
         <item itemvalue="JUnit.ReentrantLockTest.reentrantLockTest" />
-        <item itemvalue="JUnit.AttachmentMapperTest.test" />
         <item itemvalue="Application.MybatisGeneratorUtils" />
       </list>
     </recent_temporary>
@@ -559,7 +463,9 @@
       <workItem from="1584234136432" duration="14481000" />
       <workItem from="1584253180474" duration="127000" />
       <workItem from="1584253319621" duration="632000" />
-      <workItem from="1584253972615" duration="22268000" />
+      <workItem from="1584253972615" duration="22438000" />
+      <workItem from="1584322717563" duration="292000" />
+      <workItem from="1584323326713" duration="13299000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;新增解决跨域的Filter&quot;">
       <created>1583066529300</created>
@@ -615,10 +521,10 @@
     <state x="393" y="44" key="#Notifications/0.0.1366.728@0.0.1366.728" timestamp="1579526385895" />
     <state x="552" y="178" key="#Notifications/0.0.1920.1040@0.0.1920.1040" timestamp="1579508413256" />
     <state x="552" y="65" key="#Notifications/0.0.1920.1080@0.0.1920.1080" timestamp="1584005738250" />
-    <state x="480" y="128" key="#Project_Structure" timestamp="1583326313918">
+    <state x="480" y="128" key="#Project_Structure" timestamp="1584325992909">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="480" y="128" key="#Project_Structure/0.0.1920.1080@0.0.1920.1080" timestamp="1583326313918" />
+    <state x="480" y="128" key="#Project_Structure/0.0.1920.1080@0.0.1920.1080" timestamp="1584325992909" />
     <state x="400" y="127" key="#Project_Structure/0.23.1600.877@0.23.1600.877" timestamp="1582357639765" />
     <state x="560" y="205" key="#SQL_Dialects" timestamp="1583158371728">
       <screen x="0" y="0" width="1920" height="1080" />
@@ -634,12 +540,12 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="691" y="350" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1583049382803" />
-    <state x="765" y="191" key="#com.intellij.ide.util.MemberChooser" timestamp="1584282215304">
+    <state x="765" y="191" key="#com.intellij.ide.util.MemberChooser" timestamp="1584334314641">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="544" y="129" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1582026324307" />
     <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1579509312320" />
-    <state x="765" y="191" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1584282215304" />
+    <state x="765" y="191" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1584334314641" />
     <state x="765" y="196" key="#com.intellij.ide.util.MemberChooser/0.23.1920.977@0.23.1920.977" timestamp="1582854937649" />
     <state x="698" y="323" key="#com.intellij.ide.util.PackageChooserDialog" timestamp="1584252528263">
       <screen x="0" y="0" width="1920" height="1080" />
@@ -687,98 +593,98 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="118" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1582016215114" />
-    <state width="1920" height="365" key="GridCell.Tab.0.bottom" timestamp="1584282447502">
+    <state width="1920" height="365" key="GridCell.Tab.0.bottom" timestamp="1584335821278">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1366" height="258" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1582028403866" />
-    <state width="1920" height="365" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1584282447502" />
+    <state width="1920" height="365" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1584335821278" />
     <state width="1600" height="571" key="GridCell.Tab.0.bottom/0.23.1600.877@0.23.1600.877" timestamp="1582361155776" />
     <state width="1920" height="251" key="GridCell.Tab.0.bottom/0.23.1920.1057@0.23.1920.1057" timestamp="1582815745703" />
-    <state width="1920" height="317" key="GridCell.Tab.0.bottom/0.23.1920.977@0.23.1920.977" timestamp="1584276831966" />
-    <state width="1920" height="365" key="GridCell.Tab.0.center" timestamp="1584282447500">
+    <state width="1920" height="395" key="GridCell.Tab.0.bottom/0.23.1920.977@0.23.1920.977" timestamp="1584334793653" />
+    <state width="1920" height="365" key="GridCell.Tab.0.center" timestamp="1584335821277">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1366" height="258" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1582028403865" />
-    <state width="1920" height="365" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1584282447500" />
+    <state width="1920" height="365" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1584335821277" />
     <state width="1600" height="571" key="GridCell.Tab.0.center/0.23.1600.877@0.23.1600.877" timestamp="1582361155775" />
     <state width="1920" height="251" key="GridCell.Tab.0.center/0.23.1920.1057@0.23.1920.1057" timestamp="1582815745702" />
-    <state width="1920" height="317" key="GridCell.Tab.0.center/0.23.1920.977@0.23.1920.977" timestamp="1584276831965" />
-    <state width="1920" height="365" key="GridCell.Tab.0.left" timestamp="1584282447498">
+    <state width="1920" height="395" key="GridCell.Tab.0.center/0.23.1920.977@0.23.1920.977" timestamp="1584334793652" />
+    <state width="1920" height="365" key="GridCell.Tab.0.left" timestamp="1584335821277">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1366" height="258" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1582028403865" />
-    <state width="1920" height="365" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1584282447498" />
+    <state width="1920" height="365" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1584335821277" />
     <state width="1600" height="571" key="GridCell.Tab.0.left/0.23.1600.877@0.23.1600.877" timestamp="1582361155774" />
     <state width="1920" height="251" key="GridCell.Tab.0.left/0.23.1920.1057@0.23.1920.1057" timestamp="1582815745702" />
-    <state width="1920" height="317" key="GridCell.Tab.0.left/0.23.1920.977@0.23.1920.977" timestamp="1584276831963" />
-    <state width="1920" height="365" key="GridCell.Tab.0.right" timestamp="1584282447502">
+    <state width="1920" height="395" key="GridCell.Tab.0.left/0.23.1920.977@0.23.1920.977" timestamp="1584334793651" />
+    <state width="1920" height="365" key="GridCell.Tab.0.right" timestamp="1584335821278">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1366" height="258" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1582028403866" />
-    <state width="1920" height="365" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1584282447502" />
+    <state width="1920" height="365" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1584335821278" />
     <state width="1600" height="571" key="GridCell.Tab.0.right/0.23.1600.877@0.23.1600.877" timestamp="1582361155775" />
     <state width="1920" height="251" key="GridCell.Tab.0.right/0.23.1920.1057@0.23.1920.1057" timestamp="1582815745702" />
-    <state width="1920" height="317" key="GridCell.Tab.0.right/0.23.1920.977@0.23.1920.977" timestamp="1584276831966" />
-    <state width="1920" height="365" key="GridCell.Tab.1.bottom" timestamp="1584281907049">
+    <state width="1920" height="395" key="GridCell.Tab.0.right/0.23.1920.977@0.23.1920.977" timestamp="1584334793653" />
+    <state width="1920" height="365" key="GridCell.Tab.1.bottom" timestamp="1584335821280">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1366" height="258" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1582028403867" />
-    <state width="1920" height="365" key="GridCell.Tab.1.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1584281907049" />
+    <state width="1920" height="365" key="GridCell.Tab.1.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1584335821280" />
     <state width="1600" height="571" key="GridCell.Tab.1.bottom/0.23.1600.877@0.23.1600.877" timestamp="1582361155777" />
     <state width="1920" height="251" key="GridCell.Tab.1.bottom/0.23.1920.1057@0.23.1920.1057" timestamp="1582815745704" />
-    <state width="1920" height="365" key="GridCell.Tab.1.bottom/0.23.1920.977@0.23.1920.977" timestamp="1584280627987" />
-    <state width="1920" height="365" key="GridCell.Tab.1.center" timestamp="1584281907048">
+    <state width="1920" height="365" key="GridCell.Tab.1.bottom/0.23.1920.977@0.23.1920.977" timestamp="1584335226532" />
+    <state width="1920" height="365" key="GridCell.Tab.1.center" timestamp="1584335821279">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1366" height="258" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1582028403867" />
-    <state width="1920" height="365" key="GridCell.Tab.1.center/0.0.1920.1080@0.0.1920.1080" timestamp="1584281907048" />
+    <state width="1920" height="365" key="GridCell.Tab.1.center/0.0.1920.1080@0.0.1920.1080" timestamp="1584335821279" />
     <state width="1600" height="571" key="GridCell.Tab.1.center/0.23.1600.877@0.23.1600.877" timestamp="1582361155776" />
     <state width="1920" height="251" key="GridCell.Tab.1.center/0.23.1920.1057@0.23.1920.1057" timestamp="1582815745703" />
-    <state width="1920" height="365" key="GridCell.Tab.1.center/0.23.1920.977@0.23.1920.977" timestamp="1584280627986" />
-    <state width="1920" height="365" key="GridCell.Tab.1.left" timestamp="1584281907048">
+    <state width="1920" height="365" key="GridCell.Tab.1.center/0.23.1920.977@0.23.1920.977" timestamp="1584335226531" />
+    <state width="1920" height="365" key="GridCell.Tab.1.left" timestamp="1584335821279">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1366" height="258" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1582028403866" />
-    <state width="1920" height="365" key="GridCell.Tab.1.left/0.0.1920.1080@0.0.1920.1080" timestamp="1584281907048" />
+    <state width="1920" height="365" key="GridCell.Tab.1.left/0.0.1920.1080@0.0.1920.1080" timestamp="1584335821279" />
     <state width="1600" height="571" key="GridCell.Tab.1.left/0.23.1600.877@0.23.1600.877" timestamp="1582361155776" />
     <state width="1920" height="251" key="GridCell.Tab.1.left/0.23.1920.1057@0.23.1920.1057" timestamp="1582815745703" />
-    <state width="1920" height="365" key="GridCell.Tab.1.left/0.23.1920.977@0.23.1920.977" timestamp="1584280627985" />
-    <state width="1920" height="365" key="GridCell.Tab.1.right" timestamp="1584281907049">
+    <state width="1920" height="365" key="GridCell.Tab.1.left/0.23.1920.977@0.23.1920.977" timestamp="1584335226531" />
+    <state width="1920" height="365" key="GridCell.Tab.1.right" timestamp="1584335821280">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1366" height="258" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1582028403867" />
-    <state width="1920" height="365" key="GridCell.Tab.1.right/0.0.1920.1080@0.0.1920.1080" timestamp="1584281907049" />
+    <state width="1920" height="365" key="GridCell.Tab.1.right/0.0.1920.1080@0.0.1920.1080" timestamp="1584335821280" />
     <state width="1600" height="571" key="GridCell.Tab.1.right/0.23.1600.877@0.23.1600.877" timestamp="1582361155777" />
     <state width="1920" height="251" key="GridCell.Tab.1.right/0.23.1920.1057@0.23.1920.1057" timestamp="1582815745704" />
-    <state width="1920" height="365" key="GridCell.Tab.1.right/0.23.1920.977@0.23.1920.977" timestamp="1584280627987" />
-    <state width="1920" height="365" key="GridCell.Tab.2.bottom" timestamp="1584281907051">
+    <state width="1920" height="365" key="GridCell.Tab.1.right/0.23.1920.977@0.23.1920.977" timestamp="1584335226532" />
+    <state width="1920" height="365" key="GridCell.Tab.2.bottom" timestamp="1584335821282">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1366" height="258" key="GridCell.Tab.2.bottom/0.0.1366.728@0.0.1366.728" timestamp="1582028403869" />
-    <state width="1920" height="365" key="GridCell.Tab.2.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1584281907051" />
+    <state width="1920" height="365" key="GridCell.Tab.2.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1584335821282" />
     <state width="1920" height="251" key="GridCell.Tab.2.bottom/0.23.1920.1057@0.23.1920.1057" timestamp="1582815745705" />
-    <state width="1920" height="365" key="GridCell.Tab.2.bottom/0.23.1920.977@0.23.1920.977" timestamp="1584275332475" />
-    <state width="1920" height="365" key="GridCell.Tab.2.center" timestamp="1584281907050">
+    <state width="1920" height="395" key="GridCell.Tab.2.bottom/0.23.1920.977@0.23.1920.977" timestamp="1584334793495" />
+    <state width="1920" height="365" key="GridCell.Tab.2.center" timestamp="1584335821281">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1366" height="258" key="GridCell.Tab.2.center/0.0.1366.728@0.0.1366.728" timestamp="1582028403868" />
-    <state width="1920" height="365" key="GridCell.Tab.2.center/0.0.1920.1080@0.0.1920.1080" timestamp="1584281907050" />
+    <state width="1920" height="365" key="GridCell.Tab.2.center/0.0.1920.1080@0.0.1920.1080" timestamp="1584335821281" />
     <state width="1920" height="251" key="GridCell.Tab.2.center/0.23.1920.1057@0.23.1920.1057" timestamp="1582815745704" />
-    <state width="1920" height="365" key="GridCell.Tab.2.center/0.23.1920.977@0.23.1920.977" timestamp="1584275332473" />
-    <state width="1920" height="365" key="GridCell.Tab.2.left" timestamp="1584281907050">
+    <state width="1920" height="395" key="GridCell.Tab.2.center/0.23.1920.977@0.23.1920.977" timestamp="1584334793494" />
+    <state width="1920" height="365" key="GridCell.Tab.2.left" timestamp="1584335821281">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1366" height="258" key="GridCell.Tab.2.left/0.0.1366.728@0.0.1366.728" timestamp="1582028403868" />
-    <state width="1920" height="365" key="GridCell.Tab.2.left/0.0.1920.1080@0.0.1920.1080" timestamp="1584281907050" />
+    <state width="1920" height="365" key="GridCell.Tab.2.left/0.0.1920.1080@0.0.1920.1080" timestamp="1584335821281" />
     <state width="1920" height="251" key="GridCell.Tab.2.left/0.23.1920.1057@0.23.1920.1057" timestamp="1582815745704" />
-    <state width="1920" height="365" key="GridCell.Tab.2.left/0.23.1920.977@0.23.1920.977" timestamp="1584275332472" />
-    <state width="1920" height="365" key="GridCell.Tab.2.right" timestamp="1584281907051">
+    <state width="1920" height="395" key="GridCell.Tab.2.left/0.23.1920.977@0.23.1920.977" timestamp="1584334793493" />
+    <state width="1920" height="365" key="GridCell.Tab.2.right" timestamp="1584335821282">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1366" height="258" key="GridCell.Tab.2.right/0.0.1366.728@0.0.1366.728" timestamp="1582028403868" />
-    <state width="1920" height="365" key="GridCell.Tab.2.right/0.0.1920.1080@0.0.1920.1080" timestamp="1584281907051" />
+    <state width="1920" height="365" key="GridCell.Tab.2.right/0.0.1920.1080@0.0.1920.1080" timestamp="1584335821282" />
     <state width="1920" height="251" key="GridCell.Tab.2.right/0.23.1920.1057@0.23.1920.1057" timestamp="1582815745705" />
-    <state width="1920" height="365" key="GridCell.Tab.2.right/0.23.1920.977@0.23.1920.977" timestamp="1584275332474" />
+    <state width="1920" height="395" key="GridCell.Tab.2.right/0.23.1920.977@0.23.1920.977" timestamp="1584334793494" />
     <state x="490" y="175" key="Maven.ArtifactSearchDialog" timestamp="1579398158043">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -859,12 +765,12 @@
     </state>
     <state x="347" y="176" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1581000971588" />
     <state x="488" y="261" key="run.anything.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1584282378748" />
-    <state x="486" y="73" width="945" height="1006" key="search.everywhere.popup" timestamp="1584275310741">
+    <state x="486" y="73" width="945" height="1006" key="search.everywhere.popup" timestamp="1584341587634">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1582026223553" />
     <state x="486" y="70" width="945" height="969" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1579507306804" />
-    <state x="486" y="73" width="945" height="1006" key="search.everywhere.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1584275310741" />
+    <state x="486" y="73" width="945" height="1006" key="search.everywhere.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1584341587634" />
     <state x="405" y="82" width="788" height="817" key="search.everywhere.popup/0.23.1600.877@0.23.1600.877" timestamp="1582361274351" />
     <state x="486" y="94" width="945" height="985" key="search.everywhere.popup/0.23.1920.1057@0.23.1920.1057" timestamp="1582806887472" />
     <state x="486" y="89" width="945" height="910" key="search.everywhere.popup/0.23.1920.977@0.23.1920.977" timestamp="1582860138085" />

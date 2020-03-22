@@ -5,7 +5,7 @@ import com.changyue.blogserver.model.entity.Post;
 import com.changyue.blogserver.model.params.PostQuery;
 import com.changyue.blogserver.model.vo.PostVO;
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.data.repository.query.Param;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Repository;
 
@@ -68,6 +68,14 @@ public interface PostMapper extends BaseMapper<Post> {
      * @return 文章
      */
     List<PostVO> listAllByQuery(@Nonnull @Param("postQuery") PostQuery postQuery, @Param("userId") Integer userId);
+
+    /**
+     * 通过ID查找ES文档的ID
+     *
+     * @param id id
+     * @return ES文档ID
+     */
+    String findDocumentIdById(@Nonnull Integer id);
 
     /**
      * 更新点赞。

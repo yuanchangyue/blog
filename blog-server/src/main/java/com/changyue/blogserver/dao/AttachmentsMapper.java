@@ -1,16 +1,12 @@
 package com.changyue.blogserver.dao;
 
 import com.changyue.blogserver.dao.base.BaseMapper;
-import com.changyue.blogserver.model.entity.AttachmentType;
 import com.changyue.blogserver.model.entity.Attachments;
 import com.changyue.blogserver.model.params.AttachmentQuery;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.data.elasticsearch.annotations.Query;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.List;
 

@@ -120,6 +120,14 @@ public interface PostService extends BaseService<Post, Integer> {
     long countByStatus(Integer status);
 
     /**
+     * 通过ID查找ES文档的ID
+     *
+     * @param id id
+     * @return ES文档ID
+     */
+    String getDocumentIdById(Integer id);
+
+    /**
      * 转化成PostVO
      *
      * @param post 文章

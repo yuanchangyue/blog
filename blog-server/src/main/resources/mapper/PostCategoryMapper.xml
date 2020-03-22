@@ -76,7 +76,7 @@
         insert into post_categories (create_time, deleted,
         update_time, category_id, post_id)
         values
-        <foreach collection="list" item="postCategory" index="index" separator=",">
+        <foreach collection="postCategories" item="postCategory" index="index" separator=",">
            (#{postCategory.createTime}, #{postCategory.deleted},
             #{postCategory.updateTime}, #{postCategory.categoryId},
             #{postCategory.postId})

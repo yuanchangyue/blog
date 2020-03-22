@@ -2,13 +2,10 @@ package com.changyue.blogserver.filter;
 
 import com.alibaba.fastjson.JSONObject;
 import com.changyue.blogserver.model.entity.User;
-import com.changyue.blogserver.utils.constant.ConstantProperties;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.AccessControlFilter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 import javax.servlet.ServletRequest;
@@ -25,11 +22,8 @@ import java.util.Map;
  */
 @Configuration
 @Configurable
-@EnableConfigurationProperties(ConstantProperties.class)
 public class CustomAccessControlFilter extends AccessControlFilter {
 
-    @Autowired
-    ConstantProperties constantProperties;
 
     @Override
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object o) throws Exception {

@@ -4,10 +4,12 @@ import com.changyue.blogserver.dao.PostMapper;
 import com.changyue.blogserver.exception.CreateException;
 import com.changyue.blogserver.exception.NotFindException;
 import com.changyue.blogserver.exception.UpdateException;
+import com.changyue.blogserver.handler.Result;
 import com.changyue.blogserver.model.dto.CategoryDTO;
 import com.changyue.blogserver.model.dto.TagDTO;
 import com.changyue.blogserver.model.dto.UserDTO;
 import com.changyue.blogserver.model.entity.*;
+import com.changyue.blogserver.model.enums.ElasticsearchStatus;
 import com.changyue.blogserver.model.enums.PostStatus;
 import com.changyue.blogserver.model.params.PostQuery;
 import com.changyue.blogserver.model.vo.PostVO;
@@ -16,8 +18,8 @@ import com.changyue.blogserver.utils.PageInfoUtil;
 import com.changyue.blogserver.utils.ShiroUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import io.searchbox.core.DocumentResult;
 import lombok.extern.slf4j.Slf4j;
-import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,7 +28,6 @@ import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
 import java.util.*;
-import java.util.concurrent.CyclicBarrier;
 import java.util.stream.Collectors;
 
 /**
@@ -55,6 +56,9 @@ public class PostServiceImpl implements PostService {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private ElasticsearchService elasticsearchService;
 
     @Override
     public PageInfo<PostVO> pageBy(Integer pageIndex, Integer pageSize) {
@@ -90,10 +94,8 @@ public class PostServiceImpl implements PostService {
         Assert.notNull(pageSize, "页数不能为空");
         Assert.notNull(pageIndex, "页索引不能为空");
 
-        UserDTO currentUser = userService.getCurrentUser();
-
         PageHelper.startPage(pageIndex, pageSize);
-        List<PostVO> posts = postMapper.listAllByQuery(postQuery, currentUser.getId());
+        List<PostVO> posts = postMapper.listAllByQuery(postQuery, ShiroUtils.getUser().getId());
 
         return new PageInfo<>(posts, 3);
     }
@@ -153,22 +155,17 @@ public class PostServiceImpl implements PostService {
             postTagService.removeByPostId(createdOrUpdate.getId());
             postCategoryService.removeByPostId(createdOrUpdate.getId());
 
-            List<Tag> tags = tagService.listAllByIds(new ArrayList<>(tagIds));
-            List<Category> categories = categoryService.listAllByIds(new ArrayList<>(categoryIds));
-
             //没有选择标签
             if (tagIds.isEmpty()) {
-                Tag tag = new Tag();
-                tag.setId(0);
-                tags.add(tag);
+                tagIds.add(0);
             }
-
             //没有选择类别
             if (categoryIds.isEmpty()) {
-                Category category = new Category();
-                category.setId(0);
-                categories.add(category);
+                categoryIds.add(0);
             }
+
+            List<Tag> tags = tagService.listAllByIds(new ArrayList<>(tagIds));
+            List<Category> categories = categoryService.listAllByIds(new ArrayList<>(categoryIds));
 
             //新增post tag
             log.debug("新增post tag : [{}]", tagIds);
@@ -209,6 +206,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    @Transactional
     public Post update(Post post) {
         Assert.notNull(post, "文章不能为空");
         //更新文章
@@ -219,6 +217,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    @Transactional
     public Post create(Post post) {
 
         //获取当前的用户
@@ -226,12 +225,16 @@ public class PostServiceImpl implements PostService {
         //赋值当前的用户ID
         post.setUserId(currentUser.getId());
 
+        //创建文档, 并为文章的赋值es Id
+        Result result = elasticsearchService.indexArticle(post, ElasticsearchStatus.CREATION);
+        DocumentResult documentResult = (DocumentResult) result.getData();
+        post.setDocumentId(documentResult.getId());
+
         //插入文章到数据库
         int effectNum = postMapper.insertSelective(post);
         if (effectNum <= 0) {
             throw new CreateException("文章创建失败").setErrData(post);
         }
-
         return post;
     }
 
@@ -255,6 +258,9 @@ public class PostServiceImpl implements PostService {
     @Transactional(rollbackFor = Exception.class)
     public int removeById(Integer id) {
         Assert.notNull(id, "文章的id不能为空");
+
+        //移除es中的文章
+        elasticsearchService.removeArticle(this.getDocumentIdById(id));
 
         //移除文章相关联的标签
         postTagService.removeByPostId(id);
@@ -311,6 +317,12 @@ public class PostServiceImpl implements PostService {
     @Override
     public long countByStatus(Integer status) {
         return Optional.ofNullable(postMapper.countAllByStatus(status)).orElse(0L);
+    }
+
+    @Override
+    public String getDocumentIdById(Integer id) {
+        Assert.notNull(id, "post Id 不能为空");
+        return postMapper.findDocumentIdById(id);
     }
 
     @Override

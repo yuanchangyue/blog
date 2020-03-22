@@ -37,7 +37,11 @@ spring:
       enabled: true
       max-file-size: 10MB
       max-request-size: 10MB
-
+  elasticsearch:
+    jest:
+      url: http://changyue.club:9201/
+      connection-timeout: 20000
+      read-timeout: 20000
 #mybatis
 mybatis:
   type-aliases-package: com.changyue.blogserver.model
@@ -46,4 +50,4 @@ mybatis:
     #开启驼峰命名
     map-underscore-to-camel-case: true
     #开启sql日志
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    #log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

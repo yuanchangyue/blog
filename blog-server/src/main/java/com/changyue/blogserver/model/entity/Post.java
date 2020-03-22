@@ -70,11 +70,11 @@ public class Post extends BaseEntity {
      * 文章密码
      */
     private String password;
-    
+
     /**
-     * 优先权
+     * ES文档的id
      */
-    private Integer topPriority;
+    private String documentId;
 
     /**
      * 点赞
@@ -82,14 +82,9 @@ public class Post extends BaseEntity {
     private Long likes;
 
     /**
-     * 编辑时间
+     * 修改时间
      */
     private Date editTime;
-
-    /**
-     * 创建时间
-     */
-    private Date createTime;
 
     /**
      * 用户ID

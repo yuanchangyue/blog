@@ -1,11 +1,10 @@
 package com.changyue.blogserver.dao;
 
 import com.changyue.blogserver.dao.base.BaseMapper;
-
 import com.changyue.blogserver.model.entity.PostCategory;
 import lombok.NonNull;
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.data.repository.query.Param;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;

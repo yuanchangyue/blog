@@ -14,10 +14,12 @@ public class PostQuery {
      * 关键词
      */
     private String keyWords;
+
     /**
      * 状态
      */
     private Integer status;
+
     /**
      * 类别
      */

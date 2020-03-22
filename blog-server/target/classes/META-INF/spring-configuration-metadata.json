@@ -1,21 +1,29 @@
 {
   "groups": [
     {
-      "name": "constant",
-      "type": "com.changyue.blogserver.utils.constant.ConstantProperties",
-      "sourceType": "com.changyue.blogserver.utils.constant.ConstantProperties"
+      "name": "spring.elasticsearch.jest",
+      "type": "com.changyue.blogserver.config.properties.EsProperties",
+      "sourceType": "com.changyue.blogserver.config.properties.EsProperties"
     }
   ],
   "properties": [
     {
-      "name": "constant.l-o-g-i-n",
-      "type": "java.lang.String",
-      "sourceType": "com.changyue.blogserver.utils.constant.ConstantProperties"
+      "name": "spring.elasticsearch.jest.connection-timeout",
+      "type": "java.lang.Integer",
+      "description": "连接超时",
+      "sourceType": "com.changyue.blogserver.config.properties.EsProperties"
     },
     {
-      "name": "constant.u-r-l",
+      "name": "spring.elasticsearch.jest.read-timeout",
+      "type": "java.lang.Integer",
+      "description": "读超时",
+      "sourceType": "com.changyue.blogserver.config.properties.EsProperties"
+    },
+    {
+      "name": "spring.elasticsearch.jest.url",
       "type": "java.lang.String",
-      "sourceType": "com.changyue.blogserver.utils.constant.ConstantProperties"
+      "description": "es访问地址",
+      "sourceType": "com.changyue.blogserver.config.properties.EsProperties"
     }
   ],
   "hints": []

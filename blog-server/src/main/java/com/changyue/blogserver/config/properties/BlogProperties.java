@@ -24,4 +24,11 @@ public class BlogProperties {
 
     public static final String FILE_PROTOCOL = "file:///";
 
+    public static final String ES_INDEX = "blog";
+
+    public static final String ES_TYPE = "article";
+
+    public static final int ES_TAG_POST = 0;
+
+
 }

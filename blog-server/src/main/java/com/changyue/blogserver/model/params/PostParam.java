@@ -2,10 +2,8 @@ package com.changyue.blogserver.model.params;
 
 import com.changyue.blogserver.model.dto.base.InputConvert;
 import com.changyue.blogserver.model.entity.Post;
-import io.netty.channel.MessageSizeEstimator;
 import lombok.Data;
 
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.Date;
@@ -42,8 +40,6 @@ public class PostParam implements InputConvert<Post> {
 
     @Size(max = 255, message = "文章密码的字符长度不能超过 {max}")
     private String password;
-
-    private Integer topPriority = 0;
 
     private Date createTime;
 

@@ -10,24 +10,77 @@
    - 顺序扫描
    - 全文搜索
   
-## ElasticSearch
+### Elasticsearch
 
 > Elasticsearch （ES）是一个基于 Lucene 的开源搜索引擎，它不但稳定、可靠、快速，而且也具有良好的水平扩展能力，是专门为分布式环境设计的。
 > 特点： 1.分布式 2.高可用 3.多类型 4.多API 5.面向文档 6.异步写入 7.近实时
 
-### 核心
-+ 索引 
 
-
-## SpringBoot 和 ElasticSearch
+### SpringBoot 和 Elasticsearch
 
 > SpringBoot 默认支持两种技术来实现和ES交互
-> 1. Jest(默认不生效,)
+> 1. Jest(默认不生效)
 > 2. SpringData ElasticSearch
 >    1) clusterNodes 节点信息
 >    2) ElasticsearchRepository 操作ES (类似JPA)
 >
 
+### docker安装Elasticsearch以及简单的运行
++ pull 拉取镜像
+    ```
+    docker pull docker.elastic.co/elasticsearch/elasticsearch:6.3.2
+    ``` 
++ 启动es
+
+    名字为es, 9200端口, 启动单节点 ，限制虚拟内存大小
+    ```
+    docker run -e ES_JAVA_OPTS="-Xms256m -Xmx256m" -e “discovery.type=single-node” -d -p 9201:9200 -p 9301:9300 --name es elasticsearch:6.8.4
+    ```
++ 配置es的文件
+    
+    ```
+    docker exec -it es /bin/bash
+    ```
+    在elasticsearch.yml中添加, 配置跨域
+    ```
+    http.cors.enabled: true
+    http.cors.allow-origin: "*"
+    ```
+    最后 `curl 'http://localhost:9201/'`（使用域名同样可以，注意开启对应的端口：9201）, 得到如下：
+
+    ```
+    {
+      "name" : "9WjTW_p",
+      "cluster_name" : "docker-cluster",
+      "cluster_uuid" : "L_z1NHRuTbyB2f_s8A9glw",
+      "version" : {
+        "number" : "6.8.4",
+        "build_flavor" : "default",
+        "build_type" : "docker",
+        "build_hash" : "bca0c8d",
+        "build_date" : "2019-10-16T06:19:49.319352Z",
+        "build_snapshot" : false,
+        "lucene_version" : "7.7.2",
+        "minimum_wire_compatibility_version" : "5.6.0",
+        "minimum_index_compatibility_version" : "5.0.0"
+      },
+      "tagline" : "You Know, for Search"
+    }
+    
+    ```
+
+### 正式使用前的需知的基本概念
+
+`索引`: es中的一个逻辑存储（关系型数据库的数据库）
+
+`索引类型`:索引对象可以存储多个不同用途的对象，通过索引类型（index_type）可以区分单个索引中的不同对象，(关系型数据库中的表)
+
+`文档`:存储在es中的主要实体叫文档（document），可以理解为关系型数据库中表的一行记录。每个文档由多个字段构成
+
+`映射`:描述了文档可能具有的字段或属性。每个字段的数据类型（如 string, integer 或 date
+
+推荐到查看文档：`Elasticsearch: 权威指南`
+https://www.elastic.co/guide/cn/elasticsearch/guide/current/_analytics.html
 
 ## JPA配置信息
 

@@ -13,7 +13,7 @@
         <result column="summary" jdbcType="VARCHAR" property="summary"/>
         <result column="thumbnail" jdbcType="VARCHAR" property="thumbnail"/>
         <result column="title" jdbcType="VARCHAR" property="title"/>
-        <result column="top_priority" jdbcType="INTEGER" property="topPriority"/>
+        <result column="document_id" jdbcType="VARCHAR" property="documentId"/>
         <result column="url" jdbcType="VARCHAR" property="url"/>
         <result column="visits" jdbcType="BIGINT" property="visits"/>
         <result column="format_content" jdbcType="LONGVARCHAR" property="formatContent"/>
@@ -23,7 +23,7 @@
 
     <sql id="Base_Column_List">
         id, disallow_comment, edit_time, create_time,likes, password, status, summary, thumbnail,
-        title, top_priority, url, visits ,user_id
+        title, document_id, url, visits ,user_id
     </sql>
 
     <sql id="Blob_Column_List">
@@ -97,8 +97,8 @@
             <if test="title != null">
                 and title = #{title,jdbcType=VARCHAR},
             </if>
-            <if test="topPriority != null">
-                and top_priority = #{topPriority,jdbcType=INTEGER},
+            <if test="documentId != null">
+                and document_id = #{documentId,jdbcType=VARCHAR},
             </if>
             <if test="url != null">
                 and url = #{url,jdbcType=VARCHAR},
@@ -148,8 +148,8 @@
             <if test="title != null">
                 and title = #{title,jdbcType=VARCHAR},
             </if>
-            <if test="topPriority != null">
-                and top_priority = #{topPriority,jdbcType=INTEGER},
+            <if test="documentId != null">
+                and document_id = #{documentId,jdbcType=VARCHAR},
             </if>
             <if test="url != null">
                 and url = #{url,jdbcType=VARCHAR},
@@ -189,7 +189,7 @@
         <result column="summary" jdbcType="VARCHAR" property="summary"/>
         <result column="thumbnail" jdbcType="VARCHAR" property="thumbnail"/>
         <result column="title" jdbcType="VARCHAR" property="title"/>
-        <result column="top_priority" jdbcType="INTEGER" property="topPriority"/>
+        <result column="document_id" jdbcType="VARCHAR" property="documentId"/>
         <result column="url" jdbcType="VARCHAR" property="url"/>
         <result column="visits" jdbcType="BIGINT" property="visits"/>
         <result column="format_content" jdbcType="LONGVARCHAR" property="formatContent"/>
@@ -210,7 +210,7 @@
 
     <sql id="Post_Column_List">
         p.id, p.disallow_comment, p.edit_time, p.likes, p.status, p.summary, p.thumbnail,
-        p.title, p.top_priority, p.url, p.visits ,p.format_content, p.original_content
+        p.title, p.document_id, p.url, p.visits ,p.format_content, p.original_content
     </sql>
 
     <sql id="Category_Column_List">
@@ -254,17 +254,24 @@
         where id = #{id,jdbcType=INTEGER}
     </delete>
 
+      <select id="findDocumentIdById" parameterType="java.lang.Integer" resultType="java.lang.String">
+        select document_id
+        from posts
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+
     <insert id="insert" parameterType="post" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
         insert into posts (id, disallow_comment,
                            edit_time, create_time, likes, password,
                            status, summary, thumbnail,
-                           title, top_priority, url,
+                           title, document_id, url,
                            visits, format_content, original_content, user_id)
         values (#{id,jdbcType=INTEGER}, #{disallowComment,jdbcType=INTEGER},
                 #{editTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{likes,jdbcType=BIGINT},
                 #{password,jdbcType=VARCHAR},
                 #{status,jdbcType=INTEGER}, #{summary,jdbcType=VARCHAR}, #{thumbnail,jdbcType=VARCHAR},
-                #{title,jdbcType=VARCHAR}, #{topPriority,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR},
+                #{title,jdbcType=VARCHAR}, #{documentId,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR},
                 #{visits,jdbcType=BIGINT}, #{formatContent,jdbcType=LONGVARCHAR},
                 #{originalContent,jdbcType=LONGVARCHAR}, #{userId,jdbcType=INTEGER})
     </insert>
@@ -302,8 +309,8 @@
             <if test="title != null">
                 title,
             </if>
-            <if test="topPriority != null">
-                top_priority,
+            <if test="documentId != null">
+                document_id,
             </if>
             <if test="url != null">
                 url,
@@ -352,8 +359,8 @@
             <if test="title != null">
                 #{title,jdbcType=VARCHAR},
             </if>
-            <if test="topPriority != null">
-                #{topPriority,jdbcType=INTEGER},
+            <if test="documentId != null">
+                #{documentId,jdbcType=INTEGER},
             </if>
             <if test="url != null">
                 #{url,jdbcType=VARCHAR},
@@ -403,8 +410,8 @@
             <if test="title != null">
                 title = #{title,jdbcType=VARCHAR},
             </if>
-            <if test="topPriority != null">
-                top_priority = #{topPriority,jdbcType=INTEGER},
+            <if test="documentId != null">
+                document_id = #{documentId,jdbcType=VARCHAR},
             </if>
             <if test="url != null">
                 url = #{url,jdbcType=VARCHAR},
@@ -436,7 +443,7 @@
             summary          = #{summary,jdbcType=VARCHAR},
             thumbnail        = #{thumbnail,jdbcType=VARCHAR},
             title            = #{title,jdbcType=VARCHAR},
-            top_priority     = #{topPriority,jdbcType=INTEGER},
+            document_id     = #{documentId,jdbcType=VARCHAR},
             url              = #{url,jdbcType=VARCHAR},
             visits           = #{visits,jdbcType=BIGINT},
             format_content   = #{formatContent,jdbcType=LONGVARCHAR},

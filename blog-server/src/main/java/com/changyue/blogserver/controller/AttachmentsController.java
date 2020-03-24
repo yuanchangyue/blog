@@ -1,6 +1,6 @@
 package com.changyue.blogserver.controller;
 
-import com.changyue.blogserver.handler.Result;
+import com.changyue.blogserver.model.rep.Result;
 import com.changyue.blogserver.model.dto.AttachmentDTO;
 import com.changyue.blogserver.model.params.AttachmentQuery;
 import com.changyue.blogserver.serivce.AttachmentsService;

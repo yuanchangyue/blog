@@ -31,7 +31,7 @@ public class Article {
     /**
      * 文章内容
      */
-    private String formatContent;
+    private String originalContent;
 
     /**
      * 创建时间

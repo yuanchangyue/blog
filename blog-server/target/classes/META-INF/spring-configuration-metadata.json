@@ -1,12 +1,70 @@
 {
   "groups": [
     {
+      "name": "crawler.init.url",
+      "type": "com.changyue.blogserver.config.CrawlerConfig",
+      "sourceType": "com.changyue.blogserver.config.CrawlerConfig"
+    },
+    {
       "name": "spring.elasticsearch.jest",
       "type": "com.changyue.blogserver.config.properties.EsProperties",
       "sourceType": "com.changyue.blogserver.config.properties.EsProperties"
     }
   ],
   "properties": [
+    {
+      "name": "crawler.init.url.cookie-name",
+      "type": "java.lang.String",
+      "description": "cookie 名称",
+      "sourceType": "com.changyue.blogserver.config.CrawlerConfig"
+    },
+    {
+      "name": "crawler.init.url.crawler-help-next-paging-size",
+      "type": "java.lang.Integer",
+      "description": "#csdn 分页范围",
+      "sourceType": "com.changyue.blogserver.config.CrawlerConfig"
+    },
+    {
+      "name": "crawler.init.url.crawler-url-list",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "com.changyue.blogserver.config.CrawlerConfig"
+    },
+    {
+      "name": "crawler.init.url.help-crawler-xpath",
+      "type": "java.lang.String",
+      "description": "csdn 下一个页面的抓取规则",
+      "sourceType": "com.changyue.blogserver.config.CrawlerConfig"
+    },
+    {
+      "name": "crawler.init.url.init-crawler-xpath",
+      "type": "java.lang.String",
+      "description": "csdn 初始化页面抓取的规则",
+      "sourceType": "com.changyue.blogserver.config.CrawlerConfig"
+    },
+    {
+      "name": "crawler.init.url.is-used-proxy-ip",
+      "type": "java.lang.Boolean",
+      "description": "是否使用代理",
+      "sourceType": "com.changyue.blogserver.config.CrawlerConfig",
+      "defaultValue": false
+    },
+    {
+      "name": "crawler.init.url.prefix",
+      "type": "java.lang.String",
+      "description": "url 前缀",
+      "sourceType": "com.changyue.blogserver.config.CrawlerConfig"
+    },
+    {
+      "name": "crawler.init.url.spider",
+      "type": "us.codecraft.webmagic.Spider",
+      "sourceType": "com.changyue.blogserver.config.CrawlerConfig"
+    },
+    {
+      "name": "crawler.init.url.suffix",
+      "type": "java.lang.String",
+      "description": "url 后缀",
+      "sourceType": "com.changyue.blogserver.config.CrawlerConfig"
+    },
     {
       "name": "spring.elasticsearch.jest.connection-timeout",
       "type": "java.lang.Integer",

@@ -1,6 +1,6 @@
 package com.changyue.blogserver.controller;
 
-import com.changyue.blogserver.handler.Result;
+import com.changyue.blogserver.model.rep.Result;
 import com.changyue.blogserver.model.entity.Post;
 import com.changyue.blogserver.model.enums.ResultStatus;
 import com.changyue.blogserver.model.params.PostParam;

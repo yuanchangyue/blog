@@ -1,6 +1,7 @@
 package com.changyue.blogserver.handler;
 
 import com.changyue.blogserver.model.enums.ResultStatus;
+import com.changyue.blogserver.model.rep.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;

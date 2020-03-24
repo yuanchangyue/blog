@@ -82,6 +82,49 @@
 推荐到查看文档：`Elasticsearch: 权威指南`
 https://www.elastic.co/guide/cn/elasticsearch/guide/current/_analytics.html
 
+
+## 爬虫
+> WebMagic是一个简单灵活的Java爬虫框架。基于WebMagic，你可以快速开发出一个高效、易维护的爬虫
+
+### 整体思路
+
+1. 配置初始化的URL。访问URL-->解析URL-->获取用户的URL
+
+2. 抓取用户的数据（WebMagic）并分页处理。
+
+3. 抓取文章数据（WebMagic），如果抓取过程中出现失败，则采用selenium+Chrome 的方式抓取页面，并进行cookie重置
+
+4. 抓取的Html数据解析（解析器），封装并持久化
+
+5. 定时抓取。
+
+### 涉及到技术
+#### WebMagic基本的概念
++ `Downloader`
+
+    Downloader负责从互联网上下载页面，以便后续处理。WebMagic默认使用了[Apache HttpClient](http://hc.apache.org/index.html)作为下载工具。
++ `PageProcessor`
+    
+    PageProcessor负责解析页面，抽取有用信息，以及发现新的链接。WebMagic使用[Jsoup](http://jsoup.org/)作为HTML解析工具，并基于其开发了解析XPath的工具[Xsoup](https://github.com/code4craft/xsoup)。
++ `Scheduler`
+
+    Scheduler负责管理待抓取的URL，以及一些去重的工作。WebMagic默认提供了JDK的内存队列来管理URL，并用集合来进行去重。也支持使用Redis进行分布式管理。
++ `Pipeline`
+
+     Pipeline负责抽取结果的处理，包括计算、持久化到文件、数据库等。WebMagic默认提供了“输出到控制台”和“保存到文件”两种结果处理方案。
+
+#### Selenium
+> Selenium 是一个用于 Web 应用程序测试的工具。它的优点在于，浏览器能打开的页面，使用 selenium 就一定能获取到。
+
+> 调用chrome浏览器来获取Cookie，例如CSDN这类网站的cookie通过js来生成的，需要浏览器才能得到Cookie。
+
+#### Xpath
+
+#### 代理IP
+
+> 当我们对某些网站进行爬去的时候，我们经常会换IP来避免爬虫程序被封锁。其实也是一个比较简单的操作，目前网络上有很多IP代理商，例如西刺，芝麻，犀牛等等。这些代理商一般都会提供透明代理，匿名代理，高匿代理。
+
+
 ## JPA配置信息
 
 hibernate.hbm2ddl.auto 参数的作用主要用于：自动创建、更新、验证数据库表结构，有四个值。
@@ -110,6 +153,7 @@ show-sql 是否在日志中打印出自动生成的 SQL，方便调试的时候�
 ### 其他
 
 `@NotNull` 是 JSR303（Bean的校验框架）的注解，用于运行时检查一个属性是否为空，如果为空则不合法。
+
 `@NonNull` 是JSR 305（缺陷检查框架）的注解，是告诉编译器这个域不可能为空，当代码检查有空值时会给出一个风险警告，目前这个注解只有IDEA支持。
 可以参考的网址https://segmentfault.com/a/1190000018862320?utm_source=tag-newest
  

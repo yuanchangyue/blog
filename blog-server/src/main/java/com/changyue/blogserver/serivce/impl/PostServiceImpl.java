@@ -4,7 +4,7 @@ import com.changyue.blogserver.dao.PostMapper;
 import com.changyue.blogserver.exception.CreateException;
 import com.changyue.blogserver.exception.NotFindException;
 import com.changyue.blogserver.exception.UpdateException;
-import com.changyue.blogserver.handler.Result;
+import com.changyue.blogserver.model.rep.Result;
 import com.changyue.blogserver.model.dto.CategoryDTO;
 import com.changyue.blogserver.model.dto.TagDTO;
 import com.changyue.blogserver.model.dto.UserDTO;
@@ -209,6 +209,10 @@ public class PostServiceImpl implements PostService {
     @Transactional
     public Post update(Post post) {
         Assert.notNull(post, "文章不能为空");
+
+        //更新ES文章
+        elasticsearchService.modifyArticle(post, ElasticsearchStatus.CREATION);
+
         //更新文章
         if (postMapper.updateByPrimaryKeySelective(post) <= 0) {
             throw new UpdateException("文章更新失败");
@@ -274,7 +278,6 @@ public class PostServiceImpl implements PostService {
         log.debug("移除Id为[{}]文章", id);
         return postMapper.deleteByPrimaryKey(id);
     }
-
 
     @Override
     public Post getBy(Integer status, String url) {

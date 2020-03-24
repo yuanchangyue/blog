@@ -7,13 +7,21 @@ package com.changyue.blogserver.model.enums;
  */
 public enum ResultStatus {
 
-    USER_LOGIN_SUCCESS(1000, "登录成功"),
-    USER_LOGIN_ERROR(2000, "登录失败,用户名或者密码不正确！"),
-    SUCCESS(200, "请求成功"),
-    PARAMETER_ERROR(1001, "请求参数有误!"),
     UNKNOWN_ERROR(9999, "未知的错误!"),
+
+    /**
+     * 失败
+     */
+    USER_LOGIN_ERROR(1000, "登录失败,用户名或者密码不正确！"),
+    PARAMETER_ERROR(1001, "请求参数有误!"),
     OPERATION_ERROR(1002, "操作失败"),
-    OPERATION_SUCCESS(2002, "操作成功");
+
+    /**
+     * 成功
+     */
+    SUCCESS(200, "请求成功"),
+    OPERATION_SUCCESS(2002, "操作成功"),
+    USER_LOGIN_SUCCESS(2000, "登录成功");
 
     private int code;
     private String msg;

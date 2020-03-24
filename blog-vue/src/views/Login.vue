@@ -3,6 +3,11 @@
         <transition class="el-zoom-in-top">
             <div style="display: flex;justify-content: center;margin-top: 65px">
                 <el-card class="login-card">
+                  <el-container>
+                  <el-row style="width: 400px;" gutter="20">
+                    <el-image :src="bgSrc"></el-image>
+                  </el-row>
+                  <el-row style="width: 380px;">
                     <h2>登录</h2>
                     <el-form>
                         <el-form-item>
@@ -13,18 +18,20 @@
                                       placeholder="请输入密码"/>
                         </el-form-item>
                         <el-form-item>
-                            <el-button style="width: 100%;" @click="login()" type="primary">登录</el-button>
+                            <el-button style="width: 80%;" @click="login()" type="primary">登录</el-button>
                         </el-form-item>
                         <p class="toregister">没有账号？点击马上
                             <router-link to="/register">注册</router-link>
                         </p>
                     </el-form>
+                  </el-row>
+                  </el-container>
                 </el-card>
             </div>
         </transition>
     </div>
 </template>
-
+npm
 <script>
 export default {
   name: 'Login',
@@ -34,7 +41,8 @@ export default {
       form: {
         name: '',
         password: ''
-      }
+      },
+      bgSrc: require('../assets/login.svg')
     }
   },
   methods: {
@@ -62,10 +70,10 @@ export default {
         -moz-osx-font-smoothing: grayscale;
         text-align: center;
         color: #2c3e50;
-        margin-top: 60px;
+        margin-top: 140px;
     }
     .login-card{
-        width: 400px;
+        width: 800px;
     }
     .toregister{
         text-align: right;

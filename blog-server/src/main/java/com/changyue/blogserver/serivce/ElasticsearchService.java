@@ -1,9 +1,9 @@
 package com.changyue.blogserver.serivce;
 
-import com.changyue.blogserver.handler.Result;
+import com.changyue.blogserver.model.rep.Result;
 import com.changyue.blogserver.model.entity.Post;
 import com.changyue.blogserver.model.enums.ElasticsearchStatus;
-import com.changyue.blogserver.model.params.HomeQuery;
+import com.changyue.blogserver.model.params.FullTextQuery;
 
 import javax.annotation.Nonnull;
 
@@ -15,22 +15,21 @@ import javax.annotation.Nonnull;
 public interface ElasticsearchService {
 
     /**
-     * 文章
+     * 新增文章
      *
-     * @param post 文章内容
+     * @param post                文章内容
+     * @param elasticsearchStatus 标示状态
      * @return 结果
      */
-    @Nonnull
     Result indexArticle(@Nonnull Post post, @Nonnull ElasticsearchStatus elasticsearchStatus);
 
     /**
      * 全文检索
      *
-     * @param homeQuery 查询
+     * @param fullTextQuery 查询
      * @return 结果
      */
-    @Nonnull
-    Result searchArticle(@Nonnull HomeQuery homeQuery);
+    Result searchArticle(@Nonnull FullTextQuery fullTextQuery);
 
     /**
      * 移除文章
@@ -39,5 +38,14 @@ public interface ElasticsearchService {
      * @return 结果
      */
     Result removeArticle(@Nonnull String id);
+
+    /**
+     * 修改文章
+     *
+     * @param post                文章内容
+     * @param elasticsearchStatus 标示状态
+     * @return 结果
+     */
+    Result modifyArticle(@Nonnull Post post, @Nonnull ElasticsearchStatus elasticsearchStatus);
 
 }

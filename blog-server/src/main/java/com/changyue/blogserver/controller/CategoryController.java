@@ -1,6 +1,6 @@
 package com.changyue.blogserver.controller;
 
-import com.changyue.blogserver.handler.Result;
+import com.changyue.blogserver.model.rep.Result;
 import com.changyue.blogserver.model.dto.CategoryDTO;
 import com.changyue.blogserver.model.entity.Category;
 import com.changyue.blogserver.model.entity.UserCategory;

@@ -6,16 +6,19 @@ import com.changyue.blogserver.crawler.helper.CrawlerHelper;
 import com.changyue.blogserver.crawler.model.CrawlerConfigProperty;
 import com.changyue.blogserver.crawler.parse.ParseRule;
 import com.changyue.blogserver.crawler.proxy.CrawlerProxyProvider;
-import com.changyue.blogserver.model.enums.CrawlerEnum;
+import com.changyue.blogserver.model.enums.CrawlerStatus;
+import com.changyue.blogserver.process.scheduler.RedisAndDBScheduler;
 import com.changyue.blogserver.utils.crawler.SeleniumClient;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import redis.clients.jedis.JedisPool;
 import us.codecraft.webmagic.Spider;
 
 import java.util.ArrayList;
@@ -189,23 +192,23 @@ public class CrawlerConfig {
         List<ParseRule> parseRules = new ArrayList<>();
 
         //标题
-        parseRules.add(new ParseRule("title", CrawlerEnum.ParseRuleType.XPATH, "//h1[@class='title-article']/text()"));
+        parseRules.add(new ParseRule("title", CrawlerStatus.ParseRuleType.XPATH, "//h1[@class='title-article']/text()"));
         //作者
-        parseRules.add(new ParseRule("author", CrawlerEnum.ParseRuleType.XPATH, "//a[@class='follow-nickName']/text()"));
+        parseRules.add(new ParseRule("author", CrawlerStatus.ParseRuleType.XPATH, "//a[@class='follow-nickName']/text()"));
         //发布日期
-        parseRules.add(new ParseRule("releaseDate", CrawlerEnum.ParseRuleType.XPATH, "//span[@class='time']/text()"));
+        parseRules.add(new ParseRule("releaseDate", CrawlerStatus.ParseRuleType.XPATH, "//span[@class='time']/text()"));
         //标签
-        parseRules.add(new ParseRule("labels", CrawlerEnum.ParseRuleType.XPATH, "//span[@class='tags-box']/a/text()"));
+        parseRules.add(new ParseRule("labels", CrawlerStatus.ParseRuleType.XPATH, "//span[@class='tags-box']/a/text()"));
         //个人空间
-        parseRules.add(new ParseRule("labels", CrawlerEnum.ParseRuleType.XPATH, "//span[@class='tags-box']/a/text()"));
+        parseRules.add(new ParseRule("labels", CrawlerStatus.ParseRuleType.XPATH, "//span[@class='tags-box']/a/text()"));
         //阅读量
-        parseRules.add(new ParseRule("readCount", CrawlerEnum.ParseRuleType.XPATH, "//span[@class='read-count']/text()"));
+        parseRules.add(new ParseRule("readCount", CrawlerStatus.ParseRuleType.XPATH, "//span[@class='read-count']/text()"));
         //点赞量
-        parseRules.add(new ParseRule("likes", CrawlerEnum.ParseRuleType.XPATH, "//div[@class='tool-box']/ul[@class='meau-list']/li[@class='btn-like-box']/button/p/text()"));
+        parseRules.add(new ParseRule("likes", CrawlerStatus.ParseRuleType.XPATH, "//div[@class='tool-box']/ul[@class='meau-list']/li[@class='btn-like-box']/button/p/text()"));
         //回复次数
-        parseRules.add(new ParseRule("commentCount", CrawlerEnum.ParseRuleType.XPATH, "//div[@class='tool-box']/ul[@class='meau-list']/li[@class='to-commentBox']/button/p/text()"));
+        parseRules.add(new ParseRule("commentCount", CrawlerStatus.ParseRuleType.XPATH, "//div[@class='tool-box']/ul[@class='meau-list']/li[@class='to-commentBox']/button/p/text()"));
         //html内容
-        parseRules.add(new ParseRule("content", CrawlerEnum.ParseRuleType.XPATH, "//div[@id='content_views']/html()"));
+        parseRules.add(new ParseRule("content", CrawlerStatus.ParseRuleType.XPATH, "//div[@id='content_views']/html()"));
 
         return parseRules;
     }
@@ -220,5 +223,20 @@ public class CrawlerConfig {
         this.spider = spider;
     }
 
+
+    @Value("${redis.host}")
+    private String redisHost;
+    @Value("${redis.port}")
+    private int reidsPort;
+    @Value("${redis.timeout}")
+    private int reidsTimeout;
+    @Value("${redis.password}")
+    private String reidsPassword;
+
+    @Bean
+    public RedisAndDBScheduler getDbAndRedisScheduler() {
+        JedisPool jedisPool = new JedisPool(new GenericObjectPoolConfig(), redisHost, reidsPort, reidsTimeout, null, 0);
+        return new RedisAndDBScheduler(jedisPool);
+    }
 
 }

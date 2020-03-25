@@ -2,7 +2,7 @@ package com.changyue.blogserver.process.processor.impl;
 
 import com.changyue.blogserver.crawler.helper.CrawlerHelper;
 import com.changyue.blogserver.crawler.model.CrawlerConfigProperty;
-import com.changyue.blogserver.model.enums.CrawlerEnum;
+import com.changyue.blogserver.model.enums.CrawlerStatus;
 import com.changyue.blogserver.process.processor.AbstractCrawlerPageProcessor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +51,7 @@ public class CrawlerHelpPageProcessor extends AbstractCrawlerPageProcessor {
         List<String> targetUrlList = page.getHtml().xpath(helpCrawlerXpath).links().all();
 
         //判断是否分页
-        if (null != crawlerHelpNextPagingSize && crawlerHelpNextPagingSize > 0) {
+        if (null != crawlerHelpNextPagingSize && crawlerHelpNextPagingSize > 1) {
             //分页处理,处理第一页以后的页面
             List<String> afterPageUrlList = getAfterPageUrlList(requestUrl, crawlerHelpNextPagingSize);
             if (null != afterPageUrlList && !afterPageUrlList.isEmpty()) {
@@ -61,7 +61,7 @@ public class CrawlerHelpPageProcessor extends AbstractCrawlerPageProcessor {
         }
 
         //爬虫
-        addSpiderRequest(targetUrlList, page.getRequest(), CrawlerEnum.DocumentType.PAGE);
+        addSpiderRequest(targetUrlList, page.getRequest(), CrawlerStatus.DocumentType.PAGE);
 
         log.info("解析下一页完成,当前的url:[{}],处理的类型为：[{}],用时：[{}]s", requestUrl, handleType, System.currentTimeMillis() - currentTimeMillis);
     }
@@ -159,7 +159,7 @@ public class CrawlerHelpPageProcessor extends AbstractCrawlerPageProcessor {
      */
     @Override
     public boolean isNeedHandlerType(String handleType) {
-        return CrawlerEnum.HandelType.FORWARD.name().equals(handleType);
+        return CrawlerStatus.HandelType.FORWARD.name().equals(handleType);
     }
 
     /**
@@ -169,7 +169,7 @@ public class CrawlerHelpPageProcessor extends AbstractCrawlerPageProcessor {
      */
     @Override
     public boolean isNeedDocumentType(String documentType) {
-        return CrawlerEnum.DocumentType.INIT.name().equals(documentType);
+        return CrawlerStatus.DocumentType.HELP.name().equals(documentType);
     }
 
     @Override

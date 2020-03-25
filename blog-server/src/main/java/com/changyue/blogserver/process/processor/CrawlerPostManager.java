@@ -34,7 +34,7 @@ public class CrawlerPostManager {
             abstractCrawlerPageProcessors.sort((Comparator<ProcessFlow>) (o1, o2) -> {
                 if (o1.getPriority() > o2.getPriority()) {
                     return 1;
-                } else if (o1.getPriority() < o2.getPriority()) {
+                } else if (o1.getPriority() > o2.getPriority()) {
                     return -1;
                 }
                 return 0;

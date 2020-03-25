@@ -1,7 +1,7 @@
 package com.changyue.blogserver.process.processor.impl;
 
 import com.changyue.blogserver.crawler.model.CrawlerConfigProperty;
-import com.changyue.blogserver.model.enums.CrawlerEnum;
+import com.changyue.blogserver.model.enums.CrawlerStatus;
 import com.changyue.blogserver.process.processor.AbstractCrawlerPageProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -28,7 +28,7 @@ public class CrawlerInitPageProcessor extends AbstractCrawlerPageProcessor {
         //获取下一页的url
         List<String> helpUrl = page.getHtml().xpath(initCrawlerXpath).links().all();
 
-        addSpiderRequest(helpUrl, page.getRequest(), CrawlerEnum.DocumentType.HELP);
+        addSpiderRequest(helpUrl, page.getRequest(), CrawlerStatus.DocumentType.HELP);
     }
 
     /**
@@ -38,7 +38,7 @@ public class CrawlerInitPageProcessor extends AbstractCrawlerPageProcessor {
      */
     @Override
     public boolean isNeedHandlerType(String handleType) {
-        return CrawlerEnum.HandelType.FORWARD.name().equals(handleType);
+        return CrawlerStatus.HandelType.FORWARD.name().equals(handleType);
     }
 
     /**
@@ -48,7 +48,7 @@ public class CrawlerInitPageProcessor extends AbstractCrawlerPageProcessor {
      */
     @Override
     public boolean isNeedDocumentType(String documentType) {
-        return CrawlerEnum.DocumentType.INIT.name().equals(documentType);
+        return CrawlerStatus.DocumentType.INIT.name().equals(documentType);
     }
 
     @Override

@@ -3,7 +3,7 @@ package com.changyue.blogserver.process.processor.impl;
 import com.changyue.blogserver.crawler.helper.CrawlerHelper;
 import com.changyue.blogserver.crawler.model.CrawlerConfigProperty;
 import com.changyue.blogserver.crawler.parse.ParseRule;
-import com.changyue.blogserver.model.enums.CrawlerEnum;
+import com.changyue.blogserver.model.enums.CrawlerStatus;
 import com.changyue.blogserver.process.processor.AbstractCrawlerPageProcessor;
 import com.changyue.blogserver.utils.crawler.ParseRuleUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -66,7 +66,7 @@ public class CrawlerPostPageProcessor extends AbstractCrawlerPageProcessor {
      */
     @Override
     public boolean isNeedHandlerType(String handleType) {
-        return CrawlerEnum.HandelType.FORWARD.name().equals(handleType);
+        return CrawlerStatus.HandelType.FORWARD.name().equals(handleType);
     }
 
     /**
@@ -76,7 +76,7 @@ public class CrawlerPostPageProcessor extends AbstractCrawlerPageProcessor {
      */
     @Override
     public boolean isNeedDocumentType(String documentType) {
-        return CrawlerEnum.DocumentType.INIT.name().equals(documentType);
+        return CrawlerStatus.DocumentType.PAGE.name().equals(documentType);
     }
 
     @Override

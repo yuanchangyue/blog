@@ -9,6 +9,11 @@
       "name": "spring.elasticsearch.jest",
       "type": "com.changyue.blogserver.config.properties.EsProperties",
       "sourceType": "com.changyue.blogserver.config.properties.EsProperties"
+    },
+    {
+      "name": "spring.redis",
+      "type": "com.changyue.blogserver.config.RedisConfig",
+      "sourceType": "com.changyue.blogserver.config.RedisConfig"
     }
   ],
   "properties": [
@@ -53,6 +58,28 @@
       "type": "java.lang.String",
       "description": "url 前缀",
       "sourceType": "com.changyue.blogserver.config.CrawlerConfig"
+    },
+    {
+      "name": "crawler.init.url.redis-host",
+      "type": "java.lang.String",
+      "sourceType": "com.changyue.blogserver.config.CrawlerConfig"
+    },
+    {
+      "name": "crawler.init.url.reids-password",
+      "type": "java.lang.String",
+      "sourceType": "com.changyue.blogserver.config.CrawlerConfig"
+    },
+    {
+      "name": "crawler.init.url.reids-port",
+      "type": "java.lang.Integer",
+      "sourceType": "com.changyue.blogserver.config.CrawlerConfig",
+      "defaultValue": 0
+    },
+    {
+      "name": "crawler.init.url.reids-timeout",
+      "type": "java.lang.Integer",
+      "sourceType": "com.changyue.blogserver.config.CrawlerConfig",
+      "defaultValue": 0
     },
     {
       "name": "crawler.init.url.spider",

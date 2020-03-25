@@ -1,7 +1,7 @@
 package com.changyue.blogserver.process;
 
 import com.changyue.blogserver.crawler.model.ProcessFlowData;
-import com.changyue.blogserver.model.enums.CrawlerEnum;
+import com.changyue.blogserver.model.enums.CrawlerStatus;
 
 /**
  * @author : 袁阊越
@@ -25,6 +25,6 @@ public interface ProcessFlow {
     /**
      * 获取抓取类型
      */
-    CrawlerEnum.ComponentType getComponentType();
+    CrawlerStatus.ComponentType getComponentType();
 
 }

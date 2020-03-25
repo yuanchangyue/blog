@@ -26,8 +26,6 @@ public abstract class ParseItem {
 
     /**
      * 获取初始的URL
-     *
-     * @return
      */
     public abstract String getInitialUrl();
 

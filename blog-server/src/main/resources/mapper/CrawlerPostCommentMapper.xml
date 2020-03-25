@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.changyue.blogserver.dao.CrawlerPostCommentMapper">
+    <resultMap id="BaseResultMap" type="crawlerPostComment">
+        <id column="id" property="id"/>
+        <result column="news_id" property="newsId"/>
+        <result column="username" property="username"/>
+        <result column="content" property="content"/>
+        <result column="comment_date" property="commentDate"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id,news_id,username,content,comment_date,create_time
+    </sql>
+
+    <sql id="Base_Column_where">
+        <where>
+            <if test="newsId!=null and newsId!=''">
+                news_id = #{newsId}
+            </if>
+            <if test="username!=null and username!=''">
+                username = #{username}
+            </if>
+            <if test="content!=null and content!=''">
+                content = #{content}
+            </if>
+            <if test="commentDate!=null and commentDate!=''">
+                comment_date = #{commentDate}
+            </if>
+            <if test="createTime!=null and createTime!=''">
+                create_time = #{createTime}
+            </if>
+        </where>
+    </sql>
+
+    <select id="findAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from crawler_post_comments
+        <include refid="Base_Column_where"/>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from crawler_post_comments
+        where id = #{id}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from crawler_post_comments
+        where id = #{id}
+    </delete>
+
+    <insert id="insert" parameterType="crawlerPostComment">
+
+        insert into crawler_post_comments (id, news_id, username,
+                                           content, comment_date, create_time)
+        values (#{id}, #{newsId}, #{username},
+                #{content}, #{commentDate}, #{createTime})
+    </insert>
+
+    <insert id="insertSelective" parameterType="crawlerPostComment">
+
+        insert into crawler_post_comments
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="newsId != null">
+                news_id,
+            </if>
+            <if test="username != null">
+                username,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+            <if test="commentDate != null">
+                comment_date,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id},
+            </if>
+            <if test="newsId != null">
+                #{newsId},
+            </if>
+            <if test="username != null">
+                #{username},
+            </if>
+            <if test="content != null">
+                #{content},
+            </if>
+            <if test="commentDate != null">
+                #{commentDate},
+            </if>
+            <if test="createTime != null">
+                #{createTime},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective"
+            parameterType="crawlerPostComment">
+        update crawler_post_comments
+        <set>
+            <if test="newsId != null">
+                news_id = #{newsId},
+            </if>
+            <if test="username != null">
+                username = #{username},
+            </if>
+            <if test="content != null">
+                content = #{content},
+            </if>
+            <if test="commentDate != null">
+                comment_date = #{commentDate},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="crawlerPostComment">
+
+        update crawler_post_comments
+        set news_id      = #{newsId},
+            username     = #{username},
+            content      = #{content},
+            comment_date = #{commentDate},
+            create_time  = #{createTime}
+        where id = #{id}
+    </update>
+
+</mapper>

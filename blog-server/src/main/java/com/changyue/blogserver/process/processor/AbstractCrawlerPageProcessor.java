@@ -5,7 +5,7 @@ import com.changyue.blogserver.crawler.model.CrawlerParseItem;
 import com.changyue.blogserver.crawler.model.ParseItem;
 import com.changyue.blogserver.crawler.model.ProcessFlowData;
 import com.changyue.blogserver.crawler.parse.ParseRule;
-import com.changyue.blogserver.model.enums.CrawlerEnum;
+import com.changyue.blogserver.model.enums.CrawlerStatus;
 import com.changyue.blogserver.process.AbstractProcessFlow;
 import com.changyue.blogserver.utils.crawler.ParseRuleUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -54,12 +54,11 @@ public abstract class AbstractCrawlerPageProcessor extends AbstractProcessFlow i
 
     @Override
     public void handle(ProcessFlowData processFlowData) {
-
     }
 
     @Override
-    public CrawlerEnum.ComponentType getComponentType() {
-        return CrawlerEnum.ComponentType.PAGEPROCESSOR;
+    public CrawlerStatus.ComponentType getComponentType() {
+        return CrawlerStatus.ComponentType.PAGEPROCESSOR;
     }
 
     /**
@@ -74,6 +73,7 @@ public abstract class AbstractCrawlerPageProcessor extends AbstractProcessFlow i
 
         log.info("开始解析页面,url:[{}],handleType:[{}]", page.getUrl(), handleType);
 
+        //调用管理器
         crawlerPostManager.handle(page);
 
         log.info("开始解析页面,url:[{}],handleType:[{}],用时：[{}]", page.getUrl(), handleType, System.currentTimeMillis() - currentTimeMillis);
@@ -121,7 +121,7 @@ public abstract class AbstractCrawlerPageProcessor extends AbstractProcessFlow i
      * @param request      上一个爬取的对象
      * @param documentType 需要处理的文档类型
      */
-    public void addSpiderRequest(List<String> urlList, Request request, CrawlerEnum.DocumentType documentType) {
+    public void addSpiderRequest(List<String> urlList, Request request, CrawlerStatus.DocumentType documentType) {
 
         if (null != urlList && !urlList.isEmpty()) {
             List<ParseItem> parseItems = urlList.stream().map(url -> {
@@ -136,6 +136,7 @@ public abstract class AbstractCrawlerPageProcessor extends AbstractProcessFlow i
             addSpiderRequest(parseItems);
         }
     }
+
 
     /**
      * 处理页面

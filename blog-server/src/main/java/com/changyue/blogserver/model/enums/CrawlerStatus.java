@@ -1,6 +1,6 @@
 package com.changyue.blogserver.model.enums;
 
-public class CrawlerEnum {
+public class CrawlerStatus {
 
     /**
      * 处理方式

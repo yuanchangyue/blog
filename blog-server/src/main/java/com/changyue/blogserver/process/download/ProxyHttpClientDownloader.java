@@ -9,7 +9,7 @@ import com.changyue.blogserver.crawler.helper.CookieHelper;
 import com.changyue.blogserver.crawler.helper.CrawlerHelper;
 import com.changyue.blogserver.crawler.proxy.CrawlerProxyProvider;
 import com.changyue.blogserver.factory.CrawlerProxyFactory;
-import com.changyue.blogserver.model.enums.CrawlerEnum;
+import com.changyue.blogserver.model.enums.CrawlerStatus;
 import com.changyue.blogserver.process.ProcessFlow;
 import com.changyue.blogserver.utils.crawler.SeleniumClient;
 import lombok.extern.log4j.Log4j2;
@@ -334,8 +334,8 @@ public class ProxyHttpClientDownloader extends AbstractDownloader implements Pro
 
 
     @Override
-    public CrawlerEnum.ComponentType getComponentType() {
-        return CrawlerEnum.ComponentType.DOWNLOAD;
+    public CrawlerStatus.ComponentType getComponentType() {
+        return CrawlerStatus.ComponentType.DOWNLOAD;
     }
 
     @Override

@@ -4,7 +4,7 @@ import com.changyue.blogserver.config.CrawlerConfig;
 import com.changyue.blogserver.crawler.model.CrawlerParseItem;
 import com.changyue.blogserver.crawler.model.ParseItem;
 import com.changyue.blogserver.crawler.model.ProcessFlowData;
-import com.changyue.blogserver.model.enums.CrawlerEnum;
+import com.changyue.blogserver.model.enums.CrawlerStatus;
 import com.changyue.blogserver.process.original.AbstractOriginalDataProcess;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +45,7 @@ public class CsdnOriginalDataProcess extends AbstractOriginalDataProcess {
 
                 CrawlerParseItem crawlerParseItem = new CrawlerParseItem();
                 crawlerParseItem.setUrl(url + "?rnd=" + System.currentTimeMillis());
-                crawlerParseItem.setDocumentType(CrawlerEnum.DocumentType.INIT.name());
+                crawlerParseItem.setDocumentType(CrawlerStatus.DocumentType.INIT.name());
                 crawlerParseItem.setHandelType(processFlowData.getHandelType().name());
 
                 return crawlerParseItem;

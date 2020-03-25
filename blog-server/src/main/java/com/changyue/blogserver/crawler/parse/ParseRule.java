@@ -1,7 +1,7 @@
 package com.changyue.blogserver.crawler.parse;
 
 
-import com.changyue.blogserver.model.enums.CrawlerEnum;
+import com.changyue.blogserver.model.enums.CrawlerStatus;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -29,7 +29,7 @@ public class ParseRule {
     /**
      * 解析规则类型
      */
-    private CrawlerEnum.ParseRuleType parseRuleType;
+    private CrawlerStatus.ParseRuleType parseRuleType;
     /**
      * 规则
      */
@@ -50,7 +50,7 @@ public class ParseRule {
      * @param parseRuleType 解析规则类型
      * @param rule          规则
      */
-    public ParseRule(String field, CrawlerEnum.ParseRuleType parseRuleType, String rule) {
+    public ParseRule(String field, CrawlerStatus.ParseRuleType parseRuleType, String rule) {
         this.field = field;
         this.parseRuleType = parseRuleType;
         this.rule = rule;

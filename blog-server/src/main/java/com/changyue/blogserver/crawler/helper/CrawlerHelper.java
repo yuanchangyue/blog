@@ -5,7 +5,7 @@ import com.changyue.blogserver.crawler.model.CrawlerHtml;
 import com.changyue.blogserver.crawler.model.CrawlerParseItem;
 import com.changyue.blogserver.crawler.model.ParseItem;
 import com.changyue.blogserver.crawler.callback.DataValidateCallBack;
-import com.changyue.blogserver.model.enums.CrawlerEnum;
+import com.changyue.blogserver.model.enums.CrawlerStatus;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.StringUtils;
 import us.codecraft.webmagic.Page;
@@ -92,7 +92,7 @@ public class CrawlerHelper {
      * @return
      */
     public String getHandleType(Request request) {
-        String handelType = CrawlerEnum.HandelType.FORWARD.name();
+        String handelType = CrawlerStatus.HandelType.FORWARD.name();
         ParseItem parseItem = getParseItem(request);
         if (null != parseItem) {
             handelType = parseItem.getHandelType();
@@ -108,7 +108,7 @@ public class CrawlerHelper {
      * @return
      */
     public String getDocumentType(Request request) {
-        String documentType = CrawlerEnum.DocumentType.OTHER.name();
+        String documentType = CrawlerStatus.DocumentType.OTHER.name();
         ParseItem parseItem = getParseItem(request);
         if (null != parseItem) {
             documentType = parseItem.getDocumentType();

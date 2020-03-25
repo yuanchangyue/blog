@@ -20,7 +20,7 @@ public class ProcessingFlowManagerTest {
     private ProcessingFlowManager processingFlowManager;
 
     @Test
-    public  void test() {
+    public void test() {
         processingFlowManager.handle();
 
         try {

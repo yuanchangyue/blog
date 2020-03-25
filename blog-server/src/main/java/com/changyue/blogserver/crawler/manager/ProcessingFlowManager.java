@@ -4,7 +4,7 @@ import com.changyue.blogserver.config.CrawlerConfig;
 import com.changyue.blogserver.crawler.model.CrawlerComponent;
 import com.changyue.blogserver.crawler.model.ParseItem;
 import com.changyue.blogserver.crawler.model.ProcessFlowData;
-import com.changyue.blogserver.model.enums.CrawlerEnum;
+import com.changyue.blogserver.model.enums.CrawlerStatus;
 import com.changyue.blogserver.process.ProcessFlow;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -104,13 +104,13 @@ public class ProcessingFlowManager {
     private CrawlerComponent getComponent(List<ProcessFlow> processFlowList) {
         CrawlerComponent component = new CrawlerComponent();
         for (ProcessFlow processFlow : processFlowList) {
-            if (processFlow.getComponentType() == CrawlerEnum.ComponentType.PAGEPROCESSOR) {
+            if (processFlow.getComponentType() == CrawlerStatus.ComponentType.PAGEPROCESSOR) {
                 component.setPageProcessor((PageProcessor) processFlow);
-            } else if (processFlow.getComponentType() == CrawlerEnum.ComponentType.PIPELINE) {
+            } else if (processFlow.getComponentType() == CrawlerStatus.ComponentType.PIPELINE) {
                 component.addPipeline((Pipeline) processFlow);
-            } else if (processFlow.getComponentType() == CrawlerEnum.ComponentType.DOWNLOAD) {
+            } else if (processFlow.getComponentType() == CrawlerStatus.ComponentType.DOWNLOAD) {
                 component.setDownloader((Downloader) processFlow);
-            } else if (processFlow.getComponentType() == CrawlerEnum.ComponentType.SCHEDULER) {
+            } else if (processFlow.getComponentType() == CrawlerStatus.ComponentType.SCHEDULER) {
                 component.setScheduler((Scheduler) processFlow);
             }
         }
@@ -123,12 +123,13 @@ public class ProcessingFlowManager {
      * @param parseItems 解析的对象
      * @param handelType 处理类型
      */
-    private void startCrawler(List<ParseItem> parseItems, CrawlerEnum.HandelType handelType) {
+    private void startCrawler(List<ParseItem> parseItems, CrawlerStatus.HandelType handelType) {
 
         ProcessFlowData processFlowData = new ProcessFlowData();
         processFlowData.setParseItemList(parseItems);
         processFlowData.setHandelType(handelType);
 
+        //初始化爬虫列表
         for (ProcessFlow processFlow : processFlowList) {
             processFlow.handle(processFlowData);
         }
@@ -140,6 +141,6 @@ public class ProcessingFlowManager {
 
 
     public void handle() {
-        startCrawler(null, CrawlerEnum.HandelType.FORWARD);
+        startCrawler(null, CrawlerStatus.HandelType.FORWARD);
     }
 }

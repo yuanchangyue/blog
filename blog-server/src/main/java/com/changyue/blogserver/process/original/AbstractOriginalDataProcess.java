@@ -2,7 +2,7 @@ package com.changyue.blogserver.process.original;
 
 import com.changyue.blogserver.crawler.model.ParseItem;
 import com.changyue.blogserver.crawler.model.ProcessFlowData;
-import com.changyue.blogserver.model.enums.CrawlerEnum;
+import com.changyue.blogserver.model.enums.CrawlerStatus;
 import com.changyue.blogserver.process.AbstractProcessFlow;
 import lombok.extern.slf4j.Slf4j;
 
@@ -47,8 +47,8 @@ public abstract class AbstractOriginalDataProcess extends AbstractProcessFlow {
 
 
     @Override
-    public CrawlerEnum.ComponentType getComponentType() {
-        return CrawlerEnum.ComponentType.NORMAL;
+    public CrawlerStatus.ComponentType getComponentType() {
+        return CrawlerStatus.ComponentType.NORMAL;
     }
 
     /**

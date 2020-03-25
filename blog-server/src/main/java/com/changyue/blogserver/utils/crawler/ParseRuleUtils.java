@@ -2,7 +2,7 @@ package com.changyue.blogserver.utils.crawler;
 
 
 import com.changyue.blogserver.crawler.parse.ParseRule;
-import com.changyue.blogserver.model.enums.CrawlerEnum;
+import com.changyue.blogserver.model.enums.CrawlerStatus;
 import org.apache.commons.lang3.StringUtils;
 import us.codecraft.webmagic.selector.Html;
 
@@ -102,13 +102,13 @@ public class ParseRuleUtils {
                 List<String> contentList = null;
                 //Css表达式的解析
                 String rule = parseRule.getRule();
-                if (CrawlerEnum.ParseRuleType.CSS == parseRule.getParseRuleType()) {
+                if (CrawlerStatus.ParseRuleType.CSS == parseRule.getParseRuleType()) {
                     contentList = html.css(rule).all();
                     //正则表达式的解析
-                } else if (CrawlerEnum.ParseRuleType.REGULAR == parseRule.getParseRuleType()) {
+                } else if (CrawlerStatus.ParseRuleType.REGULAR == parseRule.getParseRuleType()) {
                     contentList = html.regex(rule).all();
                     //Xpath 表达式的解析
-                } else if (CrawlerEnum.ParseRuleType.XPATH == parseRule.getParseRuleType()) {
+                } else if (CrawlerStatus.ParseRuleType.XPATH == parseRule.getParseRuleType()) {
                     contentList = html.xpath(rule).all();
                 }
                 if (null != contentList && !contentList.isEmpty()) {

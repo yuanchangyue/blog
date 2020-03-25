@@ -1,11 +1,20 @@
 package com.changyue.blogserver.utils;
 
+import org.apache.commons.beanutils.ConvertUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
+import java.beans.BeanInfo;
+import java.beans.IntrospectionException;
+import java.beans.Introspector;
+import java.beans.PropertyDescriptor;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.Map;
 
 /**
  * @author : 袁阊越
@@ -88,4 +97,110 @@ public class ReflectionUtils {
 
         return getParameterizedType(superClassType, extensionClass.getGenericSuperclass());
     }
+
+    /**
+     * 通过反射将map的key value 映射到实体类中
+     *
+     * @param bean
+     * @param skipExist 是否跳过已存在的属性
+     */
+    public static void setPropertie(Object bean, Map<String, Object> parameterMap, boolean skipExist) {
+        if (null != bean && null != parameterMap && !parameterMap.isEmpty()) {
+            for (Map.Entry<String, Object> entry : parameterMap.entrySet()) {
+                setPropertie(bean, entry.getKey(), entry.getValue());
+            }
+        }
+    }
+
+    /**
+     * 调用 invok 方法
+     *
+     * @param method
+     * @param bean
+     * @param value
+     */
+    public static Object invok(Method method, Object bean, Class<?> targetType, Object value) {
+        //  System.out.println("method:" + method.getName() + "   bean:" + bean.getClass().getName() + "     " + value);
+        Object resultValue = null;
+        if (null != method && null != bean) {
+            try {
+                int count = method.getParameterCount();
+                if (count >= 1) {
+                    if (null != value) {
+                        value = ConvertUtils.convert(value, targetType);
+                    }
+                    resultValue = method.invoke(bean, value);
+                } else {
+                    resultValue = method.invoke(bean);
+                }
+
+            } catch (IllegalAccessException | InvocationTargetException e) {
+                e.printStackTrace();
+            }
+        }
+        return resultValue;
+    }
+
+    public static void setPropertyDescriptorValue(Object bean, PropertyDescriptor propertyDescriptor, Object value) {
+        if (null != propertyDescriptor) {
+            Method writeMethod = propertyDescriptor.getWriteMethod();
+            invok(writeMethod, bean, propertyDescriptor.getPropertyType(), value);
+        }
+    }
+
+    /**
+     * 通过反射设置属性
+     *
+     * @param bean
+     * @param key
+     * @param value
+     */
+    public static void setPropertie(Object bean, String key, Object value) {
+        if (null != bean && StringUtils.isNotEmpty(key)) {
+            PropertyDescriptor[] descriptor = getPropertyDescriptorArray(bean);
+            PropertyDescriptor propertyDescriptor = getPropertyDescriptor(descriptor, key);
+            setPropertyDescriptorValue(bean, propertyDescriptor, value);
+        }
+    }
+
+    /**
+     * 获取 PropertyDescriptor 属性
+     *
+     * @param propertyDescriptorArray
+     * @param key
+     * @return
+     */
+    public static PropertyDescriptor getPropertyDescriptor(PropertyDescriptor[] propertyDescriptorArray, String key) {
+        PropertyDescriptor propertyDescriptor = null;
+        for (PropertyDescriptor descriptor : propertyDescriptorArray) {
+            String fieldName = descriptor.getName();
+            if (fieldName.equals(key)) {
+                propertyDescriptor = descriptor;
+                break;
+            }
+        }
+        return propertyDescriptor;
+    }
+
+    /**
+     * 获取内省的属性
+     *
+     * @param bean
+     * @return
+     */
+    public static PropertyDescriptor[] getPropertyDescriptorArray(Object bean) {
+        BeanInfo beanInfo = null;
+        PropertyDescriptor[] propertyDescriptors = null;
+        try {
+            beanInfo = Introspector.getBeanInfo(bean.getClass());
+        } catch (IntrospectionException e) {
+            e.printStackTrace();
+        }
+        if (null != beanInfo) {
+            propertyDescriptors = beanInfo.getPropertyDescriptors();
+        }
+        return propertyDescriptors;
+    }
+
+
 }

@@ -1,7 +1,7 @@
 package com.changyue.blogserver.crawler.model;
 
 
-import com.changyue.blogserver.model.enums.CrawlerEnum;
+import com.changyue.blogserver.model.enums.CrawlerStatus;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,6 +24,6 @@ public class ProcessFlowData {
     /**
      * 处理类型
      */
-    private CrawlerEnum.HandelType handelType = CrawlerEnum.HandelType.FORWARD;
+    private CrawlerStatus.HandelType handelType = CrawlerStatus.HandelType.FORWARD;
 
 }

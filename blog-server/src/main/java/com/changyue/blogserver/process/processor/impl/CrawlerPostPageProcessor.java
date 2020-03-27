@@ -28,7 +28,6 @@ public class CrawlerPostPageProcessor extends AbstractCrawlerPageProcessor {
     @Autowired
     private CrawlerHelper crawlerHelper;
 
-
     @Override
     public void handle(Page page) {
         //处理类型

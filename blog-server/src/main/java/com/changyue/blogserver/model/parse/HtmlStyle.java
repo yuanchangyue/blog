@@ -1,11 +1,24 @@
-package com.heima.model.crawler.core.label;
+package com.changyue.blogserver.model.parse;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author : 袁阊越
+ * @description : Html 样式
+ * @date : 2020/3/26
+ */
+@Getter
+@Setter
 public class HtmlStyle {
+
+    /**
+     * 存放style样式的map
+     */
     private Map<String, String> styleMap = new HashMap<>();
 
     public void addStyle(String key, String value) {
@@ -16,6 +29,9 @@ public class HtmlStyle {
         styleMap.putAll(map);
     }
 
+    /**
+     * 获得样式
+     */
     public String getCssStyle() {
         StringBuilder sb = new StringBuilder();
         for (Map.Entry<String, String> entry : styleMap.entrySet()) {
@@ -24,11 +40,4 @@ public class HtmlStyle {
         return StringUtils.removeEnd(sb.toString(), ",");
     }
 
-    public Map<String, String> getStyleMap() {
-        return styleMap;
-    }
-
-    public void setStyleMap(Map<String, String> styleMap) {
-        this.styleMap = styleMap;
-    }
 }

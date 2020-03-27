@@ -6,6 +6,7 @@ import com.changyue.blogserver.dao.CrawlerPostAdditionalMapper;
 import com.changyue.blogserver.model.entity.CrawlerPostAdditional;
 import com.changyue.blogserver.serivce.CrawlerPostAdditionalService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -89,13 +90,14 @@ public class CrawlerPostAdditionalServiceImpl implements CrawlerPostAdditionalSe
         Assert.notNull(crawlerPostAdditional, "爬虫的附加信息不能为空");
         //返回parseItem的子类
         CrawlerParseItem crawlerParseItem = new CrawlerParseItem();
-        crawlerParseItem.setUrl(crawlerParseItem.getUrl());
+        BeanUtils.copyProperties(crawlerPostAdditional, crawlerParseItem);
         return crawlerParseItem;
     }
 
     @Override
     public List<ParseItem> getIncrementParseItem(Date currentDate) {
         Assert.notNull(currentDate, "当前时间不能为空");
-        return getListByNeedUpdate(currentDate).stream().map(this::convertToParseItem).collect(Collectors.toList());
+        List<CrawlerPostAdditional> listByNeedUpdate = getListByNeedUpdate(currentDate);
+        return convertToParseItem(listByNeedUpdate);
     }
 }

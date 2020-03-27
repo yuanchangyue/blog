@@ -1,1 +1,13 @@
-{"query": {"match_phrase": {"title": ""}}, "highlight": {"fields": {"title": {}}}}
+{
+  "query": {
+    "match_phrase": {
+      "title": ""
+    }
+  },
+  "highlight": {
+    "fields": {
+      "title": {}
+    }
+  }
+}
+

@@ -1,8 +1,14 @@
-package com.heima.model.crawler.core.label;
+package com.changyue.blogserver.model.parse;
 
-import java.io.Serializable;
+import lombok.Data;
 
-public class HtmlLabel implements Serializable {
+/**
+ * @author : 袁阊越
+ * @description :
+ * @date : 2020/3/26
+ */
+@Data
+public class HtmlLabel {
 
     /**
      * 解析的数据类型
@@ -19,29 +25,4 @@ public class HtmlLabel implements Serializable {
      */
     private String style;
 
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
-
-    public String getStyle() {
-        return style;
-    }
-
-    public void setStyle(String style) {
-        this.style = style;
-    }
 }

@@ -8,4 +8,5 @@ package com.changyue.blogserver.crawler.callback;
 public interface DataValidateCallBack {
 
     public boolean validate(String content);
+
 }

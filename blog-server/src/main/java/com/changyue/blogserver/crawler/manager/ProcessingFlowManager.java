@@ -6,6 +6,7 @@ import com.changyue.blogserver.crawler.model.ParseItem;
 import com.changyue.blogserver.crawler.model.ProcessFlowData;
 import com.changyue.blogserver.model.enums.CrawlerStatus;
 import com.changyue.blogserver.process.ProcessFlow;
+import com.changyue.blogserver.serivce.CrawlerPostAdditionalService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -17,6 +18,7 @@ import us.codecraft.webmagic.scheduler.Scheduler;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -31,8 +33,12 @@ public class ProcessingFlowManager {
     @Autowired
     private CrawlerConfig crawlerConfig;
 
+    @Autowired
+    private CrawlerPostAdditionalService crawlerPostAdditionalService;
+
     @Resource
     private List<ProcessFlow> processFlowList;
+
 
     /**
      * 初始化方法 通过子类优先级 排序
@@ -50,15 +56,12 @@ public class ProcessingFlowManager {
                 return 0;
             });
         }
-        Spider spider = configSpider();
-        crawlerConfig.setSpider(spider);
-    }
-
-    private Spider configSpider() {
+        //初始化spider
         Spider initSpider = initSpider();
         initSpider.thread(5);
-        return initSpider;
+        crawlerConfig.setSpider(initSpider);
     }
+
 
     /**
      * 根据ProcessFlow接口getComponentType接口类型生成
@@ -66,32 +69,29 @@ public class ProcessingFlowManager {
     private Spider initSpider() {
         Spider spider = null;
         CrawlerComponent crawlerComponent = getComponent(processFlowList);
-        if (null != crawlerComponent) {
 
-            PageProcessor pageProcessor = crawlerComponent.getPageProcessor();
+        PageProcessor pageProcessor = crawlerComponent.getPageProcessor();
 
-            if (null != pageProcessor) {
-                spider = Spider.create(pageProcessor);
-            }
+        if (null != pageProcessor) {
+            spider = Spider.create(pageProcessor);
+        }
 
-            if (null != spider && null != crawlerComponent.getScheduler()) {
-                spider.setScheduler(crawlerComponent.getScheduler());
-            }
+        if (null != spider && null != crawlerComponent.getScheduler()) {
+            spider.setScheduler(crawlerComponent.getScheduler());
+        }
 
-            Downloader downloader = crawlerComponent.getDownloader();
+        if (null != spider && null != crawlerComponent.getDownloader()) {
+            spider.setDownloader(crawlerComponent.getDownloader());
+        }
 
-            if (null != spider && null != downloader) {
-                spider.setDownloader(downloader);
-            }
+        List<Pipeline> pipelineList = crawlerComponent.getPipelineList();
 
-            List<Pipeline> pipelineList = crawlerComponent.getPipelineList();
-
-            if (null != spider && null != pipelineList && !pipelineList.isEmpty()) {
-                for (Pipeline pipeline : pipelineList) {
-                    spider.addPipeline(pipeline);
-                }
+        if (null != spider && null != pipelineList && !pipelineList.isEmpty()) {
+            for (Pipeline pipeline : pipelineList) {
+                spider.addPipeline(pipeline);
             }
         }
+
         return spider;
     }
 
@@ -133,14 +133,31 @@ public class ProcessingFlowManager {
         for (ProcessFlow processFlow : processFlowList) {
             processFlow.handle(processFlowData);
         }
-
         //开始爬虫
         crawlerConfig.getSpider().start();
-
     }
 
-
-    public void handle() {
+    /**
+     * 正向爬虫
+     */
+    public void forwardHandle() {
         startCrawler(null, CrawlerStatus.HandelType.FORWARD);
     }
+
+    /**
+     * 方向爬虫
+     */
+    public void reverseHandle() {
+        //获取需要方向爬虫的目标
+        List<ParseItem> parseItems = crawlerPostAdditionalService.getIncrementParseItem(new Date());
+        if (!parseItems.isEmpty()) {
+            for (ParseItem parseItem : parseItems) {
+                parseItem.setDocumentType(CrawlerStatus.DocumentType.PAGE.name());
+                parseItem.setHandelType(CrawlerStatus.HandelType.REVERSE.name());
+            }
+            //开始反向爬虫
+            startCrawler(parseItems, CrawlerStatus.HandelType.REVERSE);
+        }
+    }
+
 }

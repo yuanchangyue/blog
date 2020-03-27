@@ -20,8 +20,21 @@ public class ProcessingFlowManagerTest {
     private ProcessingFlowManager processingFlowManager;
 
     @Test
-    public void test() {
-        processingFlowManager.handle();
+    public void testForwardHandle() {
+
+        processingFlowManager.forwardHandle();
+
+        try {
+            Thread.sleep(Integer.MAX_VALUE);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testReverseHandle() {
+
+        processingFlowManager.reverseHandle();
 
         try {
             Thread.sleep(Integer.MAX_VALUE);

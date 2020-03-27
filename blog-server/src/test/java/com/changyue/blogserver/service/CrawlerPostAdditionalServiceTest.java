@@ -1,5 +1,6 @@
 package com.changyue.blogserver.service;
 
+import com.changyue.blogserver.crawler.model.ParseItem;
 import com.changyue.blogserver.model.entity.CrawlerPostAdditional;
 import com.changyue.blogserver.serivce.CrawlerPostAdditionalService;
 import org.junit.Test;
@@ -7,6 +8,9 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.Date;
+import java.util.List;
 
 /**
  * @author : 袁阊越
@@ -35,12 +39,19 @@ public class CrawlerPostAdditionalServiceTest {
         System.out.println("crawlerPostAdditionalService.checkExist(\"www.baidu.com\") = " + crawlerPostAdditionalService.checkExist("www.baidu.com"));
     }
 
-
     @Test
-    public void test() {
+    public void testGetList() {
         CrawlerPostAdditional crawlerPostAdditional = new CrawlerPostAdditional();
         crawlerPostAdditional.setUrl("www.baidu.com");
         crawlerPostAdditionalService.getList(crawlerPostAdditional).forEach(System.out::println);
+    }
+
+    @Test
+    public void testGetListByNeedUpdate() {
+
+        List<ParseItem> incrementParseItem = crawlerPostAdditionalService.getIncrementParseItem(new Date());
+        incrementParseItem.forEach(System.out::println);
+
     }
 
 }

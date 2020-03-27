@@ -25,7 +25,7 @@ public class CrawlerPost {
      */
     private String title;
     /**
-     * 名称
+     * 作者
      */
     private String name;
     /**
@@ -47,7 +47,7 @@ public class CrawlerPost {
     /**
      * 创建时间
      */
-    private Date creatTime;
+    private Date createTime;
     /**
      * 提交时间
      */

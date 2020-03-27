@@ -89,6 +89,11 @@ public class CrawlerParseItem extends ParseItem {
     private Integer likes;
 
     /**
+     * 标签
+     */
+    private String labels;
+
+    /**
      * 图文内容
      */
     private String content;
@@ -98,7 +103,7 @@ public class CrawlerParseItem extends ParseItem {
      */
     private String compressContent;
 
-
+    @Override
     public String getInitialUrl() {
         return getUrl();
     }

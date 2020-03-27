@@ -1,9 +1,9 @@
-package com.heima.crawler.utils;
+package com.changyue.blogserver.utils.crawler;
 
 import com.alibaba.fastjson.JSON;
-import com.heima.model.crawler.core.label.HtmlLabel;
-import com.heima.model.crawler.core.label.HtmlStyle;
-import com.heima.model.crawler.enums.CrawlerEnum;
+import com.changyue.blogserver.model.enums.CrawlerStatus;
+import com.changyue.blogserver.model.parse.HtmlLabel;
+import com.changyue.blogserver.model.parse.HtmlStyle;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
@@ -28,15 +28,15 @@ public class HtmlParser {
     /**
      * 需要处理的Html 标签
      */
-    private final CrawlerEnum.HtmlType[] specialHtmlTypeArray =
-            new CrawlerEnum.HtmlType[]{
-                    CrawlerEnum.HtmlType.A_TAG,
-                    CrawlerEnum.HtmlType.CODE_TAG,
-                    CrawlerEnum.HtmlType.H1_TAG,
-                    CrawlerEnum.HtmlType.H2_TAG,
-                    CrawlerEnum.HtmlType.H3_TAG,
-                    CrawlerEnum.HtmlType.H4_TAG,
-                    CrawlerEnum.HtmlType.H5_TAG};
+    private final CrawlerStatus.HtmlType[] specialHtmlTypeArray =
+            new CrawlerStatus.HtmlType[]{
+                    CrawlerStatus.HtmlType.A_TAG,
+                    CrawlerStatus.HtmlType.CODE_TAG,
+                    CrawlerStatus.HtmlType.H1_TAG,
+                    CrawlerStatus.HtmlType.H2_TAG,
+                    CrawlerStatus.HtmlType.H3_TAG,
+                    CrawlerStatus.HtmlType.H4_TAG,
+                    CrawlerStatus.HtmlType.H5_TAG};
 
     /**
      * 默认css 设置
@@ -214,11 +214,11 @@ public class HtmlParser {
         HtmlLabel htmlLabel = null;
         if (null != element) {
             String tagName = element.tagName();
-            if (CrawlerEnum.HtmlType.A_TAG.getLabelName().equals(tagName)) {
+            if (CrawlerStatus.HtmlType.A_TAG.getLabelName().equals(tagName)) {
                 // explanLabel = getExplanLabelByaLink(element);
-            } else if (CrawlerEnum.HtmlType.IMG_TAG.getLabelName().equals(tagName)) {
+            } else if (CrawlerStatus.HtmlType.IMG_TAG.getLabelName().equals(tagName)) {
                 htmlLabel = parseNodeByImage(element);
-            } else if (CrawlerEnum.HtmlType.CODE_TAG.getLabelName().equals(tagName)) {
+            } else if (CrawlerStatus.HtmlType.CODE_TAG.getLabelName().equals(tagName)) {
                 htmlLabel = parseNodeByCode(element);
             } else {
                 htmlLabel = parseNodeByOther(element);
@@ -242,7 +242,7 @@ public class HtmlParser {
             htmlLabel = new HtmlLabel();
             htmlLabel.setValue(text);
             // explanLabel.setLink(link);
-            htmlLabel.setType(CrawlerEnum.HtmlType.A_TAG.getDataType());
+            htmlLabel.setType(CrawlerStatus.HtmlType.A_TAG.getDataType());
         }
         return htmlLabel;
     }
@@ -266,7 +266,7 @@ public class HtmlParser {
             htmlStyle.addStyle("height", height + "px");
             htmlLabel.setValue(src);
             htmlLabel.setStyle(htmlStyle.getCssStyle());
-            htmlLabel.setType(CrawlerEnum.HtmlType.IMG_TAG.getDataType());
+            htmlLabel.setType(CrawlerStatus.HtmlType.IMG_TAG.getDataType());
         }
         return htmlLabel;
     }
@@ -296,7 +296,7 @@ public class HtmlParser {
             String text = element.ownText();
             htmlLabel = new HtmlLabel();
             htmlLabel.setValue(text);
-            htmlLabel.setType(CrawlerEnum.HtmlType.CODE_TAG.getDataType());
+            htmlLabel.setType(CrawlerStatus.HtmlType.CODE_TAG.getDataType());
         }
         return htmlLabel;
     }
@@ -352,7 +352,7 @@ public class HtmlParser {
         boolean flag = false;
         if (null != element) {
             String tagName = element.tagName();
-            for (CrawlerEnum.HtmlType htmlType : specialHtmlTypeArray) {
+            for (CrawlerStatus.HtmlType htmlType : specialHtmlTypeArray) {
                 if (htmlType.getLabelName().toLowerCase().equals(tagName.toLowerCase())) {
                     flag = true;
                     break;

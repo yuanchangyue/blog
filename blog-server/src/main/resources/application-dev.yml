@@ -1,28 +1,20 @@
-#  jpa:
-#    properties:
-#      hibernate:
-#        hbm2ddl:
-#          auto: validate
-#        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
-#        format_sql: true
-#    show-sql: true
-
-#分页
-pagehelper:
-  helperDialect: mysql
-#  reasonable: true
-#  supportMethodsArguments: true
-#  params: count=countSql
 
 #数据源
 spring:
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://47.93.193.94:3306/blogdb?characterEncoding=utf8&useSSL=false
-    username: root
-    password: 123456
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
+      #业务数据源
+      business:
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://47.93.193.94:3306/blogdb?characterEncoding=utf8&useSSL=false
+        username: root
+        password: 123456
+      quartz:
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://47.93.193.94:3306/quartz?characterEncoding=utf8&useSSL=false
+        username: root
+        password: 123456
       initial-size: 8
       min-idle: 1
       max-active: 20
@@ -43,15 +35,47 @@ spring:
       url: http://changyue.club:9201/
       connection-timeout: 20000
       read-timeout: 20000
+  quartz:
+    #相关属性配置
+    properties:
+      org:
+        quartz:
+          scheduler:
+            instanceName: quartzScheduler
+            instanceId: AUTO
+          jobStore:
+            class: org.quartz.impl.jdbcjobstore.JobStoreTX
+            driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
+            tablePrefix: QRTZ_
+            isClustered: false
+            clusterCheckinInterval: 10000
+            useProperties: false
+          threadPool:
+            class: org.quartz.simpl.SimpleThreadPool
+            threadCount: 10
+            threadPriority: 5
+            threadsInheritContextClassLoaderOfInitializingThread: true
+    #数据库方式
+    job-store-type: JDBC
+    #初始化表结构
+    #jdbc:
+      #initialize-schema: NEVER
+
 #mybatis
 mybatis:
-  type-aliases-package: com.changyue.blogserver.model
-  mapper-locations: classpath:mapper/*.xml
   configuration:
     #开启驼峰命名
     map-underscore-to-camel-case: true
     #开启sql日志
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    #log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+#分页
+pagehelper:
+  helperDialect: mysql
+#  reasonable: true
+#  supportMethodsArguments: true
+#  params: count=countSql
+
 
 #redis
 redis:
@@ -59,4 +83,3 @@ redis:
   port: ${spring.redis.port}
   timeout: ${spring.redis.timeout}
   password: ${spring.redis.password}
-

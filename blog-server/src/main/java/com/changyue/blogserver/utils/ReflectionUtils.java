@@ -14,6 +14,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -97,6 +98,32 @@ public class ReflectionUtils {
 
         return getParameterizedType(superClassType, extensionClass.getGenericSuperclass());
     }
+
+    /**
+     * 转换为Map
+     *
+     * @param bean
+     * @return
+     */
+    public static Map<String, Object> beanToMap(Object bean) {
+        PropertyDescriptor[] propertyDescriptorArray = getPropertyDescriptorArray(bean);
+        Map<String, Object> parameterMap = new HashMap<String, Object>();
+        for (PropertyDescriptor propertyDescriptor : propertyDescriptorArray) {
+            Object value = getPropertyDescriptorValue(bean, propertyDescriptor);
+            parameterMap.put(propertyDescriptor.getName(), value);
+        }
+        return parameterMap;
+    }
+
+    public static Object getPropertyDescriptorValue(Object bean, PropertyDescriptor propertyDescriptor) {
+        Object value = null;
+        if (null != propertyDescriptor) {
+            Method readMethod = propertyDescriptor.getReadMethod();
+            value = invok(readMethod, bean, propertyDescriptor.getPropertyType(), null);
+        }
+        return value;
+    }
+
 
     /**
      * 通过反射将map的key value 映射到实体类中

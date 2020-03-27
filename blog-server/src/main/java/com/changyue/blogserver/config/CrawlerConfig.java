@@ -198,15 +198,15 @@ public class CrawlerConfig {
         //发布日期
         parseRules.add(new ParseRule("releaseDate", CrawlerStatus.ParseRuleType.XPATH, "//span[@class='time']/text()"));
         //标签
-        parseRules.add(new ParseRule("labels", CrawlerStatus.ParseRuleType.XPATH, "//span[@class='tags-box']/a/text()"));
+        parseRules.add(new ParseRule("labels", CrawlerStatus.ParseRuleType.XPATH, "//div[@class='tags-box']/a/text()"));
         //个人空间
-        parseRules.add(new ParseRule("labels", CrawlerStatus.ParseRuleType.XPATH, "//span[@class='tags-box']/a/text()"));
+        parseRules.add(new ParseRule("personalSpace", CrawlerStatus.ParseRuleType.XPATH, "//a[@class='follow-nickName']/@href"));
         //阅读量
         parseRules.add(new ParseRule("readCount", CrawlerStatus.ParseRuleType.XPATH, "//span[@class='read-count']/text()"));
         //点赞量
         parseRules.add(new ParseRule("likes", CrawlerStatus.ParseRuleType.XPATH, "//div[@class='tool-box']/ul[@class='meau-list']/li[@class='btn-like-box']/button/p/text()"));
         //回复次数
-        parseRules.add(new ParseRule("commentCount", CrawlerStatus.ParseRuleType.XPATH, "//div[@class='tool-box']/ul[@class='meau-list']/li[@class='to-commentBox']/button/p/text()"));
+        parseRules.add(new ParseRule("commentCount", CrawlerStatus.ParseRuleType.XPATH, "//div[@class='tool-box']/ul[@class='meau-list']/li[@class='to-commentBox']/a[@class='btn-comments']/p/text()"));
         //html内容
         parseRules.add(new ParseRule("content", CrawlerStatus.ParseRuleType.XPATH, "//div[@id='content_views']/html()"));
 
@@ -222,7 +222,6 @@ public class CrawlerConfig {
     public void setSpider(Spider spider) {
         this.spider = spider;
     }
-
 
     @Value("${redis.host}")
     private String redisHost;

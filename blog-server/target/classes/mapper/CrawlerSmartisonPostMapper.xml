@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.changyue.blogserver.dao.CrawlerSmartisonPostMapper">
+    <resultMap id="BaseResultMap" type="crawlerSmartisonPost">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="site_id" jdbcType="INTEGER" property="siteId"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="headpic" jdbcType="VARCHAR" property="headpic"/>
+        <result column="brief" jdbcType="VARCHAR" property="brief"/>
+        <result column="original_url" jdbcType="VARCHAR" property="originalUrl"/>
+        <result column="url" jdbcType="VARCHAR" property="url"/>
+        <result column="site_name" jdbcType="VARCHAR" property="siteName"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="pub_time" jdbcType="TIMESTAMP" property="pubTime"/>
+        <result column="pre_pic1" jdbcType="VARCHAR" property="prePic1"/>
+        <result column="pre_pic2" jdbcType="VARCHAR" property="prePic2"/>
+        <result column="pre_pic3" jdbcType="VARCHAR" property="prePic3"/>
+    </resultMap>
+
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs"
+               type="crawlerSmartisonPost">
+        <result column="content" jdbcType="LONGVARCHAR" property="content"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, title, headpic, brief, original_url, url, create_time, update_time, pub_time,
+    pre_pic1, pre_pic2, pre_pic3,site_id,site_name
+    </sql>
+    <sql id="Blob_Column_List">
+        content
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from crawler_smartison_post
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from crawler_smartison_post
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="crawlerSmartisonPost">
+        insert into crawler_smartison_post (id, title, headpic,
+                                            brief, original_url, url,
+                                            create_time, update_time, pub_time,
+                                            pre_pic1, pre_pic2, pre_pic3,
+                                            content, site_id, site_name)
+        values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{headpic,jdbcType=VARCHAR},
+                #{brief,jdbcType=VARCHAR}, #{originalUrl,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR},
+                #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{pubTime,jdbcType=TIMESTAMP},
+                #{prePic1,jdbcType=VARCHAR}, #{prePic2,jdbcType=VARCHAR}, #{prePic3,jdbcType=VARCHAR},
+                #{content,jdbcType=LONGVARCHAR}, #{siteId,jdbcType=INTEGER}, #{siteName,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="crawlerSmartisonPost">
+        insert into crawler_smartison_post
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="headpic != null">
+                headpic,
+            </if>
+            <if test="brief != null">
+                brief,
+            </if>
+            <if test="originalUrl != null">
+                original_url,
+            </if>
+            <if test="url != null">
+                url,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="pubTime != null">
+                pub_time,
+            </if>
+            <if test="prePic1 != null">
+                pre_pic1,
+            </if>
+            <if test="prePic2 != null">
+                pre_pic2,
+            </if>
+            <if test="prePic3 != null">
+                pre_pic3,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+            <if test="siteId != null">
+                site_id,
+            </if>
+            <if test="siteName != null">
+                site_name,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="headpic != null">
+                #{headpic,jdbcType=VARCHAR},
+            </if>
+            <if test="brief != null">
+                #{brief,jdbcType=VARCHAR},
+            </if>
+            <if test="originalUrl != null">
+                #{originalUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="url != null">
+                #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="pubTime != null">
+                #{pubTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="prePic1 != null">
+                #{prePic1,jdbcType=VARCHAR},
+            </if>
+            <if test="prePic2 != null">
+                #{prePic2,jdbcType=VARCHAR},
+            </if>
+            <if test="prePic3 != null">
+                #{prePic3,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="siteId != null">
+                #{siteId,jdbcType=INTEGER},
+            </if>
+            <if test="siteName != null">
+                #{siteName,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="crawlerSmartisonPost">
+        update crawler_smartison_post
+        <set>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="headpic != null">
+                headpic = #{headpic,jdbcType=VARCHAR},
+            </if>
+            <if test="brief != null">
+                brief = #{brief,jdbcType=VARCHAR},
+            </if>
+            <if test="originalUrl != null">
+                original_url = #{originalUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="url != null">
+                url = #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="pubTime != null">
+                pub_time = #{pubTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="prePic1 != null">
+                pre_pic1 = #{prePic1,jdbcType=VARCHAR},
+            </if>
+            <if test="prePic2 != null">
+                pre_pic2 = #{prePic2,jdbcType=VARCHAR},
+            </if>
+            <if test="prePic3 != null">
+                pre_pic3 = #{prePic3,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                content = #{content,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="siteId != null">
+                #{siteId,jdbcType=INTEGER},
+            </if>
+            <if test="siteName != null">
+                #{siteName,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="crawlerSmartisonPost">
+        update crawler_smartison_post
+        set title        = #{title,jdbcType=VARCHAR},
+            headpic      = #{headpic,jdbcType=VARCHAR},
+            brief        = #{brief,jdbcType=VARCHAR},
+            original_url = #{originalUrl,jdbcType=VARCHAR},
+            url          = #{url,jdbcType=VARCHAR},
+            create_time  = #{createTime,jdbcType=TIMESTAMP},
+            update_time  = #{updateTime,jdbcType=TIMESTAMP},
+            pub_time     = #{pubTime,jdbcType=TIMESTAMP},
+            pre_pic1     = #{prePic1,jdbcType=VARCHAR},
+            pre_pic2     = #{prePic2,jdbcType=VARCHAR},
+            pre_pic3     = #{prePic3,jdbcType=VARCHAR},
+            content      = #{content,jdbcType=LONGVARCHAR},
+            site_id      = #{siteId,jdbcType=INTEGER},
+            site_name    =#{siteName,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="crawlerSmartisonPost">
+        update crawler_smartison_post
+        set title        = #{title,jdbcType=VARCHAR},
+            headpic      = #{headpic,jdbcType=VARCHAR},
+            brief        = #{brief,jdbcType=VARCHAR},
+            original_url = #{originalUrl,jdbcType=VARCHAR},
+            url          = #{url,jdbcType=VARCHAR},
+            create_time  = #{createTime,jdbcType=TIMESTAMP},
+            update_time  = #{updateTime,jdbcType=TIMESTAMP},
+            pub_time     = #{pubTime,jdbcType=TIMESTAMP},
+            pre_pic1     = #{prePic1,jdbcType=VARCHAR},
+            pre_pic2     = #{prePic2,jdbcType=VARCHAR},
+            pre_pic3     = #{prePic3,jdbcType=VARCHAR},
+            site_id      = #{siteId,jdbcType=INTEGER},
+            site_name    =#{siteName,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

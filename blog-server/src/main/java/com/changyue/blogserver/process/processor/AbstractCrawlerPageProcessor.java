@@ -4,10 +4,8 @@ import com.changyue.blogserver.crawler.helper.CrawlerHelper;
 import com.changyue.blogserver.crawler.model.CrawlerParseItem;
 import com.changyue.blogserver.crawler.model.ParseItem;
 import com.changyue.blogserver.crawler.model.ProcessFlowData;
-import com.changyue.blogserver.crawler.parse.ParseRule;
 import com.changyue.blogserver.model.enums.CrawlerStatus;
 import com.changyue.blogserver.process.AbstractProcessFlow;
-import com.changyue.blogserver.utils.crawler.ParseRuleUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import us.codecraft.webmagic.Page;
@@ -16,7 +14,6 @@ import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.processor.PageProcessor;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -44,7 +41,6 @@ public abstract class AbstractCrawlerPageProcessor extends AbstractProcessFlow i
      */
     private static final int TIME_OUT = 10000;
 
-
     @Autowired
     private CrawlerHelper crawlerHelper;
 
@@ -58,7 +54,7 @@ public abstract class AbstractCrawlerPageProcessor extends AbstractProcessFlow i
 
     @Override
     public CrawlerStatus.ComponentType getComponentType() {
-        return CrawlerStatus.ComponentType.PAGEPROCESSOR;
+        return CrawlerStatus.ComponentType.PAGE_PROCESSOR;
     }
 
     /**
@@ -97,24 +93,6 @@ public abstract class AbstractCrawlerPageProcessor extends AbstractProcessFlow i
     }
 
     /**
-     * 获得下一页解析url列表
-     *
-     * @return 下一页解析url列表
-     */
-    public List<String> getHelpUrlList(List<ParseRule> parseRuleList) {
-
-        List<String> helpUrlList = new ArrayList<>();
-
-        for (ParseRule parseRule : parseRuleList) {
-            //获取url 并检验
-            List<String> urlLinks = ParseRuleUtils.getUrlLinks(parseRule.getParseContentList());
-            helpUrlList.addAll(urlLinks);
-        }
-
-        return helpUrlList;
-    }
-
-    /**
      * 添加数据到爬取列表
      *
      * @param urlList      爬取的URL列表
@@ -134,9 +112,9 @@ public abstract class AbstractCrawlerPageProcessor extends AbstractProcessFlow i
 
             //添加到爬虫
             addSpiderRequest(parseItems);
+
         }
     }
-
 
     /**
      * 处理页面

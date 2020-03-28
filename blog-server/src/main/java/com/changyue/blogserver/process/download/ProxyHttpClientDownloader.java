@@ -1,12 +1,12 @@
 package com.changyue.blogserver.process.download;
 
 
+import com.changyue.blogserver.crawler.helper.CookieHelper;
+import com.changyue.blogserver.crawler.helper.CrawlerHelper;
 import com.changyue.blogserver.crawler.model.CrawlerCookie;
 import com.changyue.blogserver.crawler.model.CrawlerHtml;
 import com.changyue.blogserver.crawler.model.CrawlerProxy;
 import com.changyue.blogserver.crawler.model.ProcessFlowData;
-import com.changyue.blogserver.crawler.helper.CookieHelper;
-import com.changyue.blogserver.crawler.helper.CrawlerHelper;
 import com.changyue.blogserver.crawler.proxy.CrawlerProxyProvider;
 import com.changyue.blogserver.factory.CrawlerProxyFactory;
 import com.changyue.blogserver.model.enums.CrawlerStatus;

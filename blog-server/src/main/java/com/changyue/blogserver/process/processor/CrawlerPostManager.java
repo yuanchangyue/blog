@@ -43,7 +43,7 @@ public class CrawlerPostManager {
     }
 
     /**
-     * 处理数据
+     * 判断是否当前页面
      *
      * @param page 页面
      */
@@ -59,7 +59,6 @@ public class CrawlerPostManager {
                 processor.handle(page);
             }
         }
-        System.out.println("page.getUrl().get() = " + page.getUrl().get());
     }
 
 }

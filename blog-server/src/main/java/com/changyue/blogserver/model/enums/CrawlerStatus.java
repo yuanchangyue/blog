@@ -10,6 +10,10 @@ public class CrawlerStatus {
         FORWARD, REVERSE
     }
 
+    public enum FormType {
+        CSDN, Smartison
+    }
+
     /**
      * 抓取规则类型
      */
@@ -41,7 +45,7 @@ public class CrawlerStatus {
      * 抓取类型
      */
     public enum ComponentType {
-        NORMAL, PAGEPROCESSOR, PIPELINE, DOWNLOAD,SCHEDULER
+        NORMAL, PAGE_PROCESSOR, PIPELINE, DOWNLOAD, SCHEDULER
     }
 
     public enum HtmlType {
@@ -81,7 +85,6 @@ public class CrawlerStatus {
             return dataType;
         }
     }
-
 
 
 }

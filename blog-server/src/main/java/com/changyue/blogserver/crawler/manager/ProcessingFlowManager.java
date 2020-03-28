@@ -39,7 +39,6 @@ public class ProcessingFlowManager {
     @Resource
     private List<ProcessFlow> processFlowList;
 
-
     /**
      * 初始化方法 通过子类优先级 排序
      * 初始化spider
@@ -64,10 +63,14 @@ public class ProcessingFlowManager {
 
 
     /**
-     * 根据ProcessFlow接口getComponentType接口类型生成
+     * 初始化spider（PageProcessor，Downloader,Scheduler,Pipeline）
+     *
+     * @return spider
      */
     private Spider initSpider() {
+
         Spider spider = null;
+
         CrawlerComponent crawlerComponent = getComponent(processFlowList);
 
         PageProcessor pageProcessor = crawlerComponent.getPageProcessor();
@@ -96,7 +99,7 @@ public class ProcessingFlowManager {
     }
 
     /**
-     * 抓取的封装
+     * 将ProcessFlow分类封装为爬虫组件CrawlerComponent
      *
      * @param processFlowList 处理流列表
      * @return 爬虫组件
@@ -104,7 +107,7 @@ public class ProcessingFlowManager {
     private CrawlerComponent getComponent(List<ProcessFlow> processFlowList) {
         CrawlerComponent component = new CrawlerComponent();
         for (ProcessFlow processFlow : processFlowList) {
-            if (processFlow.getComponentType() == CrawlerStatus.ComponentType.PAGEPROCESSOR) {
+            if (processFlow.getComponentType() == CrawlerStatus.ComponentType.PAGE_PROCESSOR) {
                 component.setPageProcessor((PageProcessor) processFlow);
             } else if (processFlow.getComponentType() == CrawlerStatus.ComponentType.PIPELINE) {
                 component.addPipeline((Pipeline) processFlow);
@@ -133,6 +136,7 @@ public class ProcessingFlowManager {
         for (ProcessFlow processFlow : processFlowList) {
             processFlow.handle(processFlowData);
         }
+
         //开始爬虫
         crawlerConfig.getSpider().start();
     }

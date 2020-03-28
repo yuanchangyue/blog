@@ -11,7 +11,7 @@ import java.util.Date;
  * 文章
  */
 @Data
-public class CrawlerPost {
+public class CrawlerCsdnPost {
     /**
      * id
      */
@@ -65,9 +65,9 @@ public class CrawlerPost {
      */
     private String reason;
     /**
-     * 文章ID
+     * 来自
      */
-    private Integer articleId;
+    private String from;
     /**
      * 任务讯号
      */

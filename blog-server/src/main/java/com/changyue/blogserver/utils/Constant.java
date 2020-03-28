@@ -6,6 +6,7 @@ package com.changyue.blogserver.utils;
  * @date : 2020-03-23 21:57
  */
 public class Constant {
+
     /**
      * <p>
      *
@@ -86,7 +87,7 @@ public class Constant {
      * http://reader.smartisan.com/index.php?r=myCenter/recommendList&offset=0&page_size=20
      * <p>
      * 站点
-     * <p>
+     * <p>16,45,10,34,15,11,43,44
      * 新闻
      * http://reader.smartisan.com/index.php?r=site/search&cate_id=16&offset=0&page_size=20
      * 视频

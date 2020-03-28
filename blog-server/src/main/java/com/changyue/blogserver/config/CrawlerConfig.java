@@ -8,11 +8,14 @@ import com.changyue.blogserver.crawler.parse.ParseRule;
 import com.changyue.blogserver.crawler.proxy.CrawlerProxyProvider;
 import com.changyue.blogserver.model.enums.CrawlerStatus;
 import com.changyue.blogserver.process.scheduler.RedisAndDBScheduler;
+import com.changyue.blogserver.serivce.CrawlerPostCateService;
+import com.changyue.blogserver.serivce.CrawlerPostSiteService;
 import com.changyue.blogserver.utils.crawler.SeleniumClient;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -75,12 +78,92 @@ public class CrawlerConfig {
     @Value("${csdn.crawlerHelpNextPagingSize}")
     private Integer crawlerHelpNextPagingSize;
 
+    @Value("${smartisan.url.init}")
+    private String smartisanInitUrl;
+
+    @Value("${smartisan.url.site}")
+    private String smartisanSiteUrl;
+
+    @Value("${smartisan.url.cate}")
+    private String smartisanCateUrl;
+
+    @Value("${smartisan.url.cateId}")
+    private String smartisanCateIds;
+
+    @Value("${smartisan.url.site.article}")
+    private String smartisanSiteArticleUrl;
+
+
+    @Autowired
+    private CrawlerPostCateService crawlerPostCateService;
+
+    @Autowired
+    private CrawlerPostSiteService crawlerPostSiteService;
+
+
+    public List<String> getSmartisonArticleUrl() {
+        List<String> urlList = new ArrayList<>();
+        if (StringUtils.isNotEmpty(smartisanInitUrl) && StringUtils.isNotEmpty(smartisanSiteArticleUrl)) {
+            List<String> ids = crawlerPostSiteService.listIds();
+            if (null != ids && !ids.isEmpty()) {
+                for (String id : ids) {
+                    String url = smartisanInitUrl + smartisanSiteArticleUrl + id;
+                    urlList.add(url);
+                }
+            }
+        }
+        return urlList;
+    }
+
+
     /**
-     * 获得爬虫的url
+     * 获取smartison site爬虫的url
+     *
+     * @return url List
+     */
+    public List<String> getSmartisonSiteUrl() {
+        List<String> urlList = new ArrayList<>();
+        if (StringUtils.isNotEmpty(smartisanInitUrl) && StringUtils.isNotEmpty(smartisanSiteUrl)) {
+            String[] cateStr = smartisanCateIds.split(",");
+            for (String cate : cateStr) {
+                String siteIdsStr = crawlerPostCateService.getSiteIdsById(Integer.parseInt(cate));
+                String[] ids = siteIdsStr.split(",");
+                for (String id : ids) {
+                    String url = smartisanInitUrl + smartisanSiteUrl + id;
+                    urlList.add(url);
+                }
+            }
+        }
+        return urlList;
+    }
+
+    /**
+     * 获得smartison cate爬虫的url
      *
      * @return url list
      */
-    public List<String> getCrawlerUrlList() {
+    public List<String> getSmartisonUrlList() {
+        List<String> urlList = new ArrayList<>();
+
+        if (StringUtils.isNotEmpty(smartisanInitUrl) && StringUtils.isNotEmpty(smartisanCateUrl)
+                && StringUtils.isNotEmpty(smartisanCateIds)) {
+            String[] cateStr = smartisanCateIds.split(",");
+            for (String cate : cateStr) {
+                String url = smartisanInitUrl + smartisanCateUrl;
+                url = url.replace("cateId", cate);
+                urlList.add(url);
+            }
+        }
+        return urlList;
+    }
+
+    /**
+     * 获得csdn爬虫的url
+     *
+     * @return url list
+     */
+    public List<String> getCsdnCrawlerUrlList() {
+
         List<String> crawlerUrlList = new ArrayList<>();
 
         if (StringUtils.isNotEmpty(suffix) && StringUtils.isNotEmpty(prefix)) {
@@ -95,6 +178,7 @@ public class CrawlerConfig {
         }
         return crawlerUrlList;
     }
+
 
     /**
      * 注册SeleniumClient到Spring中
@@ -165,12 +249,11 @@ public class CrawlerConfig {
         return crawlerProxyProvider;
     }
 
-
     @Bean
     public CrawlerConfigProperty getCrawlerConfigProperty() {
         CrawlerConfigProperty property = new CrawlerConfigProperty();
         //初始化url列表
-        property.setInitCrawlerUrlList(getCrawlerUrlList());
+        property.setInitCrawlerUrlList(getCsdnCrawlerUrlList());
         //初始化url解析规则定义
         property.setInitCrawlerXpath(initCrawlerXpath);
         //用户空间下的解析规则  url
@@ -181,6 +264,7 @@ public class CrawlerConfig {
         property.setTargetParseRuleList(getTargetParseRuleList());
         return property;
     }
+
 
     /**
      * 目标页面的解析规则

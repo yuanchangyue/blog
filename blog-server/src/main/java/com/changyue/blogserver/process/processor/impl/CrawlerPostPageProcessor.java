@@ -30,6 +30,7 @@ public class CrawlerPostPageProcessor extends AbstractCrawlerPageProcessor {
 
     @Override
     public void handle(Page page) {
+
         //处理类型
         String handleType = crawlerHelper.getHandleType(page.getRequest());
 
@@ -41,12 +42,26 @@ public class CrawlerPostPageProcessor extends AbstractCrawlerPageProcessor {
 
         log.info("正在解析文章页,当前的url:[{}],处理的类型为：[{}]", requestUrl, handleType);
 
+        if (requestUrl.contains("csdn.net")) {
+            csdnPostPageParse(page);
+        } else if (requestUrl.contains("smartisan.com")) {
+
+            log.info("url--------->[{}]", requestUrl);
+        }
+
+        log.info("解析文章页完成,当前的url:[{}],处理的类型为：[{}],用时:[{}]", requestUrl, handleType, System.currentTimeMillis() - currentTimeMillis);
+    }
+
+    /**
+     * csdn 页面的解析
+     *
+     * @param page 页面
+     */
+    private void csdnPostPageParse(Page page) {
         //获取文章页的解析规则
         List<ParseRule> targetParseRuleList = crawlerConfigProperty.getTargetParseRuleList();
-
         //获取有效的规则
         targetParseRuleList = ParseRuleUtils.parseHtmlByRuleList(page.getHtml(), targetParseRuleList);
-
         if (null != targetParseRuleList && !targetParseRuleList.isEmpty()) {
             for (ParseRule parseRule : targetParseRuleList) {
                 log.info("字段:[{}],内容为:[{}]", parseRule.getField(), parseRule.getMergeContent());
@@ -54,8 +69,6 @@ public class CrawlerPostPageProcessor extends AbstractCrawlerPageProcessor {
                 page.putField(parseRule.getField(), parseRule.getMergeContent());
             }
         }
-
-        log.info("正在解析文章页,当前的url:[{}],处理的类型为：[{}],用时:[{}]", requestUrl, handleType, System.currentTimeMillis() - currentTimeMillis);
     }
 
     /**

@@ -3,18 +3,16 @@ package com.changyue.blogserver.process.parse.impl;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.changyue.blogserver.config.CrawlerConfig;
 import com.changyue.blogserver.crawler.model.CrawlerParseItem;
-import com.changyue.blogserver.model.entity.CrawlerPost;
+import com.changyue.blogserver.model.entity.CrawlerCsdnPost;
 import com.changyue.blogserver.model.entity.CrawlerPostAdditional;
 import com.changyue.blogserver.model.entity.CrawlerPostComment;
 import com.changyue.blogserver.model.enums.CrawlerStatus;
 import com.changyue.blogserver.model.parse.HtmlLabel;
 import com.changyue.blogserver.process.parse.AbstractHtmlParsePipeline;
 import com.changyue.blogserver.process.thread.CrawlerThreadPool;
-import com.changyue.blogserver.serivce.CrawlerPostAdditionalService;
-import com.changyue.blogserver.serivce.CrawlerPostCommentService;
-import com.changyue.blogserver.serivce.CrawlerPostLabelService;
-import com.changyue.blogserver.serivce.CrawlerPostService;
+import com.changyue.blogserver.serivce.*;
 import com.changyue.blogserver.utils.DateUtils;
 import com.changyue.blogserver.utils.ZipUtils;
 import com.changyue.blogserver.utils.crawler.HtmlParser;
@@ -36,7 +34,10 @@ import java.util.*;
 public class CrawlerHtmlParsePipeline extends AbstractHtmlParsePipeline<CrawlerParseItem> {
 
     @Autowired
-    private CrawlerPostService crawlerPostService;
+    private CrawlerConfig crawlerConfig;
+
+    @Autowired
+    private CrawlerCsdnPostService crawlerCsdnPostService;
 
     @Autowired
     private CrawlerPostAdditionalService crawlerPostAdditionalService;
@@ -46,6 +47,9 @@ public class CrawlerHtmlParsePipeline extends AbstractHtmlParsePipeline<CrawlerP
 
     @Autowired
     private CrawlerPostCommentService crawlerPostCommentService;
+
+    @Autowired
+    private CrawlerPostSiteService crawlerPostSiteService;
 
     /**
      * 获取CSDN评论url
@@ -110,6 +114,7 @@ public class CrawlerHtmlParsePipeline extends AbstractHtmlParsePipeline<CrawlerP
      * @param parseItem 解析的数据
      */
     private void saveParseItem(CrawlerParseItem parseItem) {
+
         long currentTimeMillis = System.currentTimeMillis();
 
         if (null != parseItem) {
@@ -117,50 +122,41 @@ public class CrawlerHtmlParsePipeline extends AbstractHtmlParsePipeline<CrawlerP
             String handelType = parseItem.getHandelType();
 
             log.info("正在保存数据，url：[{}],handelType:[{}]", url, handelType);
-            CrawlerPost crawlerPost = savePost(parseItem);
+            CrawlerCsdnPost crawlerCsdnPost = savePost(parseItem);
 
-            if (null != crawlerPost) {
+            if (null != crawlerCsdnPost) {
 
                 //保存附加信息
-                savePostAdditional(parseItem, crawlerPost);
+                savePostAdditional(parseItem, crawlerCsdnPost);
 
                 //保存评论
                 if (null != parseItem.getCommentCount() && parseItem.getCommentCount() > 0) {
                     //赋值ID
                     parseItem.setId(getUrlId(parseItem.getUrl()));
                     //保存评论
-                    savePostComment(parseItem, crawlerPost);
+                    savePostComment(parseItem, crawlerCsdnPost);
                 }
 
                 //发送消息
-                sendMessageForCrawlerPost(crawlerPost.getId());
             }
+
             log.info("保存数据完成，url：[{}],handelType:[{}],用时:[{}]", url, handelType, System.currentTimeMillis() - currentTimeMillis);
         }
-    }
-
-    /**
-     * 发送消息审核爬虫的文章
-     *
-     * @param crawlerPostId ID
-     */
-    private void sendMessageForCrawlerPost(Integer crawlerPostId) {
-
     }
 
     /**
      * 保存评论
      *
      * @param parseItem   爬虫文章的解析对象
-     * @param crawlerPost 爬虫文章（数据库）
+     * @param crawlerCsdnPost 爬虫文章（数据库）
      */
-    private void savePostComment(CrawlerParseItem parseItem, CrawlerPost crawlerPost) {
+    private void savePostComment(CrawlerParseItem parseItem, CrawlerCsdnPost crawlerCsdnPost) {
 
         List<CrawlerPostComment> crawlerPostComments = getCrawlerCommentData(parseItem);
 
         if (null != crawlerPostComments && !crawlerPostComments.isEmpty()) {
             for (CrawlerPostComment crawlerPostComment : crawlerPostComments) {
-                crawlerPostComment.setNewsId(crawlerPost.getId());
+                crawlerPostComment.setNewsId(crawlerCsdnPost.getId());
                 //保存到数据库
                 crawlerPostCommentService.saveCrawlerPostComment(crawlerPostComment);
             }
@@ -245,13 +241,13 @@ public class CrawlerHtmlParsePipeline extends AbstractHtmlParsePipeline<CrawlerP
      * 保存附加信息
      *
      * @param parseItem   爬虫文章的解析对象
-     * @param crawlerPost 爬虫文章（数据库）
+     * @param crawlerCsdnPost 爬虫文章（数据库）
      */
-    private void savePostAdditional(CrawlerParseItem parseItem, CrawlerPost crawlerPost) {
+    private void savePostAdditional(CrawlerParseItem parseItem, CrawlerCsdnPost crawlerCsdnPost) {
         CrawlerPostAdditional crawlerPostAdditional;
-        if (null != parseItem && null != crawlerPost) {
+        if (null != parseItem && null != crawlerCsdnPost) {
             crawlerPostAdditional = new CrawlerPostAdditional();
-            crawlerPostAdditional.setNewsId(crawlerPost.getId());//文章id
+            crawlerPostAdditional.setNewsId(crawlerCsdnPost.getId());//文章id
             crawlerPostAdditional.setReadCount(parseItem.getReadCount());//阅读数
             crawlerPostAdditional.setComment(parseItem.getCommentCount());//回复数
             crawlerPostAdditional.setLikes(parseItem.getLikes());//点赞
@@ -273,9 +269,9 @@ public class CrawlerHtmlParsePipeline extends AbstractHtmlParsePipeline<CrawlerP
      * @param parseItem 爬虫文章的解析对象
      * @return 爬虫文章（数据库）
      */
-    private CrawlerPost savePost(CrawlerParseItem parseItem) {
+    private CrawlerCsdnPost savePost(CrawlerParseItem parseItem) {
 
-        CrawlerPost crawlerPost = new CrawlerPost();
+        CrawlerCsdnPost crawlerCsdnPost = new CrawlerCsdnPost();
 
         if (null != parseItem) {
 
@@ -297,30 +293,31 @@ public class CrawlerHtmlParsePipeline extends AbstractHtmlParsePipeline<CrawlerP
             if (null == additionalByUrl) {
 
                 //赋值
-                crawlerPost.setName(parseItem.getAuthor());
-                crawlerPost.setLabels(parseItem.getLabels());
-                crawlerPost.setContent(parseItem.getCompressContent());
-                crawlerPost.setLabelIds(crawlerPostLabelService.getPostLabelIdByLabelName(parseItem.getLabels()));
-                Integer channelId = crawlerPostLabelService.getPostChannelByLabelIds(crawlerPost.getLabelIds());
-                crawlerPost.setChannelId(channelId);
-                crawlerPost.setTitle(parseItem.getTitle());
-                crawlerPost.setType(parseItem.getDocType());
-                crawlerPost.setStatus((byte) 1);
-                crawlerPost.setCreateTime(new Date());
+                crawlerCsdnPost.setName(parseItem.getAuthor());
+                crawlerCsdnPost.setLabels(parseItem.getLabels());
+                crawlerCsdnPost.setContent(parseItem.getCompressContent());
+                crawlerCsdnPost.setLabelIds(crawlerPostLabelService.getPostLabelIdByLabelName(parseItem.getLabels()));
+                Integer channelId = crawlerPostLabelService.getPostChannelByLabelIds(crawlerCsdnPost.getLabelIds());
+                crawlerCsdnPost.setChannelId(channelId);
+                crawlerCsdnPost.setTitle(parseItem.getTitle());
+                crawlerCsdnPost.setType(parseItem.getDocType());
+                crawlerCsdnPost.setStatus((byte) 1);
+                crawlerCsdnPost.setCreateTime(new Date());
+                crawlerCsdnPost.setFrom(CrawlerStatus.FormType.CSDN.name());
                 String releaseDate = parseItem.getReleaseDate();
                 if (StringUtils.isNotEmpty(releaseDate)) {
-                    crawlerPost.setOriginalTime(DateUtils.stringToDate(releaseDate, "yyyy-MM-dd HH:mm:ss"));
+                    crawlerCsdnPost.setOriginalTime(DateUtils.stringToDate(releaseDate, "yyyy-MM-dd HH:mm:ss"));
                 }
 
                 //保存到数据库中
-                crawlerPostService.savePost(crawlerPost);
+                crawlerCsdnPostService.savePost(crawlerCsdnPost);
 
             } else {
                 log.info("保存文章已经存在数据库中");
             }
         }
 
-        return crawlerPost;
+        return crawlerCsdnPost;
     }
 
     /**
@@ -373,6 +370,8 @@ public class CrawlerHtmlParsePipeline extends AbstractHtmlParsePipeline<CrawlerP
         return username;
     }
 
+
+
     /**
      * 处理前置一些不规则参数
      * 如：阅读量 123
@@ -403,6 +402,6 @@ public class CrawlerHtmlParsePipeline extends AbstractHtmlParsePipeline<CrawlerP
 
     @Override
     public int getPriority() {
-        return 1000;
+        return 180;
     }
 }

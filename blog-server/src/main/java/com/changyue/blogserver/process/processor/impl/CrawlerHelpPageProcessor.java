@@ -1,5 +1,6 @@
 package com.changyue.blogserver.process.processor.impl;
 
+import com.changyue.blogserver.config.CrawlerConfig;
 import com.changyue.blogserver.crawler.helper.CrawlerHelper;
 import com.changyue.blogserver.crawler.model.CrawlerConfigProperty;
 import com.changyue.blogserver.model.enums.CrawlerStatus;
@@ -24,6 +25,9 @@ public class CrawlerHelpPageProcessor extends AbstractCrawlerPageProcessor {
 
     @Autowired
     private CrawlerConfigProperty crawlerConfigProperty;
+
+    @Autowired
+    private CrawlerConfig crawlerConfig;
 
     @Autowired
     private CrawlerHelper crawlerHelper;
@@ -63,6 +67,8 @@ public class CrawlerHelpPageProcessor extends AbstractCrawlerPageProcessor {
         //爬虫
         addSpiderRequest(targetUrlList, page.getRequest(), CrawlerStatus.DocumentType.PAGE);
 
+
+
         log.info("解析下一页完成,当前的url:[{}],处理的类型为：[{}],用时：[{}]s", requestUrl, handleType, System.currentTimeMillis() - currentTimeMillis);
     }
 
@@ -75,13 +81,11 @@ public class CrawlerHelpPageProcessor extends AbstractCrawlerPageProcessor {
      * @return 分页页面url数据
      */
     public List<String> getAfterPageUrlList(String url, Integer pageSize) {
-
         //生成分页的url
         List<String> pagingUrlList = generatedPagingUrlList(url, pageSize);
 
         //分页里面的文章url
         return getHelpPagingPostUrl(pagingUrlList);
-
     }
 
     /**
@@ -150,7 +154,6 @@ public class CrawlerHelpPageProcessor extends AbstractCrawlerPageProcessor {
         }
         return pagingUrlList;
     }
-
 
     /**
      * 是否需要处理类型

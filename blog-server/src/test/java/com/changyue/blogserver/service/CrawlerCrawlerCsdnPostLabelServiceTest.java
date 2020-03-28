@@ -14,7 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class CrawlerCrawlerPostLabelServiceTest {
+public class CrawlerCrawlerCsdnPostLabelServiceTest {
 
     @Autowired
     private CrawlerPostLabelService crawlerPostLabelService;

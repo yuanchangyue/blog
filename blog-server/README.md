@@ -113,6 +113,10 @@ https://www.elastic.co/guide/cn/elasticsearch/guide/current/_analytics.html
 
      Pipeline负责抽取结果的处理，包括计算、持久化到文件、数据库等。WebMagic默认提供了“输出到控制台”和“保存到文件”两种结果处理方案。
 
+整体实现的框架流程 ：
+
+![流程](http://code4craft.github.io/images/posts/webmagic.png)
+
 #### Selenium
 > Selenium 是一个用于 Web 应用程序测试的工具。它的优点在于，浏览器能打开的页面，使用 selenium 就一定能获取到。
 

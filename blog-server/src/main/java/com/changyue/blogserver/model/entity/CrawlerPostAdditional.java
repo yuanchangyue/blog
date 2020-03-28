@@ -2,6 +2,7 @@ package com.changyue.blogserver.model.entity;
 
 import com.changyue.blogserver.model.base.BaseEntity;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.Date;
 
@@ -10,6 +11,7 @@ import java.util.Date;
  * @description : 爬虫文章的附加信息，方便自后进行反向爬虫
  * @date : 2020/3/25
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 public class CrawlerPostAdditional extends BaseEntity {
     private Integer id;

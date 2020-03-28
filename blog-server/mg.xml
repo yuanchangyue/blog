@@ -20,7 +20,7 @@
 
         <!-- 配置数据库连接信息 -->
         <jdbcConnection password="123456" userId="root"
-                        connectionURL="jdbc:mysql://47.93.193.94:3306/blogdb"
+                        connectionURL="jdbc:mysql://47.93.193.94:3306/blogdb?characterEncoding=utf8&amp;useSSL=false"
                         driverClass="com.mysql.jdbc.Driver"/>
 
         <javaTypeResolver>
@@ -28,19 +28,18 @@
         </javaTypeResolver>
 
         <!-- 指定javabean 生成的位置 -->
-        <javaModelGenerator targetProject=".\src\main\java" targetPackage="com.changyue.blogserver.model.entity">
+        <javaModelGenerator targetProject="/Users/alex/Documents/Code/Blog/blog-server/src/main/java" targetPackage="com.changyue.blogserver.model.entity">
             <property value="true" name="enableSubPackages"/>
             <property value="true" name="trimStrings"/>
         </javaModelGenerator>
 
         <!-- 指定sql映射文件的位置 -->
-        <sqlMapGenerator targetPackage="mapper" targetProject=".\src\main\resources">
+        <sqlMapGenerator targetPackage="mapper" targetProject="/Users/alex/Documents/Code/Blog/blog-server/src/main/resources">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
-
         <!--指定dao生成的位置-->
-        <javaClientGenerator targetProject=".\src\main\java" targetPackage="com.changyue.blogserver.dao"
+        <javaClientGenerator targetProject="/Users/alex/Documents/Code/Blog/blog-server/src/main/java" targetPackage="com.changyue.blogserver.dao"
                              type="XMLMAPPER">
             <property value="true" name="enableSubPackages"/>
         </javaClientGenerator>
@@ -71,7 +70,7 @@
                selectByExampleQueryId="false"/>
         -->
 
-        <table domainObjectName="IpPool" tableName="ip_pool" enableCountByExample="false"
+        <table domainObjectName="CrawlerSmartisonPost" tableName="crawler_smartison_post" enableCountByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"
                selectByExampleQueryId="false"/>
 

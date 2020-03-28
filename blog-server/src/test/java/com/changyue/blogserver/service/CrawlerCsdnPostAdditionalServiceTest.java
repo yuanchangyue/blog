@@ -19,7 +19,7 @@ import java.util.List;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class CrawlerPostAdditionalServiceTest {
+public class CrawlerCsdnPostAdditionalServiceTest {
 
     @Autowired
     private CrawlerPostAdditionalService crawlerPostAdditionalService;

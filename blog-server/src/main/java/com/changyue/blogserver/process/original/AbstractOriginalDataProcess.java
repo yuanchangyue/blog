@@ -1,10 +1,12 @@
 package com.changyue.blogserver.process.original;
 
+import com.changyue.blogserver.config.CrawlerConfig;
 import com.changyue.blogserver.crawler.model.ParseItem;
 import com.changyue.blogserver.crawler.model.ProcessFlowData;
 import com.changyue.blogserver.model.enums.CrawlerStatus;
 import com.changyue.blogserver.process.AbstractProcessFlow;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
@@ -16,8 +18,12 @@ import java.util.List;
 @Slf4j
 public abstract class AbstractOriginalDataProcess extends AbstractProcessFlow {
 
+    @Autowired
+    public CrawlerConfig crawlerConfig;
+
     @Override
     public void handle(ProcessFlowData processFlowData) {
+
         //从工作流中拿到解析的对象
         List<ParseItem> parseItemList = processFlowData.getParseItemList();
 
@@ -25,7 +31,6 @@ public abstract class AbstractOriginalDataProcess extends AbstractProcessFlow {
             log.info("正在获取初始化的URL");
             parseItemList = parseOriginalRequestData(processFlowData);
             log.info("获取初始化的URL完成，一共有：[{}]", parseItemList.size());
-            saveDataList(parseItemList);
         }
 
         if (!parseItemList.isEmpty()) {
@@ -35,14 +40,6 @@ public abstract class AbstractOriginalDataProcess extends AbstractProcessFlow {
             log.info("获取初始化的URL失败");
         }
 
-    }
-
-    /**
-     * 数据持久化
-     *
-     * @param parseItemList 解析的对象列表
-     */
-    public void saveDataList(List<ParseItem> parseItemList) {
     }
 
 

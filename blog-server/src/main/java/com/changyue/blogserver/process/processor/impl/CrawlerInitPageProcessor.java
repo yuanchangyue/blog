@@ -23,12 +23,14 @@ public class CrawlerInitPageProcessor extends AbstractCrawlerPageProcessor {
     @Override
     public void handle(Page page) {
 
-        //初始的爬虫Xpath
+        //初始的爬虫Xpath  在首页中找到列表文章
         String initCrawlerXpath = crawlerConfigProperty.getInitCrawlerXpath();
+
         //获取下一页的url
         List<String> helpUrl = page.getHtml().xpath(initCrawlerXpath).links().all();
 
         addSpiderRequest(helpUrl, page.getRequest(), CrawlerStatus.DocumentType.HELP);
+
     }
 
     /**
@@ -55,4 +57,5 @@ public class CrawlerInitPageProcessor extends AbstractCrawlerPageProcessor {
     public int getPriority() {
         return 100;
     }
+
 }

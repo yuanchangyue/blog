@@ -20,7 +20,7 @@ public interface ProcessFlow {
     /**
      * 处理业务
      */
-    void handle(ProcessFlowData processFlowData);
+     void handle(ProcessFlowData processFlowData);
 
     /**
      * 获取抓取类型

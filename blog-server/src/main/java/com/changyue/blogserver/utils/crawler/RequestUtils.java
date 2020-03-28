@@ -7,13 +7,15 @@ import us.codecraft.webmagic.Request;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author : 袁阊越
+ * @description : request 封装的基本类
+ * @date : 2020/3/27
+ */
 public class RequestUtils {
+
     /**
      * request 封装
-     *
-     * @param url
-     * @param headerMap
-     * @return
      */
     public static Request requestPackage(String url, Map<String, String> headerMap) {
         Request request = null;
@@ -28,9 +30,6 @@ public class RequestUtils {
 
     /**
      * 添加 cookie
-     *
-     * @param request
-     * @param headerMap
      */
     public static void addHeader(Request request, Map<String, String> headerMap) {
         if (null != headerMap && !headerMap.isEmpty()) {
@@ -43,9 +42,6 @@ public class RequestUtils {
 
     /**
      * 添加 cookie
-     *
-     * @param request
-     * @param cookieList
      */
     public static void addCookie(Request request, List<CrawlerCookie> cookieList) {
         if (null != request && null != cookieList && !cookieList.isEmpty()) {

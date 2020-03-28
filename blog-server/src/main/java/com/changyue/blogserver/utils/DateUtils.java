@@ -39,12 +39,17 @@ public class DateUtils {
      */
     public static Date addHours(Date date, int hours) {
         Calendar cd = Calendar.getInstance();
-
         cd.setTime(date);
-
         cd.add(Calendar.HOUR_OF_DAY, hours);
-
         return cd.getTime();
+    }
+
+    /*
+     * 将时间戳转换为时间
+     */
+    public static Date stampToDate(String s) {
+        long lt = new Long(s);
+        return new Date(lt);
     }
 
 }

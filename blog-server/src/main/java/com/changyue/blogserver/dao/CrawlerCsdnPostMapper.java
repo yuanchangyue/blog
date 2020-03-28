@@ -1,7 +1,7 @@
 package com.changyue.blogserver.dao;
 
 import com.changyue.blogserver.dao.base.BaseMapper;
-import com.changyue.blogserver.model.entity.CrawlerPost;
+import com.changyue.blogserver.model.entity.CrawlerCsdnPost;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -14,15 +14,15 @@ import java.util.List;
  */
 @Repository
 @Mapper
-public interface CrawlerPostMapper extends BaseMapper<CrawlerPost> {
+public interface CrawlerCsdnPostMapper extends BaseMapper<CrawlerCsdnPost> {
 
     /**
      * 按条件查 询所有数据
      *
-     * @param crawlerPost 条件
+     * @param crawlerCsdnPost 条件
      * @return 爬虫文章列表
      */
-    List<CrawlerPost> findAll(CrawlerPost crawlerPost);
+    List<CrawlerCsdnPost> findAll(CrawlerCsdnPost crawlerCsdnPost);
 
     /**
      * 通过url删除
@@ -37,6 +37,6 @@ public interface CrawlerPostMapper extends BaseMapper<CrawlerPost> {
      * @param param 参数
      * @return 爬虫文章
      */
-    CrawlerPost findByIdAndStatus(CrawlerPost param);
+    CrawlerCsdnPost findByIdAndStatus(CrawlerCsdnPost param);
 
 }

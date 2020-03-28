@@ -65,7 +65,6 @@ public class RedisAndDBScheduler extends RedisScheduler implements ProcessFlow {
 
     @Override
     public void handle(ProcessFlowData processFlowData) {
-
     }
 
     @Override

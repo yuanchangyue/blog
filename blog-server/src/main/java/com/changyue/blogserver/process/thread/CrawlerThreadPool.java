@@ -1,6 +1,6 @@
 package com.changyue.blogserver.process.thread;
 
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ExecutorService;
@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
  * @description : 线程池处理类
  * @date : 2020/3/25
  */
-@Log4j2
+@Slf4j
 public class CrawlerThreadPool {
 
     /**

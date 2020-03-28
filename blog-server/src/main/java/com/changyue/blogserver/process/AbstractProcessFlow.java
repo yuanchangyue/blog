@@ -66,16 +66,14 @@ public abstract class AbstractProcessFlow implements ProcessFlow {
      * Accept 请求头用来告知客户端可以处理的内容类型，这种内容类型用MIME类型来表示。借助内容协商机制, 服务器可以从诸多备选项中选择一项进行应用，
      * 并使用 Content-Type 应答头通知客户端它的选择。浏览器会基于请求的上下文来为这个请求头设置合适的值，比如获取一个CSS层叠样式表时值与获取图片、视频或脚本文件时的值是不同的。
      */
-    private final String Accept[] = {
+    private final String[] Accept = {
             "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3"
     };
-
 
     /**
      * UserAgent 参数设置
      */
     public final String UserAgentParameterName = "User-Agent";
-
 
     /**
      * UserAgent 参数设置
@@ -84,8 +82,6 @@ public abstract class AbstractProcessFlow implements ProcessFlow {
 
     /**
      * 获取header头
-     *
-     * @return
      */
     public Map<String, String> getHeaderMap() {
         Map<String, String> headerMap = new HashMap<>();
@@ -96,9 +92,6 @@ public abstract class AbstractProcessFlow implements ProcessFlow {
 
     /**
      * request 封装
-     *
-     * @param url
-     * @return
      */
     public Request getRequest(String url) {
         Map<String, String> headerMap = getHeaderMap();
@@ -108,8 +101,8 @@ public abstract class AbstractProcessFlow implements ProcessFlow {
     /**
      * request 封装
      *
-     * @param parseItem
-     * @return
+     * @param parseItem 解析的对象
+     * @return request
      */
     public Request getRequest(ParseItem parseItem) {
         Request request = null;
@@ -147,8 +140,6 @@ public abstract class AbstractProcessFlow implements ProcessFlow {
         return Accept[(int) (Math.random() * (Accept.length))];
     }
 
-
-
     @Autowired
     private CookieHelper cookieHelper;
 
@@ -181,7 +172,6 @@ public abstract class AbstractProcessFlow implements ProcessFlow {
         return htmlData;
     }
 
-
     /**
      * 通过Http Client 来获取数据
      *
@@ -209,7 +199,6 @@ public abstract class AbstractProcessFlow implements ProcessFlow {
         return jsonDate;
     }
 
-
     /**
      * 获取 SeleniumRequestData
      *
@@ -226,7 +215,6 @@ public abstract class AbstractProcessFlow implements ProcessFlow {
         }
         return crawlerHtml;
     }
-
 
     /**
      * cookie 转 CookieStore

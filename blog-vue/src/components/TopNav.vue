@@ -2,32 +2,39 @@
     <div class="top-nav-bar">
         <span @click="drawer = true" class="simple-menu-item logo-title">{{ navButton }}</span>
         <el-menu :default-active="this.$route.path" router class="nav" mode="horizontal">
-            <el-menu-item index="1" class="simple-menu-item hidden-md-and-down">控制台</el-menu-item>
-            <el-submenu index="2" class="hidden-md-and-down">
-                <template slot="title">
-                    <i class="el-icon-user"/>个人中心
-                </template>
-                <el-menu-item index="2-1">个人资料</el-menu-item>
+            <el-submenu :index="m.id" v-for="m in menuData" :key="m.id">
+              <template slot="title"><i :class="m.icon"/>{{m.name}}</template>
+              <div v-if="m.children!=null">
+                <el-menu-item  :index="c.url" v-for="c in m.children" :key="c.id">{{c.name}}</el-menu-item>
+              </div>
             </el-submenu>
-            <el-submenu index="3" class="hidden-md-and-down">
-                <template slot="title"><i class="el-icon-edit"/>文章</template>
-                <el-menu-item index="/postlist">文章列表</el-menu-item>
-                <el-menu-item index="/post">写文章</el-menu-item>
-                <el-menu-item index="/category">分类目录</el-menu-item>
-                <el-menu-item index="/tag">文章标签</el-menu-item>
-            </el-submenu>
-            <el-submenu index="4" class="hidden-md-and-down">
-                <template slot="title"><i class="el-icon-setting"/>看点</template>
-                <el-menu-item index="4-1">更多文章</el-menu-item>
-            </el-submenu>
-            <el-menu-item index="/attachment" class="simple-menu-item hidden-md-and-down"><i class="el-icon-picture-outline"/>附件
-            </el-menu-item>
-            <el-menu-item index="6" class="simple-menu-item hidden-md-and-down"><i class="el-icon-chat-line-round"/>评价
-            </el-menu-item>
-            <el-submenu class="hidden-md-and-down" index="7">
-                <template slot="title"><i class="el-icon-setting"/>设置</template>
-                <el-menu-item index="7-1">操作日志</el-menu-item>
-            </el-submenu>
+<!--            <el-menu-item index="1" class="simple-menu-item hidden-md-and-down">控制台</el-menu-item>-->
+<!--            <el-submenu index="2" class="hidden-md-and-down">-->
+<!--                <template slot="title">-->
+<!--                    <i class="el-icon-user"/>个人中心-->
+<!--                </template>-->
+<!--                <el-menu-item index="2-1">个人资料</el-menu-item>-->
+<!--            </el-submenu>-->
+<!--            <el-submenu index="3" class="hidden-md-and-down">-->
+<!--                <template slot="title"><i class="el-icon-edit"/>文章</template>-->
+<!--                <el-menu-item index="/postlist">文章列表</el-menu-item>-->
+<!--                <el-menu-item index="">写文章</el-menu-item>-->
+<!--                <el-menu-item index="/category">分类目录</el-menu-item>-->
+<!--                <el-menu-item index="/tag">文章标签</el-menu-item>-->
+<!--            </el-submenu>-->
+<!--            <el-submenu index="4" class="hidden-md-and-down">-->
+<!--                <template slot="title"><i class="el-icon-setting"/>看点</template>-->
+<!--                <el-menu-item index="4-1">更多文章</el-menu-item>-->
+<!--            </el-submenu>-->
+<!--            <el-menu-item index="/attachment" class="simple-menu-item hidden-md-and-down">-->
+<!--              <i class="el-icon-picture-outline"/>附件-->
+<!--            </el-menu-item>-->
+<!--            <el-menu-item index="6" class="simple-menu-item hidden-md-and-down"><i class="el-icon-chat-line-round"/>评伦-->
+<!--            </el-menu-item>-->
+<!--            <el-submenu class="hidden-md-and-down" index="7">-->
+<!--                <template slot="title"><i class="el-icon-setting"/>设置</template>-->
+<!--                <el-menu-item index="7-1">操作日志</el-menu-item>-->
+<!--            </el-submenu>-->
         </el-menu>
         <ul class="user-box">
             <li>
@@ -56,7 +63,8 @@ export default {
       drawer: false,
       direction: 'ltr',
       menuMode: 'horizontal',
-      logo: require('../assets/logo.png')
+      logo: require('../assets/logo.png'),
+      menuData: localStorage.getItem('menu')
     }
   },
   methods: {
@@ -66,6 +74,9 @@ export default {
         this.$router.replace({ path: '/login' })
       })
     }
+  },
+  created () {
+    console.info(this.menuData)
   }
 }
 </script>

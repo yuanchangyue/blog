@@ -2,92 +2,45 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bd5d3fba-cd88-41d7-b10b-952045a6ce54" name="Default Changelist" comment="&quot;VUE处理跨域并添加拦截器&quot;">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/dao/CrawlerPostCateMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/dao/CrawlerPostSiteMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/dao/CrawlerSmartisonPostMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/entity/CrawlerPostCate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/entity/CrawlerPostSite.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/entity/CrawlerSmartisonPost.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/CrawlerPostCateService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/CrawlerPostSiteService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/CrawlerSmartisonService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/CrawlerPostCateServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/CrawlerPostSiteServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/CrawlerSmartisonServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/utils/JsoupUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/CrawlerPostCateMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/CrawlerPostSiteMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/CrawlerSmartisonPostMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/changyue/blogserver/crawler/CrawlerConfigTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/changyue/blogserver/crawler/RequestTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/changyue/blogserver/service/CrawlerCsdnPostCateServiceTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/changyue/blogserver/service/CrawlerCsdnPostSiteServiceTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/changyue/blogserver/service/CrawlerSmartisonServiceTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/dao/ResourceMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/entity/Resource.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/vo/MenuVo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/vo/RouterVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/vo/UserVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/UserAuthorityService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/ResourceMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/changyue/blogserver/mapper/RoleMapperTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/changyue/blogserver/service/UserAuthorityServiceTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../blog-vue/src/assets/login-bg.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/mg.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/config/CrawlerConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/config/CrawlerConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/crawler/manager/ProcessingFlowManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/crawler/manager/ProcessingFlowManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/dao/CrawlerPostMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/dao/CrawlerCsdnPostMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/entity/CrawlerPost.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/entity/CrawlerCsdnPost.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/entity/CrawlerPostAdditional.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/entity/CrawlerPostAdditional.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/enums/CrawlerStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/enums/CrawlerStatus.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/process/AbstractProcessFlow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/process/AbstractProcessFlow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/process/ProcessFlow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/process/ProcessFlow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/process/download/ProxyHttpClientDownloader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/process/download/ProxyHttpClientDownloader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/process/original/AbstractOriginalDataProcess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/process/original/AbstractOriginalDataProcess.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/process/original/impl/CsdnOriginalDataProcess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/process/original/impl/CsdnOriginalDataProcess.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/process/parse/impl/CrawlerHtmlParsePipeline.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/process/parse/impl/CrawlerHtmlParsePipeline.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/process/processor/AbstractCrawlerPageProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/process/processor/AbstractCrawlerPageProcessor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/process/processor/CrawlerPostManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/process/processor/CrawlerPostManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/process/processor/impl/CrawlerHelpPageProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/process/processor/impl/CrawlerHelpPageProcessor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/process/processor/impl/CrawlerInitPageProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/process/processor/impl/CrawlerInitPageProcessor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/process/processor/impl/CrawlerPostPageProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/process/processor/impl/CrawlerPostPageProcessor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/process/scheduler/RedisAndDBScheduler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/process/scheduler/RedisAndDBScheduler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/process/thread/CrawlerThreadPool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/process/thread/CrawlerThreadPool.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/CrawlerPostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/CrawlerCsdnPostService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/CrawlerPostServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/CrawlerCsdnPostServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/utils/Constant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/utils/Constant.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/utils/DateUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/utils/DateUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/utils/crawler/RequestUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/utils/crawler/RequestUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/crawler.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/crawler.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/CrawlerPostMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/CrawlerCsdnPostMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/changyue/blogserver/service/CrawlerCrawlerPostLabelServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/changyue/blogserver/service/CrawlerCrawlerCsdnPostLabelServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/changyue/blogserver/service/CrawlerPostAdditionalServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/changyue/blogserver/service/CrawlerCsdnPostAdditionalServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/changyue/blogserver/service/CrawlerPostServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/changyue/blogserver/service/CrawlerCsdnPostServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/spring-configuration-metadata.json" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/META-INF/spring-configuration-metadata.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/config/CrawlerConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/config/CrawlerConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/crawler/manager/ProcessingFlowManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/crawler/manager/ProcessingFlowManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/dao/CrawlerPostMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/model/entity/CrawlerPost.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/model/entity/CrawlerPostAdditional.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/model/entity/CrawlerPostAdditional.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/model/enums/CrawlerStatus$ComponentType.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/model/enums/CrawlerStatus$ComponentType.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/model/enums/CrawlerStatus$DocumentType.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/model/enums/CrawlerStatus$DocumentType.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/model/enums/CrawlerStatus$HtmlType.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/model/enums/CrawlerStatus$HtmlType.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/model/enums/CrawlerStatus$ParseRuleType.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/model/enums/CrawlerStatus$ParseRuleType.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/model/enums/CrawlerStatus$ReturnDataType.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/model/enums/CrawlerStatus$ReturnDataType.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/model/enums/CrawlerStatus.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/model/enums/CrawlerStatus.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/process/AbstractProcessFlow.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/process/AbstractProcessFlow.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/process/original/AbstractOriginalDataProcess.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/process/original/AbstractOriginalDataProcess.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/process/original/impl/CsdnOriginalDataProcess.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/process/original/impl/CsdnOriginalDataProcess.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/process/parse/impl/CrawlerHtmlParsePipeline.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/process/parse/impl/CrawlerHtmlParsePipeline.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/process/processor/AbstractCrawlerPageProcessor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/process/processor/AbstractCrawlerPageProcessor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/process/processor/CrawlerPostManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/process/processor/CrawlerPostManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/process/processor/impl/CrawlerHelpPageProcessor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/process/processor/impl/CrawlerHelpPageProcessor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/process/processor/impl/CrawlerInitPageProcessor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/process/processor/impl/CrawlerInitPageProcessor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/process/processor/impl/CrawlerPostPageProcessor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/process/processor/impl/CrawlerPostPageProcessor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/process/scheduler/RedisAndDBScheduler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/process/scheduler/RedisAndDBScheduler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/process/thread/CrawlerThreadPool$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/process/thread/CrawlerThreadPool$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/process/thread/CrawlerThreadPool.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/process/thread/CrawlerThreadPool.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/CrawlerPostService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/impl/CrawlerPostServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/utils/DateUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/utils/DateUtils.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/utils/crawler/RequestUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/utils/crawler/RequestUtils.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/crawler.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/crawler.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mapper/CrawlerPostMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/changyue/blogserver/service/CrawlerCrawlerPostLabelServiceTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/changyue/blogserver/service/CrawlerPostAdditionalServiceTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/changyue/blogserver/service/CrawlerPostServiceTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/dao/RoleMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/dao/RoleMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/entity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/RoleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/RoleService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/UserRoleService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/CrawlerSmartisonServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/CrawlerSmartisonServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/RoleServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/RoleServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/UserAuthorityServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/UserAuthorityServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/RoleMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/RoleMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/controller/UserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/dao/RoleMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/dao/RoleMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/model/entity/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/model/entity/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/RoleService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/RoleService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/UserRoleService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/UserService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/impl/CrawlerSmartisonServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/impl/CrawlerSmartisonServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/impl/RoleServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/impl/RoleServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/impl/UserAuthorityServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/impl/UserAuthorityServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/impl/UserServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/impl/UserServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mapper/RoleMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mapper/RoleMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../blog-vue/src/assets/login.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../blog-vue/src/components/TopNav.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../blog-vue/src/components/TopNav.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../blog-vue/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../blog-vue/src/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../blog-vue/src/views/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../blog-vue/src/views/Login.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../blog-vue/src/views/Register.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../blog-vue/src/views/Register.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,13 +83,6 @@
         <item name="aliyun" type="feb32156:DbDataSourceImpl" />
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
         <item name="blogdb: schema" type="76f4a085:MysqlImplModel$Schema" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="aliyun" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="blogdb: schema" type="76f4a085:MysqlImplModel$Schema" />
-        <item name="crawler_smartison_post: table" type="285a2a93:MysqlImplModel$Table" />
       </path>
     </expand>
     <select />
@@ -358,7 +304,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.CrawlerSmartisonServiceTest.testSaveArticle">
+  <component name="RunManager" selected="Spring Boot.BlogServerApplication">
     <configuration name="MybatisGeneratorUtils" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.changyue.blogserver.utils.MybatisGeneratorUtils" />
       <module name="blog-server" />
@@ -368,38 +314,6 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CrawlerCsdnPostSiteServiceTest.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="blog-server" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.changyue.blogserver.service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.changyue.blogserver.service" />
-      <option name="MAIN_CLASS_NAME" value="com.changyue.blogserver.service.CrawlerCsdnPostSiteServiceTest" />
-      <option name="METHOD_NAME" value="test" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CrawlerSmartisonServiceTest.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="blog-server" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.changyue.blogserver.service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.changyue.blogserver.service" />
-      <option name="MAIN_CLASS_NAME" value="com.changyue.blogserver.service.CrawlerSmartisonServiceTest" />
-      <option name="METHOD_NAME" value="test" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -420,17 +334,49 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CrawlerTest.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="RoleMapperTest.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="blog-server" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.changyue.blogserver.crawler.*" />
+          <option name="PATTERN" value="com.changyue.blogserver.mapper.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.changyue.blogserver.crawler" />
-      <option name="MAIN_CLASS_NAME" value="com.changyue.blogserver.crawler.CrawlerTest" />
+      <option name="PACKAGE_NAME" value="com.changyue.blogserver.mapper" />
+      <option name="MAIN_CLASS_NAME" value="com.changyue.blogserver.mapper.RoleMapperTest" />
       <option name="METHOD_NAME" value="test" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserAuthorityServiceTest.testGet" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="blog-server" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.changyue.blogserver.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.changyue.blogserver.service" />
+      <option name="MAIN_CLASS_NAME" value="com.changyue.blogserver.service.UserAuthorityServiceTest" />
+      <option name="METHOD_NAME" value="testGet" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserAuthorityServiceTest.testGetMenuTreeBy" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="blog-server" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.changyue.blogserver.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.changyue.blogserver.service" />
+      <option name="MAIN_CLASS_NAME" value="com.changyue.blogserver.service.UserAuthorityServiceTest" />
+      <option name="METHOD_NAME" value="testGetMenuTreeBy" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -445,11 +391,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.CrawlerSmartisonServiceTest.testSaveArticle" />
+        <item itemvalue="JUnit.UserAuthorityServiceTest.testGetMenuTreeBy" />
+        <item itemvalue="JUnit.UserAuthorityServiceTest.testGet" />
+        <item itemvalue="JUnit.RoleMapperTest.test" />
         <item itemvalue="Application.MybatisGeneratorUtils" />
-        <item itemvalue="JUnit.CrawlerCsdnPostSiteServiceTest.test" />
-        <item itemvalue="JUnit.CrawlerSmartisonServiceTest.test" />
-        <item itemvalue="JUnit.CrawlerTest.test" />
+        <item itemvalue="JUnit.CrawlerSmartisonServiceTest.testSaveArticle" />
       </list>
     </recent_temporary>
   </component>
@@ -467,7 +413,22 @@
               <path>
                 <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
                 <item name="root:aliyun" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-                <item name="com.intellij.database.console.session.MessageBusSession@3a732636" type="9fbbdea:ServiceModel$ServiceNode" />
+                <item name="com.intellij.database.console.session.MessageBusSession@15a677c2" type="9fbbdea:ServiceModel$ServiceNode" />
+              </path>
+              <path>
+                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+                <item name="root:aliyun" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+                <item name="com.intellij.database.console.session.MessageBusSession@7970be54" type="9fbbdea:ServiceModel$ServiceNode" />
+              </path>
+              <path>
+                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+                <item name="root:aliyun" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+                <item name="com.intellij.database.console.session.MessageBusSession@3916d443" type="9fbbdea:ServiceModel$ServiceNode" />
+              </path>
+              <path>
+                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+                <item name="root:aliyun" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+                <item name="com.intellij.database.console.session.MessageBusSession@32037ad" type="9fbbdea:ServiceModel$ServiceNode" />
               </path>
             </expand>
             <select />
@@ -584,7 +545,11 @@
       <workItem from="1585359177925" duration="18290000" />
       <workItem from="1585379258339" duration="3979000" />
       <workItem from="1585384333430" duration="106000" />
-      <workItem from="1585384618766" duration="17463000" />
+      <workItem from="1585384618766" duration="17890000" />
+      <workItem from="1585452229391" duration="9852000" />
+      <workItem from="1585467866831" duration="2868000" />
+      <workItem from="1585472638494" duration="287000" />
+      <workItem from="1585482692407" duration="6339000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;新增解决跨域的Filter&quot;">
       <created>1583066529300</created>
@@ -664,12 +629,12 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="691" y="350" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1585136718701" />
-    <state x="765" y="191" key="#com.intellij.ide.util.MemberChooser" timestamp="1585408587616">
+    <state x="765" y="191" key="#com.intellij.ide.util.MemberChooser" timestamp="1585468129736">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="544" y="129" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1582026324307" />
     <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1579509312320" />
-    <state x="765" y="191" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1585408587616" />
+    <state x="765" y="191" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1585468129736" />
     <state x="765" y="196" key="#com.intellij.ide.util.MemberChooser/0.23.1920.977@0.23.1920.977" timestamp="1582854937649" />
     <state x="698" y="323" key="#com.intellij.ide.util.PackageChooserDialog" timestamp="1584252528263">
       <screen x="0" y="0" width="1920" height="1080" />
@@ -696,11 +661,11 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="734" y="427" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.packages/0.0.1920.1080@0.0.1920.1080" timestamp="1585296448265" />
-    <state x="201" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1585403525579">
+    <state x="201" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1585462202639">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="143" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1366.728@0.0.1366.728" timestamp="1582024369146" />
-    <state x="201" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1585403525579" />
+    <state x="201" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1585462202639" />
     <state x="580" y="193" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1585400534753">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -716,108 +681,108 @@
     <state x="283" y="0" width="879" height="728" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1581752988059" />
     <state x="398" y="0" key="CommitChangelistDialog2/0.0.1920.1080@0.0.1920.1080" timestamp="1583066925312" />
     <state x="398" y="23" key="CommitChangelistDialog2/0.23.1920.977@0.23.1920.977" timestamp="1582793533615" />
-    <state width="870" height="650" key="DebuggerActiveHint" timestamp="1585395926940">
-      <screen x="0" y="23" width="1920" height="977" />
+    <state width="870" height="650" key="DebuggerActiveHint" timestamp="1585470069266">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="441" height="438" key="DebuggerActiveHint/0.0.1366.728@0.0.1366.728" timestamp="1580888820341" />
-    <state width="870" height="650" key="DebuggerActiveHint/0.0.1920.1080@0.0.1920.1080" timestamp="1585384248285" />
+    <state width="870" height="650" key="DebuggerActiveHint/0.0.1920.1080@0.0.1920.1080" timestamp="1585470069266" />
     <state width="870" height="650" key="DebuggerActiveHint/0.23.1920.977@0.23.1920.977" timestamp="1585395926940" />
     <state x="463" y="118" key="FileChooserDialogImpl" timestamp="1582016215114">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="118" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1582016215114" />
-    <state width="1920" height="499" key="GridCell.Tab.0.bottom" timestamp="1585410583317">
+    <state width="1920" height="225" key="GridCell.Tab.0.bottom" timestamp="1585496841550">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1366" height="258" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1582028403866" />
-    <state width="1920" height="499" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1585410583317" />
+    <state width="1920" height="225" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1585496841550" />
     <state width="1600" height="571" key="GridCell.Tab.0.bottom/0.23.1600.877@0.23.1600.877" timestamp="1582361155776" />
     <state width="1920" height="251" key="GridCell.Tab.0.bottom/0.23.1920.1057@0.23.1920.1057" timestamp="1582815745703" />
-    <state width="1920" height="499" key="GridCell.Tab.0.bottom/0.23.1920.977@0.23.1920.977" timestamp="1585410446272" />
-    <state width="1920" height="499" key="GridCell.Tab.0.center" timestamp="1585410583316">
+    <state width="1920" height="551" key="GridCell.Tab.0.bottom/0.23.1920.977@0.23.1920.977" timestamp="1585473466280" />
+    <state width="1920" height="225" key="GridCell.Tab.0.center" timestamp="1585496841549">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1366" height="258" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1582028403865" />
-    <state width="1920" height="499" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1585410583316" />
+    <state width="1920" height="225" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1585496841549" />
     <state width="1600" height="571" key="GridCell.Tab.0.center/0.23.1600.877@0.23.1600.877" timestamp="1582361155775" />
     <state width="1920" height="251" key="GridCell.Tab.0.center/0.23.1920.1057@0.23.1920.1057" timestamp="1582815745702" />
-    <state width="1920" height="499" key="GridCell.Tab.0.center/0.23.1920.977@0.23.1920.977" timestamp="1585410446271" />
-    <state width="1920" height="499" key="GridCell.Tab.0.left" timestamp="1585410583315">
+    <state width="1920" height="551" key="GridCell.Tab.0.center/0.23.1920.977@0.23.1920.977" timestamp="1585473466277" />
+    <state width="1920" height="225" key="GridCell.Tab.0.left" timestamp="1585496841549">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1366" height="258" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1582028403865" />
-    <state width="1920" height="499" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1585410583315" />
+    <state width="1920" height="225" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1585496841549" />
     <state width="1600" height="571" key="GridCell.Tab.0.left/0.23.1600.877@0.23.1600.877" timestamp="1582361155774" />
     <state width="1920" height="251" key="GridCell.Tab.0.left/0.23.1920.1057@0.23.1920.1057" timestamp="1582815745702" />
-    <state width="1920" height="499" key="GridCell.Tab.0.left/0.23.1920.977@0.23.1920.977" timestamp="1585410446270" />
-    <state width="1920" height="499" key="GridCell.Tab.0.right" timestamp="1585410583317">
+    <state width="1920" height="551" key="GridCell.Tab.0.left/0.23.1920.977@0.23.1920.977" timestamp="1585473466275" />
+    <state width="1920" height="225" key="GridCell.Tab.0.right" timestamp="1585496841550">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1366" height="258" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1582028403866" />
-    <state width="1920" height="499" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1585410583317" />
+    <state width="1920" height="225" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1585496841550" />
     <state width="1600" height="571" key="GridCell.Tab.0.right/0.23.1600.877@0.23.1600.877" timestamp="1582361155775" />
     <state width="1920" height="251" key="GridCell.Tab.0.right/0.23.1920.1057@0.23.1920.1057" timestamp="1582815745702" />
-    <state width="1920" height="499" key="GridCell.Tab.0.right/0.23.1920.977@0.23.1920.977" timestamp="1585410446271" />
-    <state width="1920" height="499" key="GridCell.Tab.1.bottom" timestamp="1585410583227">
+    <state width="1920" height="551" key="GridCell.Tab.0.right/0.23.1920.977@0.23.1920.977" timestamp="1585473466278" />
+    <state width="1920" height="225" key="GridCell.Tab.1.bottom" timestamp="1585496841552">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1366" height="258" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1582028403867" />
-    <state width="1920" height="499" key="GridCell.Tab.1.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1585410583227" />
+    <state width="1920" height="225" key="GridCell.Tab.1.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1585496841552" />
     <state width="1600" height="571" key="GridCell.Tab.1.bottom/0.23.1600.877@0.23.1600.877" timestamp="1582361155777" />
     <state width="1920" height="251" key="GridCell.Tab.1.bottom/0.23.1920.1057@0.23.1920.1057" timestamp="1582815745704" />
-    <state width="1920" height="499" key="GridCell.Tab.1.bottom/0.23.1920.977@0.23.1920.977" timestamp="1585410455575" />
-    <state width="1920" height="499" key="GridCell.Tab.1.center" timestamp="1585410583226">
+    <state width="1920" height="551" key="GridCell.Tab.1.bottom/0.23.1920.977@0.23.1920.977" timestamp="1585473466284" />
+    <state width="1920" height="225" key="GridCell.Tab.1.center" timestamp="1585496841551">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1366" height="258" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1582028403867" />
-    <state width="1920" height="499" key="GridCell.Tab.1.center/0.0.1920.1080@0.0.1920.1080" timestamp="1585410583226" />
+    <state width="1920" height="225" key="GridCell.Tab.1.center/0.0.1920.1080@0.0.1920.1080" timestamp="1585496841551" />
     <state width="1600" height="571" key="GridCell.Tab.1.center/0.23.1600.877@0.23.1600.877" timestamp="1582361155776" />
     <state width="1920" height="251" key="GridCell.Tab.1.center/0.23.1920.1057@0.23.1920.1057" timestamp="1582815745703" />
-    <state width="1920" height="499" key="GridCell.Tab.1.center/0.23.1920.977@0.23.1920.977" timestamp="1585410455575" />
-    <state width="1920" height="499" key="GridCell.Tab.1.left" timestamp="1585410583225">
+    <state width="1920" height="551" key="GridCell.Tab.1.center/0.23.1920.977@0.23.1920.977" timestamp="1585473466282" />
+    <state width="1920" height="225" key="GridCell.Tab.1.left" timestamp="1585496841551">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1366" height="258" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1582028403866" />
-    <state width="1920" height="499" key="GridCell.Tab.1.left/0.0.1920.1080@0.0.1920.1080" timestamp="1585410583225" />
+    <state width="1920" height="225" key="GridCell.Tab.1.left/0.0.1920.1080@0.0.1920.1080" timestamp="1585496841551" />
     <state width="1600" height="571" key="GridCell.Tab.1.left/0.23.1600.877@0.23.1600.877" timestamp="1582361155776" />
     <state width="1920" height="251" key="GridCell.Tab.1.left/0.23.1920.1057@0.23.1920.1057" timestamp="1582815745703" />
-    <state width="1920" height="499" key="GridCell.Tab.1.left/0.23.1920.977@0.23.1920.977" timestamp="1585410455574" />
-    <state width="1920" height="499" key="GridCell.Tab.1.right" timestamp="1585410583226">
+    <state width="1920" height="551" key="GridCell.Tab.1.left/0.23.1920.977@0.23.1920.977" timestamp="1585473466281" />
+    <state width="1920" height="225" key="GridCell.Tab.1.right" timestamp="1585496841552">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1366" height="258" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1582028403867" />
-    <state width="1920" height="499" key="GridCell.Tab.1.right/0.0.1920.1080@0.0.1920.1080" timestamp="1585410583226" />
+    <state width="1920" height="225" key="GridCell.Tab.1.right/0.0.1920.1080@0.0.1920.1080" timestamp="1585496841552" />
     <state width="1600" height="571" key="GridCell.Tab.1.right/0.23.1600.877@0.23.1600.877" timestamp="1582361155777" />
     <state width="1920" height="251" key="GridCell.Tab.1.right/0.23.1920.1057@0.23.1920.1057" timestamp="1582815745704" />
-    <state width="1920" height="499" key="GridCell.Tab.1.right/0.23.1920.977@0.23.1920.977" timestamp="1585410455575" />
-    <state width="1920" height="365" key="GridCell.Tab.2.bottom" timestamp="1585222564492">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state width="1920" height="551" key="GridCell.Tab.1.right/0.23.1920.977@0.23.1920.977" timestamp="1585473466283" />
+    <state width="1920" height="551" key="GridCell.Tab.2.bottom" timestamp="1585473466289">
+      <screen x="0" y="23" width="1920" height="977" />
     </state>
     <state width="1366" height="258" key="GridCell.Tab.2.bottom/0.0.1366.728@0.0.1366.728" timestamp="1582028403869" />
-    <state width="1920" height="365" key="GridCell.Tab.2.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1585222564492" />
+    <state width="1920" height="551" key="GridCell.Tab.2.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1585471471927" />
     <state width="1920" height="251" key="GridCell.Tab.2.bottom/0.23.1920.1057@0.23.1920.1057" timestamp="1582815745705" />
-    <state width="1920" height="231" key="GridCell.Tab.2.bottom/0.23.1920.977@0.23.1920.977" timestamp="1584979491008" />
-    <state width="1920" height="365" key="GridCell.Tab.2.center" timestamp="1585222564491">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state width="1920" height="551" key="GridCell.Tab.2.bottom/0.23.1920.977@0.23.1920.977" timestamp="1585473466289" />
+    <state width="1920" height="551" key="GridCell.Tab.2.center" timestamp="1585473466287">
+      <screen x="0" y="23" width="1920" height="977" />
     </state>
     <state width="1366" height="258" key="GridCell.Tab.2.center/0.0.1366.728@0.0.1366.728" timestamp="1582028403868" />
-    <state width="1920" height="365" key="GridCell.Tab.2.center/0.0.1920.1080@0.0.1920.1080" timestamp="1585222564491" />
+    <state width="1920" height="551" key="GridCell.Tab.2.center/0.0.1920.1080@0.0.1920.1080" timestamp="1585471471926" />
     <state width="1920" height="251" key="GridCell.Tab.2.center/0.23.1920.1057@0.23.1920.1057" timestamp="1582815745704" />
-    <state width="1920" height="231" key="GridCell.Tab.2.center/0.23.1920.977@0.23.1920.977" timestamp="1584979491007" />
-    <state width="1920" height="365" key="GridCell.Tab.2.left" timestamp="1585222564490">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state width="1920" height="551" key="GridCell.Tab.2.center/0.23.1920.977@0.23.1920.977" timestamp="1585473466287" />
+    <state width="1920" height="551" key="GridCell.Tab.2.left" timestamp="1585473466285">
+      <screen x="0" y="23" width="1920" height="977" />
     </state>
     <state width="1366" height="258" key="GridCell.Tab.2.left/0.0.1366.728@0.0.1366.728" timestamp="1582028403868" />
-    <state width="1920" height="365" key="GridCell.Tab.2.left/0.0.1920.1080@0.0.1920.1080" timestamp="1585222564490" />
+    <state width="1920" height="551" key="GridCell.Tab.2.left/0.0.1920.1080@0.0.1920.1080" timestamp="1585471471925" />
     <state width="1920" height="251" key="GridCell.Tab.2.left/0.23.1920.1057@0.23.1920.1057" timestamp="1582815745704" />
-    <state width="1920" height="231" key="GridCell.Tab.2.left/0.23.1920.977@0.23.1920.977" timestamp="1584979491006" />
-    <state width="1920" height="365" key="GridCell.Tab.2.right" timestamp="1585222564491">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state width="1920" height="551" key="GridCell.Tab.2.left/0.23.1920.977@0.23.1920.977" timestamp="1585473466285" />
+    <state width="1920" height="551" key="GridCell.Tab.2.right" timestamp="1585473466288">
+      <screen x="0" y="23" width="1920" height="977" />
     </state>
     <state width="1366" height="258" key="GridCell.Tab.2.right/0.0.1366.728@0.0.1366.728" timestamp="1582028403868" />
-    <state width="1920" height="365" key="GridCell.Tab.2.right/0.0.1920.1080@0.0.1920.1080" timestamp="1585222564491" />
+    <state width="1920" height="551" key="GridCell.Tab.2.right/0.0.1920.1080@0.0.1920.1080" timestamp="1585471471926" />
     <state width="1920" height="251" key="GridCell.Tab.2.right/0.23.1920.1057@0.23.1920.1057" timestamp="1582815745705" />
-    <state width="1920" height="231" key="GridCell.Tab.2.right/0.23.1920.977@0.23.1920.977" timestamp="1584979491007" />
+    <state width="1920" height="551" key="GridCell.Tab.2.right/0.23.1920.977@0.23.1920.977" timestamp="1585473466288" />
     <state x="917" y="158" key="Maven.ArtifactSearchDialog" timestamp="1585281486435">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -859,15 +824,15 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="413" y="188" key="com.intellij.database.dbimport.ImportUtil.MyDialog/0.0.1366.728@0.0.1366.728" timestamp="1581754042781" />
-    <state x="734" y="373" width="451" height="335" key="com.intellij.database.psi.DbRenamePsiElementProcessor.DbRenameDialog" timestamp="1585404669868">
+    <state x="734" y="373" width="451" height="335" key="com.intellij.database.psi.DbRenamePsiElementProcessor.DbRenameDialog" timestamp="1585462402884">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="734" y="373" width="451" height="335" key="com.intellij.database.psi.DbRenamePsiElementProcessor.DbRenameDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1585404669868" />
-    <state x="1071" y="238" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog" timestamp="1585409088167">
+    <state x="734" y="373" width="451" height="335" key="com.intellij.database.psi.DbRenamePsiElementProcessor.DbRenameDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1585462402884" />
+    <state x="1071" y="238" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog" timestamp="1585488846635">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="627" y="6" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/0.0.1366.728@0.0.1366.728" timestamp="1582012975541" />
-    <state x="1071" y="238" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1585409088167" />
+    <state x="1071" y="238" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1585488846635" />
     <state x="1071" y="238" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/0.23.1920.977@0.23.1920.977" timestamp="1585408933650" />
     <state x="803" y="302" key="com.intellij.database.view.ui.DbObjectDialog" timestamp="1585122104207">
       <screen x="0" y="0" width="1920" height="1080" />
@@ -920,12 +885,12 @@
     <state x="347" y="176" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1581000971588" />
     <state x="488" y="261" key="run.anything.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1585133787154" />
     <state x="488" y="261" key="run.anything.popup/0.23.1920.977@0.23.1920.977" timestamp="1585054041864" />
-    <state x="486" y="73" width="945" height="1006" key="search.everywhere.popup" timestamp="1585408483798">
+    <state x="486" y="73" width="945" height="1006" key="search.everywhere.popup" timestamp="1585469537468">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1582026223553" />
     <state x="486" y="70" width="945" height="969" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1579507306804" />
-    <state x="486" y="73" width="945" height="1006" key="search.everywhere.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1585408483798" />
+    <state x="486" y="73" width="945" height="1006" key="search.everywhere.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1585469537468" />
     <state x="405" y="82" width="788" height="817" key="search.everywhere.popup/0.23.1600.877@0.23.1600.877" timestamp="1582361274351" />
     <state x="486" y="94" width="945" height="985" key="search.everywhere.popup/0.23.1920.1057@0.23.1920.1057" timestamp="1582806887472" />
     <state x="486" y="89" width="945" height="910" key="search.everywhere.popup/0.23.1920.977@0.23.1920.977" timestamp="1582860138085" />
@@ -940,7 +905,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/UserAuthorityServiceImpl.java</url>
-          <line>27</line>
+          <line>39</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -957,6 +922,21 @@
           <url>file://$PROJECT_DIR$/src/main/java/com/changyue/blogserver/process/processor/AbstractCrawlerPageProcessor.java</url>
           <line>103</line>
           <option name="timeStamp" value="76" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/UserAuthorityServiceImpl.java</url>
+          <line>61</line>
+          <option name="timeStamp" value="77" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/UserServiceImpl.java</url>
+          <line>47</line>
+          <option name="timeStamp" value="78" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/RoleServiceImpl.java</url>
+          <line>31</line>
+          <option name="timeStamp" value="79" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

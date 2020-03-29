@@ -3,6 +3,7 @@ package com.changyue.blogserver.serivce;
 import com.changyue.blogserver.model.dto.UserDTO;
 import com.changyue.blogserver.model.entity.User;
 import com.changyue.blogserver.model.params.UserParam;
+import com.changyue.blogserver.model.vo.UserVO;
 import com.changyue.blogserver.serivce.base.BaseService;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
@@ -16,6 +17,14 @@ import java.util.Set;
  * @date : 2020/2/18/018
  */
 public interface UserService extends BaseService<User, Integer> {
+
+    /**
+     * 转化用户视图对象
+     *
+     * @param user 用户
+     * @return 用户视图对象
+     */
+    UserVO getUserForView(User user);
 
     /**
      * 获取当前用户
@@ -84,6 +93,14 @@ public interface UserService extends BaseService<User, Integer> {
      * @return 用户权限集
      */
     Set<String> getUserPermissionNames(Integer userId);
+
+    /**
+     * 转化成UserDTO
+     *
+     * @param user 用户
+     * @return 用户的DTO
+     */
+    UserDTO convertTO(User user);
 
     /**
      * 检查密码是否与用户密码匹配。

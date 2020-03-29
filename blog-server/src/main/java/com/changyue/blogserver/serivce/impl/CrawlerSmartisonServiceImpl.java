@@ -87,12 +87,14 @@ public class CrawlerSmartisonServiceImpl implements CrawlerSmartisonService {
     @Override
     public String parseArticle(String url) {
         String htmlData = JsoupUtils.getHtmlData(url);
-        Document document = Jsoup.parse(htmlData);
-        Elements content = document.getElementsByClass("content");
         String htmlContent = null;
-        if (null != content && !content.isEmpty()) {
-            for (Element element : content) {
-                htmlContent = element.html();
+        if (StringUtils.isNotEmpty(htmlData)) {
+            Document document = Jsoup.parse(htmlData);
+            Elements content = document.getElementsByClass("content");
+            if (null != content && !content.isEmpty()) {
+                for (Element element : content) {
+                    htmlContent = element.html();
+                }
             }
         }
         return htmlContent;

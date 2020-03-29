@@ -3,15 +3,17 @@ package com.changyue.blogserver.serivce.impl;
 import com.changyue.blogserver.dao.UserMapper;
 import com.changyue.blogserver.exception.UpdateException;
 import com.changyue.blogserver.model.dto.UserDTO;
+import com.changyue.blogserver.model.entity.Role;
 import com.changyue.blogserver.model.entity.User;
 import com.changyue.blogserver.model.params.UserParam;
+import com.changyue.blogserver.model.vo.UserVO;
 import com.changyue.blogserver.serivce.RoleService;
+import com.changyue.blogserver.serivce.UserAuthorityService;
 import com.changyue.blogserver.serivce.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -33,6 +35,23 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private RoleService roleService;
+
+    @Autowired
+    private UserAuthorityService userAuthorityService;
+
+    @Override
+    public UserVO getUserForView(User user) {
+        Assert.notNull(user, "用户没有找到");
+
+        UserVO userVO = new UserVO();
+        userVO.setUserDTO(convertTO(user));
+        Role roleByUser = roleService.getRoleByUser();
+        userVO.setRole(roleByUser);
+        userVO.setMenuVos(userAuthorityService.getMenuTreeBy(roleByUser.getId()));
+        userVO.setRouterVOS(userAuthorityService.getRouterList(roleByUser.getId()));
+
+        return userVO;
+    }
 
     @Override
     public UserDTO getCurrentUser() {
@@ -156,6 +175,14 @@ public class UserServiceImpl implements UserService {
     public Set<String> getUserPermissionNames(Integer userId) {
         Assert.notNull(userId, "用户Id不能为空");
         return userMapper.findUserPermissionNames(userId);
+    }
+
+    @Override
+    public UserDTO convertTO(User user) {
+        Assert.notNull(user, "用户没有找到");
+        UserDTO userDTO = new UserDTO();
+        BeanUtils.copyProperties(user, userDTO);
+        return userDTO;
     }
 
 }

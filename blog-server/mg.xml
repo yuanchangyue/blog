@@ -70,7 +70,7 @@
                selectByExampleQueryId="false"/>
         -->
 
-        <table domainObjectName="CrawlerSmartisonPost" tableName="crawler_smartison_post" enableCountByExample="false"
+        <table domainObjectName="Resource" tableName="resource" enableCountByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"
                selectByExampleQueryId="false"/>
 

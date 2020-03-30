@@ -51,6 +51,14 @@ const routes = [
     path: '/attachment',
     name: 'attachment',
     component: () => import('../views/Attachment')
+  }, {
+    path: '/personal',
+    name: 'Personal',
+    component: () => import('../views/Personal')
+  }, {
+    path: '/site',
+    name: 'Site',
+    component: () => import('../views/Site')
   }
 ]
 

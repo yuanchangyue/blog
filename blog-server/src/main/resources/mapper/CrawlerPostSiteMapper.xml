@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.changyue.blogserver.dao.CrawlerPostSiteMapper">
-    <resultMap id="BaseResultMap" type="com.changyue.blogserver.model.entity.CrawlerPostSite">
+    <resultMap id="BaseResultMap" type="crawlerPostSite">
         <id column="id" jdbcType="VARCHAR" property="id"/>
         <result column="pic" jdbcType="VARCHAR" property="pic"/>
         <result column="brief" jdbcType="VARCHAR" property="brief"/>
@@ -12,10 +12,45 @@
         <result column="article_num" jdbcType="INTEGER" property="articleNum"/>
         <result column="cate_id" jdbcType="INTEGER" property="cateId"/>
     </resultMap>
+
+    <resultMap id="VOResultMap" type="siteVO">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="pic" jdbcType="VARCHAR" property="pic"/>
+        <result column="brief" jdbcType="VARCHAR" property="brief"/>
+        <result column="rss_url" jdbcType="VARCHAR" property="rssUrl"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="article_num" jdbcType="INTEGER" property="articleNum"/>
+        <association property="crawlerPostCate">
+            <id column="cateId" jdbcType="INTEGER" property="id"/>
+            <result column="cateName" jdbcType="VARCHAR" property="name"/>
+            <result column="cateSiteIds" jdbcType="VARCHAR" property="siteIds"/>
+        </association>
+    </resultMap>
+
+    <sql id="VO_Column_List">
+        cps.id, cps.pic, cps.brief, cps.rss_url, cps.create_time, cps.update_time, cps.name, cps.article_num, cpc.id as cateId, cpc.site_ids as cateSiteIds, cpc.name as cateName
+    </sql>
+
+    <select id="listByAll" resultMap="VOResultMap" parameterType="siteQuery">
+        select
+        <include refid="VO_Column_List"/>
+        from crawler_post_site cps,crawler_post_cate cpc
+        <where>
+            cps.cate_id = cpc.id
+            <if test="keyWords != null">
+                and cps.name LIKE CONCAT('%',#{keyWords},'%')
+            </if>
+            <if test="cateId != null">
+                and cps.cate_id = #{cateId,jdbcType=INTEGER}
+            </if>
+        </where>
+    </select>
+
     <sql id="Base_Column_List">
         id, pic, brief, rss_url, create_time, update_time, name, article_num, cate_id
     </sql>
-
 
     <select id="findById" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -24,10 +59,8 @@
         where id = #{id,jdbcType=VARCHAR}
     </select>
 
-
     <select id="listAll" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
+        select *
         from crawler_post_site
     </select>
 
@@ -41,7 +74,7 @@
         from crawler_post_site
         where id = #{id,jdbcType=VARCHAR}
     </delete>
-    <insert id="insert" parameterType="com.changyue.blogserver.model.entity.CrawlerPostSite">
+    <insert id="insert" parameterType="crawlerPostSite">
         insert into crawler_post_site (id, pic, brief,
                                        rss_url, create_time, update_time,
                                        name, article_num, cate_id)
@@ -49,7 +82,7 @@
                 #{rssUrl,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
                 #{name,jdbcType=VARCHAR}, #{articleNum,jdbcType=INTEGER}, #{cateId,jdbcType=INTEGER})
     </insert>
-    <insert id="insertSelective" parameterType="com.changyue.blogserver.model.entity.CrawlerPostSite">
+    <insert id="insertSelective" parameterType="crawlerPostSite">
         insert into crawler_post_site
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -110,7 +143,7 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.changyue.blogserver.model.entity.CrawlerPostSite">
+    <update id="updateByPrimaryKeySelective" parameterType="crawlerPostSite">
         update crawler_post_site
         <set>
             <if test="pic != null">
@@ -140,7 +173,7 @@
         </set>
         where id = #{id,jdbcType=VARCHAR}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.changyue.blogserver.model.entity.CrawlerPostSite">
+    <update id="updateByPrimaryKey" parameterType="crawlerPostSite">
         update crawler_post_site
         set pic         = #{pic,jdbcType=VARCHAR},
             brief       = #{brief,jdbcType=VARCHAR},

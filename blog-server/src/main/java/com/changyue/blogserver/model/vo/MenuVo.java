@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * @author : 袁阊越
- * @description : 前端菜单栏式图对象
+ * @description : 前端菜单视图对象
  * @date : 2020-03-29 14:41
  */
 @Data

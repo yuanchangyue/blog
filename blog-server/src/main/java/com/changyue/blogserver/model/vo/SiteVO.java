@@ -1,17 +1,17 @@
-package com.changyue.blogserver.model.entity;
+package com.changyue.blogserver.model.vo;
 
-import com.changyue.blogserver.model.base.BaseEntity;
+import com.changyue.blogserver.model.entity.CrawlerPostCate;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
+
+import java.util.Date;
 
 /**
  * @author : 袁阊越
- * @description : 爬虫文章的站点
- * @date : 2020/3/28
+ * @description : 站点视图对象
+ * @date : 2020-03-30 21:33
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
-public class CrawlerPostSite extends BaseEntity {
+public class SiteVO {
 
     private String id;
 
@@ -36,13 +36,22 @@ public class CrawlerPostSite extends BaseEntity {
     private String name;
 
     /**
+     * 创建时间
+     */
+    private Date createTime;
+
+    /**
+     * 更新时间
+     */
+    private Date updateTime;
+
+    /**
      * 爬虫文章的站点文章数量
      */
     private Integer articleNum;
 
     /**
-     * 所属的分类
+     * 文章分类
      */
-    private Integer cateId;
-
+    private CrawlerPostCate crawlerPostCate;
 }

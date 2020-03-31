@@ -2,29 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bd5d3fba-cd88-41d7-b10b-952045a6ce54" name="Default Changelist" comment="&quot;VUE处理跨域并添加拦截器&quot;">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/controller/CrawlerSiteController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/params/SiteQuery.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/vo/SiteVO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/changyue/blogserver/mapper/CrawlerSitePostMapperTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../blog-vue/src/views/Personal.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../blog-vue/src/views/Site.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/config/DataSourceConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/config/DataSourceConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/config/properties/CrawlerProperties.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/dao/CrawlerPostSiteMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/dao/CrawlerPostSiteMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/entity/CrawlerPostSite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/entity/CrawlerPostSite.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/entity/Resource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/entity/Resource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/vo/MenuVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/vo/MenuVo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/CrawlerPostSiteService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/CrawlerPostSiteService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/CrawlerPostSiteServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/CrawlerPostSiteServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/CrawlerPostSiteMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/CrawlerPostSiteMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/config/DataSourceConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/config/DataSourceConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/config/properties/CrawlerProperties.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/dao/CrawlerPostSiteMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/dao/CrawlerPostSiteMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/impl/CrawlerPostSiteServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/impl/CrawlerPostSiteServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mapper/CrawlerPostSiteMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mapper/CrawlerPostSiteMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/controller/CrawlerSiteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/controller/CrawlerSiteController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/dao/CrawlerPostCateMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/dao/CrawlerPostCateMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/CrawlerPostCateService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/CrawlerPostCateService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/CrawlerPostCateServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/CrawlerPostCateServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/CrawlerPostCateMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/CrawlerPostCateMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/controller/CrawlerSiteController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/controller/CrawlerSiteController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/CrawlerPostCateService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/CrawlerPostCateService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/impl/CrawlerPostCateServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/impl/CrawlerPostCateServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mapper/CrawlerPostCateMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mapper/CrawlerPostCateMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../blog-vue/src/components/TopNav.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../blog-vue/src/components/TopNav.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../blog-vue/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../blog-vue/src/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../blog-vue/src/views/Site.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../blog-vue/src/views/Site.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -531,6 +520,7 @@
       <workItem from="1585482692407" duration="6693000" />
       <workItem from="1585563398662" duration="69000" />
       <workItem from="1585563685779" duration="14111000" />
+      <workItem from="1585614243916" duration="2649000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;新增解决跨域的Filter&quot;">
       <created>1583066529300</created>
@@ -610,12 +600,12 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="691" y="350" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1585136718701" />
-    <state x="765" y="191" key="#com.intellij.ide.util.MemberChooser" timestamp="1585577881996">
+    <state x="765" y="191" key="#com.intellij.ide.util.MemberChooser" timestamp="1585614513646">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="544" y="129" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1582026324307" />
     <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1579509312320" />
-    <state x="765" y="191" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1585577881996" />
+    <state x="765" y="191" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1585614513646" />
     <state x="765" y="196" key="#com.intellij.ide.util.MemberChooser/0.23.1920.977@0.23.1920.977" timestamp="1582854937649" />
     <state x="698" y="323" key="#com.intellij.ide.util.PackageChooserDialog" timestamp="1584252528263">
       <screen x="0" y="0" width="1920" height="1080" />
@@ -672,67 +662,67 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="118" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1582016215114" />
-    <state width="1920" height="383" key="GridCell.Tab.0.bottom" timestamp="1585583713845">
+    <state width="1920" height="408" key="GridCell.Tab.0.bottom" timestamp="1585616033946">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1366" height="258" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1582028403866" />
-    <state width="1920" height="383" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1585583713845" />
+    <state width="1920" height="408" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1585616033946" />
     <state width="1600" height="571" key="GridCell.Tab.0.bottom/0.23.1600.877@0.23.1600.877" timestamp="1582361155776" />
     <state width="1920" height="251" key="GridCell.Tab.0.bottom/0.23.1920.1057@0.23.1920.1057" timestamp="1582815745703" />
     <state width="1920" height="551" key="GridCell.Tab.0.bottom/0.23.1920.977@0.23.1920.977" timestamp="1585473466280" />
-    <state width="1920" height="383" key="GridCell.Tab.0.center" timestamp="1585583713843">
+    <state width="1920" height="408" key="GridCell.Tab.0.center" timestamp="1585616033945">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1366" height="258" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1582028403865" />
-    <state width="1920" height="383" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1585583713843" />
+    <state width="1920" height="408" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1585616033945" />
     <state width="1600" height="571" key="GridCell.Tab.0.center/0.23.1600.877@0.23.1600.877" timestamp="1582361155775" />
     <state width="1920" height="251" key="GridCell.Tab.0.center/0.23.1920.1057@0.23.1920.1057" timestamp="1582815745702" />
     <state width="1920" height="551" key="GridCell.Tab.0.center/0.23.1920.977@0.23.1920.977" timestamp="1585473466277" />
-    <state width="1920" height="383" key="GridCell.Tab.0.left" timestamp="1585583713843">
+    <state width="1920" height="408" key="GridCell.Tab.0.left" timestamp="1585616033944">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1366" height="258" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1582028403865" />
-    <state width="1920" height="383" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1585583713843" />
+    <state width="1920" height="408" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1585616033944" />
     <state width="1600" height="571" key="GridCell.Tab.0.left/0.23.1600.877@0.23.1600.877" timestamp="1582361155774" />
     <state width="1920" height="251" key="GridCell.Tab.0.left/0.23.1920.1057@0.23.1920.1057" timestamp="1582815745702" />
     <state width="1920" height="551" key="GridCell.Tab.0.left/0.23.1920.977@0.23.1920.977" timestamp="1585473466275" />
-    <state width="1920" height="383" key="GridCell.Tab.0.right" timestamp="1585583713844">
+    <state width="1920" height="408" key="GridCell.Tab.0.right" timestamp="1585616033946">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1366" height="258" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1582028403866" />
-    <state width="1920" height="383" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1585583713844" />
+    <state width="1920" height="408" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1585616033946" />
     <state width="1600" height="571" key="GridCell.Tab.0.right/0.23.1600.877@0.23.1600.877" timestamp="1582361155775" />
     <state width="1920" height="251" key="GridCell.Tab.0.right/0.23.1920.1057@0.23.1920.1057" timestamp="1582815745702" />
     <state width="1920" height="551" key="GridCell.Tab.0.right/0.23.1920.977@0.23.1920.977" timestamp="1585473466278" />
-    <state width="1920" height="383" key="GridCell.Tab.1.bottom" timestamp="1585583713847">
+    <state width="1920" height="408" key="GridCell.Tab.1.bottom" timestamp="1585616033948">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1366" height="258" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1582028403867" />
-    <state width="1920" height="383" key="GridCell.Tab.1.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1585583713847" />
+    <state width="1920" height="408" key="GridCell.Tab.1.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1585616033948" />
     <state width="1600" height="571" key="GridCell.Tab.1.bottom/0.23.1600.877@0.23.1600.877" timestamp="1582361155777" />
     <state width="1920" height="251" key="GridCell.Tab.1.bottom/0.23.1920.1057@0.23.1920.1057" timestamp="1582815745704" />
     <state width="1920" height="383" key="GridCell.Tab.1.bottom/0.23.1920.977@0.23.1920.977" timestamp="1585580114637" />
-    <state width="1920" height="383" key="GridCell.Tab.1.center" timestamp="1585583713846">
+    <state width="1920" height="408" key="GridCell.Tab.1.center" timestamp="1585616033947">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1366" height="258" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1582028403867" />
-    <state width="1920" height="383" key="GridCell.Tab.1.center/0.0.1920.1080@0.0.1920.1080" timestamp="1585583713846" />
+    <state width="1920" height="408" key="GridCell.Tab.1.center/0.0.1920.1080@0.0.1920.1080" timestamp="1585616033947" />
     <state width="1600" height="571" key="GridCell.Tab.1.center/0.23.1600.877@0.23.1600.877" timestamp="1582361155776" />
     <state width="1920" height="251" key="GridCell.Tab.1.center/0.23.1920.1057@0.23.1920.1057" timestamp="1582815745703" />
     <state width="1920" height="383" key="GridCell.Tab.1.center/0.23.1920.977@0.23.1920.977" timestamp="1585580114636" />
-    <state width="1920" height="383" key="GridCell.Tab.1.left" timestamp="1585583713845">
+    <state width="1920" height="408" key="GridCell.Tab.1.left" timestamp="1585616033946">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1366" height="258" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1582028403866" />
-    <state width="1920" height="383" key="GridCell.Tab.1.left/0.0.1920.1080@0.0.1920.1080" timestamp="1585583713845" />
+    <state width="1920" height="408" key="GridCell.Tab.1.left/0.0.1920.1080@0.0.1920.1080" timestamp="1585616033946" />
     <state width="1600" height="571" key="GridCell.Tab.1.left/0.23.1600.877@0.23.1600.877" timestamp="1582361155776" />
     <state width="1920" height="251" key="GridCell.Tab.1.left/0.23.1920.1057@0.23.1920.1057" timestamp="1582815745703" />
     <state width="1920" height="383" key="GridCell.Tab.1.left/0.23.1920.977@0.23.1920.977" timestamp="1585580114635" />
-    <state width="1920" height="383" key="GridCell.Tab.1.right" timestamp="1585583713846">
+    <state width="1920" height="408" key="GridCell.Tab.1.right" timestamp="1585616033947">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1366" height="258" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1582028403867" />
-    <state width="1920" height="383" key="GridCell.Tab.1.right/0.0.1920.1080@0.0.1920.1080" timestamp="1585583713846" />
+    <state width="1920" height="408" key="GridCell.Tab.1.right/0.0.1920.1080@0.0.1920.1080" timestamp="1585616033947" />
     <state width="1600" height="571" key="GridCell.Tab.1.right/0.23.1600.877@0.23.1600.877" timestamp="1582361155777" />
     <state width="1920" height="251" key="GridCell.Tab.1.right/0.23.1920.1057@0.23.1920.1057" timestamp="1582815745704" />
     <state width="1920" height="383" key="GridCell.Tab.1.right/0.23.1920.977@0.23.1920.977" timestamp="1585580114636" />

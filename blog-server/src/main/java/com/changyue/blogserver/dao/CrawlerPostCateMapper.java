@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 @Mapper
 public interface CrawlerPostCateMapper extends BaseMapper<CrawlerPostCate> {
+
     /**
      * 通过id查询siteIds
      *
@@ -21,5 +22,6 @@ public interface CrawlerPostCateMapper extends BaseMapper<CrawlerPostCate> {
      * @return siteIds
      */
     String findSiteIdsById(@Param("id") Integer id);
+
 
 }

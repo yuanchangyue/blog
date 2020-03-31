@@ -11,8 +11,16 @@
             <li>
               <el-dropdown>
                 <el-avatar :size="25" :src="logo"></el-avatar>
-                <el-dropdown-menu slot="dropdown">
-                  <el-dropdown-item><el-link @click="logout" :underline="false">退出登陆</el-link></el-dropdown-item>
+                <el-dropdown-menu slot="dropdown" style="width: 200px;">
+                  <el-dropdown-item>
+                    <el-row align="center">
+                      <el-avatar :src="logo" :size="40"></el-avatar>
+                    </el-row>
+                    <el-row>
+                      <p style="text-align: center" v-text="user.name"></p>
+                    </el-row>
+                  </el-dropdown-item>
+                    <el-link @click="logout" :underline="false">退出登陆</el-link>
                 </el-dropdown-menu>
               </el-dropdown>
             </li>
@@ -35,19 +43,26 @@ export default {
       direction: 'ltr',
       menuMode: 'horizontal',
       logo: require('../assets/logo.png'),
-      menuData: JSON.parse(localStorage.getItem('menu'))
+      menuData: JSON.parse(localStorage.getItem('menu')),
+      user: {
+        name: '123',
+        avatar: require('../assets/logo.png'),
+        email: '123'
+      }
     }
   },
   methods: {
     logout () {
-      this.$axios.get('/user/logout').then(value => {
+      this.$axios.get('/user/logout').then(_ => {
+        var user = _.data.data.role
+        console.info(user)
+        // this.user.name = user.name
+        // this.user.email = user.email
+        // this.user.avatar = user.avatar
         this.$notify('退出成功')
         this.$router.replace({ path: '/login' })
       })
     }
-  },
-  created () {
-    console.info(this.menuData)
   }
 }
 </script>

@@ -59,6 +59,7 @@ export default {
         console.info(_.data)
         var routerItem = _.data.data.routerVOS
         var menu = _.data.data.menuVos
+        localStorage.setItem('user', _.data.data.useDTO)
         localStorage.setItem('router', JSON.stringify(routerItem))
         localStorage.setItem('menu', JSON.stringify(menu))
         this.$notify.success(this.form.name + '登陆成功')

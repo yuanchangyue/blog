@@ -11,11 +11,11 @@
           <el-form-item label="类型">
               <el-select v-model="query.cateId" placeholder="类型">
               <el-option value="">全部</el-option>
-              <!--<el-option
-                v-for="item in options"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"/>-->
+              <el-option
+                v-for="item in cateData"
+                :key="item.id"
+                :label="item.name"
+                :value="item.id"/>
             </el-select>
           </el-form-item>
           <el-form-item>
@@ -57,6 +57,7 @@
         </el-table-column>
         <el-table-column
           label="RRS"
+          width="400"
           show-overflow-tooltip>
           <template slot-scope="scope">
             <el-link type="primary" :href="scope.row.rssUrl" v-text="scope.row.rssUrl"></el-link>
@@ -64,8 +65,11 @@
         </el-table-column>
         <el-table-column
           label="文章数量"
-          width="80"
           prop="articleNum">
+        </el-table-column>
+        <el-table-column
+          label="分类"
+          prop="crawlerPostCate.name">
         </el-table-column>
         <el-table-column
           width="200"
@@ -77,7 +81,7 @@
         </el-table-column>
         <el-table-column
           label="操作">
-            <el-link type="primary" >删除</el-link>
+            <el-link type="primary" >查看</el-link>
         </el-table-column>
       </el-table>
       <el-pagination
@@ -120,15 +124,17 @@ export default {
       currentPage: 0,
       pageSize: 0,
       loading: true,
-      siteData: []
+      siteData: [],
+      cateData: []
     }
   },
   methods: {
     getlist () {
       this.$axios.post('/site', this.query).then(value => {
         if (value.data.code === 200) {
-          console.info(value.data)
           this.setPageValue(value.data)
+          this.cateData = value.data.data.crawlerPostCates
+          console.info(this.cateData)
         }
       })
     },
@@ -151,10 +157,11 @@ export default {
       this.handleCurrentChange()
     },
     setPageValue (value) {
-      this.siteData = value.data.list
-      this.pageTotal = value.data.total
-      this.pageSize = value.data.pageSize
-      this.currentPage = value.data.pageNum
+      this.siteData = value.data.siteVOPageInfo.list
+      console.info(this.siteData)
+      this.pageTotal = value.data.siteVOPageInfo.total
+      this.pageSize = value.data.siteVOPageInfo.pageSize
+      this.currentPage = value.data.siteVOPageInfo.pageNum
       this.loading = false
     },
     submit () {

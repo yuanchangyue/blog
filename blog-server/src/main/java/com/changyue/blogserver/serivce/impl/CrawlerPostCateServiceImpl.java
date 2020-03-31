@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import java.util.List;
+
 /**
  * @author : 袁阊越
  * @description : 爬虫文章的分类业务接口实现类
@@ -24,6 +26,11 @@ public class CrawlerPostCateServiceImpl implements CrawlerPostCateService {
     public String getSiteIdsById(Integer id) {
         Assert.notNull(id, "crawler post cate 不能为空");
         return crawlerPostCateMapper.findSiteIdsById(id);
+    }
+
+    @Override
+    public List<CrawlerPostCate> getListAll() {
+        return crawlerPostCateMapper.listAll();
     }
 
     @Override

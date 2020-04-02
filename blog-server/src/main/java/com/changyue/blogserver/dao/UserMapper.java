@@ -19,6 +19,16 @@ import java.util.Set;
 @Repository
 public interface UserMapper extends BaseMapper<User> {
 
+
+    /**
+     * 修改用头像
+     *
+     * @param url    头像地址
+     * @param userId 用户id
+     * @return 影响
+     */
+    int updateUserAvatar(@Param("url") String url, @Param("userId") Integer userId);
+
     /**
      * 查找用户
      *
@@ -43,4 +53,5 @@ public interface UserMapper extends BaseMapper<User> {
      * @return 用户权限集
      */
     Set<String> findUserPermissionNames(@NonNull @Param("userId") Integer userId);
+
 }

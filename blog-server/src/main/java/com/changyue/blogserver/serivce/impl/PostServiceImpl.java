@@ -101,6 +101,19 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    public List<PostVO> latestPost() {
+        List<Post> posts = postMapper.latestPost();
+        return posts.stream().map(post -> {
+            PostVO postVO = convertTO(post);
+            User byUserId = userService.getByUserId(post.getUserId());
+            UserDTO userDTO = new UserDTO();
+            BeanUtils.copyProperties(byUserId, userDTO);
+            postVO.setUserDTO(userDTO);
+            return postVO;
+        }).collect(Collectors.toList());
+    }
+
+    @Override
     public PostVO getByPostId(Integer postId) {
 
         //获取类别

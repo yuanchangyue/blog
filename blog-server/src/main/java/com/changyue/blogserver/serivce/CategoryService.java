@@ -45,6 +45,13 @@ public interface CategoryService extends BaseService<Category, Integer> {
     List<Category> getListByParentId(@NonNull Integer id);
 
     /**
+     * 最新的分类
+     *
+     * @return 类别列表
+     */
+    List<Category> getListLatest();
+
+    /**
      * 分页全部
      *
      * @param pageIndex 页索引

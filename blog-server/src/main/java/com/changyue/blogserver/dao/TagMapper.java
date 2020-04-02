@@ -17,6 +17,7 @@ import java.util.Optional;
 @Repository
 public interface TagMapper extends BaseMapper<Tag> {
 
+
     /**
      * 按名称或别名统计数量
      *
@@ -67,4 +68,11 @@ public interface TagMapper extends BaseMapper<Tag> {
      */
     List<Tag> listAllByPostId(@Param("postId") Integer postId);
 
+
+    /**
+     * 最新的tag
+     *
+     * @return 标签列表
+     */
+    List<Tag> listLatest();
 }

@@ -34,6 +34,14 @@ public interface TagService extends BaseService<Tag, Integer> {
     @Nullable
     Tag getByName(@NonNull String tagName);
 
+
+    /**
+     * 最新的tag
+     *
+     * @return 标签列表
+     */
+    List<TagDTO> getListLatest();
+
     /**
      * 通过ids查询全部list
      *
@@ -56,6 +64,13 @@ public interface TagService extends BaseService<Tag, Integer> {
      * @return 标签列表
      */
     List<TagDTO> getListByUserId();
+
+    /**
+     * 查找标签类别
+     *
+     * @return 标签列表
+     */
+    List<TagDTO> getListBy();
 
     /**
      * 转换为标签dto。

@@ -107,7 +107,7 @@ public class CrawlerConfig {
             List<String> ids = crawlerPostSiteService.listIds();
             if (null != ids && !ids.isEmpty()) {
                 for (String id : ids) {
-                    String url = smartisanInitUrl + smartisanSiteArticleUrl + id;
+                    String url = smartisanInitUrl + smartisanSiteArticleUrl + id + "&page_size=99";
                     urlList.add(url);
                 }
             }

@@ -1,6 +1,5 @@
 package com.changyue.blogserver.serivce.impl;
 
-import com.alibaba.druid.sql.PagerUtils;
 import com.changyue.blogserver.dao.CategoryMapper;
 import com.changyue.blogserver.exception.AlreadyExistsException;
 import com.changyue.blogserver.exception.CreateException;
@@ -102,6 +101,11 @@ public class CategoryServiceImpl implements CategoryService {
     public List<Category> getListByParentId(Integer id) {
         Assert.notNull(id, "类别Id不能为空");
         return categoryMapper.listByParentId(id);
+    }
+
+    @Override
+    public List<Category> getListLatest() {
+        return categoryMapper.listLatest();
     }
 
     @Override

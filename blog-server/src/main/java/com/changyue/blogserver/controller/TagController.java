@@ -51,6 +51,11 @@ public class TagController {
         return tagService.convertTo(tagService.getById(tagId));
     }
 
+    @GetMapping("/latest")
+    public Result getLatest() {
+        return Result.create(tagService.getListLatest());
+    }
+
     @PutMapping("/{tagId}")
     public TagDTO updateBy(@PathVariable("tagId") Integer tagId,
                            @Valid @RequestBody TagParam tagParam) {

@@ -10,6 +10,7 @@ import com.changyue.blogserver.model.vo.UserVO;
 import com.changyue.blogserver.serivce.RoleService;
 import com.changyue.blogserver.serivce.UserAuthorityService;
 import com.changyue.blogserver.serivce.UserService;
+import com.changyue.blogserver.utils.ShiroUtils;
 import org.apache.shiro.SecurityUtils;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.BeanUtils;
@@ -56,6 +57,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDTO getCurrentUser() {
         User user = (User) SecurityUtils.getSubject().getPrincipal();
+        user = userMapper.selectByPrimaryKey(user.getId()).orElse(null);
         Assert.notNull(user, "当前用户为空");
         UserDTO userDTO = new UserDTO();
         BeanUtils.copyProperties(user, userDTO);
@@ -77,10 +79,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User updatePassword(String oldPassword, String newPassword, Integer userId) {
+    public User updatePassword(String oldPassword, String newPassword, String againPassword, Integer userId) {
+
         Assert.hasText(oldPassword, "旧密码不能为空");
         Assert.hasText(newPassword, "新密码不能为空");
         Assert.notNull(userId, "用户ID不能为空");
+
+        if (!org.apache.commons.lang3.StringUtils.equals(newPassword, againPassword)) {
+            throw new UpdateException("密码修改失败,密码不一致");
+        }
 
         //新旧密码不能相同
         if (oldPassword.equals(newPassword)) {
@@ -120,13 +127,11 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public User update(User user) {
-
         Assert.notNull(user, "更新的用户不能为空");
-
+        user.setId(ShiroUtils.getUser().getId());
         if (userMapper.updateByPrimaryKeySelective(user) <= 0) {
             throw new UpdateException("用户更新失败");
         }
-
         return user;
     }
 
@@ -183,6 +188,12 @@ public class UserServiceImpl implements UserService {
         UserDTO userDTO = new UserDTO();
         BeanUtils.copyProperties(user, userDTO);
         return userDTO;
+    }
+
+    @Override
+    public boolean modifyAvatar(String url) {
+        Assert.hasText(url, "头像地址不能为空");
+        return userMapper.updateUserAvatar(url, ShiroUtils.getUser().getId()) >= 1;
     }
 
 }

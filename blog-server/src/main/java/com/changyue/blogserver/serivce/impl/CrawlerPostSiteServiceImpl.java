@@ -56,4 +56,9 @@ public class CrawlerPostSiteServiceImpl implements CrawlerPostSiteService {
         return new PageInfo<>(siteVOS, 3);
     }
 
+    @Override
+    public CrawlerPostSite getById(String id) {
+        Assert.hasText(id, "站点id不能为空");
+        return crawlerPostSiteMapper.findById(id);
+    }
 }

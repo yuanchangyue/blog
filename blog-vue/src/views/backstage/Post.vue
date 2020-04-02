@@ -98,8 +98,8 @@
 </template>
 
 <script>
-import TopNav from '../components/TopNav'
-import BreadCrumb from '../components/BreadCrumb'
+import TopNav from '../../components/TopNav'
+import BreadCrumb from '../../components/BreadCrumb'
 import { mavonEditor } from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
 
@@ -131,7 +131,7 @@ export default {
         status: 0,
         thumbnail: ''
       },
-      imgSrc: require('../assets/empty.svg'),
+      imgSrc: require('../../assets/empty.svg'),
       updateId: '',
       disable: false,
       radio: '1',

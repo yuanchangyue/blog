@@ -46,7 +46,7 @@ export default {
         name: '',
         password: ''
       },
-      bgImg: require('../assets/login-bg.jpg')
+      bgImg: require('../../assets/login-bg.jpg')
     }
   },
   methods: {
@@ -59,11 +59,12 @@ export default {
         console.info(_.data)
         var routerItem = _.data.data.routerVOS
         var menu = _.data.data.menuVos
-        localStorage.setItem('user', _.data.data.useDTO)
+        var user = _.data.data.userDTO
+        localStorage.setItem('user', JSON.stringify(user))
         localStorage.setItem('router', JSON.stringify(routerItem))
         localStorage.setItem('menu', JSON.stringify(menu))
         this.$notify.success(this.form.name + '登陆成功')
-        this.$router.push('/postlist')
+        this.$router.push('/blog/index')
       }).catch(err => {
         this.$message.error('登陆失败， 原因：' + err.data.msg)
       })

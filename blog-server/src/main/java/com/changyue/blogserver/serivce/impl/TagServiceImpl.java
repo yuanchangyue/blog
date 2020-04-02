@@ -146,6 +146,11 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
+    public List<TagDTO> getListLatest() {
+        return convertTo(tagMapper.listLatest());
+    }
+
+    @Override
     public List<TagDTO> getListByIds(List<Integer> ids) {
         List<Tag> tags = tagMapper.listAllTagByIds(ids);
         return tags.stream().map(this::convertTo).collect(Collectors.toList());
@@ -160,6 +165,11 @@ public class TagServiceImpl implements TagService {
     @Override
     public List<TagDTO> getListByUserId() {
         return tagMapper.listAllByUserId(ShiroUtils.getUser().getId()).stream().map(this::convertTo).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<TagDTO> getListBy() {
+        return null;
     }
 
     @Override

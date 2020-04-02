@@ -175,4 +175,10 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
 
+    <update id="updateUserAvatar">
+        update users
+        set avatar = #{url}
+        where id = #{userId}
+    </update>
+
 </mapper>

@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+
 /**
  * @author : 袁阊越
  * @description : 文章业务测试
@@ -93,6 +95,12 @@ public class PostServiceTest {
         PostVO by = postService.createBy(post, null, null);
 
         System.out.println("by = " + by);
+    }
+
+    @Test
+    public void test() {
+        List<PostVO> postVOS = postService.latestPost();
+        postVOS.forEach(System.out::println);
     }
 
 }

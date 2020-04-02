@@ -35,6 +35,16 @@
         from posts
     </select>
 
+    <select id="latestPost" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from posts
+        where status != 1
+        and status !=2
+        order by create_time desc
+        limit 3
+    </select>
+
     <select id="countAllByStatus" parameterType="java.lang.Integer">
         select sum(id)
         from posts
@@ -254,7 +264,7 @@
         where id = #{id,jdbcType=INTEGER}
     </delete>
 
-      <select id="findDocumentIdById" parameterType="java.lang.Integer" resultType="java.lang.String">
+    <select id="findDocumentIdById" parameterType="java.lang.Integer" resultType="java.lang.String">
         select document_id
         from posts
         where id = #{id,jdbcType=INTEGER}
@@ -443,7 +453,7 @@
             summary          = #{summary,jdbcType=VARCHAR},
             thumbnail        = #{thumbnail,jdbcType=VARCHAR},
             title            = #{title,jdbcType=VARCHAR},
-            document_id     = #{documentId,jdbcType=VARCHAR},
+            document_id      = #{documentId,jdbcType=VARCHAR},
             url              = #{url,jdbcType=VARCHAR},
             visits           = #{visits,jdbcType=BIGINT},
             format_content   = #{formatContent,jdbcType=LONGVARCHAR},

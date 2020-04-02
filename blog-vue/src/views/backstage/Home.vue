@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import TopNav from '../components/TopNav'
-import BreadCrumb from '../components/BreadCrumb'
+import TopNav from '../../components/TopNav'
+import BreadCrumb from '../../components/BreadCrumb'
 export default {
   name: '',
   components: { TopNav, BreadCrumb },

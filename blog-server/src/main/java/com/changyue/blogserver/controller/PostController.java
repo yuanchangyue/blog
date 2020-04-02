@@ -57,6 +57,12 @@ public class PostController {
         return postService.pageByQuery(pageIndex, pageSize, postQuery);
     }
 
+    @GetMapping("/latest")
+    public Result listLatest() {
+        return Result.create(postService.latestPost());
+    }
+
+
     @DeleteMapping
     public Result deletePost(@RequestParam(name = "multipleDelete") Integer[] multipleDelete) {
 

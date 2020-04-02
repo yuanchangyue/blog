@@ -53,7 +53,14 @@ public interface PostMapper extends BaseMapper<Post> {
     List<Post> findAllByStatus(@Nonnull Integer postId);
 
     /**
-     * 通过状态用户Id找到全部的文章
+     * 最新的文章
+     *
+     * @return 文章列表
+     */
+    List<Post> latestPost();
+
+    /**
+   通过状态用户Id找到全部的文章
      *
      * @param userId 用户id
      * @return 文章

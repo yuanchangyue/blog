@@ -37,6 +37,13 @@ public interface PostService extends BaseService<Post, Integer> {
     PageInfo<PostVO> pageByQuery(@NonNull Integer pageIndex, @NonNull Integer pageSize, @NonNull PostQuery postQuery);
 
     /**
+     * 最新的文章
+     *
+     * @return 文章列表
+     */
+    List<PostVO> latestPost();
+
+    /**
      * 通过id查找文章
      *
      * @param postId 文章id（条件）

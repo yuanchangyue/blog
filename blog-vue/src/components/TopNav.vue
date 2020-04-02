@@ -12,20 +12,24 @@
               <el-dropdown>
                 <el-avatar :size="25" :src="logo"></el-avatar>
                 <el-dropdown-menu slot="dropdown" style="width: 200px;">
-                  <el-dropdown-item>
-                    <el-row align="center">
-                      <el-avatar :src="logo" :size="40"></el-avatar>
-                    </el-row>
-                    <el-row>
-                      <p style="text-align: center" v-text="user.name"></p>
-                    </el-row>
-                  </el-dropdown-item>
-                    <el-link @click="logout" :underline="false">退出登陆</el-link>
+                  <el-row style="display: flex;justify-content: center">
+                    <el-avatar :src="handlerUrl(userData.avatar)" fit="cover" :size="40"></el-avatar>
+                  </el-row>
+                  <el-row>
+                    <p style="text-align: center;color: #606266" v-text="userData.username"></p>
+                    <p style="text-align: center;color: #909399" v-text="userData.email"></p>
+                  </el-row>
+                  <el-divider/>
+                  <el-row style="display: flex;justify-content: center">
+                      <el-link @click="personal" :underline="false" type="primary">个人资料</el-link>
+                      <el-divider direction="vertical"></el-divider>
+                      <el-link @click="logout" :underline="false"  type="danger">退出登陆</el-link>
+                  </el-row>
                 </el-dropdown-menu>
               </el-dropdown>
             </li>
             <li>
-                <el-badge :value="0"><i class="el-icon-bell"/></el-badge>
+               <el-link href="/blog/viewpoint"><i class="el-icon-link"/></el-link>
             </li>
         </ul>
     </div>
@@ -44,25 +48,28 @@ export default {
       menuMode: 'horizontal',
       logo: require('../assets/logo.png'),
       menuData: JSON.parse(localStorage.getItem('menu')),
-      user: {
-        name: '123',
-        avatar: require('../assets/logo.png'),
-        email: '123'
-      }
+      userData: JSON.parse(localStorage.getItem('user'))
     }
   },
   methods: {
     logout () {
       this.$axios.get('/user/logout').then(_ => {
-        var user = _.data.data.role
-        console.info(user)
-        // this.user.name = user.name
-        // this.user.email = user.email
-        // this.user.avatar = user.avatar
         this.$notify('退出成功')
         this.$router.replace({ path: '/login' })
       })
+    },
+    showUser () {
+      console.info(this.userData)
+    },
+    personal () {
+      this.$router.replace({ path: '/personal' })
+    },
+    handlerUrl (url) {
+      return 'http://localhost:8089/' + url
     }
+  },
+  created () {
+    this.showUser()
   }
 }
 </script>

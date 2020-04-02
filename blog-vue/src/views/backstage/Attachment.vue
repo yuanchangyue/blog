@@ -103,8 +103,8 @@
 </template>
 
 <script>
-import TopNav from '../components/TopNav'
-import BreadCrumb from '../components/BreadCrumb'
+import TopNav from '../../components/TopNav'
+import BreadCrumb from '../../components/BreadCrumb'
 import moment from 'moment'
 
 export default {
@@ -121,7 +121,7 @@ export default {
         mediaType: ''
       },
       isEmpty: true,
-      empty: require('../assets/empty.svg'),
+      empty: require('../../assets/empty.svg'),
       currentId: 0,
       direction: 'rtl',
       drawer: false,

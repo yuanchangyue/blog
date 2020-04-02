@@ -16,10 +16,7 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -49,6 +46,30 @@ public class UserController {
         userAuthorityService.create(new UsersRole(createdUser.getId(), AuthorityStatus.ORDINARY_USER.getAuthorityCode()));
 
         return Result.create(ResultStatus.OPERATION_SUCCESS);
+    }
+
+    @GetMapping
+    public Result getUser() {
+        //获得当前用户
+        return Result.create(userService.getCurrentUser());
+    }
+
+    @PutMapping
+    public Result modifyUser(@Valid @RequestBody UserParam userParam) {
+        userService.update(userParam.convertTo());
+        return Result.create("更新成功");
+    }
+
+    @PostMapping("/modifypw")
+    public Result modifyPassword(@RequestParam String oldPassword, @RequestParam String newPassword, @RequestParam String againPassword, @RequestParam Integer userId) {
+        userService.updatePassword(oldPassword, newPassword, againPassword, userId);
+        return Result.create("密码修改成功");
+    }
+
+    @PostMapping("/modifyavatar")
+    public Result modifyAvatar(@RequestParam String avatar) {
+        userService.modifyAvatar(avatar);
+        return Result.create("头像修改过成功");
     }
 
     @PostMapping("/login")

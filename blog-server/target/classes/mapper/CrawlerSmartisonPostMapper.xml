@@ -27,9 +27,20 @@
         id, title, headpic, brief, original_url, url, create_time, update_time, pub_time,
     pre_pic1, pre_pic2, pre_pic3,site_id,site_name
     </sql>
+
     <sql id="Blob_Column_List">
         content
     </sql>
+
+    <select id="findPostBySite" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from crawler_smartison_post
+        where site_id = #{siteId}
+    </select>
+
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
         select
         <include refid="Base_Column_List"/>
@@ -38,11 +49,13 @@
         from crawler_smartison_post
         where id = #{id,jdbcType=INTEGER}
     </select>
+
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
         delete
         from crawler_smartison_post
         where id = #{id,jdbcType=INTEGER}
     </delete>
+
     <insert id="insert" parameterType="crawlerSmartisonPost">
         insert into crawler_smartison_post (id, title, headpic,
                                             brief, original_url, url,

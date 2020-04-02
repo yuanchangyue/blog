@@ -30,7 +30,6 @@ public class UserParam implements InputConvert<User> {
     @Size(max = 127, message = "电子邮件的字符长度不能超过 {max}")
     private String email;
 
-    @NotBlank(message = "密码不能为空")
     @Size(min = 8, max = 100, message = "密码的字符长度必须在 {min} - {max} 之间")
     private String password;
 

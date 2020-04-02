@@ -15,6 +15,13 @@
         id, description, name, parent_id, slug_name, user_id
     </sql>
 
+    <select id="listLatest" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from categories
+        order by id desc limit 5
+    </select>
+
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>

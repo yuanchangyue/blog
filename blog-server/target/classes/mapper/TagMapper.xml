@@ -23,6 +23,13 @@
         </foreach>
     </select>
 
+    <select id="listLatest" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tags
+        order by id desc limit 5
+    </select>
+
     <select id="listAllByPostId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         SELECT t.id, t.name, t.slug_name
         from post_tags pt,

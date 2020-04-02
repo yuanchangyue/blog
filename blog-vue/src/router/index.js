@@ -11,54 +11,74 @@ const routes = [
   {
     path: '/',
     name: 'login',
-    component: () => import('../views/Login')
+    component: () => import('../views/backstage/Login')
   },
   {
     path: '/home',
     name: 'Home',
-    component: () => import('../views/Home')
+    component: () => import('../views/backstage/Home')
   },
   {
     path: '/login',
     name: 'Login',
-    component: () => import('../views/Login')
+    component: () => import('../views/backstage/Login')
   },
   {
     path: '/register',
     name: 'Register',
-    component: () => import('../views/Register')
+    component: () => import('../views/backstage/Register')
   },
   {
     path: '/tag',
     name: 'Tag',
-    component: () => import('../views/Tag')
+    component: () => import('../views/backstage/Tag')
   },
   {
     path: '/category',
     name: 'Category',
-    component: () => import('../views/Category')
+    component: () => import('../views/backstage/Category')
   },
   {
     path: '/post',
     name: 'post',
-    component: () => import('../views/Post')
+    component: () => import('../views/backstage/Post')
   },
   {
     path: '/postlist',
     name: 'postlist',
-    component: () => import('../views/PostList')
+    component: () => import('../views/backstage/PostList')
   }, {
     path: '/attachment',
     name: 'attachment',
-    component: () => import('../views/Attachment')
+    component: () => import('../views/backstage/Attachment')
   }, {
     path: '/personal',
     name: 'Personal',
-    component: () => import('../views/Personal')
+    component: () => import('../views/backstage/Personal')
   }, {
     path: '/site',
     name: 'Site',
-    component: () => import('../views/Site')
+    component: () => import('../views/backstage/Site')
+  }, {
+    path: '/blog/viewpoint',
+    name: 'ViewPointPage',
+    component: () => import('../views/frontdesk/ViewPoint')
+  }, {
+    path: '/blog/site',
+    name: 'SitePage',
+    component: () => import('../views/frontdesk/SitePage')
+  }, {
+    path: '/blog/post',
+    name: 'PostPage',
+    component: () => import('../views/frontdesk/PostPage')
+  }, {
+    path: '/blog/index',
+    name: 'IndexPage',
+    component: () => import('../views/frontdesk/IndexPage')
+  }, {
+    path: '/blog/userpost',
+    name: 'UserPostPage',
+    component: () => import('../views/frontdesk/UserPostPage')
   }
 ]
 

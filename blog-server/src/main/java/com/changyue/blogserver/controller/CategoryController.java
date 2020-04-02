@@ -50,6 +50,11 @@ public class CategoryController {
         return categoryService.convertTo(categoryService.getById(categoryId));
     }
 
+    @GetMapping("/latest")
+    public Result getLatest() {
+        return Result.create(categoryService.getListLatest());
+    }
+
     @PostMapping
     public Result createCategory(@Valid @RequestBody CategoryParam categoryParam) {
         //入参转化

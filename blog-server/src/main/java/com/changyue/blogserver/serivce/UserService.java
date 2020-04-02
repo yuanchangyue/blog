@@ -60,7 +60,7 @@ public interface UserService extends BaseService<User, Integer> {
      * @param userId      用户ID不能为空
      * @return 更新的用户详细信息
      */
-    User updatePassword(@NonNull String oldPassword, @NonNull String newPassword, @NonNull Integer userId);
+    User updatePassword(@NonNull String oldPassword, @NonNull String newPassword, String againPassword, @NonNull Integer userId);
 
     /**
      * 创建一个用户。
@@ -101,6 +101,14 @@ public interface UserService extends BaseService<User, Integer> {
      * @return 用户的DTO
      */
     UserDTO convertTO(User user);
+
+    /**
+     * 修改用户的头像
+     *
+     * @param url 地址
+     * @return 是否成功
+     */
+    boolean modifyAvatar(String url);
 
     /**
      * 检查密码是否与用户密码匹配。

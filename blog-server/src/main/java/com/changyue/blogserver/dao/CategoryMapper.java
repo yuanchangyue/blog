@@ -5,11 +5,8 @@ import com.changyue.blogserver.model.entity.Category;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.lang.NonNull;
-import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -84,5 +81,11 @@ public interface CategoryMapper extends BaseMapper<Category> {
      * @return 类别列表
      */
     List<Category> listCategoryByPostId(@Param("postId") Integer postId);
+
+    /**
+     * 最新的分类
+     * @return 类别列表
+     */
+    List<Category> listLatest();
 
 }

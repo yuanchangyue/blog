@@ -12,6 +12,8 @@ import com.changyue.blogserver.serivce.CrawlerPostSiteService;
 import com.changyue.blogserver.serivce.CrawlerSmartisonService;
 import com.changyue.blogserver.utils.DateUtils;
 import com.changyue.blogserver.utils.JsoupUtils;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
@@ -20,7 +22,9 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -43,6 +47,12 @@ public class CrawlerSmartisonServiceImpl implements CrawlerSmartisonService {
     @Autowired
     private CrawlerSmartisonPostMapper crawlerSmartisonPostMapper;
 
+
+    @Override
+    public CrawlerSmartisonPost getById(Integer id) {
+        Assert.notNull(id,"文章的ID不能为空");
+        return crawlerSmartisonPostMapper.selectByPrimaryKey(id).orElse(null);
+    }
 
     @Override
     public void saveCate(String url) {
@@ -99,6 +109,14 @@ public class CrawlerSmartisonServiceImpl implements CrawlerSmartisonService {
         }
         return htmlContent;
     }
+
+    @Override
+    public PageInfo<CrawlerSmartisonPost> getPostList(@Nonnull Integer pageIndex, @Nonnull Integer pageSize, Integer siteId) {
+        PageHelper.startPage(pageIndex, pageSize);
+        List<CrawlerSmartisonPost> postBySite = crawlerSmartisonPostMapper.findPostBySite(siteId);
+        return new PageInfo<>(postBySite, 3);
+    }
+
 
     /**
      * 解析json
@@ -201,5 +219,8 @@ public class CrawlerSmartisonServiceImpl implements CrawlerSmartisonService {
         }
         return crawlerPostSite;
     }
+
+
+
 
 }

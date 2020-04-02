@@ -2,6 +2,7 @@ package com.changyue.blogserver.model.vo;
 
 import com.changyue.blogserver.model.dto.CategoryDTO;
 import com.changyue.blogserver.model.dto.TagDTO;
+import com.changyue.blogserver.model.dto.UserDTO;
 import lombok.Data;
 
 import java.util.Date;
@@ -76,6 +77,11 @@ public class PostVO {
      * 编辑时间
      */
     private Date editTime;
+
+    /**
+     * 用户信息
+     */
+    private UserDTO userDTO;
 
     /**
      * 标签集合

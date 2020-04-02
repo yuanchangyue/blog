@@ -46,12 +46,14 @@ public class ShiroConfig {
         //anon. 配置不会被拦截的请求 顺序判断
         map.put("/api/user/login", "anon");
         map.put("/api/user/logout", "anon");
-        map.put("/#/login","anon");
+        map.put("/api/site/**", "anon");
+        map.put("/api/crawlerpost/**", "anon");
+        map.put("/api/tag/list", "anon");
+        map.put("/api/category/list", "anon");
 
         //authc. 配置拦截的请求
         map.put("/**", "authc");
 
-        map.put("/#/api/**", "authc");
         map.put("/api/**", "authc");
         map.put("/upload/**", "authc");
 

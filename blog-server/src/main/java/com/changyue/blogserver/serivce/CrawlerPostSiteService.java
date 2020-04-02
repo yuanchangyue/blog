@@ -19,7 +19,7 @@ public interface CrawlerPostSiteService extends BaseService<CrawlerPostSite, Str
     /**
      * 全部id
      *
-     * @return
+     * @return ids
      */
     List<String> listIds();
 

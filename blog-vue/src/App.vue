@@ -1,5 +1,5 @@
 <template>
-  <div class="login-box" id="app">
+  <div id="app" style="padding: 0;margin: 0;">
     <router-view/>
   </div>
 </template>
@@ -12,5 +12,8 @@ export default {
 </script>
 
 <style>
-
+  body{
+    padding: 0;
+    margin: 0;
+  }
 </style>

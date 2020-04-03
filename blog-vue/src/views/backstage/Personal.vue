@@ -24,7 +24,7 @@
                       style="margin-right: 10px;">
                 {{ item.name }}
               </el-tag>
-              <el-link href="/tag" type="primary">查看全部标签<i class="el-icon-right el-icon--right"></i></el-link>
+              <el-link href="/management/tag" type="primary">查看全部标签<i class="el-icon-right el-icon--right"></i></el-link>
             </div>
             <el-divider content-position="left">拥有的分类</el-divider>
             <div class="cate_list">
@@ -46,7 +46,7 @@
                   label="描述">
                 </el-table-column>
               </el-table>
-              <el-link href="/tag" type="primary">查看全部分类<i class="el-icon-right el-icon--right"></i></el-link>
+              <el-link href="/management/category" type="primary">查看全部分类<i class="el-icon-right el-icon--right"></i></el-link>
             </div>
           </el-card>
         </el-col>

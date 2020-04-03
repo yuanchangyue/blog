@@ -81,7 +81,7 @@ public class DataSourceConfig {
             sessionFactoryBean.setMapperLocations(resolver.getResources(MAPPER_XML_PATH));
             org.apache.ibatis.session.Configuration configuration = new org.apache.ibatis.session.Configuration();
             configuration.setMapUnderscoreToCamelCase(true);
-            //configuration.setLogImpl(org.apache.ibatis.logging.stdout.StdOutImpl.class);
+            configuration.setLogImpl(org.apache.ibatis.logging.stdout.StdOutImpl.class);
             sessionFactoryBean.setConfiguration(configuration);
             sessionFactoryBean.setTypeAliasesPackage(MODEL_PACKAGE);
             return sessionFactoryBean.getObject();

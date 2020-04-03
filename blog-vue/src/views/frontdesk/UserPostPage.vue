@@ -13,14 +13,39 @@
       <el-row :gutter="40" v-loading="loading">
         <el-col :span="18">
           <div class="post" v-html="postObj.formatContent"></div>
+          <el-divider content-position="left">结束了</el-divider>
           <div class="comment-box">
             <h4 style="text-align: center">全部评论</h4>
             <div class="write-comment-box">
-              <div class="not-login-comment" style="display: flex;align-items: center ">
+              <div class="not-login-comment" v-if="userData==null" style="display: flex;align-items: center ">
                 <font-awesome-icon :icon="['fa','user-circle']" style="font-size: 40px;margin-right: 10px;"/>
                 <span>请在<el-link type="danger">登陆</el-link>后评论</span>
               </div>
+              <div class="login-comment" v-if="userData!=null">
+                <div>
+                  <el-avatar class="user-comment-avatar" :src="handlerUrl(userData.avatar)" :size="50"></el-avatar>
+                  <span v-text="userData.username"/>
+                </div>
+                <div class="edit-comment">
+                  <el-input class="comment-input" v-model="post.content" rows="8" type="textarea" placeholder="写下你的评论"></el-input>
+                </div>
+              </div>
+              <div style="width: 100%;text-align: right">
+              <el-button @click="commentSubmit">提交</el-button>
+              </div>
             </div>
+            <el-card v-for="c in comment" :key="c.id" style="margin:10px 0;">
+              <div style="display: flex;align-items: center">
+                <div style="width: 100px;">
+                  <el-avatar class="user-comment-avatar" :src="handlerUrl(c.userDTO.avatar)" :size="50"></el-avatar>
+                </div>
+                <div style="width: 100%;">
+                  <h3 v-text="c.userDTO.username"></h3>
+                  <summary v-text="c.content"></summary>
+                </div>
+              </div>
+            </el-card>
+            <el-card style="margin: 10px 0;color: #909399;text-align: center">没有更多了</el-card>
           </div>
         </el-col>
         <el-col :span="6">
@@ -59,26 +84,49 @@
 <script>
 import FrontTopNav from '../../components/FrontTopNav'
 import moment from 'moment'
+
 export default {
   name: 'UserPostPage',
   data () {
     return {
       post: {
-        id: ''
+        pageIndex: 1,
+        pageSize: 5,
+        postId: '',
+        content: '',
+        userId: '',
+        parentId: 0
       },
       postObj: '',
       categoryData: [],
       tagData: [],
       latestPost: [],
-      loading: true
+      comment: [],
+      loading: true,
+      userData: JSON.parse(localStorage.getItem('user'))
     }
   },
   components: { FrontTopNav },
   methods: {
     getPost () {
-      this.$axios.get('/post/' + this.post.id).then(value => {
+      this.$axios.get('/post/' + this.post.postId).then(value => {
         this.postObj = value.data.data
         this.loading = false
+      })
+    },
+    getComment: function () {
+      this.$axios.get('/comments', {
+        params: {
+          pageIndex: this.post.pageIndex,
+          pageSize: this.post.pageSize,
+          postId: this.post.postId,
+          parentId: this.post.parentId,
+          content: this.post.content,
+          userId: this.userData.id
+        }
+      }).then(value => {
+        console.info(value.data)
+        this.comment = value.data.data.list
       })
     },
     getLatestPostList () {
@@ -91,14 +139,26 @@ export default {
     },
     showTagList () {
       this.$axios.get('/tag/latest').then(value => {
-        console.info(value.data)
         this.tagData = value.data.data
       }).catch(_ => {
       })
     },
+    commentSubmit () {
+      var commentParam = {
+        postId: this.post.postId,
+        parentId: this.post.parentId,
+        content: this.post.content,
+        userId: this.userData.id
+      }
+      this.$axios.post('/comments', commentParam).then(_ => {
+        if (_.data.code === 200) {
+          this.$notify.success('评价完成,等待博主审核后即可看见！')
+          this.getComment()
+        }
+      })
+    },
     showCategory () {
       this.$axios.get('/category/latest').then(value => {
-        console.info(value.data)
         this.categoryData = value.data.data
       }).catch(_ => {
       })
@@ -108,11 +168,12 @@ export default {
     }
   },
   created () {
-    this.post.id = localStorage.getItem('userPostId')
+    this.post.postId = localStorage.getItem('userPostId')
     this.getPost()
     this.showTagList()
     this.showCategory()
     this.getLatestPostList()
+    this.getComment()
   }
 }
 </script>
@@ -134,7 +195,22 @@ export default {
     padding-left: 0;
     list-style: none;
   }
-
+  .login-comment{
+    display: flex;
+    width: 100%;
+    height: 200px;
+  }
+  .edit-comment{
+    width: 100%;
+  }
+  .comment-input{
+    outline: none;
+    border: none;
+    width: 100%;
+  }
+  .user-comment-avatar{
+    margin: 5px;
+  }
   .cate-box{
     cursor: pointer;
     transition: .2s ease;

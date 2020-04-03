@@ -6,7 +6,7 @@
         <el-link class="link-text" href="/blog/index">Blog</el-link>
         <el-link class="link-text" href="/blog/viewpoint">看点</el-link>
         <el-link class="link-text" href="/login" v-if="userData==null">登陆</el-link>
-        <el-link class="link-text" href="/personal" v-if="userData!=null">后台管理</el-link>
+        <el-link class="link-text" href="/management/personal" v-if="userData!=null">后台管理</el-link>
         <el-link class="link-text" @click="logout" v-if="userData!=null">退出</el-link>
         <form class="form-inline position-relative">
           <input class="form-control" type="search" placeholder="搜索">

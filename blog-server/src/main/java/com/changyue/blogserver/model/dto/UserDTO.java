@@ -2,8 +2,6 @@ package com.changyue.blogserver.model.dto;
 
 import lombok.Data;
 
-import java.util.Date;
-
 /**
  * @program: blog-server
  * @description: 用户
@@ -24,9 +22,5 @@ public class UserDTO {
     private String avatar;
 
     private String description;
-
-    private Date createTime;
-
-    private Date updateTime;
 
 }

@@ -279,7 +279,7 @@ export default {
       for (let n = 0; val.length > n; n++) { this.multipleDelete.push(val[n].id) }
     },
     toAdd () {
-      this.$router.push('/post')
+      this.$router.push('/management/post')
     },
     updatePost (id) {
       this.$router.push({ name: 'post', params: { postId: id } })

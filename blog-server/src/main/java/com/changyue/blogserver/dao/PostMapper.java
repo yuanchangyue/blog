@@ -60,7 +60,7 @@ public interface PostMapper extends BaseMapper<Post> {
     List<Post> latestPost();
 
     /**
-   通过状态用户Id找到全部的文章
+     * 通过状态用户Id找到全部的文章
      *
      * @param userId 用户id
      * @return 文章
@@ -75,6 +75,14 @@ public interface PostMapper extends BaseMapper<Post> {
      * @return 文章
      */
     List<PostVO> listAllByQuery(@Nonnull @Param("postQuery") PostQuery postQuery, @Param("userId") Integer userId);
+
+    /**
+     * 通过userId查找postId
+     *
+     * @param userId 用户ID
+     * @return postId
+     */
+    List<String> listPostIdByUserId(@Param("userId") Integer userId);
 
     /**
      * 通过ID查找ES文档的ID

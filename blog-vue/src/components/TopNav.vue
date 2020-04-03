@@ -54,7 +54,7 @@ export default {
   methods: {
     logout () {
       this.$axios.get('/user/logout').then(_ => {
-        this.$notify('退出成功')
+        localStorage.clear()
         this.$router.replace({ path: '/login' })
       })
     },
@@ -62,7 +62,7 @@ export default {
       console.info(this.userData)
     },
     personal () {
-      this.$router.replace({ path: '/personal' })
+      this.$router.replace({ path: '/management/personal' })
     },
     handlerUrl (url) {
       return 'http://localhost:8089/' + url

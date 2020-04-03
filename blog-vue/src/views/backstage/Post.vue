@@ -170,7 +170,7 @@ export default {
           message: '文章已经移至草稿箱',
           type: 'success'
         })
-        this.$router.push({ path: '/postlist' })
+        this.$router.push({ path: '/management/postlist' })
       }).catch(_ => {
       })
     },
@@ -182,7 +182,7 @@ export default {
             message: '文章发布成功',
             type: 'success'
           })
-          this.$router.push({ path: '/postlist' })
+          this.$router.push({ path: '/management/postlist' })
         }).catch(_ => {
           this.$notify({
             title: '警告',
@@ -197,7 +197,7 @@ export default {
             message: '文章编辑成功',
             type: 'success'
           })
-          this.$router.push({ path: '/postlist' })
+          this.$router.push({ path: '/management/postlist' })
         }).catch(_ => {
           this.$notify({
             title: '警告',

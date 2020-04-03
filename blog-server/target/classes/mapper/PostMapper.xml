@@ -45,6 +45,12 @@
         limit 3
     </select>
 
+    <select id="listPostIdByUserId" resultType="java.lang.String" parameterType="java.lang.Integer">
+        select id
+        from posts
+        where user_id = #{userId}
+    </select>
+
     <select id="countAllByStatus" parameterType="java.lang.Integer">
         select sum(id)
         from posts

@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.changyue.blogserver.dao.CommentsMapper">
+    <resultMap id="BaseResultMap" type="comments">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="content" jdbcType="VARCHAR" property="content"/>
+        <result column="ip_address" jdbcType="VARCHAR" property="ipAddress"/>
+        <result column="is_admin" jdbcType="TINYINT" property="isAdmin"/>
+        <result column="parent_id" jdbcType="BIGINT" property="parentId"/>
+        <result column="post_id" jdbcType="INTEGER" property="postId"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="top_priority" jdbcType="INTEGER" property="topPriority"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, create_time, update_time, user_id, content, ip_address, is_admin, parent_id,
+    post_id, status, top_priority
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from comments
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="listCategoryByIds" parameterType="java.util.ArrayList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from categories
+        where id in
+        <foreach item="id" index="index" collection="categoryIds" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+
+    <select id="listBy" parameterType="commentParam" resultMap="BaseResultMap">
+        select
+        c.id,
+        c.create_time,
+        c.update_time,
+        c.user_id,
+        content,
+        ip_address,
+        is_admin,
+        parent_id,
+        post_id,
+        c.STATUS,
+        top_priority
+        from comments c ,posts p
+        <where>
+            c.user_id = p.user_id
+            and c.post_id = p.id
+            and c.user_id = #{userId,jdbcType=INTEGER}
+            <if test="status != null">
+                and c.status = #{status,jdbcType=INTEGER}
+            </if>
+            <if test="postId != null">
+                and c.post_id = #{postId,jdbcType=INTEGER}
+            </if>
+        </where>
+        order by c.update_time desc
+    </select>
+
+    <select id="listLatest" resultMap="BaseResultMap" parameterType="commentParam">
+        select
+        <include refid="Base_Column_List"/>
+        from comments c
+        <where>
+            c.status = 1
+            <if test="userId != null">
+                and c.user_id = #{userId,jdbcType=INTEGER}
+            </if>
+            <if test="postId != null">
+                and c.post_id = #{postId,jdbcType=INTEGER}
+            </if>
+        </where>
+        order by c.update_time desc
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+
+        delete
+        from comments
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <delete id="removeById" parameterType="java.lang.Long">
+        delete
+        from comments
+        where id = #{id}
+    </delete>
+
+    <insert id="insert" parameterType="comments">
+        insert into comments (id, create_time, update_time,
+                              user_id, content, ip_address,
+                              is_admin, parent_id, post_id,
+                              status, top_priority)
+        values (#{id,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
+                #{userId,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{ipAddress,jdbcType=VARCHAR},
+                #{isAdmin,jdbcType=TINYINT}, #{parentId,jdbcType=BIGINT}, #{postId,jdbcType=INTEGER},
+                #{status,jdbcType=INTEGER}, #{topPriority,jdbcType=INTEGER})
+    </insert>
+
+    <insert id="insertSelective" parameterType="comments">
+        insert into comments
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+            <if test="ipAddress != null">
+                ip_address,
+            </if>
+            <if test="isAdmin != null">
+                is_admin,
+            </if>
+            <if test="parentId != null">
+                parent_id,
+            </if>
+            <if test="postId != null">
+                post_id,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="topPriority != null">
+                top_priority,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="ipAddress != null">
+                #{ipAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="isAdmin != null">
+                #{isAdmin,jdbcType=TINYINT},
+            </if>
+            <if test="parentId != null">
+                #{parentId,jdbcType=BIGINT},
+            </if>
+            <if test="postId != null">
+                #{postId,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="topPriority != null">
+                #{topPriority,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="comments">
+        update comments
+        <set>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="content != null and content != ''">
+                content = #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="ipAddress != null and ipAddress != ''">
+                ip_address = #{ipAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="isAdmin != null">
+                is_admin = #{isAdmin,jdbcType=TINYINT},
+            </if>
+            <if test="parentId != null">
+                parent_id = #{parentId,jdbcType=BIGINT},
+            </if>
+            <if test="postId != null">
+                post_id = #{postId,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="topPriority != null">
+                top_priority = #{topPriority,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="comments">
+        update comments
+        set create_time  = #{createTime,jdbcType=TIMESTAMP},
+            update_time  = #{updateTime,jdbcType=TIMESTAMP},
+            user_id      = #{userId,jdbcType=INTEGER},
+            content      = #{content,jdbcType=VARCHAR},
+            ip_address   = #{ipAddress,jdbcType=VARCHAR},
+            is_admin     = #{isAdmin,jdbcType=TINYINT},
+            parent_id    = #{parentId,jdbcType=BIGINT},
+            post_id      = #{postId,jdbcType=INTEGER},
+            status       = #{status,jdbcType=INTEGER},
+            top_priority = #{topPriority,jdbcType=INTEGER}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+</mapper>

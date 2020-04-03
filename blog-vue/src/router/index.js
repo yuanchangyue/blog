@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+
 Vue.use(VueRouter)
 
 // const routerPush = VueRouter.prototype.push
@@ -29,30 +30,34 @@ const routes = [
     component: () => import('../views/backstage/Register')
   },
   {
-    path: '/tag',
+    path: '/management/tag',
     name: 'Tag',
     component: () => import('../views/backstage/Tag')
+  }, {
+    path: '/management/comment',
+    name: 'Comment',
+    component: () => import('../views/backstage/Comment')
   },
   {
-    path: '/category',
+    path: '/management/category',
     name: 'Category',
     component: () => import('../views/backstage/Category')
   },
   {
-    path: '/post',
+    path: '/management/post',
     name: 'post',
     component: () => import('../views/backstage/Post')
   },
   {
-    path: '/postlist',
+    path: '/management/postlist',
     name: 'postlist',
     component: () => import('../views/backstage/PostList')
   }, {
-    path: '/attachment',
+    path: '/management/attachment',
     name: 'attachment',
     component: () => import('../views/backstage/Attachment')
   }, {
-    path: '/personal',
+    path: '/management/personal',
     name: 'Personal',
     component: () => import('../views/backstage/Personal')
   }, {

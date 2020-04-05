@@ -40,8 +40,12 @@
                   <el-avatar class="user-comment-avatar" :src="handlerUrl(c.userDTO.avatar)" :size="50"></el-avatar>
                 </div>
                 <div style="width: 100%;">
-                  <h3 v-text="c.userDTO.username"></h3>
-                  <summary v-text="c.content"></summary>
+                  <div style="display: flex;align-items: center">
+                  <h3 v-text="c.userDTO.username" style="margin-right: 10px;"></h3>
+                  <span style="font-size: 12px" v-text="dateFormat(c.createTime)"></span>
+                   <!-- <i style="font-size: 20px;flex: 1;text-align: right" class="el-icon-chat-line-square"/>-->
+                  </div>
+                  <summary v-text="c.content"/>
                 </div>
               </div>
             </el-card>

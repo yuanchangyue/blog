@@ -117,6 +117,11 @@ public class CrawlerSmartisonServiceImpl implements CrawlerSmartisonService {
         return new PageInfo<>(postBySite, 3);
     }
 
+    @Override
+    public List<CrawlerSmartisonPost> randomList() {
+        return null;
+    }
+
 
     /**
      * 解析json

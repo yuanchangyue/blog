@@ -5,6 +5,7 @@ import com.changyue.blogserver.serivce.base.BaseService;
 import com.github.pagehelper.PageInfo;
 
 import javax.annotation.Nonnull;
+import java.util.List;
 
 /**
  * @author : 袁阊越
@@ -22,5 +23,7 @@ public interface CrawlerSmartisonService extends BaseService<CrawlerSmartisonPos
     String parseArticle(String url);
 
     PageInfo<CrawlerSmartisonPost> getPostList(@Nonnull Integer pageIndex, @Nonnull Integer pageSize,@Nonnull Integer siteId);
+
+    List<CrawlerSmartisonPost> randomList();
 
 }

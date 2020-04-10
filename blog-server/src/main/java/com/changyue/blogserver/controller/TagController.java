@@ -28,7 +28,6 @@ public class TagController {
     @Autowired
     private PostTagService postTagService;
 
-
     @GetMapping
     public List<TagDTO> listTags() {
         return tagService.convertTo(tagService.listAll());

@@ -25,4 +25,9 @@ public class PostQuery {
      */
     private Integer categoryId;
 
+    /**
+     * 标签
+     */
+    private Integer tagId;
+
 }

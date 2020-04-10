@@ -176,7 +176,7 @@ export default {
     },
     submit () {
       if (this.isInsert) {
-        this.$axios.post('/post', this.form).then(value => {
+        this.$axios.post('/post', this.form).then(_ => {
           this.$notify({
             title: '成功',
             message: '文章发布成功',
@@ -223,11 +223,7 @@ export default {
       this.$axios.get('/category/list').then(value => {
         this.categoryList = value.data.data
       }).catch(_ => {
-        this.$notify({
-          title: '警告',
-          message: '分类获取失败',
-          type: 'warning'
-        })
+        this.$notify.warning('分类获取失败')
       })
       this.$axios.get('/tag').then(value => {
         this.tagList = value.data
@@ -288,7 +284,9 @@ export default {
           this.form.originalContent = data.data.originalContent
           this.form.summary = data.data.summary
           this.form.thumbnail = data.data.thumbnail
-          this.imgSrc = this.handlerUrl(data.data.thumbnail)
+          if (data.data.thumbnail != null && data.data.thumbnail !== '') {
+            this.imgSrc = this.handlerUrl(data.data.thumbnail)
+          }
           this.form.disallowComment = data.data.disallowComment.toString()
           for (var n = 0; n < data.data.tags.length; n++) {
             this.form.tagIds.push(data.data.tags[n].id)

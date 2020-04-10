@@ -1,6 +1,7 @@
 package com.changyue.blogserver.service;
 
 import com.changyue.blogserver.config.CrawlerConfig;
+import com.changyue.blogserver.model.entity.CrawlerSmartisonPost;
 import com.changyue.blogserver.serivce.CrawlerSmartisonService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,6 +35,14 @@ public class CrawlerSmartisonServiceTest {
     public void testSaveArticle() {
         List<String> smartisonArticleUrl = crawlerConfig.getSmartisonArticleUrl();
         smartisonArticleUrl.forEach(s -> crawlerSmartisonService.saveArticle(s));
+    }
+
+    @Test
+    public void test() {
+
+        List<CrawlerSmartisonPost> crawlerSmartisonPosts = crawlerSmartisonService.randomList();
+        System.out.println(crawlerSmartisonPosts);
+
     }
 
 

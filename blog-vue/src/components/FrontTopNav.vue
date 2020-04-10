@@ -1,6 +1,7 @@
 <template >
   <div class="blog-all" style="width: 100%;background: #ffffff;">
     <nav class="nav">
+      <div style="width: 60%;display: flex;">
       <el-col class="logo">LOGO</el-col>
       <el-col class="link">
         <el-link class="link-text" href="/blog/index">Blog</el-link>
@@ -14,6 +15,7 @@
           </button>
         </form>
       </el-col>
+      </div>
     </nav>
   </div>
 </template>
@@ -39,10 +41,18 @@ export default {
 
 <style scoped>
   .nav {
-    padding: 10px 350px;
+    padding: 10px;
+    width: 100%;
     display: flex;
+    position: fixed;
+    justify-content: center;
+    left: 50%;
+    top: -40px;
+    transform: translate(-50%, 50%);
+    z-index: 1000;
+    background: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   }
-
   .logo {
     flex: 1;
     line-height: 60px;

@@ -70,7 +70,7 @@
                selectByExampleQueryId="false"/>
         -->
 
-        <table domainObjectName="Comments" tableName="comments" enableCountByExample="false"
+        <table domainObjectName="UserPost" tableName="user_post" enableCountByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"
                selectByExampleQueryId="false"/>
 

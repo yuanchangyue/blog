@@ -4,6 +4,11 @@ import com.changyue.blogserver.model.base.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+/**
+ * @author : 袁阊越
+ * @description : 评论
+ * @date : 2020/4/9
+ */
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class Comments extends BaseEntity {
@@ -14,6 +19,11 @@ public class Comments extends BaseEntity {
      * 用户id
      */
     private Integer userId;
+
+    /**
+     * 评价的用户id
+     */
+    private Integer commentUserId;
 
     /**
      * 评价内容

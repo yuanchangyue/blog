@@ -3,17 +3,21 @@
     <FrontTopNav></FrontTopNav>
     <div class="content">
       <ul class="side-bar">
-        <li class="side-bar-li">
-          <font-awesome-icon :icon="['fa','heart']"></font-awesome-icon>
+        <li class="side-bar-li" @click="like">
+          <font-awesome-icon :icon="['fa','heart']"></font-awesome-icon>&nbsp;
+          <span>{{postObj.likes}}</span>
         </li>
         <li class="side-bar-li">
-          <font-awesome-icon :icon="['fa','comment']"></font-awesome-icon>
+          <font-awesome-icon :icon="['fa','bookmark']"/>
+        </li>
+        <li class="side-bar-li">
+          <a href="#comment-box"><font-awesome-icon :icon="['fa','comment']"></font-awesome-icon></a>
         </li>
       </ul>
-      <el-row :gutter="40" v-loading="loading">
+      <el-row class="content-box"  :gutter="40" v-loading="loading">
         <el-col :span="18">
           <div class="post" v-html="postObj.formatContent"></div>
-          <el-divider content-position="left">结束了</el-divider>
+          <el-divider content-position="left" id="comment-box">结束了</el-divider>
           <div class="comment-box">
             <h4 style="text-align: center">全部评论</h4>
             <div class="write-comment-box">
@@ -37,13 +41,12 @@
             <el-card v-for="c in comment" :key="c.id" style="margin:10px 0;">
               <div style="display: flex;align-items: center">
                 <div style="width: 100px;">
-                  <el-avatar class="user-comment-avatar" :src="handlerUrl(c.userDTO.avatar)" :size="50"></el-avatar>
+                  <el-avatar class="user-comment-avatar" :src="handlerUrl(c.commentDTO.avatar)" :size="50"></el-avatar>
                 </div>
                 <div style="width: 100%;">
                   <div style="display: flex;align-items: center">
-                  <h3 v-text="c.userDTO.username" style="margin-right: 10px;"></h3>
+                  <h3 v-text="c.commentDTO.username" style="margin-right: 10px;"></h3>
                   <span style="font-size: 12px" v-text="dateFormat(c.createTime)"></span>
-                   <!-- <i style="font-size: 20px;flex: 1;text-align: right" class="el-icon-chat-line-square"/>-->
                   </div>
                   <summary v-text="c.content"/>
                 </div>
@@ -54,11 +57,11 @@
         </el-col>
         <el-col :span="6">
           <div class="other">
-            <div class="latest-post">
+            <div>
               <el-divider content-position="left">最新文章</el-divider>
-              <el-row v-for="post in latestPost" :key="post.id">
+              <el-row v-for="post in latestPost" :key="post.id" :gutter="20">
                 <el-col :span="10">
-                  <el-image :src="handlerUrl(post.thumbnail)" style="width: 100%;height: 70px;" fit="cover"></el-image>
+                  <el-image :src="handlerUrl(post.thumbnail)" style="width: 100%;height: 70px;" fit="cover"  @click="toPost(post.id)"></el-image>
                 </el-col>
                 <el-col :span="14">
                   <p style="padding: 0;margin: 0;" v-text="post.title"></p>
@@ -70,22 +73,24 @@
               </el-row>
               <el-divider content-position="left">最新分类</el-divider>
               <ul style="display: flex">
-                <li v-for="c in categoryData" :key="c.id"><a class="cate-box" href="#" v-text="c.name"/></li>
+                <li @click="toCate(c.id)" v-for="c in categoryData" :key="c.id"><a class="cate-box" href="#" v-text="c.name"/></li>
               </ul>
               <el-divider content-position="left">最新标签</el-divider>
               <ul style="display: flex">
-                <li v-for="t in tagData" :key="t.id"><a class="cate-box" href="#" v-text="t.name"/></li>
+                <li @click="gotoTag(t.id)" v-for="t in tagData" :key="t.id"><a class="cate-box" href="#" v-text="t.name"/></li>
               </ul>
             </div>
           </div>
         </el-col>
       </el-row>
     </div>
-    <el-backtop></el-backtop>
+    <el-backtop/>
+    <FrontFooter/>
   </div>
 </template>
 
 <script>
+import FrontFooter from '../../components/FrontFooter'
 import FrontTopNav from '../../components/FrontTopNav'
 import moment from 'moment'
 
@@ -99,6 +104,7 @@ export default {
         postId: '',
         content: '',
         userId: '',
+        commentUserId: '',
         parentId: 0
       },
       postObj: '',
@@ -110,15 +116,18 @@ export default {
       userData: JSON.parse(localStorage.getItem('user'))
     }
   },
-  components: { FrontTopNav },
+  components: { FrontTopNav, FrontFooter },
   methods: {
     getPost () {
       this.$axios.get('/post/' + this.post.postId).then(value => {
+        console.info(value.data.data.userDTO)
+        this.post.userId = value.data.data.userDTO.id
         this.postObj = value.data.data
         this.loading = false
       })
     },
     getComment: function () {
+      console.info('userDTO' + this.postObj)
       this.$axios.get('/comments', {
         params: {
           pageIndex: this.post.pageIndex,
@@ -126,7 +135,8 @@ export default {
           postId: this.post.postId,
           parentId: this.post.parentId,
           content: this.post.content,
-          userId: this.userData.id
+          commentUserId: this.userData.id,
+          userId: this.post.userId
         }
       }).then(value => {
         console.info(value.data)
@@ -147,12 +157,19 @@ export default {
       }).catch(_ => {
       })
     },
+    toPost (id) {
+      this.loading = true
+      localStorage.setItem('userPostId', id)
+      this.post.postId = id
+      this.getPost()
+    },
     commentSubmit () {
       var commentParam = {
         postId: this.post.postId,
         parentId: this.post.parentId,
         content: this.post.content,
-        userId: this.userData.id
+        commentUserId: this.userData.id,
+        userId: this.post.userId
       }
       this.$axios.post('/comments', commentParam).then(_ => {
         if (_.data.code === 200) {
@@ -169,6 +186,23 @@ export default {
     },
     dateFormat (d) {
       return moment(d).format('YYYY-MM-DD')
+    },
+    gotoTag (id) {
+      localStorage.setItem('tagId', id)
+      this.$router.push({ name: 'TagPage', params: { tagId: id, userId: this.userData.id } })
+    },
+    toCate (id) {
+      localStorage.setItem('cateId', id)
+      this.$router.push({ name: 'CatePage', params: { cateId: id, userId: this.userData.id } })
+    },
+    like () {
+      if (this.userData == null) {
+        this.$message.error('请登陆后再点赞！')
+        return
+      }
+      this.$axios.put('/post/' + this.postObj.id + '/likes').then(_ => {
+        this.getPost()
+      })
     }
   },
   created () {
@@ -187,14 +221,37 @@ export default {
     padding: 0;
     margin: 0;
   }
-
   .content {
-    margin: 0 auto;
     width: 750px;
     height: 100%;
-    padding: 60px;
+    margin: 80px auto;
+    padding-top: 30px;
+    position: relative;
   }
-
+  .side-bar{
+    position: fixed;
+    z-index: 100;
+    top:30%;
+    left: 26%;
+  }
+  a{
+    color: #909399;
+  }
+  .side-bar li{
+    width: 60px;
+    color: #909399;
+    height: 60px;
+    line-height: 60px;
+    background: #f4f4f4;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    text-align: center;
+    transition: all .3s linear 0s;
+  }
+  .side-bar .side-bar-li:hover{
+    color: #409EFF;
+    cursor: pointer;
+  }
   ul{
     padding-left: 0;
     list-style: none;
@@ -226,7 +283,6 @@ export default {
     padding: 2px 5px;
     color: #000;
   }
-
   .content .post >>> h1 {
     margin: 0 auto 10px;
     font-size: 24px;

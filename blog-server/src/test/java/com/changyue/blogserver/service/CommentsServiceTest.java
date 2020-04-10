@@ -1,5 +1,7 @@
 package com.changyue.blogserver.service;
 
+import com.changyue.blogserver.dao.CommentsMapper;
+import com.changyue.blogserver.model.entity.Comments;
 import com.changyue.blogserver.model.params.CommentParam;
 import com.changyue.blogserver.model.vo.CommentsVO;
 import com.changyue.blogserver.serivce.CommentsService;
@@ -9,6 +11,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.List;
 
 /**
  * @author : 袁阊越
@@ -22,6 +26,9 @@ public class CommentsServiceTest {
     @Autowired
     private CommentsService commentsService;
 
+    @Autowired
+    private CommentsMapper commentsMapper;
+
     @Test
     public void testListLatest() {
         PageInfo<CommentsVO> listLatest = commentsService.getListLatest(1, 2, null);
@@ -31,7 +38,7 @@ public class CommentsServiceTest {
     @Test
     public void testGetCommentList() {
         CommentParam commentParam = new CommentParam();
-        commentParam.setUserId(13);
+        commentParam.setCommentUserId(13);
         PageInfo<CommentsVO> commentList = commentsService.getCommentList(1, 5, commentParam);
         System.out.println(commentList.getPageNum());
         System.out.println(commentList.getTotal());
@@ -40,9 +47,12 @@ public class CommentsServiceTest {
     @Test
     public void test() {
         CommentParam commentParam = new CommentParam();
-        commentParam.setId(9L);
+        commentParam.setUserId(13);
         commentParam.setStatus(1);
-        commentsService.changeStatus(commentParam);
+        List<Comments> comments = commentsMapper.listBy(commentParam);
+        comments.forEach(System.out::println);
     }
+
+
 
 }

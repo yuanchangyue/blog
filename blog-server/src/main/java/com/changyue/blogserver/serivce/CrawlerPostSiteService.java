@@ -23,7 +23,21 @@ public interface CrawlerPostSiteService extends BaseService<CrawlerPostSite, Str
      */
     List<String> listIds();
 
-
+    /**
+     * 站点列表
+     *
+     * @param pageIndex 页索引
+     * @param pageSize  页数
+     * @param siteQuery 站点查询
+     */
     PageInfo<SiteVO> listByAll(@Nonnull Integer pageIndex, @Nonnull Integer pageSize, @Nonnull SiteQuery siteQuery);
+
+    /**
+     * 转化为视图对象
+     *
+     * @param crawlerPostSite 爬虫的站点信息
+     * @return 视图对象
+     */
+    SiteVO convertTo(CrawlerPostSite crawlerPostSite);
 
 }

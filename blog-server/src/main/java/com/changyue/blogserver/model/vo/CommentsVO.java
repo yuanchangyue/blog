@@ -16,9 +16,14 @@ public class CommentsVO {
     private Long id;
 
     /**
-     * 用户
+     * 拥有的用户
      */
     private UserDTO userDTO;
+
+    /**
+     * 评价的用户
+     */
+    private UserDTO commentDTO;
 
     /**
      * 评价内容

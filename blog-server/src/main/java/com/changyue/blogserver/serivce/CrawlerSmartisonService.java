@@ -9,10 +9,10 @@ import java.util.List;
 
 /**
  * @author : 袁阊越
- * @description :
+ * @description : smartison 业务接口层
  * @date : 2020-03-28 20:59
  */
-public interface CrawlerSmartisonService extends BaseService<CrawlerSmartisonPost,Integer> {
+public interface CrawlerSmartisonService extends BaseService<CrawlerSmartisonPost, Integer> {
 
     void saveCate(String url);
 
@@ -22,8 +22,14 @@ public interface CrawlerSmartisonService extends BaseService<CrawlerSmartisonPos
 
     String parseArticle(String url);
 
-    PageInfo<CrawlerSmartisonPost> getPostList(@Nonnull Integer pageIndex, @Nonnull Integer pageSize,@Nonnull Integer siteId);
+    PageInfo<CrawlerSmartisonPost> getPostList(@Nonnull Integer pageIndex, @Nonnull Integer pageSize, @Nonnull Integer siteId);
 
+    /**
+     * 随机生成文章 推荐
+     *
+     * @return 文章列表
+     */
     List<CrawlerSmartisonPost> randomList();
+
 
 }

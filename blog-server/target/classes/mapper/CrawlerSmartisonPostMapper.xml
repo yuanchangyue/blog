@@ -41,6 +41,14 @@
         where site_id = #{siteId}
     </select>
 
+    <select id="findOnePostBySite" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        from crawler_smartison_post
+        where site_id = #{siteId}
+        limit 1
+    </select>
+
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
         select
         <include refid="Base_Column_List"/>

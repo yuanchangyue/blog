@@ -127,6 +127,14 @@ public interface PostService extends BaseService<Post, Integer> {
     long countByStatus(Integer status);
 
     /**
+     * 增加点赞量
+     *
+     * @param likes  点赞
+     * @param postId 文章
+     */
+    void increaseLike(long likes, Integer postId);
+
+    /**
      * 通过ID查找ES文档的ID
      *
      * @param id id

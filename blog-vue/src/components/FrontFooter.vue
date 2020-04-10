@@ -1,7 +1,7 @@
 <template>
   <div class="footer">
     <el-row style="width: 60%;margin:0 auto;">
-      <el-col :span="6">
+      <el-col :span="6" >
         <h1 style=" font-family: Smudgie,serif;font-size: 40px; color: #f0f2f5">LOGO</h1>
       </el-col>
       <el-col :span="6">

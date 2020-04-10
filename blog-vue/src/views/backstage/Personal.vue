@@ -8,7 +8,8 @@
           <el-card :body-style="{ padding: '0px' }">
             <div class="personal-box">
               <el-image class="personal-bg" :src="bgImg" fit="cover" alt=""/>
-              <el-image class="personal-avatar" :size="80" :src="handlerUrl(userData.avatar)" alt="" @click="dialogVisible = true"/>
+              <el-image class="personal-avatar" v-if="userData.avatar!==null" :size="80" :src="handlerUrl(userData.avatar)" @click="dialogVisible = true"/>
+              <el-image class="personal-avatar" v-else :size="80" :src="bgImg" @click="dialogVisible = true"/>
             </div>
             <div class="personal-info">
               <span style="color: #409EFF ;font-size: 28px" v-text="userData.username"></span>

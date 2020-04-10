@@ -25,4 +25,9 @@ public class CrawlerPostController {
         return Result.create(crawlerSmartisonService.getById(crawlerPostId));
     }
 
+    @GetMapping("/randomlist")
+    public Result getRandomList() {
+        return Result.create(crawlerSmartisonService.randomList());
+    }
+
 }

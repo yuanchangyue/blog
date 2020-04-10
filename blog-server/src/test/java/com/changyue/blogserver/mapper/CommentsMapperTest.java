@@ -26,7 +26,7 @@ public class CommentsMapperTest {
     @Test
     public void test() {
         CommentParam commentParam = new CommentParam();
-        commentParam.setUserId(13);
+        commentParam.setCommentUserId(13);
         List<Comments> comments = commentsMapper.listBy(commentParam);
         comments.forEach(System.out::println);
     }

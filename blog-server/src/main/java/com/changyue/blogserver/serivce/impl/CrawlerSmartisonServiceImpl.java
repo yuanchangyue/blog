@@ -25,9 +25,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import javax.annotation.Nonnull;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author : 袁阊越
@@ -50,7 +49,7 @@ public class CrawlerSmartisonServiceImpl implements CrawlerSmartisonService {
 
     @Override
     public CrawlerSmartisonPost getById(Integer id) {
-        Assert.notNull(id,"文章的ID不能为空");
+        Assert.notNull(id, "文章的ID不能为空");
         return crawlerSmartisonPostMapper.selectByPrimaryKey(id).orElse(null);
     }
 
@@ -117,11 +116,28 @@ public class CrawlerSmartisonServiceImpl implements CrawlerSmartisonService {
         return new PageInfo<>(postBySite, 3);
     }
 
+    /**
+     * 随机拿到站点 再拿到站点文章
+     */
     @Override
     public List<CrawlerSmartisonPost> randomList() {
-        return null;
-    }
 
+        HashSet<Integer> indexs = new HashSet<>();
+
+        for (int i = 0; i < 8; i++) {
+            indexs.add(new Random().nextInt(500));
+        }
+
+        List<String> siteIds = crawlerPostSiteService.listIds();
+        List<String> randomIds = new ArrayList<>();
+
+        for (Integer index : indexs) {
+            randomIds.add(siteIds.get(index));
+        }
+
+        return randomIds.stream().map(s -> crawlerSmartisonPostMapper.findOnePostBySite(Integer.valueOf(s))).collect(Collectors.toList());
+
+    }
 
     /**
      * 解析json
@@ -224,8 +240,6 @@ public class CrawlerSmartisonServiceImpl implements CrawlerSmartisonService {
         }
         return crawlerPostSite;
     }
-
-
 
 
 }

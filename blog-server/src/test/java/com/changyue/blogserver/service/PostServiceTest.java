@@ -2,8 +2,10 @@ package com.changyue.blogserver.service;
 
 import com.changyue.blogserver.model.entity.Post;
 import com.changyue.blogserver.model.params.PostParam;
+import com.changyue.blogserver.model.params.PostQuery;
 import com.changyue.blogserver.model.vo.PostVO;
 import com.changyue.blogserver.serivce.PostService;
+import com.github.pagehelper.PageInfo;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -98,9 +100,17 @@ public class PostServiceTest {
     }
 
     @Test
-    public void test() {
+    public void testLatestPost() {
         List<PostVO> postVOS = postService.latestPost();
         postVOS.forEach(System.out::println);
+    }
+
+    @Test
+    public void testPageByQuery() {
+        PostQuery postQuery = new PostQuery();
+        postQuery.setTagId(42);
+        PageInfo<PostVO> postVOPageInfo = postService.pageByQuery(1, 5, postQuery);
+        System.out.println(postVOPageInfo);
     }
 
 }

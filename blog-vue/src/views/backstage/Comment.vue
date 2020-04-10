@@ -60,7 +60,7 @@
               show-overflow-tooltip>
             </el-table-column>
             <el-table-column
-              prop="userDTO.username"
+              prop="commentDTO.username"
               label="评价用户"
               show-overflow-tooltip>
             </el-table-column>

@@ -130,10 +130,18 @@ public class PostServiceImpl implements PostService {
             listByTagIds = tagService.getListByIds(new ArrayList<>(tagsIds));
         }
 
+        //作者的信息
+        Post post = postMapper.selectByPrimaryKey(postId).orElse(null);
+        UserDTO userDTO = null;
+        if (null != post) {
+            userDTO = userService.convertTO(userService.getByUserId(post.getUserId()));
+        }
+
         //合并
-        PostVO postVO = this.convertTO(postMapper.selectByPrimaryKey(postId).orElse(null));
+        PostVO postVO = this.convertTO(post);
         postVO.setCategories(listCategoryByIds);
         postVO.setTags(listByTagIds);
+        postVO.setUserDTO(userDTO);
 
         return postVO;
     }
@@ -319,6 +327,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    @Transactional
     public boolean updateStatus(Integer postId, Integer status) {
         Assert.notNull(postId, "post Id 不能为空");
         Assert.notNull(status, "status Id 不能为空");
@@ -331,6 +340,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    @Transactional
     public long countByStatus(Integer status) {
         return Optional.ofNullable(postMapper.countAllByStatus(status)).orElse(0L);
     }
@@ -339,6 +349,19 @@ public class PostServiceImpl implements PostService {
     public String getDocumentIdById(Integer id) {
         Assert.notNull(id, "post Id 不能为空");
         return postMapper.findDocumentIdById(id);
+    }
+
+    @Override
+    @Transactional
+    public void increaseLike(long likes, Integer postId) {
+        Assert.isTrue(likes > 0, "点赞大于1");
+        Assert.notNull(postId, "文章的id不能为空");
+
+        long affectedRows = postMapper.updateLikes(likes, postId);
+
+        if (affectedRows != 1) {
+            throw new UpdateException("新增文章的点赞量失败");
+        }
     }
 
     @Override

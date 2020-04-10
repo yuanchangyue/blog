@@ -6,6 +6,7 @@
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
         <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="comment_user_id" jdbcType="INTEGER" property="commentUserId"/>
         <result column="content" jdbcType="VARCHAR" property="content"/>
         <result column="ip_address" jdbcType="VARCHAR" property="ipAddress"/>
         <result column="is_admin" jdbcType="TINYINT" property="isAdmin"/>
@@ -16,7 +17,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id, create_time, update_time, user_id, content, ip_address, is_admin, parent_id,
+        id, create_time, update_time, user_id, comment_user_id, content, ip_address, is_admin, parent_id,
     post_id, status, top_priority
     </sql>
 
@@ -43,18 +44,18 @@
         c.create_time,
         c.update_time,
         c.user_id,
-        content,
-        ip_address,
-        is_admin,
-        parent_id,
-        post_id,
+        c.content,
+        c.comment_user_id,
+        c.ip_address,
+        c.is_admin,
+        c.parent_id,
+        c.post_id,
         c.STATUS,
-        top_priority
+        c.top_priority
         from comments c ,posts p
         <where>
-            c.user_id = p.user_id
-            and c.post_id = p.id
-            and c.user_id = #{userId,jdbcType=INTEGER}
+            c.post_id = p.id
+            and p.user_id = #{userId,jdbcType=INTEGER}
             <if test="status != null">
                 and c.status = #{status,jdbcType=INTEGER}
             </if>
@@ -97,11 +98,11 @@
         insert into comments (id, create_time, update_time,
                               user_id, content, ip_address,
                               is_admin, parent_id, post_id,
-                              status, top_priority)
+                              status, top_priority, comment_user_id)
         values (#{id,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
                 #{userId,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{ipAddress,jdbcType=VARCHAR},
                 #{isAdmin,jdbcType=TINYINT}, #{parentId,jdbcType=BIGINT}, #{postId,jdbcType=INTEGER},
-                #{status,jdbcType=INTEGER}, #{topPriority,jdbcType=INTEGER})
+                #{status,jdbcType=INTEGER}, #{topPriority,jdbcType=INTEGER}, #{commentUserId,jdbcType=INTEGER})
     </insert>
 
     <insert id="insertSelective" parameterType="comments">
@@ -118,6 +119,9 @@
             </if>
             <if test="userId != null">
                 user_id,
+            </if>
+            <if test="commentUserId != null">
+                comment_user_id,
             </if>
             <if test="content != null">
                 content,
@@ -153,6 +157,9 @@
             </if>
             <if test="userId != null">
                 #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="commentUserId != null">
+                #{commentUserId,jdbcType=INTEGER},
             </if>
             <if test="content != null">
                 #{content,jdbcType=VARCHAR},
@@ -190,6 +197,9 @@
             <if test="userId != null">
                 user_id = #{userId,jdbcType=INTEGER},
             </if>
+            <if test="commentUserId != null">
+                comment_user_id = #{commentUserId,jdbcType=INTEGER},
+            </if>
             <if test="content != null and content != ''">
                 content = #{content,jdbcType=VARCHAR},
             </if>
@@ -217,16 +227,17 @@
 
     <update id="updateByPrimaryKey" parameterType="comments">
         update comments
-        set create_time  = #{createTime,jdbcType=TIMESTAMP},
-            update_time  = #{updateTime,jdbcType=TIMESTAMP},
-            user_id      = #{userId,jdbcType=INTEGER},
-            content      = #{content,jdbcType=VARCHAR},
-            ip_address   = #{ipAddress,jdbcType=VARCHAR},
-            is_admin     = #{isAdmin,jdbcType=TINYINT},
-            parent_id    = #{parentId,jdbcType=BIGINT},
-            post_id      = #{postId,jdbcType=INTEGER},
-            status       = #{status,jdbcType=INTEGER},
-            top_priority = #{topPriority,jdbcType=INTEGER}
+        set create_time     = #{createTime,jdbcType=TIMESTAMP},
+            update_time     = #{updateTime,jdbcType=TIMESTAMP},
+            user_id         = #{userId,jdbcType=INTEGER},
+            comment_user_id = #{commentUserId,jdbcType=INTEGER},
+            content         = #{content,jdbcType=VARCHAR},
+            ip_address      = #{ipAddress,jdbcType=VARCHAR},
+            is_admin        = #{isAdmin,jdbcType=TINYINT},
+            parent_id       = #{parentId,jdbcType=BIGINT},
+            post_id         = #{postId,jdbcType=INTEGER},
+            status          = #{status,jdbcType=INTEGER},
+            top_priority    = #{topPriority,jdbcType=INTEGER}
         where id = #{id,jdbcType=BIGINT}
     </update>
 

@@ -26,6 +26,7 @@ public class PostMapperTest {
     @Test
     public void test() {
         PostQuery postQuery = new PostQuery();
+        postQuery.setTagId(51);
         List<PostVO> posts = postMapper.listAllByQuery(postQuery, 13);
         System.out.println(posts.size());
         posts.forEach(System.out::println);

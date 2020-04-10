@@ -20,4 +20,14 @@ public interface CrawlerSmartisonPostMapper extends BaseMapper<CrawlerSmartisonP
      */
     List<CrawlerSmartisonPost> findPostBySite(@Param("siteId") Integer siteId);
 
+
+    /**
+     * 拿到一篇文章
+     *
+     * @param siteId 站点id
+     * @return 文章
+     */
+    CrawlerSmartisonPost findOnePostBySite(@Param("siteId") Integer siteId);
+
+
 }

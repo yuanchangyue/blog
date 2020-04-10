@@ -84,6 +84,14 @@ const routes = [
     path: '/blog/userpost',
     name: 'UserPostPage',
     component: () => import('../views/frontdesk/UserPostPage')
+  }, {
+    path: '/blog/tag',
+    name: 'TagPage',
+    component: () => import('../views/frontdesk/TagPage')
+  }, {
+    path: '/blog/cate',
+    name: 'CatePage',
+    component: () => import('../views/frontdesk/CatePage')
   }
 ]
 

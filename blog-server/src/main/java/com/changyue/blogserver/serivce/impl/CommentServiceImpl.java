@@ -102,8 +102,10 @@ public class CommentServiceImpl implements CommentsService {
         return comments.stream().map(c -> {
             CommentsVO commentsVO = new CommentsVO();
             UserDTO userDTO = userService.convertTO(userService.getByUserId(c.getUserId()));
+            UserDTO commentUser = userService.convertTO(userService.getByUserId(c.getCommentUserId()));
             PostVO postVO = postService.getByPostId(c.getPostId());
             BeanUtils.copyProperties(c, commentsVO);
+            commentsVO.setCommentDTO(commentUser);
             commentsVO.setUserDTO(userDTO);
             commentsVO.setPostVO(postVO);
             return commentsVO;

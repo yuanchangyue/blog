@@ -32,7 +32,7 @@ public class PostController {
 
     @GetMapping
     public PageInfo<PostVO> listPost(@RequestParam(name = "pageIndex", defaultValue = "1") Integer pageIndex,
-                                     @RequestParam(name = "pageSize", defaultValue = "5") Integer pageSize) {
+                                     @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize) {
         return postService.pageBy(pageIndex, pageSize);
     }
 
@@ -91,6 +91,11 @@ public class PostController {
     public Result updateStatus(@RequestParam("postId") Integer postId, @RequestParam("status") Integer status) {
         postService.updateStatus(postId, status);
         return Result.create(ResultStatus.OPERATION_SUCCESS);
+    }
+
+    @PutMapping("{postId}/likes")
+    public void likes(@PathVariable("postId") Integer postId) {
+        postService.increaseLike(1L,postId);
     }
 
 }

@@ -205,7 +205,6 @@
         <result column="summary" jdbcType="VARCHAR" property="summary"/>
         <result column="thumbnail" jdbcType="VARCHAR" property="thumbnail"/>
         <result column="title" jdbcType="VARCHAR" property="title"/>
-        <result column="document_id" jdbcType="VARCHAR" property="documentId"/>
         <result column="url" jdbcType="VARCHAR" property="url"/>
         <result column="visits" jdbcType="BIGINT" property="visits"/>
         <result column="format_content" jdbcType="LONGVARCHAR" property="formatContent"/>
@@ -260,6 +259,9 @@
             </if>
             <if test="postQuery.status != null">
                 and p.status = #{postQuery.status,jdbcType=INTEGER}
+            </if>
+            <if test="postQuery.tagId != null">
+                and pt.tag_id = #{postQuery.tagId,jdbcType=INTEGER}
             </if>
         </where>
     </select>
@@ -466,6 +468,12 @@
             original_content = #{originalContent,jdbcType=LONGVARCHAR},
             user_id          = #{userId,jdbcType=INTEGER}
         where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateLikes">
+        update posts
+        set likes = likes + #{likes}
+        where id = #{postId,jdbcType=INTEGER}
     </update>
 
 

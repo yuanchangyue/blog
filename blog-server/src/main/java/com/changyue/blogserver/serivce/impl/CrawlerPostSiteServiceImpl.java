@@ -7,6 +7,7 @@ import com.changyue.blogserver.model.vo.SiteVO;
 import com.changyue.blogserver.serivce.CrawlerPostSiteService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -54,6 +55,13 @@ public class CrawlerPostSiteServiceImpl implements CrawlerPostSiteService {
         PageHelper.startPage(pageIndex, pageSize);
         List<SiteVO> siteVOS = crawlerPostSiteMapper.listByAll(siteQuery);
         return new PageInfo<>(siteVOS, 3);
+    }
+
+    @Override
+    public SiteVO convertTo(CrawlerPostSite crawlerPostSite) {
+        SiteVO siteVO = new SiteVO();
+        BeanUtils.copyProperties(crawlerPostSite, siteVO);
+        return siteVO;
     }
 
     @Override

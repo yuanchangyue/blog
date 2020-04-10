@@ -93,13 +93,8 @@ export default {
       }).then(successResponse => {
         this.responseResult = JSON.stringify(successResponse.data)
         console.log(this.responseResult)
-        if (successResponse.data.status === 200) {
-          this.$message({
-            message: this.form.name + '注册成功',
-            type: 'success'
-          })
-          this.$router.replace({ path: '/login' })
-        }
+        this.$notify.success('注册成功！')
+        this.$router.replace({ path: '/login' })
       }).catch(() => {})
     }
   }

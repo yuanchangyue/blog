@@ -104,7 +104,6 @@ public class CrawlerHtmlParsePipeline extends AbstractHtmlParsePipeline<CrawlerP
                 crawlerPostAdditionalService.modifyAdditional(additionalByUrl);
             }
         }
-
         log.info("反向爬虫,更新附加信息完成，url：[{}],handelType:[{}],用时:[{}]", parseItem.getUrl(), parseItem.getHandelType(), System.currentTimeMillis() - currentTimeMillis);
     }
 

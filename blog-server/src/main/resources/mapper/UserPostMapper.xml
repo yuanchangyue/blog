@@ -12,20 +12,20 @@
     </sql>
 
     <select id="findOneBySelective" parameterType="userPost" resultMap="BaseResultMap">
-      select
-      <include refid="Base_Column_List"/>
-      from user_post
-      <where>
-        <if test="userId != null">
-          and user_id =  #{userId,jdbcType=INTEGER}
-        </if>
-        <if test="postId != null">
-          and post_id = #{postId,jdbcType=INTEGER}
-        </if>
-        <if test="crawlerPostId != null">
-          and crawler_post_id = #{crawlerPostId,jdbcType=INTEGER}
-        </if>
-      </where>
+        select
+        <include refid="Base_Column_List"/>
+        from user_post
+        <where>
+            <if test="userId != null">
+                and user_id = #{userId,jdbcType=INTEGER}
+            </if>
+            <if test="postId != null">
+                and post_id = #{postId,jdbcType=INTEGER}
+            </if>
+            <if test="crawlerPostId != null">
+                and crawler_post_id = #{crawlerPostId,jdbcType=INTEGER}
+            </if>
+        </where>
     </select>
 
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -34,17 +34,27 @@
         from user_post
         where id = #{id,jdbcType=INTEGER}
     </select>
+
+    <select id="listByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user_post
+        where user_id = #{userId,jdbcType=INTEGER}
+    </select>
+
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
         delete
         from user_post
         where id = #{id,jdbcType=INTEGER}
     </delete>
+
     <insert id="insert" parameterType="userPost">
         insert into user_post (id, user_id, post_id,
                                crawler_post_id)
         values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{postId,jdbcType=INTEGER},
                 #{crawlerPostId,jdbcType=INTEGER})
     </insert>
+
     <insert id="insertSelective" parameterType="userPost" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         insert into user_post
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -76,6 +86,7 @@
             </if>
         </trim>
     </insert>
+
     <update id="updateByPrimaryKeySelective" parameterType="userPost">
         update user_post
         <set>
@@ -91,6 +102,7 @@
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
+
     <update id="updateByPrimaryKey" parameterType="userPost">
         update user_post
         set user_id         = #{userId,jdbcType=INTEGER},

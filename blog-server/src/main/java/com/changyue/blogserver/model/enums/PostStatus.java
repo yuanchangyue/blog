@@ -5,7 +5,8 @@ package com.changyue.blogserver.model.enums;
  * @description : 文章状态
  * @date : 2020-02-03 13:21
  */
-public enum PostStatus {
+public enum
+PostStatus {
 
     /**
      * 发布状态

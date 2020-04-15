@@ -2,21 +2,25 @@
   <div class="blog-all" style="width: 100%;background: #ffffff;">
     <FrontTopNav></FrontTopNav>
     <div class="content">
-      <ul class="side-bar">
-        <li class="side-bar-li" @click="like">
-          <font-awesome-icon :icon="['fa','heart']"></font-awesome-icon>&nbsp;
-          <span>{{postObj.likes}}</span>
-        </li>
-        <li class="side-bar-li">
-          <font-awesome-icon :icon="['fa','bookmark']"/>
-        </li>
-        <li class="side-bar-li">
-          <a href="#comment-box"><font-awesome-icon :icon="['fa','comment']"></font-awesome-icon></a>
-        </li>
-      </ul>
       <el-row class="content-box"  :gutter="40" v-loading="loading">
         <el-col :span="18">
-          <div class="post" v-html="postObj.formatContent"></div>
+          <div class="post-box">
+            <ul class="side-bar">
+              <li class="side-bar-li" @click="like">
+                <font-awesome-icon :icon="['fa','heart']"></font-awesome-icon>&nbsp;
+                <span>{{postObj.likes}}</span>
+              </li>
+              <li :class="collectionStatus?checkStatus:normalStatus">
+                <font-awesome-icon style="cursor: pointer" @click="collect" :icon="['fa','bookmark']"/>
+              </li>
+              <li class="side-bar-li">
+                <a href="#comment-box">
+                  <font-awesome-icon :icon="['fa','comment']"></font-awesome-icon>
+                </a>
+              </li>
+            </ul>
+            <div class="post" v-html="postObj.formatContent"></div>
+          </div>
           <el-divider content-position="left" id="comment-box">结束了</el-divider>
           <div class="comment-box">
             <h4 style="text-align: center">全部评论</h4>
@@ -113,7 +117,14 @@ export default {
       latestPost: [],
       comment: [],
       loading: true,
-      userData: JSON.parse(localStorage.getItem('user'))
+      userData: JSON.parse(localStorage.getItem('user')),
+      collection: {
+        userId: '',
+        postId: ''
+      },
+      collectionStatus: false,
+      normalStatus: 'side-bar-li',
+      checkStatus: 'side-bar-li-hover'
     }
   },
   components: { FrontTopNav, FrontFooter },
@@ -125,6 +136,7 @@ export default {
         this.postObj = value.data.data
         this.loading = false
       })
+      this.check()
     },
     getComment: function () {
       console.info('userDTO' + this.postObj)
@@ -161,7 +173,7 @@ export default {
       this.loading = true
       localStorage.setItem('userPostId', id)
       this.post.postId = id
-      this.getPost()
+      window.location.reload()
     },
     commentSubmit () {
       var commentParam = {
@@ -203,6 +215,36 @@ export default {
       this.$axios.put('/post/' + this.postObj.id + '/likes').then(_ => {
         this.getPost()
       })
+    },
+    check () {
+      this.collection.userId = this.userData.id
+      this.collection.postId = this.post.postId
+      this.$axios.post('/collection/check', this.collection).then(_ => {
+        console.info(_.data.data)
+        this.collectionStatus = _.data.data
+      })
+    },
+    collect () {
+      console.info(this.userData)
+      if (this.userData == null) {
+        this.$message.error('登陆后才可以收藏该文章')
+        return
+      }
+      if (this.collectionStatus) {
+        this.$axios.delete('/collection/' + this.userData.id + '/' + this.post.postId).then(_ => {
+          this.$notify.success(_.data.data)
+          this.check()
+        })
+      } else {
+        this.collection.userId = this.userData.id
+        this.collection.postId = this.post.postId
+        this.$axios.post('/collection', this.collection).then(_ => {
+          console.info(_.data.data.id)
+          this.userPostId = _.data.data.id
+          this.$notify.success('收藏成功')
+          this.check()
+        })
+      }
     }
   },
   created () {
@@ -226,27 +268,46 @@ export default {
     height: 100%;
     margin: 80px auto;
     padding-top: 30px;
+  }
+  .content-box{
+    max-width: 750px;
+  }
+  .post-box{
     position: relative;
   }
   .side-bar{
+    text-align: center;
     position: fixed;
-    z-index: 100;
-    top:30%;
-    left: 26%;
+    top: 10%;
+    left: 400px;
+    -webkit-transform: translateY(30%);
+    transform: translateY(30%);
+    z-index: 90;
   }
   a{
     color: #909399;
   }
-  .side-bar li{
+  .side-bar .side-bar-li {
     width: 60px;
     color: #909399;
     height: 60px;
     line-height: 60px;
-    background: #f4f4f4;
+    background: #e1e1e1;
     border-radius: 50%;
     margin-bottom: 10px;
     text-align: center;
-    transition: all .3s linear 0s;
+    transition: all .3s linear 0s ;
+  }
+  .side-bar .side-bar-li-hover {
+    width: 60px;
+    color: #409EFF;
+    height: 60px;
+    line-height: 60px;
+    background: #e1e1e1;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    text-align: center;
+    transition: all .3s linear 0s ;
   }
   .side-bar .side-bar-li:hover{
     color: #409EFF;

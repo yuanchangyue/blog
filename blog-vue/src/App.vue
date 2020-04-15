@@ -5,7 +5,6 @@
 </template>
 
 <script>
-
 export default {
   name: 'App'
 }
@@ -16,4 +15,5 @@ export default {
     padding: 0;
     margin: 0;
   }
+  html, body { scroll-behavior:smooth; }
 </style>

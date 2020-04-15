@@ -29,6 +29,6 @@ public interface UserSiteService extends BaseService<UserSite, Integer> {
      * @param userId 用户ID
      * @return 订阅列表
      */
-    PageInfo<SubscriptionVO> subscribeList(@Nonnull Integer pageIndex, @Nonnull Integer pageSize,@Nonnull Integer userId);
+    PageInfo<SubscriptionVO> pageBy(@Nonnull Integer pageIndex, @Nonnull Integer pageSize, @Nonnull Integer userId);
 
 }

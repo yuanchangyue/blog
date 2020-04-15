@@ -59,7 +59,7 @@ public class UserSiteServiceImpl implements UserSiteService {
     }
 
     @Override
-    public PageInfo<SubscriptionVO> subscribeList(@Nonnull Integer pageIndex, @Nonnull Integer pageSize, Integer userId) {
+    public PageInfo<SubscriptionVO> pageBy(@Nonnull Integer pageIndex, @Nonnull Integer pageSize, Integer userId) {
 
         Assert.notNull(pageIndex, "页索引不能为空");
         Assert.notNull(pageSize, "页数不能为空");

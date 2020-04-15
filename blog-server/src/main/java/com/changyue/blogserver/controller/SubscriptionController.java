@@ -34,7 +34,7 @@ public class SubscriptionController {
     public Result listBy(@RequestParam(name = "pageIndex", defaultValue = "1") Integer pageIndex,
                          @RequestParam(name = "pageSize", defaultValue = "8") Integer pageSize,
                          @PathVariable(name = "userId") Integer userId) {
-        return Result.create(userSiteService.subscribeList(pageIndex, pageSize, userId));
+        return Result.create(userSiteService.pageBy(pageIndex, pageSize, userId));
     }
 
 }

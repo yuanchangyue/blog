@@ -14,14 +14,37 @@ import java.util.List;
  */
 public interface CrawlerSmartisonService extends BaseService<CrawlerSmartisonPost, Integer> {
 
+    /**
+     * 保存分类
+     */
     void saveCate(String url);
 
+    /**
+     * 保存站点
+     */
     void saveSite(String url);
 
+    /**
+     * 保存文章
+     */
     void saveArticle(String url);
 
+    /**
+     * 解析文章
+     *
+     * @param url 地址
+     * @return 文章Str
+     */
     String parseArticle(String url);
 
+    /**
+     * 通过站点查询文章
+     *
+     * @param pageIndex 页索引
+     * @param pageSize  页数
+     * @param siteId    站点ID
+     * @return 分页文章列表
+     */
     PageInfo<CrawlerSmartisonPost> getPostList(@Nonnull Integer pageIndex, @Nonnull Integer pageSize, @Nonnull Integer siteId);
 
     /**
@@ -31,5 +54,12 @@ public interface CrawlerSmartisonService extends BaseService<CrawlerSmartisonPos
      */
     List<CrawlerSmartisonPost> randomList();
 
+    /**
+     * 获得简单的文章（不包含文章内容）
+     *
+     * @param id id
+     * @return 文章
+     */
+    CrawlerSmartisonPost getSimplyPost(Integer id);
 
 }

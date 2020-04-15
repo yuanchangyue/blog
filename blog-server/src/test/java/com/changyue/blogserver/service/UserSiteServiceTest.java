@@ -24,7 +24,7 @@ public class UserSiteServiceTest {
 
     @Test
     public void test() {
-        PageInfo<SubscriptionVO> subscriptionVOPageInfo = userSiteService.subscribeList(1, 10, 13);
+        PageInfo<SubscriptionVO> subscriptionVOPageInfo = userSiteService.pageBy(1, 10, 13);
         System.out.println(subscriptionVOPageInfo.getList());
     }
 

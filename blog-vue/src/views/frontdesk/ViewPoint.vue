@@ -39,22 +39,23 @@
       </el-pagination>
       </el-card>
       <el-divider content-position="left">推荐文章</el-divider>
-      <el-card style="margin: 20px 0;">
       <el-row :gutter="20">
+            <el-card style="margin: 20px 0;" >
         <transition-group appear>
           <el-col :span="6" class="post-item" v-for="p in randomList" :key="p.id">
-            <el-col v-show="p.headpic!==''&&p.headpic!==null">
-              <el-image  :src="p.headpic" style="height: 120px;width: 100%;" fit="cover"></el-image>
-            </el-col>
-            <el-col>
-              <el-tooltip class="item" effect="dark" :content="p.title" placement="top">
-              <p class="post-title" style="font-size: 14px;" @click="toPage(p.id)" v-text="p.title"></p>
-              </el-tooltip>
-            </el-col>
+              <el-col v-show="p.headpic!==''&&p.headpic!==null" >
+                <el-image :src="p.headpic" style="height: 120px;width: 100%;" fit="cover"></el-image>
+              </el-col>
+              <el-col>
+                <el-tooltip class="item" effect="dark" :content="p.title" placement="top">
+                  <p class="post-title" style="font-size: 14px;" @click="toPage(p.id)" v-text="p.title"></p>
+                </el-tooltip>
+                <span class="post-site" v-text="'来自：' + p.siteName"></span>
+              </el-col>
           </el-col>
         </transition-group>
+            </el-card>
       </el-row>
-      </el-card>
     </div>
     <FrontFooter/>
   </div>
@@ -184,10 +185,20 @@ export default {
     color: #409EFF;
     cursor: pointer;
   }
-  .post-item {
+  .post-title {
     transition: all .3s linear 0s;
     overflow: hidden;
     text-overflow:ellipsis;
     white-space: nowrap;
+    margin: 5px 0;
+  }
+  .post-site {
+    display: block;
+    font-size: 12px;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    padding-bottom: 10px;
+    color: #8e8787;
   }
 </style>

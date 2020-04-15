@@ -4,10 +4,7 @@ import com.changyue.blogserver.model.entity.UserPost;
 import com.changyue.blogserver.model.rep.Result;
 import com.changyue.blogserver.serivce.UserPostService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author : 袁阊越
@@ -21,10 +18,16 @@ public class CollectionController {
     @Autowired
     private UserPostService userPostService;
 
+    @GetMapping("/list")
+    public Result pageBy(@RequestParam(name = "pageIndex", defaultValue = "1") Integer pageIndex,
+                         @RequestParam(name = "pageSize", defaultValue = "8") Integer pageSize,
+                         @RequestParam(name = "userId") Integer userId) {
+        return Result.create(userPostService.pageBy(pageIndex, pageSize, userId));
+    }
+
     @PostMapping
     public Result createBy(@RequestBody UserPost userPost) {
-        userPostService.create(userPost);
-        return Result.create("收藏成功！");
+        return Result.create(userPostService.create(userPost));
     }
 
     @PostMapping("/check")
@@ -32,5 +35,13 @@ public class CollectionController {
         return Result.create(userPostService.isExist(userPost));
     }
 
+    @DeleteMapping("/{userId}/{postId}")
+    public Result delete(@PathVariable("userId") Integer userId, @PathVariable("postId") Integer postId) {
+        UserPost userPost = new UserPost();
+        userPost.setUserId(userId);
+        userPost.setCrawlerPostId(postId);
+        userPostService.remove(userPost);
+        return Result.create("取消收藏！");
+    }
 
 }

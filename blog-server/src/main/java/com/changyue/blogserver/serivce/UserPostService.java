@@ -1,7 +1,9 @@
 package com.changyue.blogserver.serivce;
 
 import com.changyue.blogserver.model.entity.UserPost;
+import com.changyue.blogserver.model.vo.CollectionVO;
 import com.changyue.blogserver.serivce.base.BaseService;
+import com.github.pagehelper.PageInfo;
 
 /**
  * @author : 袁阊越
@@ -18,5 +20,23 @@ public interface UserPostService extends BaseService<UserPost, Integer> {
      * @return 是否存在
      */
     boolean isExist(UserPost userPost);
+
+    /**
+     * 查找用户和文章之间的关系
+     *
+     * @param userPost 条件
+     * @return 收藏信息
+     */
+    UserPost getByUserPost(UserPost userPost);
+
+    /**
+     * 获取收藏的文章
+     *
+     * @param pageIndex 页索引
+     * @param pageSize  页数
+     * @param userId    用户ID
+     * @return 分页收藏信息
+     */
+    PageInfo<CollectionVO> pageBy(Integer pageIndex, Integer pageSize, Integer userId);
 
 }

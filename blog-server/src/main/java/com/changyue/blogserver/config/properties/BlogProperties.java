@@ -30,5 +30,4 @@ public class BlogProperties {
 
     public static final int ES_TAG_POST = 0;
 
-
 }

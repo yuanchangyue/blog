@@ -46,7 +46,6 @@ public class CrawlerSmartisonServiceImpl implements CrawlerSmartisonService {
     @Autowired
     private CrawlerSmartisonPostMapper crawlerSmartisonPostMapper;
 
-
     @Override
     public CrawlerSmartisonPost getById(Integer id) {
         Assert.notNull(id, "文章的ID不能为空");
@@ -137,6 +136,11 @@ public class CrawlerSmartisonServiceImpl implements CrawlerSmartisonService {
 
         return randomIds.stream().map(s -> crawlerSmartisonPostMapper.findOnePostBySite(Integer.valueOf(s))).collect(Collectors.toList());
 
+    }
+
+    @Override
+    public CrawlerSmartisonPost getSimplyPost(Integer id) {
+        return crawlerSmartisonPostMapper.findSimplyById(id);
     }
 
     /**

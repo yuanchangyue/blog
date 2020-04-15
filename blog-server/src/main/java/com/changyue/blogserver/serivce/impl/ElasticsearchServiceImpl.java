@@ -64,7 +64,6 @@ public class ElasticsearchServiceImpl implements ElasticsearchService {
 
     @Override
     public Result searchArticle(@Nonnull FullTextQuery fullTextQuery) {
-
         Search search = new Search.Builder(EsQueryUtils.createQuery(fullTextQuery))
                 .addIndex(BlogProperties.ES_INDEX)
                 .addType(BlogProperties.ES_TYPE).build();

@@ -1,11 +1,13 @@
 package com.changyue.blogserver.controller;
 
-import com.changyue.blogserver.model.rep.Result;
 import com.changyue.blogserver.model.entity.Post;
 import com.changyue.blogserver.model.enums.ResultStatus;
+import com.changyue.blogserver.model.params.FullTextQuery;
 import com.changyue.blogserver.model.params.PostParam;
 import com.changyue.blogserver.model.params.PostQuery;
+import com.changyue.blogserver.model.rep.Result;
 import com.changyue.blogserver.model.vo.PostVO;
+import com.changyue.blogserver.serivce.ElasticsearchService;
 import com.changyue.blogserver.serivce.PostService;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
@@ -29,6 +31,9 @@ public class PostController {
 
     @Autowired
     private PostService postService;
+
+    @Autowired
+    private ElasticsearchService elasticsearchService;
 
     @GetMapping
     public PageInfo<PostVO> listPost(@RequestParam(name = "pageIndex", defaultValue = "1") Integer pageIndex,
@@ -62,7 +67,6 @@ public class PostController {
         return Result.create(postService.latestPost());
     }
 
-
     @DeleteMapping
     public Result deletePost(@RequestParam(name = "multipleDelete") Integer[] multipleDelete) {
 
@@ -95,7 +99,14 @@ public class PostController {
 
     @PutMapping("{postId}/likes")
     public void likes(@PathVariable("postId") Integer postId) {
-        postService.increaseLike(1L,postId);
+        postService.increaseLike(1L, postId);
+    }
+
+    @GetMapping("/fulltext/{query}")
+    public Result fullTextQuery(@PathVariable("query") String query) {
+        FullTextQuery fullTextQuery = new FullTextQuery();
+        fullTextQuery.setOriginalContent(query);
+        return Result.create(elasticsearchService.searchArticle(fullTextQuery));
     }
 
 }

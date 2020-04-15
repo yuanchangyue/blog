@@ -1,9 +1,12 @@
 <template>
-  <div class="blog-all" style="width: 100%;background: #ffffff;">
-    <FrontTopNav></FrontTopNav>
-    <div class="banner">
-      <el-image style="width: 100%;height: 100%;" fit="cover" :src="defaultBg"></el-image>
-    </div>
+  <div class="blog-all" id="blog-all" style="width: 100%;background: #ffffff;">
+    <header-bar/>
+    <section class="banner">
+      <div class="banner-box">
+        <p class="banner-title">记录生活</p>
+        <button class="explore-btn" @click="toContent">探索</button>
+      </div>
+    </section>
     <div class="content">
       <el-row :gutter="30" v-loading="loading">
         <el-col :span="16" v-if="postData==null||postData.length<=0" style="text-align: center;vertical-align: middle">
@@ -18,7 +21,7 @@
                 <el-image v-if="p.thumbnail!==''" style="width: 100%;height: 200px" fit="cover"
                           :src="handlerUrl(p.thumbnail)"></el-image>
                 <el-image v-else style="width: 100%;height: 200px" fit="cover" :src="defaultBg"/>
-                <h2 v-text="p.title"></h2>
+                <h2 style="margin: 0;" v-text="p.title"></h2>
                 <summary v-text="p.summary"></summary>
                 <summary v-text="subStringToContent(p.originalContent)"></summary>
                 <a href="#" class="more-btn" @click="toPost(p.id)">更多</a>
@@ -48,7 +51,7 @@
         </el-col>
       </el-row>
       <el-divider content-position="left">最新文章</el-divider>
-      <el-row style="margin-bottom: 50px;" v-loading="loading">
+      <el-row style="margin-bottom: 60px;" v-loading="loading">
           <el-col :span="8" style="min-width: 300px" v-for="post in latestPost" :key="post.id">
             <el-col :span="9">
               <el-avatar shape="square" :src="handlerUrl(post.thumbnail)" style="width: 100px;height: 100px;"></el-avatar>
@@ -64,7 +67,7 @@
           </el-col>
       </el-row>
       <el-divider content-position="left">订阅站点</el-divider>
-      <el-row style="margin-bottom: 20px;" v-loading="loading">
+      <el-row style="margin-bottom: 60px;" v-loading="loading">
           <el-col :span="6" v-for="s in subscriptionData" :key="s.id">
             <el-col :span="10">
               <el-avatar  :src="s.site.pic" style="width: 80px;height: 80px;"></el-avatar>
@@ -75,6 +78,35 @@
             </el-col>
           </el-col>
       </el-row>
+      <el-divider content-position="left">收藏的文章</el-divider>
+      <el-row style="margin-bottom: 60px;" v-loading="loading" :gutter="20">
+        <el-col :span="6" class="post-item" v-for="p in collectionData" :key="p.id">
+          <div v-if="p.crawlerPost!=null">
+            <el-col v-show="p.crawlerPost.headpic!==''&&p.crawlerPost.headpic!==null">
+              <el-image :src="p.crawlerPost.headpic" style="height: 120px;width: 100%;" fit="cover"></el-image>
+            </el-col>
+            <el-col>
+              <el-tooltip class="item" effect="dark" :content="p.crawlerPost.title" placement="top">
+                <p class="post-title" style="font-size: 14px;" @click="toPage(p.crawlerPost.id)"
+                   v-text="p.crawlerPost.title"></p>
+              </el-tooltip>
+              <span class="post-site" v-text="'来自：' + p.crawlerPost.siteName"></span>
+            </el-col>
+          </div>
+          <div v-if="p.post!=null">
+            <el-col v-show="p.post.thumbnail!==''&&p.post.thumbnail!==null">
+              <el-image :src="handlerUrl(p.post.thumbnail)" style="height: 120px;width: 100%;" fit="cover"></el-image>
+            </el-col>
+            <el-col>
+              <el-tooltip class="item" effect="dark" :content="p.post.title" placement="top">
+                <p class="post-title" style="font-size: 14px;"  @click="toPost(p.post.id)"
+                   v-text="p.post.title"></p>
+              </el-tooltip>
+              <span class="post-site" v-text="'来自：' + p.post.userDTO.username"></span>
+            </el-col>
+          </div>
+        </el-col>
+      </el-row>
     </div>
     <el-backtop></el-backtop>
     <FrontFooter/>
@@ -82,12 +114,12 @@
 </template>
 
 <script>
-import FrontTopNav from '../../components/FrontTopNav'
+import HeaderBar from '../../components/HeaderBar'
 import FrontFooter from '../../components/FrontFooter'
 import moment from 'moment'
 export default {
   name: 'Index',
-  components: { FrontTopNav, FrontFooter },
+  components: { HeaderBar, FrontFooter },
   data () {
     return {
       form: {
@@ -100,6 +132,7 @@ export default {
       postData: [],
       latestPost: [],
       subscriptionData: [],
+      collectionData: [],
       pageTotal: 0,
       currentPage: 0,
       pageSize: 0,
@@ -148,18 +181,26 @@ export default {
     dateFormat (d) {
       return moment(d).format('YYYY-MM-DD h:mm:ss a')
     },
+    getCollectionList () {
+      this.loading = true
+      this.$axios.get('/collection/list?userId=' + this.userData.id).then(value => {
+        console.info(value.data)
+        this.collectionData = value.data.data.list
+        this.loading = false
+      })
+    },
     getSubscription () {
+      this.loading = true
       this.$axios.get('/subscription/' + this.userData.id).then(_ => {
         this.subscriptionData = _.data.data.list
+        this.loading = false
       })
-      console.info(this.subscriptionData)
     },
     toPost (id) {
       localStorage.setItem('userPostId', id)
       this.$router.push({ name: 'UserPostPage', params: { postId: id } })
     },
     moreSite (id) {
-      console.info(id)
       localStorage.setItem('siteId', id)
       this.$router.push({ name: 'SitePage', params: { siteId: id } })
     },
@@ -176,6 +217,13 @@ export default {
     toCate (id) {
       localStorage.setItem('cateId', id)
       this.$router.push({ name: 'CatePage', params: { cateId: id, userId: this.userData.id } })
+    },
+    toPage (id) {
+      this.$router.push({ name: 'PostPage', params: { postId: id } })
+    },
+    toContent () {
+      console.info('scroll')
+      window.scrollBy(0, 1000)
     }
   },
   created () {
@@ -184,7 +232,7 @@ export default {
     this.showCategory()
     this.getLatestPostList()
     this.getSubscription()
-    localStorage.setItem('isFlag', true)
+    this.getCollectionList()
   }
 }
 </script>
@@ -195,8 +243,32 @@ export default {
     margin: 0;
   }
   .banner {
-    height: 50vh;
     position: relative;
+    width: 100%;
+    height: 100vh;
+    background: url('../../assets/login-bg.jpg');
+    background-size: cover;
+  }
+  .banner-box{
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    text-align: center;
+  }
+  .banner-title{
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 50px;
+  }
+  .explore-btn{
+    border: none;
+    background: #ffffff;
+    padding: 10px 30px;
+    border-radius: 20px;
+    font-size: 16px;
+    font-weight: 500;
+    outline: none;
   }
   .content{
     margin: 30px auto;
@@ -240,5 +312,28 @@ export default {
     text-align: center;
     padding: 2px 5px;
     color: #000;
+  }
+  .post-title:hover{
+    color: #409EFF;
+    cursor: pointer;
+  }
+  .post-title {
+    transition: all .3s linear 0s;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    margin: 5px 0;
+  }
+  .post-site {
+    display: block;
+    font-size: 12px;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    padding-bottom: 10px;
+    color: #8e8787;
+  }
+  .post-item{
+    margin-bottom: 10px;
   }
 </style>

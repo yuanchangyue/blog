@@ -4,10 +4,15 @@
     <div class="content">
       <ul class="side-bar">
         <li :class="collectionStatus?checkStatus:normalStatus">
-          <font-awesome-icon @click="collect" :icon="['fa','bookmark']"></font-awesome-icon>
+          <font-awesome-icon style="cursor: pointer" @click="collect" :icon="['fa','bookmark']"></font-awesome-icon>
         </li>
       </ul>
       <div class="post" v-html="postObj.content"></div>
+      <div class="post-end" style="text-align: center">
+        <el-divider/>
+        <p class="end-text">本文章来自爬虫,重新排版处理.</p>
+        <el-link :href="postObj.url">查看原文</el-link>
+      </div>
     </div>
     <FrontFooter/>
     <el-backtop></el-backtop>
@@ -45,26 +50,33 @@ export default {
       })
     },
     check () {
-      console.info('this.post.id' + this.post.id)
-      console.info('this.userData.id' + this.userData.id)
-      this.subscript.userId = this.userData.id
-      this.subscript.crawlerPostId = this.post.id
+      this.collection.userId = this.userData.id
+      this.collection.crawlerPostId = this.post.id
       this.$axios.post('/collection/check', this.collection).then(_ => {
         console.info(_.data.data)
         this.collectionStatus = _.data.data
       })
     },
     collect () {
+      console.info(this.userData)
       if (this.userData == null) {
         this.$message.error('登陆后才可以收藏该文章')
         return
       }
-      this.collection.userId = this.userData.id
-      this.collection.crawlerPostId = this.post.id
-      this.$axios.post('/collection', this.collection).then(_ => {
-        this.$notify.success(_.data.data)
-        this.check()
-      })
+      if (this.collectionStatus) {
+        this.$axios.delete('/collection/' + this.userData.id + '/' + this.post.id).then(_ => {
+          this.$notify.success(_.data.data)
+          this.check()
+        })
+      } else {
+        this.collection.userId = this.userData.id
+        this.collection.crawlerPostId = this.post.id
+        this.$axios.post('/collection', this.collection).then(_ => {
+          console.info(_.data.data.id)
+          this.$notify.success('收藏成功')
+          this.check()
+        })
+      }
     }
   },
   created () {
@@ -87,7 +99,7 @@ export default {
   }
   .side-bar {
     position: fixed;
-    left: 450px;
+    left: 300px;
     top: 400px;
     list-style: none;
   }
@@ -122,11 +134,17 @@ export default {
     line-height: 29px;
     margin-top: 20px;
   }
-
   .content .post >>> img {
     margin: 8px 0 8px 0;
     max-width: 100%;
     width: 100%;
     vertical-align: middle;
+  }
+  .end-text{
+    font-size: 12px;
+    line-height: 22px;
+    text-align: center;
+    color: #655e5e;
+    margin-top: 40px;
   }
 </style>

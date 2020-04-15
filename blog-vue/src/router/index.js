@@ -92,6 +92,10 @@ const routes = [
     path: '/blog/cate',
     name: 'CatePage',
     component: () => import('../views/frontdesk/CatePage')
+  }, {
+    path: '/blog/query',
+    name: 'QueryPage',
+    component: () => import('../views/frontdesk/QueryPage')
   }
 ]
 

@@ -52,7 +52,7 @@ public class CrawlerSiteController {
 
     @GetMapping
     public Result getPostBySite(@RequestParam(name = "pageIndex", defaultValue = "1") Integer pageIndex,
-                                @RequestParam(name = "pageSize", defaultValue = "5") Integer pageSize,
+                                @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize,
                                 @RequestParam(name = "siteId") Integer siteId) {
         return Result.create(crawlerSmartisonService.getPostList(pageIndex,pageSize,siteId));
     }

@@ -1,60 +1,46 @@
 <template>
   <div class="blog-all" style="width: 100%;background: #ffffff;">
-    <FrontTopNav/>
-    <el-carousel class="carousel-view" :interval="6000" type="card" height="340px">
-      <el-carousel-item v-for="item in img" :key="item.img">
-        <el-image :src="item.img" fit="scale-down"></el-image>
-      </el-carousel-item>
-    </el-carousel>
-    <div class="content">
-      <el-divider content-position="left">推荐站点</el-divider>
-      <el-card>
-      <el-tabs v-model="activeName" @tab-click="handleClick">
-        <el-tab-pane :name="c.cateId" :label="c.cateName" v-for="c in cate" :key="c.cateId">
-          <el-row :gutter="10" align="center">
-            <transition-group appear>
-              <el-col :span="6" v-for="site in siteData" align="center" :key="site.id" style="margin: 20px 0;">
-                <el-badge :value="site.articleNum">
-                  <el-image style="width: 120px;height: 120px;" :src="site.pic"></el-image>
-                </el-badge>
-                <p style="font-size: 12px;color: #909399">[{{c.cateName}}]</p>
-                <h3 style="" v-text="site.name"></h3>
-                <p style="color: #909399;font-size: 14px" v-text="site.brief"></p>
-                <span class="more-btn" @click="moreSite(site.id)">更多</span>
-              </el-col>
-            </transition-group>
-          </el-row>
-        </el-tab-pane>
-      </el-tabs>
-      <el-pagination
-        style="margin: 50px 0 0 0;"
-        background
-        @current-change="handleCurrentChange"
-        @size-change="handleSizeChange"
-        layout="total, sizes,prev, pager, next"
-        :page-sizes="[8,16,24]"
-        :current-page.sync="currentPage"
-        :page-size="pageSize"
-        :total="pageTotal">
-      </el-pagination>
-      </el-card>
-      <el-divider content-position="left">推荐文章</el-divider>
-      <el-row :gutter="20">
-            <el-card style="margin: 20px 0;" >
-        <transition-group appear>
-          <el-col :span="6" class="post-item" v-for="p in randomList" :key="p.id">
-              <el-col v-show="p.headpic!==''&&p.headpic!==null" >
-                <el-image :src="p.headpic" style="height: 120px;width: 100%;" fit="cover"></el-image>
-              </el-col>
-              <el-col>
-                <el-tooltip class="item" effect="dark" :content="p.title" placement="top">
-                  <p class="post-title" style="font-size: 14px;" @click="toPage(p.id)" v-text="p.title"></p>
-                </el-tooltip>
+    <header-bar title="奇文共欣赏，疑义相与析" btn="探索" :banner="true" bg="about.jpg"/>
+    <div class="content" id="content">
+      <el-row type="flex" justify="space-between" :gutter="80">
+        <el-col :md="18">
+          <el-tabs class="tab-box" v-model="activeName" @tab-click="handleClick">
+            <el-tab-pane :name="c.cateId" :label="c.cateName" v-for="c in cate" :key="c.cateId">
+              <el-row :gutter="20">
+                <el-col data-aos="fade-up" :data-aos-delay="index*100" class="site-box" :xs="24" :sm="12" :md="8"
+                        :lg="6" v-for="(site,index) in siteData" :key="site.id">
+                  <el-image class="show-img" style="width: 200px;height: 150px;" fit="cover" :src="site.pic"></el-image>
+                  <h3 class="site-name" @click="moreSite(site.id)" v-text="site.name"></h3>
+                  <p class="site-brief" v-text="site.brief"></p>
+                  <p style="font-size: 12px;color: #909399">[{{c.cateName}}]</p>
+                </el-col>
+              </el-row>
+            </el-tab-pane>
+          </el-tabs>
+          <el-pagination
+            @current-change="handleCurrentChange"
+            @size-change="handleSizeChange"
+            layout="total, sizes,prev, pager, next"
+            :page-sizes="[8,16,24]"
+            :current-page.sync="currentPage"
+            :page-size="pageSize"
+            :total="pageTotal">
+          </el-pagination>
+        </el-col>
+        <el-col :md="6">
+          <el-row :gutter="20" style="margin-top: 5px;">
+            <el-divider content-position="center">推荐文章</el-divider>
+            <section data-aos="zoom-in-up" :data-aos-delay="index*100" class="post-item"
+                     v-show="p.headpic!==''&&p.headpic!==null" v-for="(p,index) in randomList" :key="p.id">
+              <el-image class="post-img" :src="p.headpic" fit="cover"></el-image>
+              <p class="post-title" @click="toPage(p.id)" v-text="p.title"></p>
+              <div class="post-info">
                 <span class="post-site" v-text="'来自：' + p.siteName"></span>
-              </el-col>
-          </el-col>
-        </transition-group>
-            </el-card>
+              </div>
+            </section>
+            <el-divider content-position="center">没有了~</el-divider>
+          </el-row>
+        </el-col>
       </el-row>
     </div>
     <FrontFooter/>
@@ -62,13 +48,13 @@
 </template>
 
 <script>
-import FrontTopNav from '../../components/FrontTopNav'
+import HeaderBar from '../../components/HeaderBar'
 import FrontFooter from '../../components/FrontFooter'
 import moment from 'moment'
 
 export default {
   name: 'Index',
-  components: { FrontTopNav, FrontFooter },
+  components: { HeaderBar, FrontFooter },
   data () {
     return {
       activeName: '10',
@@ -80,10 +66,6 @@ export default {
         { cateName: '科学', cateId: '43' },
         { cateName: '商业', cateId: '34' },
         { cateName: '非虚构', cateId: '44' }],
-      img: [ { img: 'http://image.s-reader.com/setting/rss/d8b796f69090873a41cc248bd6d49e3c.png' },
-        { img: 'http://image.s-reader.com/setting/rss/7b1f3e6b48cca71fe8af933979e57ff4.png' },
-        { img: 'http://image.s-reader.com/setting/rss/26b3e2fdb45f189312de5f1bdbdbea1b.png' },
-        { img: 'http://image.s-reader.com/setting/rss/44a632495c1a4a5df3d6f38a8674edcd.png' } ],
       siteData: [],
       query: {
         keyWords: '',
@@ -151,54 +133,108 @@ export default {
 </script>
 
 <style scoped>
-  body{
-    padding: 0;
-    margin: 0;
+  .site-name,.site-brief{
+    transition: all .3s linear 0s;
   }
-  .carousel-view{
-    padding-top: 30px;
-    margin: 80px 0 0 auto;
+  .site-box{
+    position: relative;
+    margin: 10px 0;
+  }
+  .site-brief {
+    color: #909399;
+    font-size: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .site-name{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .site-name:hover{
+    color: #409EFF;
+    cursor: pointer;
   }
   .content{
     margin: 10px auto;
     width: 60%;
     height: 100%;
   }
-  .more-btn {
-    transition: background 0.3s linear, color 0.3s linear;
-    width: 40px;
-    height: 30px;
-    font-size: 14px;
-    padding: 5px 20px;
-    border: 1px solid #409EFF;
-    color: #222222;
-    cursor: pointer;
-  }
-  .more-btn:hover{
-    background: #409EFF;
-    color: #ffffff;
-  }
   h3,h5{
     margin:10px 3px;
+  }
+  .post-item{
   }
   .post-title:hover{
     color: #409EFF;
     cursor: pointer;
   }
+  .post-item{
+    position: relative;
+  }
+  .post-img{
+    width: 250px;
+    height: 150px;
+    box-sizing: border-box;
+  }
+  .post-img::before{
+    position: absolute;
+    content: " ";
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.5);
+  }
   .post-title {
+    position: absolute;
+    top: 0;
+    color: #ffffff;
+    left: 10px;
+    font-size: 20px;
+    font-weight: 500;
     transition: all .3s linear 0s;
-    overflow: hidden;
-    text-overflow:ellipsis;
-    white-space: nowrap;
-    margin: 5px 0;
+    z-index: 99;
+    word-break: break-all;
+    text-overflow: ellipsis;
+    display: -webkit-box; /** 对象作为伸缩盒子模型显示 **/
+    -webkit-box-orient: vertical; /** 设置或检索伸缩盒对象的子元素的排列方式 **/
+    -webkit-line-clamp: 2; /** 显示的行数 **/
+    overflow: hidden;  /** 隐藏超出的内容 **/
+  }
+  .post-item:hover > .post-title{
+    top: 8px;
+  }
+  .post-item:hover > .post-info:before{
+    height: 50px;
+  }
+  .post-info{
+    width: 100%;
+    height: 100%;
+  }
+  .post-info:before {
+    position: absolute;
+    content: " ";
+    background: rgba(255,255,255,.3);
+    width: 100%;
+    height: 0;
+    z-index: 88;
+    left: 0;
+    bottom:  0;
+    clip-path: polygon(0 100%,100% 0,100% 100%);
+    transition: .3s linear;
   }
   .post-site {
+    position: absolute;
     display: block;
     font-size: 12px;
-    overflow: hidden;
-    text-overflow:ellipsis;
-    white-space: nowrap;
     padding-bottom: 10px;
-    color: #8e8787;
+    font-weight: bold;
+    color: #ffffff;
+    z-index: 99;
+    bottom: 0;
+    right: 10px;
+  }
+  .tab-box /deep/ .el-tabs__nav-wrap::after{
+    background-color: #ffffff !important;
   }
 </style>

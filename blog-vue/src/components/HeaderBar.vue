@@ -1,7 +1,12 @@
 <template>
-  <div>
+  <div class="nav-box">
     <header>
-      <a href="" class="logo">Blogger</a>
+      <a href="#" class="logo">BLOGGER</a>
+      <div class="toggle-collapse" @click="collapse">
+        <div class="toggle-icons">
+          <i class="el-icon-s-fold"></i>
+        </div>
+      </div>
       <ul>
         <li>
           <div class="search-box">
@@ -18,6 +23,12 @@
         <li><a href="#" @click="logout" v-if="userData!=null">退出</a></li>
       </ul>
     </header>
+    <section v-if="banner" class="banner" :style="{backgroundImage:`url(${require('../assets/'+bg)})`}">
+      <div class="banner-box">
+        <p class="banner-title" data-aos="fade-up">{{title}}</p>
+        <a class="explore-btn" data-aos="fade-up" data-aos-delay="200" href="#content">{{btn}} <i class="el-icon-bottom"></i></a>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -36,7 +47,17 @@ export default {
         localStorage.clear()
         this.$router.replace({ path: '/blog/viewpoint' })
       })
+    },
+    collapse () {
+      var header = $('header')
+      header.toggleClass('collapse')
     }
+  },
+  props: {
+    title: String,
+    btn: String,
+    banner: Boolean,
+    bg: String
   },
   mounted () {
     window.addEventListener('scroll', function () {
@@ -56,6 +77,12 @@ export default {
     font-family: 'Smudgie', serif;
   }
 
+  .nav-box{
+    background: #1a1a1a;
+    display: flex;
+    justify-content: flex-end;
+  }
+
   header {
     position: fixed;
     top: 0;
@@ -64,14 +91,18 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    transition: 0.6s;
+    transition:height 0.6s ease-in-out;
     padding: 40px 60px;
     z-index: 9999;
+    height: 0;
+    min-height: 5vh;
+    overflow: hidden;
   }
 
   header.sticky {
     padding: 5px 100px;
     background: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   }
 
   header .logo {
@@ -80,9 +111,31 @@ export default {
     color: #ffffff;
     text-decoration: none;
     font-size: 2em;
-    text-transform: uppercase;
     letter-spacing: 2px;
     transition: .6s;
+  }
+
+  header .toggle-collapse {
+    position: absolute;
+    top: 0;
+    cursor: pointer;
+    width: 90%;
+    display: none;
+  }
+
+  header .toggle-collapse .toggle-icons {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 40px;
+  }
+
+  header .toggle-collapse .toggle-icons i {
+    color: #ffffff;
+    font-size: 30px;
+  }
+
+  .collapse{
+    height: 20rem;
   }
 
   header ul {
@@ -110,9 +163,8 @@ export default {
 
   .banner {
     position: relative;
-    width: 100%;
+    width: 90%;
     height: 100vh;
-    background: url("../assets/login-bg.jpg");
     background-size: cover;
   }
 
@@ -151,5 +203,59 @@ export default {
   header ul .search-box:hover > .search-input {
     padding: 2px 5px;
     width: 120px;
+  }
+
+  .banner-box {
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    transition: .3s ease-in-out;
+  }
+
+  .banner-title {
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 50px;
+    margin-bottom: 50px;
+  }
+
+  .explore-btn:hover {
+    background: rgba(0, 0, 0, .5);
+    color: #ffffff;
+  }
+
+  .explore-btn {
+    border: none;
+    background: #ffffff;
+    padding: 10px 30px;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: 500;
+    outline: none;
+    color: #222222;
+    text-decoration: none;
+    cursor: pointer;
+    transition: .4s ease-in;
+  }
+
+  @media only screen and (max-width: 750px) {
+    header, header ul {
+      flex-direction: column;
+    }
+
+    header .toggle-collapse {
+      display: block;
+    }
+    .banner-box{
+      top: 60%;
+    }
+    header .toggle-collapse .toggle-icons i {
+      color: #000000;
+    }
+    header .toggle-collapse .toggle-icons {
+      padding-top: 10px;
+    }
   }
 </style>

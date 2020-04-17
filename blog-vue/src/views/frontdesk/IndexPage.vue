@@ -1,122 +1,117 @@
 <template>
-  <div class="blog-all" id="blog-all" style="width: 100%;background: #ffffff;">
-    <header-bar/>
-    <section class="banner">
-      <div class="banner-box">
-        <p class="banner-title">记录生活</p>
-        <button class="explore-btn" @click="toContent">探索</button>
+  <div class="blog-all" id="blog-all" style="width: 100%;background: #f4f4f4">
+    <header-bar title="记录生活" btn="开始" :banner="true" bg="work.jpg"/>
+    <div class="content" id="content">
+      <!--最新文章-->
+      <section id="last-blog" data-aos="fade-up">
+        <div class="container">
+          <h1 class="model-title">最新文章</h1>
+          <div class="owl-carousel owl-theme blog-post">
+            <article class="blog-content" v-for="post in latestPost" :key="post.id">
+              <img :src="handlerUrl(post.thumbnail)">
+              <div class="blog-title">
+                <h3 v-text="post.title"></h3>
+              </div>
+              <button class="btn btn-blog" @click="toPost(post.id)">更多</button>
+              <span class="post-user" v-text="'来自：'+post.userDTO.username"></span>
+              <span class="post-time" v-text="dateFormat(post.editTime)"></span>
+            </article>
+          </div>
+          <div class="owl-navigation">
+            <span class="owl-nav-prev"><i class="el-icon-back"/></span>
+            <span class="owl-nav-next"><i class="el-icon-right"/></span>
+          </div>
+        </div>
+      </section>
+      <!--我的文章-->
+      <section class="container">
+        <div class="site-content">
+          <div class="posts">
+            <div class="posts-content" data-aos="zoom-in" v-for="p in postData" :key="p.id">
+              <div class="post-image">
+                <div>
+                  <img v-if="p.thumbnail!==''" :src="handlerUrl(p.thumbnail)" alt="">
+                  <img v-else :src="defaultBg" alt="">
+                </div>
+              </div>
+              <div class="post-title">
+                  <a href="#" v-text="p.title"></a>
+                  <p v-text="subStringToContent(p.originalContent)"></p>
+              </div>
+              <button class="btn post-btn" @click="toPost(p.id)">更多<i class="el-icon-right"></i></button>
+              <el-divider/>
+            </div>
+            <el-pagination
+              align="center"
+              background
+              style="margin: 10px 0;"
+              @current-change="handleCurrentChange"
+              layout=" prev, pager, next"
+              :current-page.sync="currentPage"
+              :page-size="pageSize"
+              :total="pageTotal">
+            </el-pagination>
+          </div>
+          <aside class="side-bar">
+            <div class="category">
+              <h1 class="model-title">分类</h1>
+              <ul class="category-list">
+                <li class="list-items" data-aos="zoom-in-right" :data-aos-delay="index*100"
+                    v-for="(c,index) in categoryData" :key="c.id">
+                  <a href="#" v-text="c.name" @click="toCate(c.id)"></a>
+                </li>
+              </ul>
+            </div>
+            <div class="tags">
+              <h1 class="model-title">标签</h1>
+              <div class="tags-list flex-row">
+                <span class="tag" data-aos="flip-left" :data-aos-delay="index*100" @click="gotoTag(t.id)"
+                      v-for="(t,index) in tagData" :key="t.id" v-text="t.name"></span>
+              </div>
+            </div>
+            <div class="collection-post">
+              <h1 class="model-title">收藏的文章</h1>
+              <div class="posts-content" data-aos="zoom-in" v-for="p in collectionData" :key="p.id">
+                <div class="post-image">
+                  <div>
+                    <img :src="p.crawlerPost.headpic" alt="">
+                  </div>
+                  <div class="post-info flex-row">
+                    <span><i class="el-icon-user-solid">&nbsp;&nbsp;{{p.crawlerPost.siteName}}</i></span>
+                    <span><i class="el-icon-data-board">&nbsp;&nbsp;{{p.createTime}}</i></span>
+                  </div>
+                </div>
+                <div class="post-title">
+                  <a href="#" @click="toPage(p.crawlerPost.id)" v-text="p.crawlerPost.title"></a>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+      <div class="site-list">
+        <div class="container">
+          <h1 class="model-title">收藏的站点</h1>
+          <div class="sites flex-row">
+            <div class="site-img" @click="moreSite(s.site.id)" v-for="(s,index) in subscriptionData" :key="s.id">
+              <img data-aos="fade-up" :data-aos-delay="index*100" :src="s.site.pic"/>
+            </div>
+          </div>
+        </div>
       </div>
-    </section>
-    <div class="content">
-      <el-row :gutter="30" v-loading="loading">
-        <el-col :span="16" v-if="postData==null||postData.length<=0" style="text-align: center;vertical-align: middle">
-          <el-image :src="nullBg" style="width: 400px;"></el-image>
-          <p style="text-align: center">没有文章，赶快去写文章吧</p>
-        </el-col>
-        <el-col :span="16" v-else>
-          <el-divider content-position="left">我的</el-divider>
-          <el-row :gutter="20">
-            <transition-group appear>
-              <el-col :span="12" v-for="p in postData" :key="p.id" style="margin-top: 10px;">
-                <el-image v-if="p.thumbnail!==''" style="width: 100%;height: 200px" fit="cover"
-                          :src="handlerUrl(p.thumbnail)"></el-image>
-                <el-image v-else style="width: 100%;height: 200px" fit="cover" :src="defaultBg"/>
-                <h2 style="margin: 0;" v-text="p.title"></h2>
-                <summary v-text="p.summary"></summary>
-                <summary v-text="subStringToContent(p.originalContent)"></summary>
-                <a href="#" class="more-btn" @click="toPost(p.id)">更多</a>
-              </el-col>
-            </transition-group>
-          </el-row>
-          <el-pagination
-            align="center"
-            style="margin: 10px 0;"
-            @current-change="handleCurrentChange"
-            layout=" prev, pager, next"
-            :current-page.sync="currentPage"
-            :page-size="pageSize"
-            :total="pageTotal">
-          </el-pagination>
-        </el-col>
-        <el-col :span="8" align="center">
-          <h2 class="user-title" v-text="userData.username"></h2>
-          <el-avatar :src="handlerUrl(userData.avatar)" :size="80"></el-avatar>
-          <summary v-text="userData.description"></summary>
-          <h2 class="user-title">分类</h2>
-          <ul style="display: flex; align-items: center; justify-content: center">
-            <li v-for="c in categoryData" :key="c.id"><a class="cate-box" href="#" v-text="c.name" @click="toCate(c.id)"/></li>
-          </ul>
-          <h2 class="user-title">标签</h2>
-          <el-button @click="gotoTag(t.id)" v-for="t in tagData" :key="t.id" v-text="t.name" size="small" style="margin: 5px;"></el-button>
-        </el-col>
-      </el-row>
-      <el-divider content-position="left">最新文章</el-divider>
-      <el-row style="margin-bottom: 60px;" v-loading="loading">
-          <el-col :span="8" style="min-width: 300px" v-for="post in latestPost" :key="post.id">
-            <el-col :span="9">
-              <el-avatar shape="square" :src="handlerUrl(post.thumbnail)" style="width: 100px;height: 100px;"></el-avatar>
-            </el-col>
-            <el-col :span="14">
-              <p style="padding: 0;margin: 0;" v-text="post.title"></p>
-              <summary style="color: #909399;font-size: 12px;line-height: 20px"
-                       v-text="'来自：'+post.userDTO.username"></summary>
-              <summary style="color: #909399;font-size: 12px;line-height: 20px"
-                       v-text="dateFormat(post.editTime)"></summary>
-              <a href="#" style="text-decoration: none;color: #000;line-height: 40px;"  @click="toPost(post.id)">详细</a>
-            </el-col>
-          </el-col>
-      </el-row>
-      <el-divider content-position="left">订阅站点</el-divider>
-      <el-row style="margin-bottom: 60px;" v-loading="loading">
-          <el-col :span="6" v-for="s in subscriptionData" :key="s.id">
-            <el-col :span="10">
-              <el-avatar  :src="s.site.pic" style="width: 80px;height: 80px;"></el-avatar>
-            </el-col>
-            <el-col :span="14" style="align-items: center">
-              <p  @click="moreSite(s.site.id)" style="color: #303133;cursor: pointer" v-text="s.site.name"></p>
-              <summary style="font-size: 12px;color: #606266" v-text="s.site.brief"/>
-            </el-col>
-          </el-col>
-      </el-row>
-      <el-divider content-position="left">收藏的文章</el-divider>
-      <el-row style="margin-bottom: 60px;" v-loading="loading" :gutter="20">
-        <el-col :span="6" class="post-item" v-for="p in collectionData" :key="p.id">
-          <div v-if="p.crawlerPost!=null">
-            <el-col v-show="p.crawlerPost.headpic!==''&&p.crawlerPost.headpic!==null">
-              <el-image :src="p.crawlerPost.headpic" style="height: 120px;width: 100%;" fit="cover"></el-image>
-            </el-col>
-            <el-col>
-              <el-tooltip class="item" effect="dark" :content="p.crawlerPost.title" placement="top">
-                <p class="post-title" style="font-size: 14px;" @click="toPage(p.crawlerPost.id)"
-                   v-text="p.crawlerPost.title"></p>
-              </el-tooltip>
-              <span class="post-site" v-text="'来自：' + p.crawlerPost.siteName"></span>
-            </el-col>
-          </div>
-          <div v-if="p.post!=null">
-            <el-col v-show="p.post.thumbnail!==''&&p.post.thumbnail!==null">
-              <el-image :src="handlerUrl(p.post.thumbnail)" style="height: 120px;width: 100%;" fit="cover"></el-image>
-            </el-col>
-            <el-col>
-              <el-tooltip class="item" effect="dark" :content="p.post.title" placement="top">
-                <p class="post-title" style="font-size: 14px;"  @click="toPost(p.post.id)"
-                   v-text="p.post.title"></p>
-              </el-tooltip>
-              <span class="post-site" v-text="'来自：' + p.post.userDTO.username"></span>
-            </el-col>
-          </div>
-        </el-col>
-      </el-row>
+    <FrontFooter/>
     </div>
     <el-backtop></el-backtop>
-    <FrontFooter/>
   </div>
 </template>
 
 <script>
+import '../../assets/css/owl.carousel.min.css'
+import '../../assets/css/owl.theme.default.min.css'
 import HeaderBar from '../../components/HeaderBar'
 import FrontFooter from '../../components/FrontFooter'
 import moment from 'moment'
+
 export default {
   name: 'Index',
   components: { HeaderBar, FrontFooter },
@@ -135,7 +130,7 @@ export default {
       collectionData: [],
       pageTotal: 0,
       currentPage: 0,
-      pageSize: 0,
+      pageSize: 3,
       loading: true,
       userData: JSON.parse(localStorage.getItem('user')),
       nullBg: require('../../assets/not_found.svg'),
@@ -150,6 +145,7 @@ export default {
       })
     },
     setPageValue (value) {
+      console.info(value.data.list)
       this.postData = value.data.list
       this.pageTotal = value.data.total
       this.pageSize = value.data.pageSize
@@ -164,6 +160,9 @@ export default {
     getLatestPostList () {
       this.$axios.get('/post/latest').then(value => {
         this.latestPost = value.data.data
+        this.$nextTick(function () {
+          this.initCarousel()
+        })
       })
     },
     showTagList () {
@@ -184,7 +183,6 @@ export default {
     getCollectionList () {
       this.loading = true
       this.$axios.get('/collection/list?userId=' + this.userData.id).then(value => {
-        console.info(value.data)
         this.collectionData = value.data.data.list
         this.loading = false
       })
@@ -193,6 +191,7 @@ export default {
       this.loading = true
       this.$axios.get('/subscription/' + this.userData.id).then(_ => {
         this.subscriptionData = _.data.data.list
+        console.info(this.subscriptionData)
         this.loading = false
       })
     },
@@ -208,7 +207,7 @@ export default {
       return 'http://localhost:8089/' + url
     },
     subStringToContent (str) {
-      return str.substr(0, 40)
+      return str.substr(0, 200)
     },
     gotoTag (id) {
       localStorage.setItem('tagId', id)
@@ -221,9 +220,29 @@ export default {
     toPage (id) {
       this.$router.push({ name: 'PostPage', params: { postId: id } })
     },
-    toContent () {
-      console.info('scroll')
-      window.scrollBy(0, 1000)
+    initCarousel () {
+      $('.owl-carousel').owlCarousel({
+        loop: true,
+        autoplay: true,
+        autoplayTimeout: 5000,
+        nav: true,
+        dots: false,
+        navText: [$('.owl-navigation .owl-nav-prev'), $('.owl-navigation .owl-nav-next')],
+        responsive: {
+          0: {
+            items: 1
+          },
+          320: {
+            items: 1
+          },
+          560: {
+            items: 2
+          },
+          960: {
+            items: 3
+          }
+        }
+      })
     }
   },
   created () {
@@ -238,102 +257,250 @@ export default {
 </script>
 
 <style scoped>
-  body{
-    padding: 0;
-    margin: 0;
+  h1.model-title {
+    margin: 0 20px;
+    padding: 10px 0;
   }
-  .banner {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    background: url('../../assets/login-bg.jpg');
-    background-size: cover;
-  }
-  .banner-box{
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    text-align: center;
-  }
-  .banner-title{
-    color: #ffffff;
-    font-weight: 700;
-    font-size: 50px;
-  }
-  .explore-btn{
-    border: none;
-    background: #ffffff;
-    padding: 10px 30px;
-    border-radius: 20px;
-    font-size: 16px;
-    font-weight: 500;
-    outline: none;
-  }
-  .content{
-    margin: 30px auto;
-    width: 60%;
-    height: 100%;
-  }
-  ul{
+
+  ul {
     list-style: none;
   }
-  .user-title {
-    height: 50px;
-    width: 140px;
-    line-height: 50px;
-    border-bottom: 1px solid #222222;
-    border-top: 1px solid #222222;
-  }
-  .more-btn{
-    margin-top: 10px;
-    display: block;
-    text-align: center;
-    width: 100px;
-    height: 40px;
-    color: #222222;
-    line-height: 40px;
+
+  a {
     text-decoration: none;
-    border: 1px solid #e1e1e1;
-    transition: all .2s linear 0s;
   }
-  .more-btn:hover {
-    background: #409EFF;
-    border:1px solid #409EFF;
-    color: #f0f2f5;
+
+  .flex-row {
+    display: flex;
+    flex-wrap: wrap;
   }
-  .cate-box{
-    cursor: pointer;
-    transition: .2s ease;
-    display: block;
-    background: #f4f4f4;
-    margin: 3px;
-    text-decoration: none;
+
+  /*--------主要内容 start ----------*/
+  .site-content {
+    position: relative;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 70% 30%;
+  }
+
+  .site-content .posts-content > .post-image, .post-title {
+    padding: 1rem 2rem;
+    position: relative;
+  }
+
+  .site-content .posts-content > .post-image .post-info span {
+    margin: 0 .5rem;
+  }
+
+  .site-content .posts-content > .post-image .post-info {
+    position: absolute;
+    bottom: 0;
+    left: 5vw;
+    background: #292C30;
+    padding: 1rem;
+    border-radius: 3rem;
+    color: black;
+    font-weight: 700;
+  }
+
+  .site-content .posts-content > .post-image > div {
+    overflow: hidden;
+  }
+
+  .site-content .posts-content > .post-image img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    transition: 0.6s linear;
+  }
+
+  .site-content .posts-content > .post-image img:hover {
+    transform: scale(1.3);
+  }
+
+  .site-content .posts-content .post-title a {
+    color: #303133;
+    font-size: 1.6rem;
+    font-weight: bold;
+  }
+
+  .site-content .posts-content .post-btn {
+    background: #292C30;
+    border-radius: 0;
+    padding: .7rem 1.5rem;
+    width: 10rem;
+    color: #e1e1e1;
+    font-size: 16px;
+    font-weight: 700;
+    margin-left: 2rem;
+  }
+
+  /*--------主要内容 end ----------*/
+
+  /*--------侧边栏 start---------*/
+
+  .site-content > .side-bar .category-list .list-items {
+    background: #292C30;
+    padding: 1rem 1rem;
+    margin: .8rem;
+    border-radius: 3rem;
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .site-content > .side-bar .category-list .list-items a {
+    color: #ffffff;
+    font-weight: 700;
+  }
+
+  .site-content > .side-bar .collection-post .posts-content {
+    padding: 1rem 0;
+  }
+
+  .site-content > .side-bar .collection-post h2 {
+    padding-top: 2rem;
+  }
+
+  .site-content > .side-bar .collection-post .post-info {
+    padding: .4rem .1rem !important;
+    bottom: 0 !important;
+    left: 1.5rem !important;
+    border-radius: 0 !important;
+    background: #fff !important;
+  }
+
+  .site-content > .side-bar .collection-post .post-title a {
+    font-size: 1rem;
+  }
+
+  .site-content > .side-bar .collection-post .posts-content img {
+    width: 100%;
+    height: auto !important;
+  }
+
+  .site-content > .side-bar .tags .tags-list {
+    padding-left: 5rem;
+  }
+
+  .site-content > .side-bar .tags .tags-list .tag {
+    background: #292C30;
+    padding: 1rem 2rem;
+    border-radius: 3rem;
+    margin: .4rem .6rem;
+    color: #ffffff;
+    font-weight: 700;
+  }
+
+  .site-content > .side-bar .tags {
+    padding: 4rem 0;
+
+  }
+
+  /*--------侧边栏 end---------*/
+
+  /*--------最新文章轮播 start---------*/
+  #last-blog {
+    height: 70vh;
+    width: 100%;
+  }
+
+  #last-blog .blog-post {
+    padding-top: 1rem;
     text-align: center;
-    padding: 2px 5px;
-    color: #000;
   }
-  .post-title:hover{
-    color: #409EFF;
-    cursor: pointer;
+
+  #last-blog .blog-post .blog-content .post-user,
+  #last-blog .blog-post .blog-content .post-time {
+    padding: 0 0 2rem 0;
+    font-size: 14px;
+    color: #606266;
   }
-  .post-title {
-    transition: all .3s linear 0s;
-    overflow: hidden;
-    text-overflow:ellipsis;
-    white-space: nowrap;
-    margin: 5px 0;
+
+  #last-blog .blog-post .blog-content {
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 80%;
+    margin: 3rem 2rem;
+    box-shadow: 0 15px 20px rgba(0, 0, 0, .2);
   }
-  .post-site {
-    display: block;
-    font-size: 12px;
-    overflow: hidden;
-    text-overflow:ellipsis;
-    white-space: nowrap;
-    padding-bottom: 10px;
-    color: #8e8787;
+
+  #last-blog .blog-post .blog-content img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
   }
-  .post-item{
+
+  #last-blog .blog-content .blog-title {
+    padding: 2rem 0;
+  }
+
+  .btn-blog {
+    background: #292C30;
+    color: #ffffff;
+    width: 10rem;
+    border-radius: 20px;
+    margin: 0 auto 5px;
+  }
+
+  .owl-nav-prev,
+  .owl-nav-next {
+    font-size: 2rem;
+    background: #333333;
+  }
+
+  .owl-nav-prev i,
+  .owl-nav-next i {
+    outline: none;
+  }
+
+  /*--------最新文章轮播 end---------*/
+
+  /*-------- 站点列表 start ------*/
+  .site-list {
     margin-bottom: 10px;
   }
+
+  .site-list .sites {
+    display: flex;
+    justify-content: center;
+  }
+
+  .site-list .sites .site-img img {
+    width: 100%;
+    height: auto;
+  }
+
+  .site-list .sites .site-img {
+    position: relative;
+    overflow: hidden;
+    width: 10rem;
+    height: 10rem;
+    border-radius: 50%;
+    margin: 1rem 2rem;
+    transition: .3s linear;
+    cursor: pointer;
+  }
+
+  /*-------- 站点列表 end ------*/
+
+  /*-------屏幕自适应 start-------*/
+  @media only screen and (max-width: 1130px) {
+    .site-content > .side-bar .collection-post .post-info {
+      display: none;
+    }
+  }
+
+  @media only screen and (max-width: 750px) {
+    .site-content {
+      grid-template-columns: 100%;
+    }
+  }
+
+  @media only screen and (max-width: 520px) {
+  }
+
+  /*-------屏幕自适应 end-------*/
 </style>

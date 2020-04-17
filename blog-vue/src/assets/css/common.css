@@ -1,10 +1,18 @@
 @font-face {
     font-family: Smudgie;
-    src: url('font/Smudgie Crayon.ttf')
+    src: url('../font/Smudgie Crayon.ttf')
 }
 
 body {
     background-color: #f0f2f5;
+}
+
+a {
+    text-decoration: none;
+}
+
+.primary-color{
+    color: #292C30;
 }
 
 .prompt-form {
@@ -38,6 +46,24 @@ body {
 }
 .v-leave-active {
     position: absolute;
+}
+.show-img{
+    transition: .3s linear;
+}
+.show-img:hover:before {
+    background: rgba(0,0,0,.2);
+}
+.show-img:hover{
+    transform: scale(1.1);
+}
+.show-img:before{
+    position: absolute;
+    content: " ";
+    width: 100%;
+    height: 100%;
+    z-index: 99;
+    cursor: pointer;
+    transition: .3s linear;
 }
 
 @media only screen and (max-width: 768px) {

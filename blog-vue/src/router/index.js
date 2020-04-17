@@ -96,6 +96,10 @@ const routes = [
     path: '/blog/query',
     name: 'QueryPage',
     component: () => import('../views/frontdesk/QueryPage')
+  }, {
+    path: '/blog/postlist',
+    name: 'SitePostList',
+    component: () => import('../views/frontdesk/SitePostList')
   }
 ]
 

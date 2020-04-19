@@ -23,12 +23,6 @@
         <li><a href="#" @click="logout" v-if="userData!=null">退出</a></li>
       </ul>
     </header>
-    <section v-if="banner" class="banner" :style="{backgroundImage:`url(${require('../assets/'+bg)})`}">
-      <div class="banner-box">
-        <p class="banner-title" data-aos="fade-up">{{title}}</p>
-        <a class="explore-btn" data-aos="fade-up" data-aos-delay="200" href="#content">{{btn}} <i class="el-icon-bottom"></i></a>
-      </div>
-    </section>
   </div>
 </template>
 
@@ -53,12 +47,6 @@ export default {
       header.toggleClass('collapse')
     }
   },
-  props: {
-    title: String,
-    btn: String,
-    banner: Boolean,
-    bg: String
-  },
   mounted () {
     window.addEventListener('scroll', function () {
       var scrollTop = document.documentElement.scrollTop || document.body.scrollTop
@@ -77,7 +65,7 @@ export default {
     font-family: 'Smudgie', serif;
   }
 
-  .nav-box{
+  .nav-box {
     background: #1a1a1a;
     display: flex;
     justify-content: flex-end;
@@ -91,16 +79,16 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    transition:height 0.6s ease-in-out;
+    transition: all 0.6s ease-in-out;
     padding: 40px 60px;
-    z-index: 9999;
+    z-index: 9;
     height: 0;
-    min-height: 5vh;
+    min-height: 10vh;
     overflow: hidden;
   }
 
   header.sticky {
-    padding: 5px 100px;
+    padding: 2rem 100px;
     background: #ffffff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   }
@@ -108,7 +96,7 @@ export default {
   header .logo {
     position: relative;
     font-weight: 700;
-    color: #ffffff;
+    color: #000000;
     text-decoration: none;
     font-size: 2em;
     letter-spacing: 2px;
@@ -134,7 +122,7 @@ export default {
     font-size: 30px;
   }
 
-  .collapse{
+  .collapse {
     height: 20rem;
   }
 
@@ -154,18 +142,11 @@ export default {
     position: relative;
     margin: 0 15px;
     text-decoration: none;
-    color: #ffffff;
+    color: #000000;
     letter-spacing: 2px;
     font-weight: 700;
     transition: .6s;
     font-size: 18px;
-  }
-
-  .banner {
-    position: relative;
-    width: 90%;
-    height: 100vh;
-    background-size: cover;
   }
 
   header.sticky .logo,
@@ -205,41 +186,6 @@ export default {
     width: 120px;
   }
 
-  .banner-box {
-    position: absolute;
-    top: 50%;
-    left: 10%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    transition: .3s ease-in-out;
-  }
-
-  .banner-title {
-    color: #ffffff;
-    font-weight: 700;
-    font-size: 50px;
-    margin-bottom: 50px;
-  }
-
-  .explore-btn:hover {
-    background: rgba(0, 0, 0, .5);
-    color: #ffffff;
-  }
-
-  .explore-btn {
-    border: none;
-    background: #ffffff;
-    padding: 10px 30px;
-    border-radius: 25px;
-    font-size: 16px;
-    font-weight: 500;
-    outline: none;
-    color: #222222;
-    text-decoration: none;
-    cursor: pointer;
-    transition: .4s ease-in;
-  }
-
   @media only screen and (max-width: 750px) {
     header, header ul {
       flex-direction: column;
@@ -248,12 +194,11 @@ export default {
     header .toggle-collapse {
       display: block;
     }
-    .banner-box{
-      top: 60%;
-    }
+
     header .toggle-collapse .toggle-icons i {
       color: #000000;
     }
+
     header .toggle-collapse .toggle-icons {
       padding-top: 10px;
     }

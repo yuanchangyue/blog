@@ -63,7 +63,7 @@ export default {
 
   footer.footer {
     height: 100%;
-    background: url('../assets/footer.jpg') center;
+    background: #000000;
   }
 
   footer.footer .container {

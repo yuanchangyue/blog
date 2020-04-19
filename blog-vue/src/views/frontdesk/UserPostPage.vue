@@ -1,9 +1,13 @@
 <template>
-  <div class="blog-all" style="width: 100%;background: #ffffff;">
-    <FrontTopNav></FrontTopNav>
-    <div class="content">
-      <el-row class="content-box"  :gutter="40" v-loading="loading">
-        <el-col :span="18">
+  <div class="blog-all" style="width: 100%;background: #f4f4f4;">
+    <header-bar/>
+    <div class="post-top">
+      <span style="color: #939598;font-weight: 700" v-text="'由' + postObj.userDTO.username + '编写'"></span>
+      <h1 v-text="postObj.title"></h1>
+    </div>
+    <div class="content" id="content">
+      <div class="container">
+        <div class="content-box">
           <div class="post-box">
             <ul class="side-bar">
               <li class="side-bar-li" @click="like">
@@ -21,51 +25,12 @@
             </ul>
             <div class="post" v-html="postObj.formatContent"></div>
           </div>
-          <el-divider content-position="left" id="comment-box">结束了</el-divider>
-          <div class="comment-box">
-            <h4 style="text-align: center">全部评论</h4>
-            <div class="write-comment-box">
-              <div class="not-login-comment" v-if="userData==null" style="display: flex;align-items: center ">
-                <font-awesome-icon :icon="['fa','user-circle']" style="font-size: 40px;margin-right: 10px;"/>
-                <span>请在<el-link type="danger">登陆</el-link>后评论</span>
-              </div>
-              <div class="login-comment" v-if="userData!=null">
-                <div>
-                  <el-avatar class="user-comment-avatar" :src="handlerUrl(userData.avatar)" :size="50"></el-avatar>
-                  <span v-text="userData.username"/>
-                </div>
-                <div class="edit-comment">
-                  <el-input class="comment-input" v-model="post.content" rows="8" type="textarea" placeholder="写下你的评论"></el-input>
-                </div>
-              </div>
-              <div style="width: 100%;text-align: right">
-              <el-button @click="commentSubmit">提交</el-button>
-              </div>
-            </div>
-            <el-card v-for="c in comment" :key="c.id" style="margin:10px 0;">
-              <div style="display: flex;align-items: center">
-                <div style="width: 100px;">
-                  <el-avatar class="user-comment-avatar" :src="handlerUrl(c.commentDTO.avatar)" :size="50"></el-avatar>
-                </div>
-                <div style="width: 100%;">
-                  <div style="display: flex;align-items: center">
-                  <h3 v-text="c.commentDTO.username" style="margin-right: 10px;"></h3>
-                  <span style="font-size: 12px" v-text="dateFormat(c.createTime)"></span>
-                  </div>
-                  <summary v-text="c.content"/>
-                </div>
-              </div>
-            </el-card>
-            <el-card style="margin: 10px 0;color: #909399;text-align: center">没有更多了</el-card>
-          </div>
-        </el-col>
-        <el-col :span="6">
           <div class="other">
-            <div>
               <el-divider content-position="left">最新文章</el-divider>
               <el-row v-for="post in latestPost" :key="post.id" :gutter="20">
                 <el-col :span="10">
-                  <el-image :src="handlerUrl(post.thumbnail)" style="width: 100%;height: 70px;" fit="cover"  @click="toPost(post.id)"></el-image>
+                  <el-image :src="handlerUrl(post.thumbnail)" style="width: 100%;height: 70px;" fit="cover"
+                            @click="toPost(post.id)"></el-image>
                 </el-col>
                 <el-col :span="14">
                   <p style="padding: 0;margin: 0;" v-text="post.title"></p>
@@ -77,16 +42,55 @@
               </el-row>
               <el-divider content-position="left">最新分类</el-divider>
               <ul style="display: flex">
-                <li @click="toCate(c.id)" v-for="c in categoryData" :key="c.id"><a class="cate-box" href="#" v-text="c.name"/></li>
+                <li @click="toCate(c.id)" v-for="c in categoryData" :key="c.id"><a class="cate-box" href="#"
+                                                                                   v-text="c.name"/></li>
               </ul>
               <el-divider content-position="left">最新标签</el-divider>
               <ul style="display: flex">
-                <li @click="gotoTag(t.id)" v-for="t in tagData" :key="t.id"><a class="cate-box" href="#" v-text="t.name"/></li>
+                <li @click="gotoTag(t.id)" v-for="t in tagData" :key="t.id"><a class="cate-box" href="#"
+                                                                               v-text="t.name"/></li>
               </ul>
-            </div>
           </div>
-        </el-col>
-      </el-row>
+        </div>
+      </div>
+    </div>
+    <div class="comment-box container">
+      <el-divider content-position="left" style="background: #f4f4f4" id="comment-box">结束了</el-divider>
+      <h4 style="text-align: center">全部评论</h4>
+      <div class="write-comment-box">
+        <div class="not-login-comment" v-if="userData==null" style="display: flex;align-items: center ">
+          <font-awesome-icon :icon="['fa','user-circle']" style="font-size: 40px;margin-right: 10px;"/>
+          <span>请在<el-link type="danger">登陆</el-link>后评论</span>
+        </div>
+        <div class="login-comment" v-if="userData!=null">
+          <div>
+            <el-avatar class="user-comment-avatar" :src="handlerUrl(userData.avatar)" :size="50"></el-avatar>
+            <span v-text="userData.username"/>
+          </div>
+          <div class="edit-comment">
+            <el-input class="comment-input" v-model="post.content" rows="8" type="textarea"
+                      placeholder="写下你的评论"></el-input>
+          </div>
+        </div>
+        <div style="width: 100%;text-align: right">
+          <el-button @click="commentSubmit">提交</el-button>
+        </div>
+      </div>
+      <el-card v-for="c in comment" :key="c.id" style="margin:10px 0;">
+        <div style="display: flex;align-items: center">
+          <div style="width: 100px;">
+            <el-avatar class="user-comment-avatar" :src="handlerUrl(c.commentDTO.avatar)" :size="50"></el-avatar>
+          </div>
+          <div style="width: 100%;">
+            <div style="display: flex;align-items: center">
+              <h3 v-text="c.commentDTO.username" style="margin-right: 10px;"></h3>
+              <span style="font-size: 12px" v-text="dateFormat(c.createTime)"></span>
+            </div>
+            <summary v-text="c.content"/>
+          </div>
+        </div>
+      </el-card>
+      <el-card style="margin: 10px 0;color: #909399;text-align: center">没有更多了</el-card>
     </div>
     <el-backtop/>
     <FrontFooter/>
@@ -95,7 +99,7 @@
 
 <script>
 import FrontFooter from '../../components/FrontFooter'
-import FrontTopNav from '../../components/FrontTopNav'
+import HeaderBar from '../../components/PostHeaderBar'
 import moment from 'moment'
 
 export default {
@@ -127,7 +131,7 @@ export default {
       checkStatus: 'side-bar-li-hover'
     }
   },
-  components: { FrontTopNav, FrontFooter },
+  components: { HeaderBar, FrontFooter },
   methods: {
     getPost () {
       this.$axios.get('/post/' + this.post.postId).then(value => {
@@ -254,28 +258,74 @@ export default {
     this.showCategory()
     this.getLatestPostList()
     this.getComment()
+  },
+  mounted: function () {
+    window.addEventListener('scroll', function () {
+      var scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+      var content = document.getElementById('content')
+      content.classList.toggle('content-toggle', scrollTop > 0)
+    })
   }
 }
 </script>
 
 <style scoped>
-  body {
-    padding: 0;
-    margin: 0;
-  }
   .content {
-    width: 750px;
+    position: relative;
+    background: #ffffff;
+    width: 60%;
     height: 100%;
-    margin: 80px auto;
-    padding-top: 30px;
+    margin: 8rem auto 10rem;
+    padding: 6rem 0;
+    transition: all .3s linear;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .5);
   }
-  .content-box{
+
+  .content-toggle {
+    width: 75%;
+  }
+
+  .content-box {
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 70% 30%;
+  }
+
+  .content-box .post-box .post{
+    max-width: 750px;
+    padding: 4rem;
+    margin: 0 auto;
+  }
+  .content-box .post-box {
+    max-width: 750px;
+    box-sizing: border-box;
+    margin-right: 2rem;
+    border-right: 1px solid #f4f4f4;
+    padding-right: 2rem;
+  }
+
+  .content-box .other {
+    overflow: hidden;
     max-width: 750px;
   }
-  .post-box{
+
+  .post-box {
     position: relative;
   }
-  .side-bar{
+
+  a {
+    color: #909399;
+  }
+
+  .post-top {
+    margin: 10rem auto 0;
+    width: 60%;
+  }
+
+  /*------ 侧边栏 ------*/
+  .side-bar {
     text-align: center;
     position: fixed;
     top: 10%;
@@ -283,10 +333,9 @@ export default {
     -webkit-transform: translateY(30%);
     transform: translateY(30%);
     z-index: 90;
+    display: none;
   }
-  a{
-    color: #909399;
-  }
+
   .side-bar .side-bar-li {
     width: 60px;
     color: #909399;
@@ -296,8 +345,9 @@ export default {
     border-radius: 50%;
     margin-bottom: 10px;
     text-align: center;
-    transition: all .3s linear 0s ;
+    transition: all .3s linear 0s;
   }
+
   .side-bar .side-bar-li-hover {
     width: 60px;
     color: #409EFF;
@@ -307,33 +357,48 @@ export default {
     border-radius: 50%;
     margin-bottom: 10px;
     text-align: center;
-    transition: all .3s linear 0s ;
+    transition: all .3s linear 0s;
   }
-  .side-bar .side-bar-li:hover{
+
+  .side-bar .side-bar-li:hover {
     color: #409EFF;
     cursor: pointer;
   }
-  ul{
+
+  /*------ 侧边栏 ------*/
+
+  /*----- 评论区 -----*/
+  .comment-box{
+    max-width: 750px;
+  }
+  /*----- 评论区 -----*/
+
+  ul {
     padding-left: 0;
     list-style: none;
   }
-  .login-comment{
+
+  .login-comment {
     display: flex;
     width: 100%;
     height: 200px;
   }
-  .edit-comment{
+
+  .edit-comment {
     width: 100%;
   }
-  .comment-input{
+
+  .comment-input {
     outline: none;
     border: none;
     width: 100%;
   }
-  .user-comment-avatar{
+
+  .user-comment-avatar {
     margin: 5px;
   }
-  .cate-box{
+
+  .cate-box {
     cursor: pointer;
     transition: .2s ease;
     display: block;
@@ -344,6 +409,7 @@ export default {
     padding: 2px 5px;
     color: #000;
   }
+
   .content .post >>> h1 {
     margin: 0 auto 10px;
     font-size: 24px;
@@ -361,12 +427,14 @@ export default {
     padding: 5px;
     margin: 0;
     font-size: 85%;
-    background-color: rgba(27,31,35,.05);
+    background-color: rgba(27, 31, 35, .05);
     border-radius: 3px;
   }
+
   .content .post >>> p strong {
     color: #222222;
   }
+
   .content .post >>> p, li {
     color: #6e6d7a;
     font-size: 16px;
@@ -422,6 +490,7 @@ export default {
     border: 1px solid #ccc;
     border-radius: 4px;
   }
+
   .content .post >>> table {
     text-align: left;
     width: 100%;
@@ -431,11 +500,54 @@ export default {
   }
 
   .content .post >>> table thead tr th,
-  .content .post >>> table tbody tr td ,
+  .content .post >>> table tbody tr td,
   .content .post >>> table tbody tr th {
     padding: 20px;
     vertical-align: top;
     border: 1px solid #e1e1e1;
   }
+
+  .el-divider__text {
+    background: #ffffff !important;
+  }
+
+  /*-------屏幕自适应 start-------*/
+  @media only screen and (max-width: 1300px) {
+    .content-box  {
+      grid-template-columns: 100%;
+    }
+    .post-top {
+      width: 85%;
+    }
+    .content {
+      width: 85%;
+    }
+    .comment-box{
+      max-width: 750px;
+    }
+    .content-box .post-box {
+      border: none;
+    }
+    .content-box .other {
+      max-width: 500px;
+    }
+  }
+
+  @media only screen and (max-width: 750px) {
+    .content {
+      width: 90%;
+    }
+    .post-top {
+      width: 90%;
+    }
+    .comment-box{
+      max-width: 400px;
+    }
+  }
+
+  @media only screen and (max-width: 520px) {
+  }
+
+  /*-------屏幕自适应 end-------*/
 
 </style>

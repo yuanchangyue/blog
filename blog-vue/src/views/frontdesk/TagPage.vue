@@ -1,6 +1,6 @@
 <template>
   <div class="blog-all" style="width: 100%;background: #ffffff;">
-    <FrontTopNav></FrontTopNav>
+    <header-bar/>
     <div class="content">
       <el-row>
         <h1 v-text="'#' + tagObj.name" style="text-align: center"></h1>
@@ -64,12 +64,12 @@
 </template>
 
 <script>
-import FrontTopNav from '../../components/FrontTopNav'
+import HeaderBar from '../../components/PostHeaderBar'
 import FrontFooter from '../../components/FrontFooter'
 import moment from 'moment'
 export default {
   name: 'TagPage',
-  components: { FrontTopNav, FrontFooter },
+  components: { HeaderBar, FrontFooter },
   data () {
     return {
       tagObj: '',
@@ -198,8 +198,8 @@ export default {
     transition: all .2s linear 0s;
   }
   .more-btn:hover {
-    background: #409EFF;
-    border:1px solid #409EFF;
+    background: #292C30;
+    border:1px solid #292C30;
     color: #f0f2f5;
   }
   .content-text{

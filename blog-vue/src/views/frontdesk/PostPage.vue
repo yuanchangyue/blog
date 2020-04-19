@@ -1,17 +1,16 @@
 <template>
-  <div class="blog-all" style="width: 100%;background: #ffffff;">
-    <FrontTopNav/>
-    <div class="content">
+  <div class="blog-all" id="blog-all" style="width: 100%;background: #f4f4f4;">
+    <header-bar/>
+    <div class="content" id="content">
       <ul class="side-bar">
         <li :class="collectionStatus?checkStatus:normalStatus">
           <font-awesome-icon style="cursor: pointer" @click="collect" :icon="['fa','bookmark']"></font-awesome-icon>
         </li>
       </ul>
       <div class="post" v-html="postObj.content"></div>
-      <div class="post-end" style="text-align: center">
+      <div class="post-end">
         <el-divider/>
-        <p class="end-text">本文章来自爬虫,重新排版处理.</p>
-        <el-link :href="postObj.url">查看原文</el-link>
+        <p class="end-text">本文章来自爬虫,重新排版处理.<el-link :href="postObj.url">查看原文</el-link></p>
       </div>
     </div>
     <FrontFooter/>
@@ -20,7 +19,7 @@
 </template>
 
 <script>
-import FrontTopNav from '../../components/FrontTopNav'
+import HeaderBar from '../../components/PostHeaderBar'
 import FrontFooter from '../../components/FrontFooter'
 
 export default {
@@ -41,7 +40,7 @@ export default {
       checkStatus: 'side-bar-li-hover'
     }
   },
-  components: { FrontTopNav, FrontFooter },
+  components: { HeaderBar, FrontFooter },
   methods: {
     getPost () {
       this.$axios.get('/crawlerpost/' + this.post.id).then(value => {
@@ -87,22 +86,31 @@ export default {
 </script>
 
 <style scoped>
-  body {
-    padding: 0;
-    margin: 0;
-  }
+
   .content {
-    margin: 80px auto;
-    width: 750px;
-    padding-top: 30px;
+    width: 60%;
     height: 100%;
+    margin: 15rem auto;
+    background: #ffffff;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .5);
+    transition: all .3s ease-in 0s;
   }
+
+  .content .post {
+    max-width: 750px;
+    padding: 4rem;
+    margin: 0 auto;
+  }
+
+  /*------ 侧边栏 ------*/
+
   .side-bar {
     position: fixed;
-    left: 300px;
+    left: 200px;
     top: 400px;
     list-style: none;
   }
+
   .side-bar .side-bar-li {
     width: 60px;
     color: #909399;
@@ -112,8 +120,9 @@ export default {
     border-radius: 50%;
     margin-bottom: 10px;
     text-align: center;
-    transition: all .3s linear 0s ;
+    transition: all .3s linear 0s;
   }
+
   .side-bar .side-bar-li-hover {
     width: 60px;
     color: #409EFF;
@@ -123,28 +132,58 @@ export default {
     border-radius: 50%;
     margin-bottom: 10px;
     text-align: center;
-    transition: all .3s linear 0s ;
+    transition: all .3s linear 0s;
   }
-  .side-bar .side-bar-li:hover{
+
+  .side-bar .side-bar-li:hover {
     color: #409EFF;
     cursor: pointer;
   }
+
+  /*------ 侧边栏 ------*/
+
+  /*------ 文章css -----*/
+
   .content .post >>> p, div, h2, h4, h5, h6 {
     color: #333;
     line-height: 29px;
-    margin-top: 20px;
   }
+
   .content .post >>> img {
     margin: 8px 0 8px 0;
     max-width: 100%;
     width: 100%;
     vertical-align: middle;
   }
-  .end-text{
-    font-size: 12px;
+
+  /*------ 文章css -----*/
+
+  /*------ 文章结尾 -----*/
+  .end-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
     line-height: 22px;
     text-align: center;
     color: #655e5e;
-    margin-top: 40px;
+    padding: 1.5rem 0 2rem 0;
+  }
+
+  /*------ 文章结尾 -----*/
+
+  @media (max-width: 1200px) {
+    .content {
+      width: 85%;
+    }
+    .side-bar {
+      display: none;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .content {
+      width: 95%;
+    }
   }
 </style>

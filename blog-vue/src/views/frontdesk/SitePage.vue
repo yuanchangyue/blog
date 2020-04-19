@@ -1,52 +1,44 @@
 <template>
-  <section class="blog-all" style="width: 100%;background: #ffffff;">
-    <header-bar title="" btn="" :banner="false"/>
-    <div class="content" id="content">
-      <div class="site-top">
-        <el-card class="site-carousel">
-          <el-carousel height="200px" :autoplay="true" v-loading="loading">
-            <el-carousel-item v-for="item in siteHeadImg" :key="item">
-              <el-image :src="item" fit="cover" style="width: 100%;"></el-image>
-            </el-carousel-item>
-          </el-carousel>
-        </el-card>
-        <el-card class="site-sub">
-          <div style="display: flex;align-items: center;justify-content: space-between">
-            <div style="display: flex;align-items: center">
-              <el-avatar :src="siteObj.pic" style="width: 40px;height: 40px;"></el-avatar>
-              <h2 style="padding: 0;margin: 5px;" v-text="siteObj.name"></h2>
-            </div>
-            <el-button type="primary" size="small" icon="el-icon-message-solid" @click="subscribeTo(siteObj.id)">
-              {{subscriptText}}
-            </el-button>
-          </div>
-          <summary v-text="siteObj.brief"></summary>
-          <p style="color: #909399;font-size: 10px;text-align: left">*来自网络爬虫内容</p>
-        </el-card>
+  <section class="blog-all" style="width: 100%;background: #f4f4f4;">
+    <header-bar/>
+    <div class="site-top" data-aos="fade-right">
+      <img :src="siteObj.pic" alt=""/>
+      <div class="site-sub">
+        <h2 v-text="siteObj.name"></h2>
+        <p v-text="siteObj.brief"></p>
+        <el-button class="btn subscript-btn" size="small" icon="el-icon-message-solid" @click="subscribeTo(siteObj.id)">
+          {{subscriptText}}
+        </el-button>
       </div>
-      <section id="blog-loading">
-        <article data-aos="zoom-in-up" class="post-panel" v-for="(p) in postList" :key="p.id">
-          <img :src="p.headpic" v-show="p.headpic!==''&&p.headpic!==null" alt="">
-          <h2>
-            <a class="post-title" @click="toPage(p.id)" v-text="p.title" href="#"></a>
-          </h2>
-          <p v-text="p.brief"></p>
-          <el-row>
-            <el-image v-if="p.prePic2!==''&&p.prePic2!==null" :src="p.prePic2"
-                      style="height: 80px;width: 80px;margin:10px;" fit="cover"></el-image>
-            <el-image v-if="p.prePic2!==''&&p.prePic2!==null" :src="p.prePic3"
-                      style="height: 80px;width: 80px;margin:10px;" fit="cover"></el-image>
-          </el-row>
-          <div style="display: flex;align-items: center;justify-content: space-between">
-            <div style="display: flex ;align-items: center;">
-              <el-avatar style="width: 20px;height: 20px;margin-right: 5px;" :src="siteObj.pic"></el-avatar>
-              <span v-text="p.siteName"></span>
+    </div>
+    <div class="content" id="content">
+      <div class="container">
+        <section id="blog-loading">
+          <article data-aos="zoom-in-up" class="post-panel" v-for="(p) in postList" :key="p.id">
+            <img :src="p.headpic" v-show="p.headpic!==''&&p.headpic!==null" alt="">
+            <h2>
+              <a class="post-title" @click="toPage(p.id)" v-text="p.title" href="#"></a>
+            </h2>
+            <p v-text="p.brief"></p>
+            <el-row>
+              <el-image v-if="p.prePic2!==''&&p.prePic2!==null" :src="p.prePic2"
+                        style="height: 80px;width: 80px;margin:10px;" fit="cover"></el-image>
+              <el-image v-if="p.prePic2!==''&&p.prePic2!==null" :src="p.prePic3"
+                        style="height: 80px;width: 80px;margin:10px;" fit="cover"></el-image>
+            </el-row>
+            <div style="display: flex;align-items: center;justify-content: space-between">
+              <div style="display: flex ;align-items: center;">
+                <el-avatar style="width: 20px;height: 20px;margin-right: 5px;" :src="siteObj.pic"></el-avatar>
+                <span v-text="p.siteName"></span>
+              </div>
+              <span v-text="dateFormat(p.createTime)"></span>
             </div>
-            <span v-text="dateFormat(p.createTime)"></span>
-          </div>
-        </article>
-      </section>
-      <i class="el-icon-download" style="cursor: pointer;font-size: 40px;margin: 50px auto;display:inline-block;width: 100%; text-align: center" @click="loadingMore"/>
+          </article>
+        </section>
+      </div>
+    </div>
+    <div class="load-btn">
+      <i class="el-icon-download" @click="loadingMore">加载更多</i>
     </div>
     <FrontFooter/>
   </section>
@@ -54,7 +46,7 @@
 
 <script>
 
-import HeaderBar from '../../components/HeaderBar'
+import HeaderBar from '../../components/PostHeaderBar'
 import FrontFooter from '../../components/FrontFooter'
 import moment from 'moment'
 
@@ -77,7 +69,8 @@ export default {
       subscript: {
         userId: '',
         siteId: ''
-      }
+      },
+      no_columns: 3
     }
   },
   methods: {
@@ -155,9 +148,9 @@ export default {
     initPostCard: function () {
       this.$nextTick(function () {
         $('#blog-loading').pinterest_grid({
-          no_columns: 3,
-          padding_x: 10,
-          padding_y: 10,
+          no_columns: this.no_columns,
+          padding_x: 30,
+          padding_y: 20,
           margin_bottom: 50,
           single_column_breakpoint: 700
         })
@@ -168,35 +161,98 @@ export default {
     this.site.id = localStorage.getItem('siteId')
     this.getPostList()
     this.getSite()
+  },
+  mounted: function () {
+    window.addEventListener('scroll', function () {
+      var scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+      var content = document.getElementById('content')
+      content.classList.toggle('content-toggle', scrollTop > 0)
+      console.info(scrollTop)
+      console.info(content)
+    })
   }
 }
 </script>
 
 <style scoped>
-  .content {
-    width: 70%;
-    margin: 0 auto;
-  }
-  #content .site-top{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 10px;
-  }
 
-  #content .site-top .site-carousel{
-    width: 890px;
-  }
-  #content .site-top .site-sub {
+  .site-top .site-sub {
     width: 400px;
-    height: 100%;
   }
 
+  .content {
+    position: relative;
+    width: 60%;
+    height: 100%;
+    margin: 5rem auto;
+    background: #ffffff;
+    padding: 2rem 0;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .5);
+    transition: all .3s ease-in 0s;
+  }
+
+  .content-toggle {
+    width: 75%;
+  }
+
+  .load-btn {
+    width: 100%;
+    height: 100%;
+    margin: 3rem 0;
+    text-align: center;
+  }
+
+  /*-------- top 站点信息 start--------*/
+
+  .site-top {
+    position: relative;
+    width: 60%;
+    margin: 10rem auto 10px;
+    display: flex;
+  }
+
+  .site-top  img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .site-top .site-sub h2{
+    padding: 0;
+    margin: 0 0 5px 0;
+  }
+  .site-top .site-sub {
+    position: relative;
+    height: 100%;
+    margin-left: 2rem;
+  }
+
+  .el-icon-download {
+    background: #292C30;
+    padding: 2rem 0;
+    cursor: pointer;
+    font-size: 20px;
+    margin: 20px auto;
+    display: inline-block;
+    width: 30%;
+    color: white;
+    text-align: center;
+  }
+
+  .subscript-btn {
+    background: #292C30;
+    color: white;
+  }
+
+  /*-------- top 站点信息 end--------*/
+
+  /*------- post 列表 start*/
   #blog-loading {
     position: relative;
+    justify-content: center;
     width: 100%;
-    margin: 0 auto;
-    height: auto;
+    max-width: 100%;
+    margin: 40px auto;
+    padding: 0;
   }
 
   #blog-loading .post-panel {
@@ -214,6 +270,7 @@ export default {
 
   #blog-loading .post-panel img {
     max-width: 100%;
+    width: 100%;
     height: auto;
   }
 
@@ -230,29 +287,19 @@ export default {
     text-indent:10px;
   }
 
-/*  @media (max-width: 1200px) {
-    #blog-loading {
-      columns: 3;
-      width: calc(100% - 50px);
-      box-sizing: border-box;
-      column-gap: 20px;
-    }
-    .content{
-      min-width: 100%;
-    }
-    .site-sub{display: none}
-    .site-carousel{
-      min-width: 100%;
-    }
+  /*------- post 列表 end*/
+  @media (max-width: 1200px) {
   }
+
   @media (max-width: 768px) {
-    #blog-loading {
-      columns: 2;
+    .content{
+      width: 95%;
+    }
+    ..site-top{
+      width: 95%;
     }
   }
+
   @media (max-width: 480px) {
-    #blog-loading {
-      columns: 1;
-    }
-  }*/
+  }
 </style>

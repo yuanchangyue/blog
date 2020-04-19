@@ -10,8 +10,8 @@
       <ul>
         <li>
           <div class="search-box">
-            <input class="search-input" type="text" placeholder="搜索一下">
-            <a href="">
+            <input class="search-input" v-model="query" type="text" placeholder="搜索一下">
+            <a href="#" @click="queryFull">
               <i class="el-icon-search"/>
             </a>
           </div>
@@ -38,7 +38,8 @@ export default {
   name: 'Header',
   data () {
     return {
-      userData: JSON.parse(localStorage.getItem('user'))
+      userData: JSON.parse(localStorage.getItem('user')),
+      query: ''
     }
   },
   methods: {
@@ -51,6 +52,11 @@ export default {
     collapse () {
       var header = $('header')
       header.toggleClass('collapse')
+    },
+    queryFull () {
+      this.$axios.get('/query/full/' + this.query).then(value => {
+        localStorage.setItem('queryItem', value.data.data)
+      })
     }
   },
   props: {
@@ -91,9 +97,9 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    transition:height 0.6s ease-in-out;
+    transition:all 0.6s ease-in-out;
     padding: 40px 60px;
-    z-index: 9999;
+    z-index: 9;
     height: 0;
     min-height: 5vh;
     overflow: hidden;

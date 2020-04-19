@@ -71,18 +71,21 @@
             </div>
             <div class="collection-post">
               <h1 class="model-title">收藏的文章</h1>
-              <div class="posts-content" data-aos="zoom-in" v-for="p in collectionData" :key="p.id">
+              <div class="posts-content" data-aos="zoom-in" :data-aos-delay="index*100" v-for="(p,index) in collectionData" :key="p.id">
                 <div class="post-image">
                   <div>
-                    <img :src="p.crawlerPost.headpic" alt="">
+                    <img v-if="p.crawlerPost!=null" :src="p.crawlerPost.headpic" alt="">
+                    <img v-else :src="handlerUrl(p.post.thumbnail)" alt="">
                   </div>
                   <div class="post-info flex-row">
-                    <span><i class="el-icon-user-solid">&nbsp;&nbsp;{{p.crawlerPost.siteName}}</i></span>
+                    <span><i class="el-icon-user-solid"
+                             v-text="p.crawlerPost!=null?p.crawlerPost.siteName:p.post.userDTO.username"></i></span>
                     <span><i class="el-icon-data-board">&nbsp;&nbsp;{{p.createTime}}</i></span>
                   </div>
                 </div>
                 <div class="post-title">
-                  <a href="#" @click="toPage(p.crawlerPost.id)" v-text="p.crawlerPost.title"></a>
+                  <a href="#" v-if="p.crawlerPost!=null" @click="toPage(p.crawlerPost.id)" v-text="p.crawlerPost.title"></a>
+                  <a href="#" v-else @click="toPost(p.post.id)" v-text="p.post.title"></a>
                 </div>
               </div>
             </div>
@@ -160,6 +163,7 @@ export default {
     getLatestPostList () {
       this.$axios.get('/post/latest').then(value => {
         this.latestPost = value.data.data
+        console.info(this.latestPost)
         this.$nextTick(function () {
           this.initCarousel()
         })
@@ -183,6 +187,7 @@ export default {
     getCollectionList () {
       this.loading = true
       this.$axios.get('/collection/list?userId=' + this.userData.id).then(value => {
+        console.info(value.data.data.list)
         this.collectionData = value.data.data.list
         this.loading = false
       })
@@ -257,6 +262,7 @@ export default {
 </script>
 
 <style scoped>
+
   h1.model-title {
     margin: 0 20px;
     padding: 10px 0;

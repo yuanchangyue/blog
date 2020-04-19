@@ -250,10 +250,12 @@ public class PostServiceImpl implements PostService {
         //赋值当前的用户ID
         post.setUserId(currentUser.getId());
 
-        //创建文档, 并为文章的赋值es Id
-        Result result = elasticsearchService.indexArticle(post, ElasticsearchStatus.CREATION);
-        DocumentResult documentResult = (DocumentResult) result.getData();
-        post.setDocumentId(documentResult.getId());
+        //创建文档, 并为文章的赋值es Id 状态为发布状态
+        if (post.getStatus() == PostStatus.PUBLISHED.getStatusCode()) {
+            Result result = elasticsearchService.indexArticle(post, ElasticsearchStatus.CREATION);
+            DocumentResult documentResult = (DocumentResult) result.getData();
+            post.setDocumentId(documentResult.getId());
+        }
 
         //插入文章到数据库
         int effectNum = postMapper.insertSelective(post);

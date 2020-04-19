@@ -2,7 +2,6 @@ package com.changyue.blogserver.controller;
 
 import com.changyue.blogserver.model.entity.Post;
 import com.changyue.blogserver.model.enums.ResultStatus;
-import com.changyue.blogserver.model.params.FullTextQuery;
 import com.changyue.blogserver.model.params.PostParam;
 import com.changyue.blogserver.model.params.PostQuery;
 import com.changyue.blogserver.model.rep.Result;
@@ -102,11 +101,5 @@ public class PostController {
         postService.increaseLike(1L, postId);
     }
 
-    @GetMapping("/fulltext/{query}")
-    public Result fullTextQuery(@PathVariable("query") String query) {
-        FullTextQuery fullTextQuery = new FullTextQuery();
-        fullTextQuery.setOriginalContent(query);
-        return Result.create(elasticsearchService.searchArticle(fullTextQuery));
-    }
 
 }

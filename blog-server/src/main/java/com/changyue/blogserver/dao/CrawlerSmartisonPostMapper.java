@@ -32,9 +32,20 @@ public interface CrawlerSmartisonPostMapper extends BaseMapper<CrawlerSmartisonP
 
     /**
      * 查找简单的文章内容
+     *
      * @param id id
      * @return 文章
      */
     CrawlerSmartisonPost findSimplyById(@Param("id") Integer id);
+
+
+    /**
+     * 查找简单的文章内容
+     *
+     * @param name name
+     * @return 文章
+     */
+    List<CrawlerSmartisonPost> findSimplyByName(@Param("name") String name);
+
 
 }

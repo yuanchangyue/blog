@@ -1,11 +1,13 @@
 package com.changyue.blogserver.serivce;
 
-import com.changyue.blogserver.model.rep.Result;
+import com.changyue.blogserver.model.elsatic.Article;
 import com.changyue.blogserver.model.entity.Post;
 import com.changyue.blogserver.model.enums.ElasticsearchStatus;
 import com.changyue.blogserver.model.params.FullTextQuery;
+import com.changyue.blogserver.model.rep.Result;
 
 import javax.annotation.Nonnull;
+import java.util.List;
 
 /**
  * @author : 袁阊越
@@ -29,7 +31,7 @@ public interface ElasticsearchService {
      * @param fullTextQuery 查询
      * @return 结果
      */
-    Result searchArticle(@Nonnull FullTextQuery fullTextQuery);
+    List<Article> searchArticle(@Nonnull FullTextQuery fullTextQuery);
 
     /**
      * 移除文章

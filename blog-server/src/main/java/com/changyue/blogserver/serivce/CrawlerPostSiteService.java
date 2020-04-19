@@ -40,4 +40,5 @@ public interface CrawlerPostSiteService extends BaseService<CrawlerPostSite, Str
      */
     SiteVO convertTo(CrawlerPostSite crawlerPostSite);
 
+
 }

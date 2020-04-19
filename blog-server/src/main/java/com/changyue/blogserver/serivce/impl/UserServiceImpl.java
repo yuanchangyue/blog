@@ -20,8 +20,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * @author : 袁阊越
@@ -76,6 +78,12 @@ public class UserServiceImpl implements UserService {
         User user = new User();
         user.setEmail(email);
         return userMapper.findOneBySelective(user);
+    }
+
+    @Override
+    public List<UserDTO> listUser(String username) {
+        List<User> listUser = userMapper.findListUser(username);
+        return listUser.stream().map(this::convertTO).collect(Collectors.toList());
     }
 
     @Override

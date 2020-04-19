@@ -26,7 +26,7 @@ public class EsQueryUtils {
             Assert.hasText(fullTextQuery.getTitle(), "查询的标题不能为空");
             return createQueryJsonByTitle(fullTextQuery.getTitle());
         } else {
-            Assert.hasText(fullTextQuery.getTitle(), "查询的内容不能为空");
+            Assert.hasText(fullTextQuery.getOriginalContent(), "查询的内容不能为空");
             return createQueryJsonByContent(fullTextQuery.getOriginalContent());
         }
     }

@@ -46,6 +46,14 @@
         where id = #{id}
     </select>
 
+    <select id="findSimplyByName" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        from crawler_smartison_post
+        where title LIKE CONCAT('%',#{name},'%')
+        limit 8
+    </select>
+
     <select id="findOnePostBySite" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
         select
         <include refid="Base_Column_List"/>

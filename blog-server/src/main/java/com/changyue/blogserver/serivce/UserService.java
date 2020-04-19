@@ -8,6 +8,7 @@ import com.changyue.blogserver.serivce.base.BaseService;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -51,6 +52,13 @@ public interface UserService extends BaseService<User, Integer> {
      */
     Optional<User> getByEmail(@NonNull String email);
 
+
+    /**
+     * 按照用户名查找用户列表
+     * @param username 用户名
+     * @return 用户列表
+     */
+    List<UserDTO> listUser(@NonNull String username);
 
     /**
      * 更新用户密码.

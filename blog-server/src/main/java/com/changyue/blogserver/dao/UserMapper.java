@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -28,6 +29,14 @@ public interface UserMapper extends BaseMapper<User> {
      * @return 影响
      */
     int updateUserAvatar(@Param("url") String url, @Param("userId") Integer userId);
+
+    /**
+     * 查找用户的列表
+     *
+     * @param username username
+     * @return 用户列表
+     */
+    List<User> findListUser(@Param("username") String username);
 
     /**
      * 查找用户

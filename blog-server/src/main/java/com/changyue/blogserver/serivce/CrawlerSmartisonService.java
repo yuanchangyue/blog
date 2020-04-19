@@ -55,11 +55,20 @@ public interface CrawlerSmartisonService extends BaseService<CrawlerSmartisonPos
     List<CrawlerSmartisonPost> randomList();
 
     /**
-     * 获得简单的文章（不包含文章内容）
+     * 通过id获得简单的文章（不包含文章内容）
      *
      * @param id id
      * @return 文章
      */
     CrawlerSmartisonPost getSimplyPost(Integer id);
+
+    /**
+     * 通过name获得简单的文章（不包含文章内容）
+     *
+     * @param postName 文章名字
+     * @return 文章
+     */
+    List<CrawlerSmartisonPost> getSimplyPost(String postName);
+
 
 }

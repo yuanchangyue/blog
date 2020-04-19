@@ -143,6 +143,12 @@ public class CrawlerSmartisonServiceImpl implements CrawlerSmartisonService {
         return crawlerSmartisonPostMapper.findSimplyById(id);
     }
 
+    @Override
+    public List<CrawlerSmartisonPost> getSimplyPost(@Nonnull String postName) {
+        Assert.hasText(postName, "文章名称不能为空");
+        return crawlerSmartisonPostMapper.findSimplyByName(postName);
+    }
+
     /**
      * 解析json
      *

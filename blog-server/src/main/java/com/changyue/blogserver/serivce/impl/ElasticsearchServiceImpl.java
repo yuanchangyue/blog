@@ -63,7 +63,7 @@ public class ElasticsearchServiceImpl implements ElasticsearchService {
     }
 
     @Override
-    public Result searchArticle(@Nonnull FullTextQuery fullTextQuery) {
+    public List<Article> searchArticle(@Nonnull FullTextQuery fullTextQuery) {
         Search search = new Search.Builder(EsQueryUtils.createQuery(fullTextQuery))
                 .addIndex(BlogProperties.ES_INDEX)
                 .addType(BlogProperties.ES_TYPE).build();
@@ -87,7 +87,7 @@ public class ElasticsearchServiceImpl implements ElasticsearchService {
         }
 
         log.info("es 文章查询成功:[{}]", articles);
-        return Result.create(ResultStatus.OPERATION_SUCCESS, articles);
+        return articles;
 
     }
 

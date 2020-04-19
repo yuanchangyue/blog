@@ -23,6 +23,17 @@
         where id = #{id,jdbcType=INTEGER}
     </select>
 
+    <select id="findListUser" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from users
+        <where>
+            <if test="username!=null and username!=''">
+                username LIKE CONCAT('%',#{username},'%')
+            </if>
+        </where>
+    </select>
+
     <select id="findUserRoleName" parameterType="java.lang.Integer">
         SELECT r.name
         from users_role ur,

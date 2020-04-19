@@ -2,36 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bd5d3fba-cd88-41d7-b10b-952045a6ce54" name="Default Changelist" comment="&quot;VUE处理跨域并添加拦截器&quot;">
-      <change afterPath="$PROJECT_DIR$/../blog-vue/src/assets/about.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../blog-vue/src/assets/break-topography-left3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../blog-vue/src/assets/break-topography-right3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../blog-vue/src/assets/css/owl.carousel.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../blog-vue/src/assets/css/owl.theme.default.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../blog-vue/src/assets/css/owl.video.play.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../blog-vue/src/assets/footer.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../blog-vue/src/assets/js/carousel.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../blog-vue/src/assets/js/owl.carousel.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../blog-vue/src/assets/js/pinterest_grid.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../blog-vue/src/assets/work.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../blog-vue/src/views/frontdesk/SitePostList.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../blog-vue/src/components/PostHeaderBar.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/controller/CrawlerSiteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/controller/CrawlerSiteController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/CrawlerSmartisonServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/CrawlerSmartisonServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/controller/CrawlerSiteController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/controller/CrawlerSiteController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/impl/CrawlerSmartisonServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/impl/CrawlerSmartisonServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../blog-vue/.eslintrc.js" beforeDir="false" afterPath="$PROJECT_DIR$/../blog-vue/.eslintrc.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../blog-vue/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../blog-vue/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../blog-vue/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../blog-vue/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../blog-vue/src/assets/common.css" beforeDir="false" afterPath="$PROJECT_DIR$/../blog-vue/src/assets/css/common.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../blog-vue/src/components/FrontFooter.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../blog-vue/src/components/FrontFooter.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../blog-vue/src/components/HeaderBar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../blog-vue/src/components/HeaderBar.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../blog-vue/src/config/axios-config.js" beforeDir="false" afterPath="$PROJECT_DIR$/../blog-vue/src/config/axios-config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../blog-vue/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/../blog-vue/src/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../blog-vue/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../blog-vue/src/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../blog-vue/src/views/frontdesk/CatePage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../blog-vue/src/views/frontdesk/CatePage.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../blog-vue/src/views/frontdesk/IndexPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../blog-vue/src/views/frontdesk/IndexPage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../blog-vue/src/views/frontdesk/PostPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../blog-vue/src/views/frontdesk/PostPage.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../blog-vue/src/views/frontdesk/SitePage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../blog-vue/src/views/frontdesk/SitePage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../blog-vue/src/views/frontdesk/ViewPoint.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../blog-vue/src/views/frontdesk/ViewPoint.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../blog-vue/vue.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/../blog-vue/vue.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../blog-vue/src/views/frontdesk/TagPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../blog-vue/src/views/frontdesk/TagPage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../blog-vue/src/views/frontdesk/UserPostPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../blog-vue/src/views/frontdesk/UserPostPage.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -550,6 +530,7 @@
       <workItem from="1586927469479" duration="4833000" />
       <workItem from="1587010175862" duration="2656000" />
       <workItem from="1587103402676" duration="2983000" />
+      <workItem from="1587193899469" duration="846000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;新增解决跨域的Filter&quot;">
       <created>1583066529300</created>
@@ -691,97 +672,97 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="118" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1582016215114" />
-    <state width="1920" height="317" key="GridCell.Tab.0.bottom" timestamp="1587103920153">
+    <state width="1920" height="590" key="GridCell.Tab.0.bottom" timestamp="1587288960387">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1366" height="258" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1582028403866" />
-    <state width="1920" height="317" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1587103920153" />
+    <state width="1920" height="590" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1587288960387" />
     <state width="1920" height="345" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.23.1920.977" timestamp="1585891462443" />
     <state width="1600" height="571" key="GridCell.Tab.0.bottom/0.23.1600.877@0.23.1600.877" timestamp="1582361155776" />
     <state width="1920" height="251" key="GridCell.Tab.0.bottom/0.23.1920.1057@0.23.1920.1057" timestamp="1582815745703" />
     <state width="1920" height="589" key="GridCell.Tab.0.bottom/0.23.1920.977@0.23.1920.977" timestamp="1586850891683" />
-    <state width="1920" height="317" key="GridCell.Tab.0.center" timestamp="1587103920152">
+    <state width="1920" height="590" key="GridCell.Tab.0.center" timestamp="1587288960368">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1366" height="258" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1582028403865" />
-    <state width="1920" height="317" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1587103920152" />
+    <state width="1920" height="590" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1587288960368" />
     <state width="1600" height="571" key="GridCell.Tab.0.center/0.23.1600.877@0.23.1600.877" timestamp="1582361155775" />
     <state width="1920" height="251" key="GridCell.Tab.0.center/0.23.1920.1057@0.23.1920.1057" timestamp="1582815745702" />
     <state width="1920" height="589" key="GridCell.Tab.0.center/0.23.1920.977@0.23.1920.977" timestamp="1586850891679" />
-    <state width="1920" height="317" key="GridCell.Tab.0.left" timestamp="1587103920151">
+    <state width="1920" height="590" key="GridCell.Tab.0.left" timestamp="1587288960354">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1366" height="258" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1582028403865" />
-    <state width="1920" height="317" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1587103920151" />
+    <state width="1920" height="590" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1587288960354" />
     <state width="1600" height="571" key="GridCell.Tab.0.left/0.23.1600.877@0.23.1600.877" timestamp="1582361155774" />
     <state width="1920" height="251" key="GridCell.Tab.0.left/0.23.1920.1057@0.23.1920.1057" timestamp="1582815745702" />
     <state width="1920" height="589" key="GridCell.Tab.0.left/0.23.1920.977@0.23.1920.977" timestamp="1586850891667" />
-    <state width="1920" height="317" key="GridCell.Tab.0.right" timestamp="1587103920153">
+    <state width="1920" height="590" key="GridCell.Tab.0.right" timestamp="1587288960386">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1366" height="258" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1582028403866" />
-    <state width="1920" height="317" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1587103920153" />
+    <state width="1920" height="590" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1587288960386" />
     <state width="1600" height="571" key="GridCell.Tab.0.right/0.23.1600.877@0.23.1600.877" timestamp="1582361155775" />
     <state width="1920" height="251" key="GridCell.Tab.0.right/0.23.1920.1057@0.23.1920.1057" timestamp="1582815745702" />
     <state width="1920" height="589" key="GridCell.Tab.0.right/0.23.1920.977@0.23.1920.977" timestamp="1586850891682" />
-    <state width="1920" height="317" key="GridCell.Tab.1.bottom" timestamp="1587043893537">
+    <state width="1920" height="590" key="GridCell.Tab.1.bottom" timestamp="1587194794320">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1366" height="258" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1582028403867" />
-    <state width="1920" height="317" key="GridCell.Tab.1.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1587043893537" />
+    <state width="1920" height="590" key="GridCell.Tab.1.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1587194794320" />
     <state width="1600" height="571" key="GridCell.Tab.1.bottom/0.23.1600.877@0.23.1600.877" timestamp="1582361155777" />
     <state width="1920" height="251" key="GridCell.Tab.1.bottom/0.23.1920.1057@0.23.1920.1057" timestamp="1582815745704" />
     <state width="1920" height="402" key="GridCell.Tab.1.bottom/0.23.1920.977@0.23.1920.977" timestamp="1586863302287" />
-    <state width="1920" height="317" key="GridCell.Tab.1.center" timestamp="1587043893537">
+    <state width="1920" height="590" key="GridCell.Tab.1.center" timestamp="1587194794319">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1366" height="258" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1582028403867" />
-    <state width="1920" height="317" key="GridCell.Tab.1.center/0.0.1920.1080@0.0.1920.1080" timestamp="1587043893537" />
+    <state width="1920" height="590" key="GridCell.Tab.1.center/0.0.1920.1080@0.0.1920.1080" timestamp="1587194794319" />
     <state width="1600" height="571" key="GridCell.Tab.1.center/0.23.1600.877@0.23.1600.877" timestamp="1582361155776" />
     <state width="1920" height="251" key="GridCell.Tab.1.center/0.23.1920.1057@0.23.1920.1057" timestamp="1582815745703" />
     <state width="1920" height="402" key="GridCell.Tab.1.center/0.23.1920.977@0.23.1920.977" timestamp="1586863302286" />
-    <state width="1920" height="317" key="GridCell.Tab.1.left" timestamp="1587043893536">
+    <state width="1920" height="590" key="GridCell.Tab.1.left" timestamp="1587194794318">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1366" height="258" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1582028403866" />
-    <state width="1920" height="317" key="GridCell.Tab.1.left/0.0.1920.1080@0.0.1920.1080" timestamp="1587043893536" />
+    <state width="1920" height="590" key="GridCell.Tab.1.left/0.0.1920.1080@0.0.1920.1080" timestamp="1587194794318" />
     <state width="1600" height="571" key="GridCell.Tab.1.left/0.23.1600.877@0.23.1600.877" timestamp="1582361155776" />
     <state width="1920" height="251" key="GridCell.Tab.1.left/0.23.1920.1057@0.23.1920.1057" timestamp="1582815745703" />
     <state width="1920" height="402" key="GridCell.Tab.1.left/0.23.1920.977@0.23.1920.977" timestamp="1586863302285" />
-    <state width="1920" height="317" key="GridCell.Tab.1.right" timestamp="1587043893537">
+    <state width="1920" height="590" key="GridCell.Tab.1.right" timestamp="1587194794319">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1366" height="258" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1582028403867" />
-    <state width="1920" height="317" key="GridCell.Tab.1.right/0.0.1920.1080@0.0.1920.1080" timestamp="1587043893537" />
+    <state width="1920" height="590" key="GridCell.Tab.1.right/0.0.1920.1080@0.0.1920.1080" timestamp="1587194794319" />
     <state width="1600" height="571" key="GridCell.Tab.1.right/0.23.1600.877@0.23.1600.877" timestamp="1582361155777" />
     <state width="1920" height="251" key="GridCell.Tab.1.right/0.23.1920.1057@0.23.1920.1057" timestamp="1582815745704" />
     <state width="1920" height="402" key="GridCell.Tab.1.right/0.23.1920.977@0.23.1920.977" timestamp="1586863302286" />
-    <state width="1920" height="317" key="GridCell.Tab.2.bottom" timestamp="1587043893539">
+    <state width="1920" height="590" key="GridCell.Tab.2.bottom" timestamp="1587194794322">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1366" height="258" key="GridCell.Tab.2.bottom/0.0.1366.728@0.0.1366.728" timestamp="1582028403869" />
-    <state width="1920" height="317" key="GridCell.Tab.2.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1587043893539" />
+    <state width="1920" height="590" key="GridCell.Tab.2.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1587194794322" />
     <state width="1920" height="251" key="GridCell.Tab.2.bottom/0.23.1920.1057@0.23.1920.1057" timestamp="1582815745705" />
     <state width="1920" height="589" key="GridCell.Tab.2.bottom/0.23.1920.977@0.23.1920.977" timestamp="1586850891515" />
-    <state width="1920" height="317" key="GridCell.Tab.2.center" timestamp="1587043893538">
+    <state width="1920" height="590" key="GridCell.Tab.2.center" timestamp="1587194794321">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1366" height="258" key="GridCell.Tab.2.center/0.0.1366.728@0.0.1366.728" timestamp="1582028403868" />
-    <state width="1920" height="317" key="GridCell.Tab.2.center/0.0.1920.1080@0.0.1920.1080" timestamp="1587043893538" />
+    <state width="1920" height="590" key="GridCell.Tab.2.center/0.0.1920.1080@0.0.1920.1080" timestamp="1587194794321" />
     <state width="1920" height="251" key="GridCell.Tab.2.center/0.23.1920.1057@0.23.1920.1057" timestamp="1582815745704" />
     <state width="1920" height="589" key="GridCell.Tab.2.center/0.23.1920.977@0.23.1920.977" timestamp="1586850891514" />
-    <state width="1920" height="317" key="GridCell.Tab.2.left" timestamp="1587043893538">
+    <state width="1920" height="590" key="GridCell.Tab.2.left" timestamp="1587194794320">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1366" height="258" key="GridCell.Tab.2.left/0.0.1366.728@0.0.1366.728" timestamp="1582028403868" />
-    <state width="1920" height="317" key="GridCell.Tab.2.left/0.0.1920.1080@0.0.1920.1080" timestamp="1587043893538" />
+    <state width="1920" height="590" key="GridCell.Tab.2.left/0.0.1920.1080@0.0.1920.1080" timestamp="1587194794320" />
     <state width="1920" height="251" key="GridCell.Tab.2.left/0.23.1920.1057@0.23.1920.1057" timestamp="1582815745704" />
     <state width="1920" height="589" key="GridCell.Tab.2.left/0.23.1920.977@0.23.1920.977" timestamp="1586850891513" />
-    <state width="1920" height="317" key="GridCell.Tab.2.right" timestamp="1587043893539">
+    <state width="1920" height="590" key="GridCell.Tab.2.right" timestamp="1587194794321">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1366" height="258" key="GridCell.Tab.2.right/0.0.1366.728@0.0.1366.728" timestamp="1582028403868" />
-    <state width="1920" height="317" key="GridCell.Tab.2.right/0.0.1920.1080@0.0.1920.1080" timestamp="1587043893539" />
+    <state width="1920" height="590" key="GridCell.Tab.2.right/0.0.1920.1080@0.0.1920.1080" timestamp="1587194794321" />
     <state width="1920" height="251" key="GridCell.Tab.2.right/0.23.1920.1057@0.23.1920.1057" timestamp="1582815745705" />
     <state width="1920" height="589" key="GridCell.Tab.2.right/0.23.1920.977@0.23.1920.977" timestamp="1586850891515" />
     <state x="917" y="158" key="Maven.ArtifactSearchDialog" timestamp="1585281486435">

@@ -34,7 +34,7 @@
                   <img v-else :src="defaultBg" alt="">
                 </div>
               </div>
-              <div class="post-title">
+              <div class="post-info">
                   <a href="#" v-text="p.title"></a>
                   <p v-text="subStringToContent(p.originalContent)"></p>
               </div>
@@ -83,7 +83,7 @@
                     <span><i class="el-icon-data-board">&nbsp;&nbsp;{{p.createTime}}</i></span>
                   </div>
                 </div>
-                <div class="post-title">
+                <div class="post-info">
                   <a href="#" v-if="p.crawlerPost!=null" @click="toPage(p.crawlerPost.id)" v-text="p.crawlerPost.title"></a>
                   <a href="#" v-else @click="toPost(p.post.id)" v-text="p.post.title"></a>
                 </div>
@@ -289,7 +289,7 @@ export default {
     grid-template-columns: 70% 30%;
   }
 
-  .site-content .posts-content > .post-image, .post-title {
+  .site-content .posts-content > .post-image, .post-info {
     padding: 1rem 2rem;
     position: relative;
   }
@@ -324,7 +324,7 @@ export default {
     transform: scale(1.3);
   }
 
-  .site-content .posts-content .post-title a {
+  .site-content .posts-content .post-info a {
     color: #303133;
     font-size: 1.6rem;
     font-weight: bold;
@@ -376,7 +376,7 @@ export default {
     background: #fff !important;
   }
 
-  .site-content > .side-bar .collection-post .post-title a {
+  .site-content > .side-bar .collection-post .post-info a {
     font-size: 1rem;
   }
 
@@ -474,12 +474,12 @@ export default {
     justify-content: center;
   }
 
-  .site-list .sites .site-img img {
+  .site-list .sites .sites img {
     width: 100%;
     height: auto;
   }
 
-  .site-list .sites .site-img {
+  .site-list .sites .sites {
     position: relative;
     overflow: hidden;
     width: 10rem;

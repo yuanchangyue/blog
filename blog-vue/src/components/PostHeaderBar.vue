@@ -11,7 +11,7 @@
         <li>
           <div class="search-box">
             <input class="search-input" type="text" placeholder="搜索一下">
-            <a href="">
+            <a href="#" @click="queryFull">
               <i class="el-icon-search"/>
             </a>
           </div>

@@ -6,9 +6,9 @@
       <el-row :gutter="30">
         <el-col :span="10" style="position: relative">
           <el-card :body-style="{ padding: '0px' }">
-            <div class="personal-box">
+            <div class="personal-box" @click="dialogVisible = true">
               <el-image class="personal-bg" :src="bgImg" fit="cover" alt=""/>
-              <el-image class="personal-avatar" v-if="userData.avatar!==null" :size="80" :src="handlerUrl(userData.avatar)" @click="dialogVisible = true"/>
+              <el-image class="personal-avatar" v-if="userData.avatar!==null" :size="80" :src="handlerUrl(userData.avatar)" />
               <el-image class="personal-avatar" v-else :size="80" :src="bgImg" @click="dialogVisible = true"/>
             </div>
             <div class="personal-info">

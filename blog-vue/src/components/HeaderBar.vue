@@ -11,7 +11,7 @@
         <li>
           <div class="search-box">
             <input class="search-input" v-model="query" type="text" placeholder="搜索一下">
-            <a href="#" @click="queryFull">
+            <a href="#" @click="queryPost">
               <i class="el-icon-search"/>
             </a>
           </div>
@@ -26,7 +26,8 @@
     <section v-if="banner" class="banner" :style="{backgroundImage:`url(${require('../assets/'+bg)})`}">
       <div class="banner-box">
         <p class="banner-title" data-aos="fade-up">{{title}}</p>
-        <a class="explore-btn" data-aos="fade-up" data-aos-delay="200" href="#content">{{btn}} <i class="el-icon-bottom"></i></a>
+        <a class="explore-btn" data-aos="fade-up" data-aos-delay="200" href="#content">{{btn}} <i
+          class="el-icon-bottom"></i></a>
       </div>
     </section>
   </div>
@@ -53,9 +54,10 @@ export default {
       var header = $('header')
       header.toggleClass('collapse')
     },
-    queryFull () {
+    queryPost () {
       this.$axios.get('/query/full/' + this.query).then(value => {
-        localStorage.setItem('queryItem', value.data.data)
+        localStorage.setItem('queryItem', JSON.stringify(value.data.data))
+        this.$router.replace({ path: '/blog/query' })
       })
     }
   },
@@ -83,7 +85,7 @@ export default {
     font-family: 'Smudgie', serif;
   }
 
-  .nav-box{
+  .nav-box {
     background: #1a1a1a;
     display: flex;
     justify-content: flex-end;
@@ -97,7 +99,7 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    transition:all 0.6s ease-in-out;
+    transition: all 0.6s ease-in-out;
     padding: 40px 60px;
     z-index: 9;
     height: 0;
@@ -140,7 +142,7 @@ export default {
     font-size: 30px;
   }
 
-  .collapse{
+  .collapse {
     height: 20rem;
   }
 
@@ -254,12 +256,15 @@ export default {
     header .toggle-collapse {
       display: block;
     }
-    .banner-box{
+
+    .banner-box {
       top: 60%;
     }
+
     header .toggle-collapse .toggle-icons i {
       color: #000000;
     }
+
     header .toggle-collapse .toggle-icons {
       padding-top: 10px;
     }

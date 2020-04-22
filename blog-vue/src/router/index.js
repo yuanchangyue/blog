@@ -61,7 +61,11 @@ const routes = [
     name: 'Personal',
     component: () => import('../views/backstage/Personal')
   }, {
-    path: '/site',
+    path: '/management/usermanage',
+    name: 'UserManage',
+    component: () => import('../views/backstage/UserManage')
+  }, {
+    path: '/management/site',
     name: 'Site',
     component: () => import('../views/backstage/Site')
   }, {

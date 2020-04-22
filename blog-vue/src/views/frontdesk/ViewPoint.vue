@@ -33,7 +33,7 @@
             <section data-aos="zoom-in-up" :data-aos-delay="index*100" class="post-item"
                      v-show="p.headpic!==''&&p.headpic!==null" v-for="(p,index) in randomList" :key="p.id">
               <el-image class="post-img" :src="p.headpic" fit="cover"></el-image>
-              <p class="post-title" @click="toPage(p.id)" v-text="p.title"></p>
+              <p class="post-info" @click="toPage(p.id)" v-text="p.title"></p>
               <div class="post-info">
                 <span class="post-site" v-text="'来自：' + p.siteName"></span>
               </div>
@@ -166,7 +166,7 @@ export default {
   }
   .post-item{
   }
-  .post-title:hover{
+  .post-info:hover{
     color: #409EFF;
     cursor: pointer;
   }
@@ -185,7 +185,7 @@ export default {
     height: 100%;
     background: rgba(0,0,0,.5);
   }
-  .post-title {
+  .post-info {
     position: absolute;
     top: 0;
     color: #ffffff;
@@ -201,7 +201,7 @@ export default {
     -webkit-line-clamp: 2; /** 显示的行数 **/
     overflow: hidden;  /** 隐藏超出的内容 **/
   }
-  .post-item:hover > .post-title{
+  .post-item:hover > .post-info{
     top: 8px;
   }
   .post-item:hover > .post-info:before{

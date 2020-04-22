@@ -81,7 +81,9 @@
         </el-table-column>
         <el-table-column
           label="操作">
-            <el-link type="primary" >查看</el-link>
+          <template slot-scope="scope">
+            <el-link type="primary" @click="moreSite(scope.row.id)">查看</el-link>
+          </template>
         </el-table-column>
       </el-table>
       <el-pagination
@@ -129,6 +131,10 @@ export default {
     }
   },
   methods: {
+    moreSite (id) {
+      localStorage.setItem('siteId', id)
+      this.$router.push({ name: 'SitePage', params: { siteId: id } })
+    },
     getlist () {
       this.$axios.post('/site', this.query).then(value => {
         if (value.data.code === 200) {

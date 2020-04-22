@@ -17,7 +17,7 @@
           <article data-aos="zoom-in-up" class="post-panel" v-for="(p) in postList" :key="p.id">
             <img :src="p.headpic" v-show="p.headpic!==''&&p.headpic!==null" alt="">
             <h2>
-              <a class="post-title" @click="toPage(p.id)" v-text="p.title" href="#"></a>
+              <a class="post-info" @click="toPage(p.id)" v-text="p.title" href="#"></a>
             </h2>
             <p v-text="p.brief"></p>
             <el-row>

@@ -1,5 +1,7 @@
 package com.changyue.blogserver.ulits;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * @author : 袁阊越
  * @description : 其他测试
@@ -25,26 +27,27 @@ public class OtherTest {
 //        System.out.println("DateUtils.stringToDate(substring,\"yyyy-MM-dd HH:mm:ss\") = " + DateUtils.stringToDate(substring, "yyyy-MM-dd HH:mm:ss"));
 
 
-        String str = "https://blog.csdn.net/sinat_33921105/article/details/104031977?depth_1-utm_source=distribute.pc_feed.none-task&request_id=&utm_source=distribute.pc_feed.none-task";
-
-        String baseUrlSize = "https://blog.csdn.net/";
-
-        int startIndex = str.indexOf("/", 21);
-        int endIndex = str.indexOf("/", 22);
-
-        System.out.println("endIndex = " + endIndex);
-        System.out.println("startIndex = " + startIndex);
-
-        String userName = str.substring(startIndex + 1, endIndex);
-
-        System.out.println(userName);
+//        String str = "https://blog.csdn.net/sinat_33921105/article/details/104031977?depth_1-utm_source=distribute.pc_feed.none-task&request_id=&utm_source=distribute.pc_feed.none-task";
+//
+//        String baseUrlSize = "https://blog.csdn.net/";
+//
+//        int startIndex = str.indexOf("/", 21);
+//        int endIndex = str.indexOf("/", 22);
+//
+//        System.out.println("endIndex = " + endIndex);
+//        System.out.println("startIndex = " + startIndex);
+//
+//        String userName = str.substring(startIndex + 1, endIndex);
+//
+//        System.out.println(userName);
 
 
         /*  System.out.println("str.substring(i + 1, str.length()) = " + str.substring(i, length));
          */
 
-
-
+        String str = "<em class=\"highligh\">rock</em> <em class=\"highligh\">rock</em> <em class=\\\"highligh\\\">rock</em> rockrockrockrockrock\"";
+        String remove = StringUtils.remove(str, "\\");
+        System.out.println(remove);
     }
 
 

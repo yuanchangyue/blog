@@ -24,7 +24,7 @@
     </delete>
     <insert id="insert" parameterType="usersRole" keyProperty="id" keyColumn="id" useGeneratedKeys="true">
         insert into users_role (user_id, role_id,
-                                     create_time, update_time)
+                                create_time, update_time)
         values (#{userId,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER},
                 #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
     </insert>
@@ -85,10 +85,17 @@
     </update>
     <update id="updateByPrimaryKey" parameterType="usersRole">
         update users_role
-        set user_id      = #{userId,jdbcType=INTEGER},
-            role_id = #{roleId,jdbcType=INTEGER},
-            create_time  = #{createTime,jdbcType=TIMESTAMP},
-            update_time  = #{updateTime,jdbcType=TIMESTAMP}
+        set user_id     = #{userId,jdbcType=INTEGER},
+            role_id     = #{roleId,jdbcType=INTEGER},
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+            update_time = #{updateTime,jdbcType=TIMESTAMP}
         where id = #{id,jdbcType=INTEGER}
     </update>
+
+    <update id="updateUserRoleToManage" parameterType="java.lang.Integer">
+        update users_role
+        set role_id = 1
+        where user_id = #{userId,jdbcType=INTEGER}
+    </update>
+
 </mapper>

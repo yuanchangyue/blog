@@ -23,10 +23,28 @@ public interface UserAuthorityService extends BaseService<UsersRole, Integer> {
      */
     List<Resource> getResourceByRoleId(Integer roleId);
 
-
+    /**
+     * 获得角色菜单树形
+     *
+     * @param roleId 角色id
+     * @return 角色菜单树形
+     */
     List<MenuVo> getMenuTreeBy(Integer roleId);
 
-
+    /**
+     * 获得角色路由树形
+     *
+     * @param roleId 角色ID
+     * @return 角色路由树形
+     */
     List<RouterVO> getRouterList(Integer roleId);
+
+    /**
+     * 升级的为管理员
+     *
+     * @param userId 用户ID
+     * @return 是否成功
+     */
+    boolean changeUserRole(Integer userId);
 
 }

@@ -1,7 +1,6 @@
 package com.changyue.blogserver.service;
 
 import com.changyue.blogserver.model.elsatic.Article;
-import com.changyue.blogserver.model.params.FullTextQuery;
 import com.changyue.blogserver.serivce.ElasticsearchService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,9 +24,7 @@ public class ElasticsearchServiceTest {
 
     @Test
     public void testSearchArticle() {
-        FullTextQuery fullTextQuery = new FullTextQuery();
-        fullTextQuery.setTitle("心情");
-        List<Article> articles = elasticsearchService.searchArticle(fullTextQuery);
+        List<Article> articles = elasticsearchService.searchArticle("rock");
         System.out.println(articles);
     }
 

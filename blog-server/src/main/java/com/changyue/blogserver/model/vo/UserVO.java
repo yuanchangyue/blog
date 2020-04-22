@@ -14,12 +14,24 @@ import java.util.List;
 @Data
 public class UserVO {
 
+    /**
+     * 用户基本信息
+     */
     private UserDTO userDTO;
 
+    /**
+     * 用户角色
+     */
     private Role role;
 
+    /**
+     * 用户拥有菜单
+     */
     private List<MenuVo> menuVos;
 
+    /**
+     * 用户拥有路由
+     */
     private List<RouterVO> routerVOS;
 
 }

@@ -70,7 +70,7 @@
                selectByExampleQueryId="false"/>
         -->
 
-        <table domainObjectName="UserPost" tableName="user_post" enableCountByExample="false"
+        <table domainObjectName="Logs" tableName="logs" enableCountByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"
                selectByExampleQueryId="false"/>
 

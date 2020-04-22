@@ -4,7 +4,6 @@ import com.changyue.blogserver.dao.PostMapper;
 import com.changyue.blogserver.exception.CreateException;
 import com.changyue.blogserver.exception.NotFindException;
 import com.changyue.blogserver.exception.UpdateException;
-import com.changyue.blogserver.model.rep.Result;
 import com.changyue.blogserver.model.dto.CategoryDTO;
 import com.changyue.blogserver.model.dto.TagDTO;
 import com.changyue.blogserver.model.dto.UserDTO;
@@ -232,7 +231,7 @@ public class PostServiceImpl implements PostService {
         Assert.notNull(post, "文章不能为空");
 
         //更新ES文章
-        elasticsearchService.modifyArticle(post, ElasticsearchStatus.CREATION);
+        elasticsearchService.modifyArticle(post, getDocumentIdById(post.getId()), ElasticsearchStatus.CREATION);
 
         //更新文章
         if (postMapper.updateByPrimaryKeySelective(post) <= 0) {
@@ -252,9 +251,8 @@ public class PostServiceImpl implements PostService {
 
         //创建文档, 并为文章的赋值es Id 状态为发布状态
         if (post.getStatus() == PostStatus.PUBLISHED.getStatusCode()) {
-            Result result = elasticsearchService.indexArticle(post, ElasticsearchStatus.CREATION);
-            DocumentResult documentResult = (DocumentResult) result.getData();
-            post.setDocumentId(documentResult.getId());
+            DocumentResult result = elasticsearchService.indexArticle(post, ElasticsearchStatus.CREATION);
+            post.setDocumentId(result.getId());
         }
 
         //插入文章到数据库
@@ -329,6 +327,12 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    public Post getById(Integer id) {
+        Assert.notNull(id, "post Id 不能为空");
+        return postMapper.selectByPrimaryKey(id).orElse(null);
+    }
+
+    @Override
     @Transactional
     public boolean updateStatus(Integer postId, Integer status) {
         Assert.notNull(postId, "post Id 不能为空");
@@ -369,7 +373,9 @@ public class PostServiceImpl implements PostService {
     @Override
     public PostVO convertTO(Post post) {
         PostVO postVO = new PostVO();
-        BeanUtils.copyProperties(post, postVO);
+        if (null != post) {
+            BeanUtils.copyProperties(post, postVO);
+        }
         return postVO;
     }
 

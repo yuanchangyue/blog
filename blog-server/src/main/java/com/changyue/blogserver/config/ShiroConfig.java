@@ -48,6 +48,7 @@ public class ShiroConfig {
         map.put("/api/user/logout", "anon");
         map.put("/api/user", "anon");
         map.put("/api/site/**", "anon");
+        map.put("/api/query/**", "anon");
         map.put("/api/crawlerpost/**", "anon");
         map.put("/api/tag/list", "anon");
         map.put("/api/category/list", "anon");

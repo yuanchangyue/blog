@@ -5,9 +5,11 @@ import com.changyue.blogserver.model.entity.User;
 import com.changyue.blogserver.model.params.UserParam;
 import com.changyue.blogserver.model.vo.UserVO;
 import com.changyue.blogserver.serivce.base.BaseService;
+import com.github.pagehelper.PageInfo;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 
+import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -52,13 +54,21 @@ public interface UserService extends BaseService<User, Integer> {
      */
     Optional<User> getByEmail(@NonNull String email);
 
-
     /**
      * 按照用户名查找用户列表
+     *
      * @param username 用户名
      * @return 用户列表
      */
     List<UserDTO> listUser(@NonNull String username);
+
+    /**
+     * 按照用户名查找用户列表(分页)
+     *
+     * @param username 用户名
+     * @return 用户列表
+     */
+    PageInfo<UserVO> listUser(@Nonnull Integer pageIndex, @Nonnull Integer pageSize, @NonNull String username);
 
     /**
      * 更新用户密码.

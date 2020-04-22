@@ -9,11 +9,11 @@ public enum AuthorityStatus {
     /**
      * 管理员
      */
-    ADMIN(0),
+    ADMIN(1),
     /**
      * 普通用户（博主）
      */
-    ORDINARY_USER(1);
+    ORDINARY_USER(2);
 
     int authorityCode;
 

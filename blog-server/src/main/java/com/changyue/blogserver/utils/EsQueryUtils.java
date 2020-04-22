@@ -90,5 +90,30 @@ public class EsQueryUtils {
         return new Gson().toJson(queryJson);
     }
 
+    /**
+     * 高亮搜索的请求json
+     *
+     * @param keywords 关键字
+     * @return json str
+     */
+    public static String createHighSearch(String keywords) {
+        return "{" +
+                "    \"query\" : {" +
+                "        \"multi_match\": { \"query\": \"" + keywords + "\"}" +
+                "    }," +
+                "    \"highlight\" : {" +
+                "    \"pre_tags\": [" +
+                "          \"<span class=\\\"highlight\\\">\"" +
+                "      ]," +
+                "      \"post_tags\": [" +
+                "        \"</span>\"" +
+                "      ]," +
+                "        \"fields\" : {" +
+                "            \"title\": {}," +
+                "            \"summary\": {}" +
+                "        }" +
+                "    }" +
+                "}";
+    }
 
 }

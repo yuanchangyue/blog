@@ -64,14 +64,16 @@ public class UserPostServiceImpl implements UserPostService {
 
         //转换为视图分页信息
         PageInfo<CollectionVO> collectionVOPageInfo = PageInfoUtil.PageInfo2PageInfoDTO(userPostPageInfo);
-        //转化
-        List<CollectionVO> collectionVOS = convertTo(userPosts);
-        //添加到视图的分页中
-        collectionVOS.forEach(collectionVO -> collectionVOPageInfo.getList().add(collectionVO));
+
+        if (!userPosts.isEmpty()) {
+            //转化
+            List<CollectionVO> collectionVOS = convertTo(userPosts);
+            //添加到视图的分页中
+            collectionVOS.forEach(collectionVO -> collectionVOPageInfo.getList().add(collectionVO));
+        }
 
         return collectionVOPageInfo;
     }
-
 
     /**
      * userPost 转换为 CollectionVO的对象
@@ -120,7 +122,7 @@ public class UserPostServiceImpl implements UserPostService {
         Assert.notNull(userPost, "用户收藏信息不能为空");
         UserPost byUserPost = getByUserPost(userPost);
         if (null == byUserPost) {
-            UserPost up  = new UserPost();
+            UserPost up = new UserPost();
             up.setUserId(userPost.getUserId());
             up.setPostId(userPost.getCrawlerPostId());
             byUserPost = getByUserPost(up);

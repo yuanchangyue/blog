@@ -1,5 +1,6 @@
 package com.changyue.blogserver.controller;
 
+import com.changyue.blogserver.annotation.MyLog;
 import com.changyue.blogserver.model.rep.Result;
 import com.changyue.blogserver.model.dto.AttachmentDTO;
 import com.changyue.blogserver.model.params.AttachmentQuery;
@@ -34,6 +35,7 @@ public class AttachmentsController {
         return attachmentsService.pageBy(pageIndex, pageSize);
     }
 
+    @MyLog("附件查询")
     @PostMapping("/query")
     public PageInfo<AttachmentDTO> getByQuery(@RequestParam(name = "pageIndex", defaultValue = "1") Integer pageIndex,
                                               @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize,
@@ -51,6 +53,7 @@ public class AttachmentsController {
         return Result.create(attachmentsService.geyAttachmentType());
     }
 
+    @MyLog("移除附件")
     @DeleteMapping("/{attachmentId}")
     public Result remove(@PathVariable("attachmentId") Integer attachmentId) {
         return Result.create(attachmentsService.removeById(attachmentId));

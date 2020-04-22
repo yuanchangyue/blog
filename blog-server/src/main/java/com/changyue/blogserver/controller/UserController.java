@@ -48,7 +48,6 @@ public class UserController {
         return Result.create(ResultStatus.OPERATION_SUCCESS);
     }
 
-
     @GetMapping
     public Result getUser() {
         //获得当前用户

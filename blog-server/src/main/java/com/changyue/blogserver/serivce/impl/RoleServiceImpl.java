@@ -2,9 +2,7 @@ package com.changyue.blogserver.serivce.impl;
 
 import com.changyue.blogserver.dao.RoleMapper;
 import com.changyue.blogserver.model.entity.Role;
-import com.changyue.blogserver.model.entity.User;
 import com.changyue.blogserver.serivce.RoleService;
-import com.changyue.blogserver.utils.ShiroUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,9 +26,8 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public Role getRoleByUser() {
-        User user = ShiroUtils.getUser();
-        List<Integer> roleIdByUserId = roleMapper.findRoleIdByUserId(user.getId());
+    public Role getRoleByUser(Integer userId) {
+        List<Integer> roleIdByUserId = roleMapper.findRoleIdByUserId(userId);
         Role role = new Role();
         if (null != roleIdByUserId && !roleIdByUserId.isEmpty() && roleIdByUserId.size() > 1) {
             Integer id = roleIdByUserId.stream().max(Comparator.naturalOrder()).get();

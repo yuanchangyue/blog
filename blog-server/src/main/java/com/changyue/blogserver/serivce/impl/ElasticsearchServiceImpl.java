@@ -2,20 +2,21 @@ package com.changyue.blogserver.serivce.impl;
 
 import com.changyue.blogserver.config.properties.BlogProperties;
 import com.changyue.blogserver.exception.ElasticSearchException;
-import com.changyue.blogserver.model.rep.Result;
 import com.changyue.blogserver.model.elsatic.Article;
 import com.changyue.blogserver.model.entity.Post;
 import com.changyue.blogserver.model.enums.ElasticsearchStatus;
 import com.changyue.blogserver.model.enums.ResultStatus;
-import com.changyue.blogserver.model.params.FullTextQuery;
+import com.changyue.blogserver.model.rep.Result;
 import com.changyue.blogserver.serivce.ElasticsearchService;
 import com.changyue.blogserver.utils.EsQueryUtils;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import io.searchbox.client.JestClient;
 import io.searchbox.core.*;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,7 +39,7 @@ public class ElasticsearchServiceImpl implements ElasticsearchService {
     private JestClient jestClient;
 
     @Override
-    public Result indexArticle(@Nonnull Post post, ElasticsearchStatus elasticsearchStatus) {
+    public DocumentResult indexArticle(@Nonnull Post post, ElasticsearchStatus elasticsearchStatus) {
 
         //构建出文章
         Article article = new Article();
@@ -59,12 +60,12 @@ public class ElasticsearchServiceImpl implements ElasticsearchService {
         }
 
         log.info("es 文章[{}]添加成功", post.getTitle());
-        return Result.create(ResultStatus.OPERATION_SUCCESS, result);
+        return result;
     }
 
     @Override
-    public List<Article> searchArticle(@Nonnull FullTextQuery fullTextQuery) {
-        Search search = new Search.Builder(EsQueryUtils.createQuery(fullTextQuery))
+    public List<Article> searchArticle(@Nonnull String fullTextQuery) {
+        Search search = new Search.Builder(EsQueryUtils.createHighSearch(fullTextQuery))
                 .addIndex(BlogProperties.ES_INDEX)
                 .addType(BlogProperties.ES_TYPE).build();
 
@@ -76,11 +77,29 @@ public class ElasticsearchServiceImpl implements ElasticsearchService {
             Gson gson = new Gson();
 
             hits.forEach(jsonElement -> {
-                JsonObject object = jsonElement.getAsJsonObject().get("_source").getAsJsonObject();
-                Article article = gson.fromJson(object, Article.class);
+                JsonObject source = jsonElement.getAsJsonObject().get("_source").getAsJsonObject();
+                JsonObject highlight = jsonElement.getAsJsonObject().get("highlight").getAsJsonObject();
+
+                Article article = gson.fromJson(source, Article.class);
+                //高亮搜索不为空就重新赋值
+                if (null != highlight) {
+                    if (null != highlight.get("title")) {
+                        String title = highlight.get("title").toString();
+                        if (StringUtils.isNotEmpty(title)) {
+                            title = StringUtils.remove(title.substring(2, title.length() - 2), "\\");
+                            article.setTitle(title);
+                        }
+                    }
+                    if (null != highlight.get("summary")) {
+                        String summary = highlight.get("summary").toString();
+                        if (StringUtils.isNotEmpty(summary)) {
+                            summary = StringUtils.remove(summary.substring(2, summary.length() - 2), "\\");
+                            article.setSummary(summary);
+                        }
+                    }
+                }
                 articles.add(article);
             });
-
         } catch (IOException e) {
             log.debug("es 文章查询失败：[{}]", e.getMessage());
             throw new ElasticSearchException("es 文章查询失败");
@@ -108,7 +127,7 @@ public class ElasticsearchServiceImpl implements ElasticsearchService {
     }
 
     @Override
-    public Result modifyArticle(@Nonnull Post post, @Nonnull ElasticsearchStatus elasticsearchStatus) {
+    public Result modifyArticle(@Nonnull Post post, @Nonnull String documentId, @Nonnull ElasticsearchStatus elasticsearchStatus) {
 
         Article article = new Article();
         BeanUtils.copyProperties(post, article);
@@ -117,7 +136,7 @@ public class ElasticsearchServiceImpl implements ElasticsearchService {
         Index index = new Index.Builder(article)
                 .index(BlogProperties.ES_INDEX)
                 .type(BlogProperties.ES_TYPE)
-                .id(post.getDocumentId())
+                .id(documentId)
                 .build();
 
         DocumentResult result;

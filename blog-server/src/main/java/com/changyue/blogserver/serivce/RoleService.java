@@ -15,6 +15,6 @@ public interface RoleService extends BaseService<Role, Integer> {
      *
      * @return 角色
      */
-    Role getRoleByUser();
+    Role getRoleByUser(Integer userId);
 
 }

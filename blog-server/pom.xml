@@ -25,6 +25,12 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
+        <!--spring切面aop依赖-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+
         <!-- mybatis -->
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>

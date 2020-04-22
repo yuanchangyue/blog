@@ -4,6 +4,7 @@ package com.changyue.blogserver.dao;
 import com.changyue.blogserver.dao.base.BaseMapper;
 import com.changyue.blogserver.model.entity.UsersRole;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -14,4 +15,11 @@ import org.springframework.stereotype.Repository;
 @Mapper
 @Repository
 public interface UsersRoleMapper extends BaseMapper<UsersRole> {
+
+    /**
+     * 更新用户为管理员
+     * @param userId 用户ID
+     * @return 影响
+     */
+    Integer updateUserRoleToManage(@Param("userId") Integer userId);
 }

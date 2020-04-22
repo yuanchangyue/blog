@@ -10,7 +10,10 @@ import com.changyue.blogserver.model.vo.UserVO;
 import com.changyue.blogserver.serivce.RoleService;
 import com.changyue.blogserver.serivce.UserAuthorityService;
 import com.changyue.blogserver.serivce.UserService;
+import com.changyue.blogserver.utils.PageInfoUtil;
 import com.changyue.blogserver.utils.ShiroUtils;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.apache.shiro.SecurityUtils;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.BeanUtils;
@@ -20,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
+import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -48,7 +52,7 @@ public class UserServiceImpl implements UserService {
 
         UserVO userVO = new UserVO();
         userVO.setUserDTO(convertTO(user));
-        Role roleByUser = roleService.getRoleByUser();
+        Role roleByUser = roleService.getRoleByUser(user.getId());
         userVO.setRole(roleByUser);
         userVO.setMenuVos(userAuthorityService.getMenuTreeBy(roleByUser.getId()));
         userVO.setRouterVOS(userAuthorityService.getRouterList(roleByUser.getId()));
@@ -84,6 +88,23 @@ public class UserServiceImpl implements UserService {
     public List<UserDTO> listUser(String username) {
         List<User> listUser = userMapper.findListUser(username);
         return listUser.stream().map(this::convertTO).collect(Collectors.toList());
+    }
+
+    @Override
+    public PageInfo<UserVO> listUser(@Nonnull Integer pageIndex, @Nonnull Integer pageSize, String username) {
+
+        Assert.notNull(pageIndex, "页索引不能为空");
+        Assert.notNull(pageSize, "页数不能为空");
+
+        PageHelper.startPage(pageIndex, pageSize);
+        List<User> listUser = userMapper.findListUser(username);
+        PageInfo<User> userPageInfo = new PageInfo<>(listUser,3);
+
+        PageInfo<UserVO> userVOPageInfo = PageInfoUtil.PageInfo2PageInfoDTO(userPageInfo);
+        List<UserVO> userVOList = listUser.stream().map(this::getUserForView).collect(Collectors.toList());
+        userVOList.forEach(userVO -> userVOPageInfo.getList().add(userVO));
+
+        return userVOPageInfo;
     }
 
     @Override

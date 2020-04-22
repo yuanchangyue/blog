@@ -34,6 +34,16 @@ public class Article {
     private String originalContent;
 
     /**
+     * 文章简介
+     */
+    private String summary;
+
+    /**
+     * 收略图
+     */
+    private String thumbnail;
+
+    /**
      * 创建时间
      */
     private Date createTime;
@@ -47,5 +57,6 @@ public class Article {
      * 标签（区分来源）
      */
     private Integer tag;
+
 
 }

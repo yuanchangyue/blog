@@ -45,6 +45,7 @@ public class UserAuthorityServiceImpl implements UserAuthorityService {
         return usersRole;
     }
 
+
     @Override
     public UsersRole getById(Integer id) {
         Assert.notNull(id, "用户权限ID不能为空");
@@ -98,6 +99,11 @@ public class UserAuthorityServiceImpl implements UserAuthorityService {
             }
         }
         return routerVOS;
+    }
+
+    @Override
+    public boolean changeUserRole(Integer userId) {
+        return usersRoleMapper.updateUserRoleToManage(userId) >= 1;
     }
 
 }

@@ -8,103 +8,6 @@
       <change afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../.idea/modules.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_aspectj_aspectjweaver_1_9_5.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_aop_2_2_3_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/annotation/MyLog.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/config/aspect/LogAspect.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/controller/SystemController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/dao/LogsMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/entity/Logs.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/LogsService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/LogsServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/LogsMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/config/aspect/LogAspect.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/controller/SystemController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/dao/LogsMapper.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/model/entity/Logs.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/mapper/LogsMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../blog-vue/src/views/backstage/UserManage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog-server.iml" beforeDir="false" afterPath="$PROJECT_DIR$/blog-server.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/mg.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/config/DataSourceConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/config/DataSourceConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/config/ShiroConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/config/ShiroConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/config/properties/EsProperties.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/controller/AttachmentsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/controller/AttachmentsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/dao/LogMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/dao/UsersRoleMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/dao/UsersRoleMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/even/UserEven.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/elsatic/Article.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/elsatic/Article.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/entity/Log.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/enums/AuthorityStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/enums/AuthorityStatus.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/vo/UserVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/model/vo/UserVO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/ElasticsearchService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/ElasticsearchService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/RoleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/RoleService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/UserAuthorityService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/UserAuthorityService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/ElasticsearchServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/ElasticsearchServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/PostServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/PostServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/RoleServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/RoleServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/UserAuthorityServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/UserAuthorityServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/UserPostServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/UserPostServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/serivce/impl/UserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/utils/EsQueryUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/utils/EsQueryUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/utils/PageInfoUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/utils/PageInfoUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/changyue/blogserver/utils/ReadJsonFileUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-dev.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/constant.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ehcache-shiro.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ehcache-shiro.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/LogMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/UsersRoleMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/UsersRoleMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/changyue/blogserver/service/ElasticsearchServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/changyue/blogserver/service/ElasticsearchServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/changyue/blogserver/ulits/OtherTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/changyue/blogserver/ulits/OtherTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/changyue/blogserver/ulits/ReadJsonTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/spring-configuration-metadata.json" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/META-INF/spring-configuration-metadata.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application-dev.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/config/DataSourceConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/config/DataSourceConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/config/ShiroConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/config/ShiroConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/config/properties/EsProperties.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/controller/AttachmentsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/controller/AttachmentsController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/controller/UserController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/dao/LogMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/dao/UsersRoleMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/dao/UsersRoleMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/even/UserEven.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/model/elsatic/Article.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/model/elsatic/Article.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/model/entity/Log.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/model/enums/AuthorityStatus.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/model/enums/AuthorityStatus.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/model/vo/UserVO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/model/vo/UserVO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/ElasticsearchService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/ElasticsearchService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/RoleService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/RoleService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/UserAuthorityService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/UserAuthorityService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/UserService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/impl/ElasticsearchServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/impl/ElasticsearchServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/impl/PostServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/impl/PostServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/impl/RoleServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/impl/RoleServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/impl/UserAuthorityServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/impl/UserAuthorityServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/impl/UserPostServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/impl/UserPostServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/impl/UserServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/serivce/impl/UserServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/utils/EsQueryUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/utils/EsQueryUtils.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/utils/PageInfoUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/utils/PageInfoUtil.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/changyue/blogserver/utils/ReadJsonFileUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/constant.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ehcache-shiro.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ehcache-shiro.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mapper/LogMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mapper/UsersRoleMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mapper/UsersRoleMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/changyue/blogserver/service/ElasticsearchServiceTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/changyue/blogserver/service/ElasticsearchServiceTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/changyue/blogserver/ulits/OtherTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/changyue/blogserver/ulits/OtherTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/changyue/blogserver/ulits/ReadJsonTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../blog-vue/src/components/HeaderBar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../blog-vue/src/components/HeaderBar.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../blog-vue/src/components/PostHeaderBar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../blog-vue/src/components/PostHeaderBar.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../blog-vue/src/components/TopNav.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../blog-vue/src/components/TopNav.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../blog-vue/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../blog-vue/src/router/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../blog-vue/src/views/backstage/Personal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../blog-vue/src/views/backstage/Personal.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../blog-vue/src/views/backstage/Site.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../blog-vue/src/views/backstage/Site.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../blog-vue/src/views/frontdesk/IndexPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../blog-vue/src/views/frontdesk/IndexPage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../blog-vue/src/views/frontdesk/QueryPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../blog-vue/src/views/frontdesk/QueryPage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../blog-vue/src/views/frontdesk/SitePage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../blog-vue/src/views/frontdesk/SitePage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../blog-vue/src/views/frontdesk/ViewPoint.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../blog-vue/src/views/frontdesk/ViewPoint.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -631,7 +534,7 @@
       <workItem from="1587288890206" duration="6605000" />
       <workItem from="1587310483900" duration="273000" />
       <workItem from="1587345682347" duration="12858000" />
-      <workItem from="1587537235146" duration="12972000" />
+      <workItem from="1587537235146" duration="13223000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;新增解决跨域的Filter&quot;">
       <created>1583066529300</created>

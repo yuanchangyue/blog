@@ -38,13 +38,10 @@ public class UserController {
 
     @PostMapping
     public Result createUser(@Valid @RequestBody UserParam userParam) {
-
         //创建用户
         User createdUser = userService.createBy(userParam);
-
         //默认普通用户
         userAuthorityService.create(new UsersRole(createdUser.getId(), AuthorityStatus.ORDINARY_USER.getAuthorityCode()));
-
         return Result.create(ResultStatus.OPERATION_SUCCESS);
     }
 

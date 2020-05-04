@@ -1,6 +1,7 @@
 package com.changyue.blogserver.ulits;
 
-import org.apache.commons.lang3.StringUtils;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @author : 袁阊越
@@ -45,9 +46,21 @@ public class OtherTest {
         /*  System.out.println("str.substring(i + 1, str.length()) = " + str.substring(i, length));
          */
 
-        String str = "<em class=\"highligh\">rock</em> <em class=\"highligh\">rock</em> <em class=\\\"highligh\\\">rock</em> rockrockrockrockrock\"";
-        String remove = StringUtils.remove(str, "\\");
-        System.out.println(remove);
+//        String str = "<em class=\"highligh\">rock</em> <em class=\"highligh\">rock</em> <em class=\\\"highligh\\\">rock</em> rockrockrockrockrock\"";
+//        String remove = StringUtils.remove(str, "\\");
+//        System.out.println(remove);
+
+        String timeRex = "\\d{4}-\\d{2}-\\d{2}";
+        String v = "jasdfdd2222010-03-12asdf";
+
+        Pattern compile = Pattern.compile(timeRex);
+        Matcher matcher = compile.matcher(v);
+        String s = "";
+        while (matcher.find()) {
+            s = matcher.group();
+        }
+        System.out.println(s);
+
     }
 
 

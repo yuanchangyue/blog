@@ -56,7 +56,6 @@ public class CrawlerProxyProvider {
      */
     private ProxyProviderCallBack proxyProviderCallBack;
 
-
     /**
      * 随机获取一个代理IP保证每次请求使用的IP都不一样
      *
@@ -98,7 +97,6 @@ public class CrawlerProxyProvider {
             writeLock.lock();
             crawlerProxyList.remove(proxy);
             writeLock.unlock();
-//            proxyProviderCallBack.unvailable(proxy);
             if (crawlerProxyList.size() <= proxyIpUpdateThreshold) {
                 updateProxy();
             }

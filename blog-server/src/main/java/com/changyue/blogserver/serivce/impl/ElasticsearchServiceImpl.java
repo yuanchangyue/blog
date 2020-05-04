@@ -104,10 +104,8 @@ public class ElasticsearchServiceImpl implements ElasticsearchService {
             log.debug("es 文章查询失败：[{}]", e.getMessage());
             throw new ElasticSearchException("es 文章查询失败");
         }
-
         log.info("es 文章查询成功:[{}]", articles);
         return articles;
-
     }
 
     @Override

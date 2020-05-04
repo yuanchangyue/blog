@@ -45,7 +45,6 @@ public class CrawlerPostPageProcessor extends AbstractCrawlerPageProcessor {
         if (requestUrl.contains("csdn.net")) {
             csdnPostPageParse(page);
         } else if (requestUrl.contains("smartisan.com")) {
-
             log.info("url--------->[{}]", requestUrl);
         }
 

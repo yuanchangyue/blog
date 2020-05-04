@@ -45,6 +45,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Autowired
     private UserService userService;
 
+
     @Override
     public Category create(Category category) {
 
@@ -82,20 +83,24 @@ public class CategoryServiceImpl implements CategoryService {
         return category;
     }
 
+
     @Override
     public Category getBySlugName(String slugName) {
         return categoryMapper.findBySlugName(slugName).orElse(null);
     }
+
 
     @Override
     public Category getByName(String name) {
         return categoryMapper.findByName(name).orElse(null);
     }
 
+
     @Override
     public Category getById(Integer id) {
         return categoryMapper.selectByPrimaryKey(id).orElse(null);
     }
+
 
     @Override
     public List<Category> getListByParentId(Integer id) {
@@ -138,6 +143,7 @@ public class CategoryServiceImpl implements CategoryService {
 
         return categoryDTOPageInfo;
     }
+
 
     @Override
     @Transactional

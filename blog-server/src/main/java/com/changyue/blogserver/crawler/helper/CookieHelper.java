@@ -6,7 +6,7 @@ import com.changyue.blogserver.crawler.model.CrawlerHtml;
 import com.changyue.blogserver.crawler.model.CrawlerProxy;
 import com.changyue.blogserver.crawler.callback.ConcurrentCallBack;
 import com.changyue.blogserver.crawler.delay.DelayedUtils;
-import com.changyue.blogserver.factory.CrawlerProxyFactory;
+import com.changyue.blogserver.crawler.factory.CrawlerProxyFactory;
 import com.changyue.blogserver.utils.crawler.SeleniumClient;
 
 import java.util.ArrayList;
@@ -25,7 +25,6 @@ import java.util.concurrent.ConcurrentHashMap;
  * @date : 2020/3/24
  */
 public class CookieHelper {
-
 
     /**
      * 代理IP存放的地方

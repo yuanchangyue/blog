@@ -2225,6 +2225,11 @@
       "sourceType": "com.alibaba.druid.pool.DruidDataSource"
     },
     {
+      "name": "spring.elasticsearch.jest.url",
+      "type": "java.lang.String",
+      "description": "Description for spring.elasticsearch.jest.url."
+    },
+    {
       "name": "spring.datasource.druid.business.max-idle",
       "type": "java.lang.Integer",
       "sourceType": "com.alibaba.druid.pool.DruidDataSource",

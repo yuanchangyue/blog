@@ -1,4 +1,4 @@
-package com.changyue.blogserver.handler;
+package com.changyue.blogserver.exception.handler;
 
 import com.changyue.blogserver.model.enums.ResultStatus;
 import com.changyue.blogserver.model.rep.Result;

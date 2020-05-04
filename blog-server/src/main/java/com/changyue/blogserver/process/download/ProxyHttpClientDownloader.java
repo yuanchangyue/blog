@@ -8,7 +8,7 @@ import com.changyue.blogserver.crawler.model.CrawlerHtml;
 import com.changyue.blogserver.crawler.model.CrawlerProxy;
 import com.changyue.blogserver.crawler.model.ProcessFlowData;
 import com.changyue.blogserver.crawler.proxy.CrawlerProxyProvider;
-import com.changyue.blogserver.factory.CrawlerProxyFactory;
+import com.changyue.blogserver.crawler.factory.CrawlerProxyFactory;
 import com.changyue.blogserver.model.enums.CrawlerStatus;
 import com.changyue.blogserver.process.ProcessFlow;
 import com.changyue.blogserver.utils.crawler.SeleniumClient;
@@ -73,7 +73,6 @@ public class ProxyHttpClientDownloader extends AbstractDownloader implements Pro
     @Autowired
     private SeleniumClient seleniumClient;
 
-
     private Logger logger = LoggerFactory.getLogger(getClass());
 
     private final Map<String, CloseableHttpClient> httpClients = new HashMap<String, CloseableHttpClient>();
@@ -125,7 +124,7 @@ public class ProxyHttpClientDownloader extends AbstractDownloader implements Pro
     public Page download(Request request, Task task) {
         String handelType = crawlerHelper.getHandleType(request);
         long currentTime = System.currentTimeMillis();
-        log.info("开始下载页面数据，url:{},handelType:{}", request.getUrl(),handelType);
+        log.info("开始下载页面数据，url:{},handelType:{}", request.getUrl(), handelType);
         if (task == null || task.getSite() == null) {
             throw new NullPointerException("task or site can not be null");
         }
@@ -158,10 +157,10 @@ public class ProxyHttpClientDownloader extends AbstractDownloader implements Pro
             if (downloadStatus) {
                 page.setStatusCode(200);
                 onSuccess(request);
-                log.info("下载数据成功，url:{}，handelType:{},耗时：{}", request.getUrl(),handelType, System.currentTimeMillis() - currentTime);
+                log.info("下载数据成功，url:{}，handelType:{},耗时：{}", request.getUrl(), handelType, System.currentTimeMillis() - currentTime);
             } else {
                 onError(request);
-                log.error("下载文档失败，url:{},handelType:{},proxy:{},状态码：{}", page.getUrl().toString(),handelType, proxy, page.getStatusCode());
+                log.error("下载文档失败，url:{},handelType:{},proxy:{},状态码：{}", page.getUrl().toString(), handelType, proxy, page.getStatusCode());
             }
 
 
@@ -233,8 +232,42 @@ public class ProxyHttpClientDownloader extends AbstractDownloader implements Pro
         return charset;
     }
 
+    /**
+     * 根据代理Ip 添加Cookie
+     *
+     * @param site
+     * @param url
+     * @param proxy
+     */
+    private void addCookie(Site site, String url, CrawlerProxy proxy) {
+        List<CrawlerCookie> crawlerCookieList = cookieHelper.getCacheCookieList(url, proxy);
+        if (null != site && null != crawlerCookieList && !crawlerCookieList.isEmpty()) {
+            for (CrawlerCookie crawlerCookie : crawlerCookieList) {
+                if (null != crawlerCookie) {
+                    site.addCookie(crawlerCookie.getName(), crawlerCookie.getValue());
+                }
+            }
+        }
+    }
 
-    //**********************************************以下代码是自定义的代码************************
+    /**
+     * 获取代理数组
+     *
+     * @param crawlerProxyList
+     * @return
+     */
+    private Proxy[] getProxyArray(List<CrawlerProxy> crawlerProxyList) {
+        Proxy[] proxyArray = null;
+        if (null != crawlerProxyList && !crawlerProxyList.isEmpty()) {
+            proxyArray = new Proxy[crawlerProxyList.size()];
+            for (int i = 0; i < crawlerProxyList.size(); i++) {
+                proxyArray[i] = CrawlerProxyFactory.getWebmagicProxy(crawlerProxyList.get(i));
+            }
+        }
+        return proxyArray;
+    }
+
+    //**********************************************以下代码是自定义的代码*****************************************
 
     /**
      * 初始化webmagic的代理IP
@@ -248,7 +281,6 @@ public class ProxyHttpClientDownloader extends AbstractDownloader implements Pro
             setProxyProvider(SimpleProxyProvider.from(proxies));
         }
     }
-
 
     /**
      * selenium+chrome headless 方式下载
@@ -294,42 +326,6 @@ public class ProxyHttpClientDownloader extends AbstractDownloader implements Pro
             crawlerProxyProvider.unavailable(proxy);
         }
         return crawlerHtml;
-    }
-
-
-    /**
-     * 根据代理Ip 添加Cookie
-     *
-     * @param site
-     * @param url
-     * @param proxy
-     */
-    private void addCookie(Site site, String url, CrawlerProxy proxy) {
-        List<CrawlerCookie> crawlerCookieList = cookieHelper.getCacheCookieList(url, proxy);
-        if (null != site && null != crawlerCookieList && !crawlerCookieList.isEmpty()) {
-            for (CrawlerCookie crawlerCookie : crawlerCookieList) {
-                if (null != crawlerCookie) {
-                    site.addCookie(crawlerCookie.getName(), crawlerCookie.getValue());
-                }
-            }
-        }
-    }
-
-    /**
-     * 获取代理数组
-     *
-     * @param crawlerProxyList
-     * @return
-     */
-    private Proxy[] getProxyArray(List<CrawlerProxy> crawlerProxyList) {
-        Proxy[] proxyArray = null;
-        if (null != crawlerProxyList && !crawlerProxyList.isEmpty()) {
-            proxyArray = new Proxy[crawlerProxyList.size()];
-            for (int i = 0; i < crawlerProxyList.size(); i++) {
-                proxyArray[i] = CrawlerProxyFactory.getWebmagicProxy(crawlerProxyList.get(i));
-            }
-        }
-        return proxyArray;
     }
 
 

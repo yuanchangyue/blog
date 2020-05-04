@@ -22,6 +22,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @author : 袁阊越
@@ -146,7 +148,7 @@ public class CrawlerHtmlParsePipeline extends AbstractHtmlParsePipeline<CrawlerP
     /**
      * 保存评论
      *
-     * @param parseItem   爬虫文章的解析对象
+     * @param parseItem       爬虫文章的解析对象
      * @param crawlerCsdnPost 爬虫文章（数据库）
      */
     private void savePostComment(CrawlerParseItem parseItem, CrawlerCsdnPost crawlerCsdnPost) {
@@ -239,7 +241,7 @@ public class CrawlerHtmlParsePipeline extends AbstractHtmlParsePipeline<CrawlerP
     /**
      * 保存附加信息
      *
-     * @param parseItem   爬虫文章的解析对象
+     * @param parseItem       爬虫文章的解析对象
      * @param crawlerCsdnPost 爬虫文章（数据库）
      */
     private void savePostAdditional(CrawlerParseItem parseItem, CrawlerCsdnPost crawlerCsdnPost) {
@@ -305,7 +307,7 @@ public class CrawlerHtmlParsePipeline extends AbstractHtmlParsePipeline<CrawlerP
                 crawlerCsdnPost.setFrom(CrawlerStatus.FormType.CSDN.name());
                 String releaseDate = parseItem.getReleaseDate();
                 if (StringUtils.isNotEmpty(releaseDate)) {
-                    crawlerCsdnPost.setOriginalTime(DateUtils.stringToDate(releaseDate, "yyyy-MM-dd HH:mm:ss"));
+                    crawlerCsdnPost.setOriginalTime(DateUtils.stringToDate(releaseDate, "yyyy-MM-dd"));
                 }
 
                 //保存到数据库中
@@ -370,7 +372,6 @@ public class CrawlerHtmlParsePipeline extends AbstractHtmlParsePipeline<CrawlerP
     }
 
 
-
     /**
      * 处理前置一些不规则参数
      * 如：阅读量 123
@@ -382,20 +383,16 @@ public class CrawlerHtmlParsePipeline extends AbstractHtmlParsePipeline<CrawlerP
             String readCount = itemsAll.get("readCount").toString();
             String releaseDate = itemsAll.get("releaseDate").toString();
 
-            if (StringUtils.isNotEmpty(readCount)) {
-                readCount = readCount.split(" ")[1];
-                if (StringUtils.isNotEmpty(readCount)) {
-                    itemsAll.put("readCount", readCount);
-                }
+            readCount = readCount.replaceAll("[^0-9]", "");
+            itemsAll.put("readCount", readCount);
+
+            String timeRex = "\\d{4}-\\d{2}-\\d{2}";
+            Pattern compile = Pattern.compile(timeRex);
+            Matcher matcher = compile.matcher(releaseDate);
+            while (matcher.find()) {
+                itemsAll.put("releaseDate", matcher.group());
             }
 
-            if (StringUtils.isNotEmpty(releaseDate)) {
-                int index = releaseDate.indexOf("于");
-                releaseDate = releaseDate.substring(index + 1, index + 20);
-                if (StringUtils.isNotEmpty(releaseDate)) {
-                    itemsAll.put("releaseDate", releaseDate);
-                }
-            }
         }
     }
 

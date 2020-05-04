@@ -72,7 +72,6 @@ public class CrawlerParseItem extends ParseItem {
      */
     private String releaseDate;
 
-
     /**
      * 阅读量
      */

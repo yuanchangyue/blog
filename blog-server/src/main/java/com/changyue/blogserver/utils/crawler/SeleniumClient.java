@@ -6,7 +6,7 @@ import com.changyue.blogserver.crawler.model.CrawlerHtml;
 import com.changyue.blogserver.crawler.model.CrawlerProxy;
 import com.changyue.blogserver.crawler.callback.DelayedCallBack;
 import com.changyue.blogserver.crawler.delay.DelayedUtils;
-import com.changyue.blogserver.factory.CrawlerProxyFactory;
+import com.changyue.blogserver.crawler.factory.CrawlerProxyFactory;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.Cookie;

@@ -19,7 +19,7 @@ public class TagParam implements InputConvert<Tag> {
     @Size(max = 6, message = "标签名称的字符长度不能超过 {max}")
     private String name;
 
-    @NotBlank(message = "标签类别不能为空")
+    @NotBlank(message = "标签别名不能为空")
     @Size(max = 10, message = "标签别名的字符长度不能超过 {max}")
     private String slugName;
 

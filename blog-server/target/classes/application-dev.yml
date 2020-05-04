@@ -34,9 +34,9 @@ spring:
   #es
   elasticsearch:
     jest:
-      url: http://changyue.club:9201/
       connection-timeout: 20000
       read-timeout: 20000
+      uris: http://changyue.club:9201/
   quartz:
     #相关属性配置
     properties:

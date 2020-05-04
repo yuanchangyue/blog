@@ -24,7 +24,6 @@ import java.util.Map;
 @Configurable
 public class CustomAccessControlFilter extends AccessControlFilter {
 
-
     @Override
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object o) throws Exception {
         return false;

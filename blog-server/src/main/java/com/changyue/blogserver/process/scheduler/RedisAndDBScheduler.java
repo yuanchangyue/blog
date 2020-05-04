@@ -26,7 +26,6 @@ public class RedisAndDBScheduler extends RedisScheduler implements ProcessFlow {
     @Autowired
     private CrawlerHelper crawlerHelper;
 
-
     public RedisAndDBScheduler(String host) {
         super(host);
     }

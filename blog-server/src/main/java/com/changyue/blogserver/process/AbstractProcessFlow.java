@@ -9,7 +9,7 @@ import com.changyue.blogserver.crawler.model.CrawlerHtml;
 import com.changyue.blogserver.crawler.model.CrawlerProxy;
 import com.changyue.blogserver.crawler.model.ParseItem;
 import com.changyue.blogserver.crawler.proxy.CrawlerProxyProvider;
-import com.changyue.blogserver.factory.CrawlerProxyFactory;
+import com.changyue.blogserver.crawler.factory.CrawlerProxyFactory;
 import com.changyue.blogserver.utils.crawler.HttpClientUtils;
 import com.changyue.blogserver.utils.crawler.RequestUtils;
 import com.changyue.blogserver.utils.crawler.SeleniumClient;

@@ -68,7 +68,6 @@ public class CrawlerHelpPageProcessor extends AbstractCrawlerPageProcessor {
         addSpiderRequest(targetUrlList, page.getRequest(), CrawlerStatus.DocumentType.PAGE);
 
 
-
         log.info("解析下一页完成,当前的url:[{}],处理的类型为：[{}],用时：[{}]s", requestUrl, handleType, System.currentTimeMillis() - currentTimeMillis);
     }
 

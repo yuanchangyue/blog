@@ -38,6 +38,7 @@ public class AttachmentsServiceImpl implements AttachmentsService {
         return attachmentsMapper.listAllMediaType(ShiroUtils.getUser().getId());
     }
 
+
     @Override
     public AttachmentDTO getByAttachmentId(Integer id) {
         Assert.notNull(id, "id不能为空");
@@ -70,6 +71,7 @@ public class AttachmentsServiceImpl implements AttachmentsService {
         return attachmentDTOPageInfo;
     }
 
+
     @Override
     public PageInfo<AttachmentDTO> pageByQuery(Integer pageIndex, Integer pageSize, AttachmentQuery attachmentQuery) {
         Assert.notNull(pageIndex, "页索引不能为空");
@@ -93,6 +95,7 @@ public class AttachmentsServiceImpl implements AttachmentsService {
 
         return attachmentDTOPageInfo;
     }
+
 
     @Override
     public Attachments upload(MultipartFile file) {
@@ -120,6 +123,7 @@ public class AttachmentsServiceImpl implements AttachmentsService {
         return create(attachment);
     }
 
+
     @Override
     public int removeById(Integer id) {
 
@@ -134,6 +138,7 @@ public class AttachmentsServiceImpl implements AttachmentsService {
         //删除数据库中内容
         return attachmentsMapper.deleteByPrimaryKey(id);
     }
+
 
     @Override
     public Attachments create(Attachments attachments) {

@@ -19,13 +19,13 @@ public class CategoryParam implements InputConvert<Category> {
      * 分类名称
      */
     @NotBlank(message = "分类名称不能为空")
-    @Size(max = 20, message = "分类名称的字符长度不能超过 {max}")
+    @Size(max = 8, message = "分类名称的字符长度不能超过 {max}")
     private String name;
 
     /**
      * 类别别名
      */
-    @Size(max = 20, message = "分类别名的字符长度不能超过 {max}")
+    @Size(max = 8, message = "分类别名的字符长度不能超过 {max}")
     private String slugName;
 
     /**

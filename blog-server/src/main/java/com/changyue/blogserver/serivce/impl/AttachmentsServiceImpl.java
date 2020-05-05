@@ -39,6 +39,7 @@ public class AttachmentsServiceImpl implements AttachmentsService {
     }
 
 
+
     @Override
     public AttachmentDTO getByAttachmentId(Integer id) {
         Assert.notNull(id, "id不能为空");
@@ -70,6 +71,7 @@ public class AttachmentsServiceImpl implements AttachmentsService {
 
         return attachmentDTOPageInfo;
     }
+
 
 
     @Override
@@ -122,6 +124,7 @@ public class AttachmentsServiceImpl implements AttachmentsService {
 
         return create(attachment);
     }
+
 
 
     @Override

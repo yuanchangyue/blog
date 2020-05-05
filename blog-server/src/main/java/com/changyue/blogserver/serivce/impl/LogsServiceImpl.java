@@ -36,4 +36,16 @@ public class LogsServiceImpl implements LogsService {
         return logs;
     }
 
+    @Override
+    public PageInfo<Logs> listAll(Integer pageIndex, Integer pageSize, String username) {
+        PageHelper.startPage(pageIndex, pageSize);
+        List<Logs> logs = logsMapper.listBy(username);
+        return new PageInfo<>(logs, 3);
+    }
+
+    @Override
+    public int removeById(Integer id) {
+        Assert.notNull(id, "ID不能为空");
+        return logsMapper.deleteByPrimaryKey(id);
+    }
 }

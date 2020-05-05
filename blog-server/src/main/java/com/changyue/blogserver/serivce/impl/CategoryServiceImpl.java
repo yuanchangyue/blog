@@ -1,5 +1,6 @@
 package com.changyue.blogserver.serivce.impl;
 
+import com.changyue.blogserver.annotation.MyLog;
 import com.changyue.blogserver.dao.CategoryMapper;
 import com.changyue.blogserver.exception.AlreadyExistsException;
 import com.changyue.blogserver.exception.CreateException;
@@ -96,6 +97,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
 
+
     @Override
     public Category getById(Integer id) {
         return categoryMapper.selectByPrimaryKey(id).orElse(null);
@@ -108,6 +110,7 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryMapper.listByParentId(id);
     }
 
+
     @Override
     public List<Category> getListLatest() {
         return categoryMapper.listLatest();
@@ -118,6 +121,7 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryMapper.listCategoryByIds(new ArrayList<>(ids));
     }
 
+    @MyLog("查询分类列表")
     @Override
     public PageInfo<CategoryDTO> pageBy(Integer pageIndex, Integer pageSize) {
 
@@ -143,6 +147,7 @@ public class CategoryServiceImpl implements CategoryService {
 
         return categoryDTOPageInfo;
     }
+
 
 
     @Override
@@ -192,6 +197,7 @@ public class CategoryServiceImpl implements CategoryService {
         Assert.notNull(categoryId, "类别Id不能为空");
         return categoryMapper.deleteByPrimaryKey(categoryId);
     }
+
 
     @Override
     public Category update(Category category) {

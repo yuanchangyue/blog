@@ -50,27 +50,24 @@ public class LogAspect {
         //获取切入点所在的方法
         Method method = signature.getMethod();
 
-        //获取操作
+
         MyLog myLog = method.getAnnotation(MyLog.class);
         if (myLog != null) {
             String value = myLog.value();
             logs.setOperation(value);//保存获取的操作
         }
 
-        //获取请求的类名
+
         String className = joinPoint.getTarget().getClass().getName();
-        //获取请求的方法名
+
         String methodName = method.getName();
         logs.setMethod(className + "." + methodName);
 
-        //请求的参数
         Object[] args = joinPoint.getArgs();
-        //将参数所在的数组转换成json
         String params = JSON.toJSONString(args);
         logs.setParams(params);
 
         logs.setCreatetime(new Date());
-        //获取用户名
         logs.setUsername(ShiroUtils.getUser().getUsername());
 
         //获取用户ip地址

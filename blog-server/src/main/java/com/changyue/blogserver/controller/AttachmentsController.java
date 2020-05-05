@@ -1,5 +1,6 @@
 package com.changyue.blogserver.controller;
 
+import com.changyue.blogserver.annotation.MyLog;
 import com.changyue.blogserver.model.dto.AttachmentDTO;
 import com.changyue.blogserver.model.params.AttachmentQuery;
 import com.changyue.blogserver.model.rep.Result;
@@ -28,6 +29,7 @@ public class AttachmentsController {
         return Result.create(attachmentsService.upload(file));
     }
 
+    @MyLog("查询附件列表")
     @GetMapping
     public PageInfo<AttachmentDTO> getBy(@RequestParam(name = "pageIndex", defaultValue = "1") Integer pageIndex,
                                          @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize) {
@@ -35,6 +37,7 @@ public class AttachmentsController {
     }
 
 
+    @MyLog("查询附件列表（条件）")
     @PostMapping("/query")
     public PageInfo<AttachmentDTO> getByQuery(@RequestParam(name = "pageIndex", defaultValue = "1") Integer pageIndex,
                                               @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize,
@@ -42,6 +45,8 @@ public class AttachmentsController {
         return attachmentsService.pageByQuery(pageIndex, pageSize, attachmentQuery);
     }
 
+
+    @MyLog("查询单条附件信息")
     @GetMapping("/{attachmentId}")
     public Result getById(@PathVariable("attachmentId") Integer attachmentId) {
         return Result.create(attachmentsService.getByAttachmentId(attachmentId));
@@ -51,6 +56,7 @@ public class AttachmentsController {
     public Result getById() {
         return Result.create(attachmentsService.geyAttachmentType());
     }
+
 
 
     @DeleteMapping("/{attachmentId}")

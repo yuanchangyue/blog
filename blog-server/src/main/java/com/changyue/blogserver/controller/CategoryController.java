@@ -1,10 +1,11 @@
 package com.changyue.blogserver.controller;
 
-import com.changyue.blogserver.model.rep.Result;
+import com.changyue.blogserver.annotation.MyLog;
 import com.changyue.blogserver.model.dto.CategoryDTO;
 import com.changyue.blogserver.model.entity.Category;
 import com.changyue.blogserver.model.entity.UserCategory;
 import com.changyue.blogserver.model.params.CategoryParam;
+import com.changyue.blogserver.model.rep.Result;
 import com.changyue.blogserver.serivce.CategoryService;
 import com.changyue.blogserver.serivce.PostCategoryService;
 import com.changyue.blogserver.serivce.UserCategoryService;
@@ -39,22 +40,26 @@ public class CategoryController {
     @Autowired
     private UserService userService;
 
+    @MyLog("查询分类列表")
     @GetMapping
     public PageInfo<CategoryDTO> listCategory(@RequestParam(name = "pageIndex", defaultValue = "1") Integer pageIndex,
                                               @RequestParam(name = "pageSize", defaultValue = "5") Integer pageSize) {
         return categoryService.pageBy(pageIndex, pageSize);
     }
-
+    @MyLog("查询单个分类信息")
     @GetMapping("/{categoryId}")
     public CategoryDTO getBy(@PathVariable("categoryId") Integer categoryId) {
         return categoryService.convertTo(categoryService.getById(categoryId));
     }
 
+    @MyLog("查询最新分类")
     @GetMapping("/latest")
     public Result getLatest() {
         return Result.create(categoryService.getListLatest());
     }
 
+
+    @MyLog("新增分类")
     @PostMapping
     public Result createCategory(@Valid @RequestBody CategoryParam categoryParam) {
         //入参转化
@@ -70,11 +75,14 @@ public class CategoryController {
         return Result.create(categoryService.convertTo(createdCategory));
     }
 
+
+    @MyLog("删除分类")
     @DeleteMapping("/{categoryId}")
     public void deleteCategory(@PathVariable("categoryId") Integer categoryId) {
         categoryService.removeCategoryAndPostCategory(categoryId);
     }
 
+    @MyLog("修改分类")
     @PutMapping("/{categoryId}")
     public void modifyCategory(@PathVariable("categoryId") Integer categoryId, @Valid @RequestBody CategoryParam categoryParam) {
 

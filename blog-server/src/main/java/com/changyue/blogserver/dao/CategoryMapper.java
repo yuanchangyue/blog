@@ -88,4 +88,10 @@ public interface CategoryMapper extends BaseMapper<Category> {
      */
     List<Category> listLatest();
 
+    /**
+     * 通过用户Id删除分类
+     * @param userId 用户id
+     * @return 是否删除
+     */
+    int deleteByUserId(@Param("userId") Integer userId);
 }

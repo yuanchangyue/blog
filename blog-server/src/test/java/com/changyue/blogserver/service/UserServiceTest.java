@@ -1,17 +1,12 @@
 package com.changyue.blogserver.service;
 
-import com.changyue.blogserver.model.entity.User;
 import com.changyue.blogserver.model.params.UserParam;
 import com.changyue.blogserver.serivce.UserService;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import java.util.Optional;
 
 
 /**
@@ -41,8 +36,12 @@ public class UserServiceTest {
 
     @Test
     public void test() {
-       User changyue = userService.getByUsername("changyue");
-        System.out.println(changyue);
+
+        userService.listUser(1,10,"").getList().forEach(System.out::println);
+
     }
+
+
+
 
 }

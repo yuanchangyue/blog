@@ -7,9 +7,7 @@ import com.changyue.blogserver.model.entity.UserCategory;
 import com.changyue.blogserver.model.params.CategoryParam;
 import com.changyue.blogserver.model.rep.Result;
 import com.changyue.blogserver.serivce.CategoryService;
-import com.changyue.blogserver.serivce.PostCategoryService;
 import com.changyue.blogserver.serivce.UserCategoryService;
-import com.changyue.blogserver.serivce.UserService;
 import com.changyue.blogserver.utils.ShiroUtils;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
@@ -32,13 +30,7 @@ public class CategoryController {
     private CategoryService categoryService;
 
     @Autowired
-    private PostCategoryService postCategoryService;
-
-    @Autowired
     private UserCategoryService userCategoryService;
-
-    @Autowired
-    private UserService userService;
 
     @MyLog("查询分类列表")
     @GetMapping

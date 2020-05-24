@@ -84,10 +84,17 @@
           and pc.category_id = c.id
           and p.id = #{postId}
     </select>
+
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
         delete
         from categories
         where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByUserId" parameterType="java.lang.Integer">
+        delete
+        from categories
+        where user_id = #{userId,jdbcType=INTEGER}
     </delete>
 
     <select id="count" parameterType="category" resultType="java.lang.Long">

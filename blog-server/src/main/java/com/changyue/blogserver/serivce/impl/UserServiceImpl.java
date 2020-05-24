@@ -194,6 +194,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public boolean removeUser(Integer userId) {
+        Assert.notNull(userId, "用户id不能为空");
+        return userMapper.deleteByPrimaryKey(userId)>0;
+    }
+
+    @Override
     public User getByUserId(Integer userId) {
         Assert.notNull(userId, "用户id不能为空");
         return userMapper.selectByPrimaryKey(userId).orElse(null);

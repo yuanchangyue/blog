@@ -45,7 +45,6 @@ public interface UserService extends BaseService<User, Integer> {
      */
     User getByUsername(@NonNull String username);
 
-
     /**
      * 通过电子邮件获取用户。
      *
@@ -68,7 +67,7 @@ public interface UserService extends BaseService<User, Integer> {
      * @param username 用户名
      * @return 用户列表
      */
-    PageInfo<UserVO> listUser(@Nonnull Integer pageIndex, @Nonnull Integer pageSize, @NonNull String username);
+    PageInfo<UserVO> listUser(@Nonnull Integer pageIndex, @Nonnull Integer pageSize, String username);
 
     /**
      * 更新用户密码.
@@ -145,5 +144,12 @@ public interface UserService extends BaseService<User, Integer> {
      * @return 是否信息匹配
      */
     boolean verifyUser(@NonNull String username, @NonNull String password);
+
+    /**
+     * 删除账户
+     * @param userId
+     * @return
+     */
+    boolean removeUser(@NonNull Integer userId);
 
 }

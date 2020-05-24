@@ -143,6 +143,14 @@ public interface PostService extends BaseService<Post, Integer> {
     String getDocumentIdById(Integer id);
 
     /**
+     * 通过user id 获取文章ids
+     *
+     * @param userId 用户ID
+     * @return 文章id集合
+     */
+    List<Integer> getPostIdsByUserId(Integer userId);
+
+    /**
      * 转化成PostVO
      *
      * @param post 文章

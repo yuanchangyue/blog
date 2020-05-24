@@ -51,11 +51,16 @@ public class UserSiteServiceImpl implements UserSiteService {
         return userSite;
     }
 
-
     @Override
     public boolean isExist(UserSite userSite) {
         Assert.notNull(userSite, "用户的订阅信息不能为空");
         return userSiteMapper.findUserSite(userSite.getUserId(), userSite.getSiteId()) != null;
+    }
+
+    @Override
+    public void remove(UserSite userSite) {
+        Assert.notNull(userSite, "用户的订阅信息不能为空");
+        userSiteMapper.deleteBy(userSite.getUserId(),userSite.getSiteId());
     }
 
     @Override

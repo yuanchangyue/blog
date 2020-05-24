@@ -3,10 +3,7 @@ package com.changyue.blogserver.serivce;
 import com.changyue.blogserver.model.entity.Post;
 import com.changyue.blogserver.model.entity.PostCategory;
 import com.changyue.blogserver.serivce.base.BaseService;
-import com.github.pagehelper.PageInfo;
-
 import org.springframework.lang.NonNull;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -17,7 +14,6 @@ import java.util.Set;
  * @description : 文章类别业务接口
  * @date : 2020/2/3/003
  */
-@Service
 public interface PostCategoryService extends BaseService<PostCategory, Integer> {
     /**
      * 按文章ID列出类别。

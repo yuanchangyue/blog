@@ -20,7 +20,6 @@ import java.util.Set;
 @Repository
 public interface UserMapper extends BaseMapper<User> {
 
-
     /**
      * 修改用头像
      *

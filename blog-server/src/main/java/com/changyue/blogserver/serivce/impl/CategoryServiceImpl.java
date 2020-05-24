@@ -1,6 +1,5 @@
 package com.changyue.blogserver.serivce.impl;
 
-import com.changyue.blogserver.annotation.MyLog;
 import com.changyue.blogserver.dao.CategoryMapper;
 import com.changyue.blogserver.exception.AlreadyExistsException;
 import com.changyue.blogserver.exception.CreateException;
@@ -45,7 +44,6 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Autowired
     private UserService userService;
-
 
     @Override
     public Category create(Category category) {
@@ -97,7 +95,6 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
 
-
     @Override
     public Category getById(Integer id) {
         return categoryMapper.selectByPrimaryKey(id).orElse(null);
@@ -121,7 +118,6 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryMapper.listCategoryByIds(new ArrayList<>(ids));
     }
 
-    @MyLog("查询分类列表")
     @Override
     public PageInfo<CategoryDTO> pageBy(Integer pageIndex, Integer pageSize) {
 
@@ -148,12 +144,9 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryDTOPageInfo;
     }
 
-
-
     @Override
     @Transactional
     public void removeCategoryAndPostCategory(Integer categoryId) {
-
         //处理如果是父级类别被使用
         List<Category> categories = this.getListByParentId(categoryId);
         if (!CollectionUtils.isEmpty(categories)) {
@@ -162,7 +155,6 @@ public class CategoryServiceImpl implements CategoryService {
                 this.update(category);
             });
         }
-
         //删除类别
         this.removeById(categoryId);
         //删除文章类别
@@ -198,7 +190,6 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryMapper.deleteByPrimaryKey(categoryId);
     }
 
-
     @Override
     public Category update(Category category) {
         Assert.notNull(category, "类别不能为空");
@@ -222,10 +213,13 @@ public class CategoryServiceImpl implements CategoryService {
      */
     @Override
     public List<CategoryDTO> convertTo(List<Category> categories) {
-
         Assert.notNull(categories, "类别列表不能为空");
-
         return categories.stream().map(this::convertTo).collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean removeByUserId(Integer userId) {
+        return categoryMapper.deleteByUserId(userId)>0;
     }
 
 }

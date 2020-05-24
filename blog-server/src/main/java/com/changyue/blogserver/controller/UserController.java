@@ -45,6 +45,11 @@ public class UserController {
         return Result.create(ResultStatus.OPERATION_SUCCESS);
     }
 
+    @GetMapping("/name/{username}")
+    public Result getUserByUserName(@PathVariable("username") String username) {
+        return Result.create(userService.getByUsername(username));
+    }
+
     @GetMapping
     public Result getUser() {
         //获得当前用户

@@ -1,5 +1,6 @@
 package com.changyue.blogserver.service;
 
+import com.changyue.blogserver.model.entity.UserSite;
 import com.changyue.blogserver.model.vo.SubscriptionVO;
 import com.changyue.blogserver.serivce.UserSiteService;
 import com.github.pagehelper.PageInfo;
@@ -23,9 +24,17 @@ public class UserSiteServiceTest {
 
 
     @Test
-    public void test() {
+    public void pageBy() {
         PageInfo<SubscriptionVO> subscriptionVOPageInfo = userSiteService.pageBy(1, 10, 13);
         System.out.println(subscriptionVOPageInfo.getList());
+    }
+
+    @Test
+    public void remove(){
+        UserSite userSite = new UserSite();
+        userSite.setSiteId(1836);
+        userSite.setUserId(13);
+        userSiteService.remove(userSite);
     }
 
 }

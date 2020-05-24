@@ -6,7 +6,6 @@ import com.changyue.blogserver.serivce.base.BaseService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -15,7 +14,6 @@ import java.util.List;
  * @description : 类别业务接口
  * @date : 2020/3/4
  */
-@Transactional(readOnly = true)
 public interface CategoryService extends BaseService<Category, Integer> {
 
     /**
@@ -66,7 +64,6 @@ public interface CategoryService extends BaseService<Category, Integer> {
      *
      * @param categoryId 类别ID
      */
-    @Transactional
     void removeCategoryAndPostCategory(@NonNull Integer categoryId);
 
     /**
@@ -116,4 +113,11 @@ public interface CategoryService extends BaseService<Category, Integer> {
      */
     @NonNull
     List<CategoryDTO> convertTo(@NonNull List<Category> category);
+
+    /**
+     * 通过用户Id删除分类
+     * @param userId 用户id
+     * @return 是否删除
+     */
+    boolean removeByUserId(Integer userId);
 }

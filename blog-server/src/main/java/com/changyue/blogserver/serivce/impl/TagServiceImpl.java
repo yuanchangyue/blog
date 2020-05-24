@@ -19,7 +19,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 
-import javax.annotation.Nonnull;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -120,7 +119,6 @@ public class TagServiceImpl implements TagService {
         return tag;
     }
 
-
     @Transactional
     @Override
     public Tag update(Tag tag) {
@@ -180,13 +178,18 @@ public class TagServiceImpl implements TagService {
         return tagDTO;
     }
 
-    @Nonnull
     @Override
     public List<TagDTO> convertTo(List<Tag> tags) {
         if (CollectionUtils.isEmpty(tags)) {
             return Collections.emptyList();
         }
         return tags.stream().map(this::convertTo).collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean removeByUserId(Integer userId) {
+        Assert.notNull(userId, "用户id不能为空");
+        return tagMapper.deleteByPrimaryKey(userId) > 0;
     }
 
 }

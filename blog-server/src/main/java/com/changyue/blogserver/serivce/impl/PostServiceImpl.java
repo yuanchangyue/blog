@@ -105,9 +105,11 @@ public class PostServiceImpl implements PostService {
         return posts.stream().map(post -> {
             PostVO postVO = convertTO(post);
             User byUserId = userService.getByUserId(post.getUserId());
-            UserDTO userDTO = new UserDTO();
-            BeanUtils.copyProperties(byUserId, userDTO);
-            postVO.setUserDTO(userDTO);
+            if(byUserId!=null){
+                UserDTO userDTO = new UserDTO();
+                BeanUtils.copyProperties(byUserId, userDTO);
+                postVO.setUserDTO(userDTO);
+            }
             return postVO;
         }).collect(Collectors.toList());
     }
@@ -355,6 +357,12 @@ public class PostServiceImpl implements PostService {
     public String getDocumentIdById(Integer id) {
         Assert.notNull(id, "post Id 不能为空");
         return postMapper.findDocumentIdById(id);
+    }
+
+    @Override
+    public List<Integer> getPostIdsByUserId(Integer userId) {
+        Assert.notNull(userId, "用户id不能为空");
+        return postMapper.listPostIdByUserId(userId);
     }
 
     @Override

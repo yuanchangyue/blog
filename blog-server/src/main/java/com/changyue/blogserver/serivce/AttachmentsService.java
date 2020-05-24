@@ -1,7 +1,6 @@
 package com.changyue.blogserver.serivce;
 
 import com.changyue.blogserver.model.dto.AttachmentDTO;
-import com.changyue.blogserver.model.entity.AttachmentType;
 import com.changyue.blogserver.model.entity.Attachments;
 import com.changyue.blogserver.model.params.AttachmentQuery;
 import com.changyue.blogserver.serivce.base.BaseService;
@@ -62,6 +61,7 @@ public interface AttachmentsService extends BaseService<Attachments, Integer> {
      */
     @NonNull
     Attachments upload(@NonNull MultipartFile file);
+
 
     /**
      * 转换为DIO

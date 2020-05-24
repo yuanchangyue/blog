@@ -82,7 +82,7 @@ public interface PostMapper extends BaseMapper<Post> {
      * @param userId 用户ID
      * @return postId
      */
-    List<String> listPostIdByUserId(@Param("userId") Integer userId);
+    List<Integer> listPostIdByUserId(@Param("userId") Integer userId);
 
     /**
      * 通过ID查找ES文档的ID
@@ -90,7 +90,7 @@ public interface PostMapper extends BaseMapper<Post> {
      * @param id id
      * @return ES文档ID
      */
-    String findDocumentIdById(@Nonnull Integer id);
+    String findDocumentIdById(Integer id);
 
     /**
      * 更新点赞。

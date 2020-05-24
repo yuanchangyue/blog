@@ -25,7 +25,7 @@ public class CategoryParam implements InputConvert<Category> {
     /**
      * 类别别名
      */
-    @Size(max = 8, message = "分类别名的字符长度不能超过 {max}")
+    @Size(max = 12, message = "分类别名的字符长度不能超过 {max}")
     private String slugName;
 
     /**

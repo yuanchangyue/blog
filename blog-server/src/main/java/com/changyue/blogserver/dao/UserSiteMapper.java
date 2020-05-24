@@ -34,4 +34,13 @@ public interface UserSiteMapper extends BaseMapper<UserSite> {
      */
     UserSite findUserSite(@Param("userId") Integer userId, @Param("siteId") Integer siteId);
 
+    /**
+     * 移除用户和站点的关系
+     *
+     * @param userId 用户ID
+     * @param siteId 站点ID
+     * @return 影响行数
+     */
+    int deleteBy(@Param("userId") Integer userId, @Param("siteId") Integer siteId);
+
 }

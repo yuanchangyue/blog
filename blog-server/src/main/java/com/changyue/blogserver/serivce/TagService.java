@@ -34,7 +34,6 @@ public interface TagService extends BaseService<Tag, Integer> {
     @Nullable
     Tag getByName(@NonNull String tagName);
 
-
     /**
      * 最新的tag
      *
@@ -78,7 +77,6 @@ public interface TagService extends BaseService<Tag, Integer> {
      * @param tag 标记不能为null
      * @return tag dto
      */
-    @NonNull
     TagDTO convertTo(@NonNull Tag tag);
 
     /**
@@ -87,7 +85,13 @@ public interface TagService extends BaseService<Tag, Integer> {
      * @param tags 标签列表
      * @return tag dto
      */
-    @NonNull
     List<TagDTO> convertTo(@Nullable List<Tag> tags);
+
+    /**
+     * 通过用户Id删除标签
+     * @param userId 用户ID
+     * @return 是否删除成
+     */
+    boolean removeByUserId(@NonNull Integer userId);
 
 }

@@ -18,11 +18,10 @@ public class SubscriptionController {
     @Autowired
     private UserSiteService userSiteService;
 
-
     @PostMapping
     public Result createBy(@RequestBody UserSite userSite) {
         userSiteService.create(userSite);
-        return Result.create("订阅成功！");
+        return Result.create("收藏成功！");
     }
 
     @PostMapping("/check")
@@ -35,6 +34,12 @@ public class SubscriptionController {
                          @RequestParam(name = "pageSize", defaultValue = "8") Integer pageSize,
                          @PathVariable(name = "userId") Integer userId) {
         return Result.create(userSiteService.pageBy(pageIndex, pageSize, userId));
+    }
+
+    @PostMapping("/remove")
+    public Result remove(@RequestBody UserSite userSite) {
+        userSiteService.remove(userSite);
+        return Result.create("取消收藏");
     }
 
 }

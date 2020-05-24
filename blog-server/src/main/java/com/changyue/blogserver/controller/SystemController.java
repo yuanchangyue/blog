@@ -1,11 +1,11 @@
 package com.changyue.blogserver.controller;
 
 import com.changyue.blogserver.model.rep.Result;
-import com.changyue.blogserver.serivce.LogsService;
-import com.changyue.blogserver.serivce.UserAuthorityService;
-import com.changyue.blogserver.serivce.UserService;
+import com.changyue.blogserver.serivce.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author : 袁阊越
@@ -21,6 +21,15 @@ public class SystemController {
 
     @Autowired
     private LogsService logsService;
+
+    @Autowired
+    private CategoryService categoryService;
+
+    @Autowired
+    private TagService tagService;
+
+    @Autowired
+    private PostService postService;
 
     @Autowired
     private UserAuthorityService userAuthorityService;
@@ -48,6 +57,21 @@ public class SystemController {
     public Result deleteLog(@PathVariable("logId") Integer logId) {
         logsService.removeById(logId);
         return Result.create("日志删除成功");
+    }
+
+    @DeleteMapping("/user/close/{userId}")
+    public Result closeUser(@PathVariable("userId") Integer userId) {
+
+        //移除用户相关的标签信息
+        tagService.removeByUserId(userId);
+        //移除用户相关的分类信息
+        categoryService.removeByUserId(userId);
+        //移除相关文章
+        List<Integer> postIdsByUserId = postService.getPostIdsByUserId(userId);
+        if (!postIdsByUserId.isEmpty()) {
+            postService.removeInBatch(postIdsByUserId);
+        }
+        return Result.create("销户成功！");
     }
 
 }

@@ -68,11 +68,16 @@ public interface TagMapper extends BaseMapper<Tag> {
      */
     List<Tag> listAllByPostId(@Param("postId") Integer postId);
 
-
     /**
      * 最新的tag
      *
      * @return 标签列表
      */
     List<Tag> listLatest();
+
+    /**
+     * 通过用户ID 删除tag
+     * @return 影响行数
+     */
+    int deleteByUserId(@Param("userId")Integer userId);
 }

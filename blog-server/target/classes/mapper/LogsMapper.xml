@@ -28,7 +28,7 @@
         from logs
         <where>
             <if test="username != null and username != ''">
-                username = #{username}
+                username LIKE CONCAT('%', #{username}, '%')
             </if>
         </where>
     </select>

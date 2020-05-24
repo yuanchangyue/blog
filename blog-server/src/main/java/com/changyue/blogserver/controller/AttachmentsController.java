@@ -36,7 +36,6 @@ public class AttachmentsController {
         return attachmentsService.pageBy(pageIndex, pageSize);
     }
 
-
     @MyLog("查询附件列表（条件）")
     @PostMapping("/query")
     public PageInfo<AttachmentDTO> getByQuery(@RequestParam(name = "pageIndex", defaultValue = "1") Integer pageIndex,
@@ -44,7 +43,6 @@ public class AttachmentsController {
                                               @RequestBody AttachmentQuery attachmentQuery) {
         return attachmentsService.pageByQuery(pageIndex, pageSize, attachmentQuery);
     }
-
 
     @MyLog("查询单条附件信息")
     @GetMapping("/{attachmentId}")
@@ -56,8 +54,6 @@ public class AttachmentsController {
     public Result getById() {
         return Result.create(attachmentsService.geyAttachmentType());
     }
-
-
 
     @DeleteMapping("/{attachmentId}")
     public Result remove(@PathVariable("attachmentId") Integer attachmentId) {

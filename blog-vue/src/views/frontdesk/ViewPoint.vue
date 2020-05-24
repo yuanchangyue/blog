@@ -1,6 +1,6 @@
 <template>
   <div class="blog-all" style="width: 100%;background: #ffffff;">
-    <header-bar title="奇文共欣赏，疑义相与析" btn="探索" :banner="true" bg="about.jpg"/>
+    <header-bar title="奇文共欣赏" btn="探索" :banner="true" bg="explore.jpg"/>
     <div class="content" id="content">
       <el-row type="flex" justify="space-between" :gutter="80">
         <el-col :md="18">
@@ -9,7 +9,7 @@
               <el-row :gutter="20">
                 <el-col data-aos="fade-up" :data-aos-delay="index*100" class="site-box" :xs="24" :sm="12" :md="8"
                         :lg="6" v-for="(site,index) in siteData" :key="site.id">
-                  <el-image class="show-img" style="width: 200px;height: 150px;" fit="cover" :src="site.pic"></el-image>
+                  <el-image @click="goto" class="show-img" style="width: 200px;height: 150px;" fit="cover" :src="site.pic"/>
                   <h3 class="site-name" @click="moreSite(site.id)" v-text="site.name"></h3>
                   <p class="site-brief" v-text="site.brief"></p>
                   <p style="font-size: 12px;color: #909399">[{{c.cateName}}]</p>
@@ -21,7 +21,7 @@
             @current-change="handleCurrentChange"
             @size-change="handleSizeChange"
             layout="total, sizes,prev, pager, next"
-            :page-sizes="[8,16,24]"
+            :page-sizes="[16,24,30]"
             :current-page.sync="currentPage"
             :page-size="pageSize"
             :total="pageTotal">
@@ -32,10 +32,10 @@
             <el-divider content-position="center">推荐文章</el-divider>
             <section data-aos="zoom-in-up" :data-aos-delay="index*100" class="post-item"
                      v-show="p.headpic!==''&&p.headpic!==null" v-for="(p,index) in randomList" :key="p.id">
-              <el-image class="post-img" :src="p.headpic" fit="cover"></el-image>
-              <p class="post-info" @click="toPage(p.id)" v-text="p.title"></p>
+              <el-image  class="post-img" :src="p.headpic" fit="cover"></el-image>
+              <p class="post-info" @click="toPage(p.id)" v-text="p.title"/>
               <div class="post-info">
-                <span class="post-site" v-text="'来自：' + p.siteName"></span>
+                <span class="post-site" @click="toPage(p.id)" v-text="'来自：' + p.siteName"></span>
               </div>
             </section>
             <el-divider content-position="center">没有了~</el-divider>
@@ -69,7 +69,7 @@ export default {
       siteData: [],
       query: {
         keyWords: '',
-        cateId: ''
+        cateId: '10'
       },
       randomList: '',
       pageTotal: 0,
@@ -78,8 +78,10 @@ export default {
     }
   },
   methods: {
+    goto () {
+      console.info('click')
+    },
     handleClick (tab) {
-      console.log(tab.name)
       this.query.cateId = tab.name
       this.getSite()
     },
@@ -100,7 +102,7 @@ export default {
       this.currentPage = value.data.siteVOPageInfo.pageNum
     },
     moreSite (id) {
-      localStorage.setItem('siteId', id)
+      sessionStorage.setItem('siteId', id)
       this.$router.push({ name: 'SitePage', params: { siteId: id } })
     },
     handleCurrentChange (val) {
@@ -120,7 +122,6 @@ export default {
     },
     getRandomList () {
       this.$axios.get('/crawlerpost/randomlist').then(_ => {
-        console.info(_.data)
         this.randomList = _.data.data
       })
     }

@@ -46,19 +46,16 @@ export default {
       direction: 'ltr',
       menuMode: 'horizontal',
       logo: require('../assets/logo.png'),
-      menuData: JSON.parse(localStorage.getItem('menu')),
-      userData: JSON.parse(localStorage.getItem('user'))
+      menuData: JSON.parse(sessionStorage.getItem('menu')),
+      userData: JSON.parse(sessionStorage.getItem('user'))
     }
   },
   methods: {
     logout () {
       this.$axios.get('/user/logout').then(_ => {
-        localStorage.clear()
+        sessionStorage.clear()
         this.$router.replace({ path: '/login' })
       })
-    },
-    showUser () {
-      console.info(this.userData)
     },
     personal () {
       this.$router.replace({ path: '/management/personal' })
@@ -66,9 +63,6 @@ export default {
     handlerUrl (url) {
       return 'http://localhost:8089/' + url
     }
-  },
-  created () {
-    this.showUser()
   }
 }
 </script>
@@ -107,5 +101,9 @@ export default {
   .user-box li {
     float: right;
     margin: 0 10px;
+  }
+
+  .el-icon-link{
+    font-size: 26px;
   }
 </style>

@@ -9,17 +9,15 @@
             <div slot="header">
               <span>{{ title }}</span>
             </div>
-            <el-form>
-              <el-form-item label="名称:">
-                <el-input size="small" v-model="form.name" placeholder="请输入类别名称"/>
-                <div class="prompt-form">* 名称不能空,长度不能超过20</div>
+            <el-form :model="form" :rules="rules" ref="form">
+              <el-form-item label="名称:" prop="name">
+                <el-input  v-model="form.name" placeholder="请输入类别名称"/>
               </el-form-item>
-              <el-form-item label="别名:">
-                <el-input size="small" type="text" v-model="form.slugName" placeholder="请输入类别别名"/>
-                <div class="prompt-form">* 别名不能空,长度不能超过20,不能重复</div>
+              <el-form-item label="别名:" prop="slugName">
+                <el-input  type="text" v-model="form.slugName" placeholder="请输入类别别名"/>
               </el-form-item>
               <el-form-item label="父级类别">
-                <el-select v-model="form.parentId" clearable style="width: 100%;" size="small" placeholder="请选择类别">
+                <el-select v-model="form.parentId" clearable style="width: 100%;"  placeholder="请选择类别">
                   <el-option
                     v-for="item in parentCategoryDate"
                     :key="item.id"
@@ -29,12 +27,11 @@
                 </el-select>
                 <div class="prompt-form">* 选择父级类别(一级分类), 一级分类默认不选</div>
               </el-form-item>
-              <el-form-item label="描述">
+              <el-form-item label="描述" prop="description">
                 <el-input type="textarea" v-model="form.description" placeholder="请输入描述内容"/>
-                <div class="prompt-form">* 关于类别描述</div>
               </el-form-item>
               <el-form-item>
-                <el-button type="primary" size="small" @click="createAndUpdate">{{button}}</el-button>
+                <el-button type="primary" size="small" @click="createAndUpdate('form')">{{button}}</el-button>
                 <el-button v-if="!isInsert" size="small" @click="returnInsert()">返回新增</el-button>
               </el-form-item>
             </el-form>
@@ -119,17 +116,31 @@ export default {
       loading: true,
       pageTotal: 0,
       currentPage: 0,
-      pageSize: 0
+      pageSize: 0,
+      rules: {
+        name: [
+          { required: true, message: '请输入分类名称', trigger: 'blur' },
+          { max: 8, message: '长度不能超过8个字符', trigger: 'blur' }
+        ],
+        slugName: [
+          { required: true, message: '请输入分类别名', trigger: 'blur' },
+          { max: 12, message: '长度不能超过12个字符', trigger: 'blur' }
+        ],
+        description: [
+          { required: true, message: '请输入分类描述', trigger: 'blur' },
+          { max: 50, message: '长度不能超过50个字符', trigger: 'blur' }
+        ]
+      }
     }
   },
   mounted () {
     this.showList()
-    this.showParentCategory()
   },
   methods: {
     showList () {
       this.$axios.get('/category').then(value => {
         this.setPageValue(value)
+        this.showParentCategory()
       }).catch(_ => {})
     },
     setPageValue (value) {
@@ -149,24 +160,31 @@ export default {
       this.pageSize = val
       this.handleCurrentChange()
     },
-    createAndUpdate () {
-      var formData = {
-        name: this.form.name,
-        slugName: this.form.slugName,
-        description: this.form.description,
-        parentId: this.form.parentId
-      }
-      if (this.isInsert) {
-        this.$axios.post('/category', formData).then(_ => {
-          this.$notify.success('类别添加成功')
-          this.showList()
-        }).catch(_ => {})
-      } else {
-        this.$axios.put('/category/' + this.currentCategoryId, formData).then(_ => {
-          this.$notify.success('修改标签成功!')
-          this.showList()
-        }).catch(_ => {})
-      }
+    createAndUpdate (formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          var formData = {
+            name: this.form.name,
+            slugName: this.form.slugName,
+            description: this.form.description,
+            parentId: this.form.parentId
+          }
+          if (this.isInsert) {
+            this.$axios.post('/category', formData).then(_ => {
+              this.$notify.success('类别添加成功')
+              this.showList()
+            }).catch(_ => {})
+          } else {
+            this.$axios.put('/category/' + this.currentCategoryId, formData).then(_ => {
+              this.$notify.success('修改标签成功!')
+              this.showList()
+            }).catch(_ => {})
+          }
+        } else {
+          this.$message.error('请输入有效的信息!')
+          return false
+        }
+      })
     },
     handleDelete (index) {
       var id = this.tableData[index].id
@@ -212,6 +230,7 @@ export default {
     showParentCategory () {
       this.$axios.get('/category/parent').then(value => {
         this.parentCategoryDate = value.data.data
+        console.info('category' + this.parentCategoryDate)
       })
     }
   }

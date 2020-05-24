@@ -2,7 +2,7 @@
   <div class="all-warp">
     <TopNav/>
     <BreadCrumb :bread1="bread.firstBread" :bread2="bread.secondBread"/>
-    <div class="container">
+    <div class="container" style="margin-bottom: 40px;">
       <el-row :gutter="30" v-loading="loading">
         <el-col :span="8" v-for="user in userList" :key="user.userDTO.id">
           <el-card class="user-card">
@@ -19,9 +19,6 @@
                  v-text="'简介：'+user.userDTO.description"></p>
               <div class="roles">
                 <span>当前角色：{{ user.role.name }}</span>
-                <el-button style="margin-left: 8px;" v-if="user.role.id === 2" @click="updateRole(user.userDTO.id)"
-                           size="small" type="primary">升级
-                </el-button>
               </div>
               <el-divider content-position="left">拥有的菜单</el-divider>
               <div class="menu-info">
@@ -31,6 +28,14 @@
                         style="margin: 5px;">
                   {{ item.name }}
                 </el-tag>
+              </div>
+              <div v-if="user.role.id === 2">
+                <el-divider/>
+                <el-button-group >
+                  <el-button @click="updateRole(user.userDTO.id)" size="small" type="primary">升级
+                  </el-button>
+<!--                  <el-button size="small" type="danger" >注销</el-button>-->
+                </el-button-group>
               </div>
             </div>
           </el-card>
@@ -56,7 +61,7 @@ export default {
       bgImg: require('../../assets/login-bg.jpg'),
       pageTotal: 0,
       currentPage: 0,
-      pageSize: 4,
+      pageSize: 10,
       loading: true,
       userList: [],
       username: ''
@@ -69,7 +74,6 @@ export default {
       })
     },
     setPageValue (value) {
-      console.info(value.data.data)
       this.userList = value.data.data.list
       this.pageTotal = value.data.total
       this.pageSize = value.data.pageSize

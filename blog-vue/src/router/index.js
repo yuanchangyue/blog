@@ -68,7 +68,13 @@ const routes = [
     path: '/management/site',
     name: 'Site',
     component: () => import('../views/backstage/Site')
-  }, {
+  },
+  {
+    path: '/management/log',
+    name: 'Logs',
+    component: () => import('../views/backstage/Log')
+  },
+  {
     path: '/blog/viewpoint',
     name: 'ViewPointPage',
     component: () => import('../views/frontdesk/ViewPoint')
@@ -115,7 +121,7 @@ const router = new VueRouter({
 // let newRouter = []
 // router.beforeEach((to, from, next) => {
 //   if (to.path !== '/login') {
-//     var routerItem = JSON.parse(localStorage.getItem('router'))
+//     var routerItem = JSON.parse(sessionStorage.getItem('router'))
 //     if (routerItem) {
 //       if (!newRouter) {
 //         routerItem.forEach(e => {

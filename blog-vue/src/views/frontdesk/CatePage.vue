@@ -106,12 +106,10 @@ export default {
     },
     showPostByTag () {
       this.$axios.post('/post/query?pageSize=' + this.pageSize, this.cate).then(value => {
-        console.info(value.data)
         this.setPageValue(value)
       }).catch(_ => {})
     },
     setPageValue (value) {
-      console.info(value.data)
       this.postData = value.data.list
       this.pageTotal = value.data.total
       this.pageSize = value.data.pageSize
@@ -136,25 +134,22 @@ export default {
       })
     },
     getCate () {
-      console.info(this.cate.categoryId)
       this.$axios.get('/category/' + this.cate.categoryId).then(value => {
         this.cateObj = value.data
-        console.info(this.cateObj)
       }).catch(_ => {
       })
     },
     toPost (id) {
-      localStorage.setItem('userPostId', id)
+      sessionStorage.setItem('userPostId', id)
       this.$router.push({ name: 'UserPostPage', params: { postId: id } })
     },
     gotoTag (id) {
-      console.info('go to tag' + id)
-      localStorage.setItem('tagId', id)
+      sessionStorage.setItem('tagId', id)
       this.$router.push({ name: 'TagPage', params: { tagId: id } })
     }
   },
   created () {
-    this.cate.categoryId = localStorage.getItem('cateId')
+    this.cate.categoryId = sessionStorage.getItem('cateId')
     this.showTagList()
     this.showCategory()
     this.showPostByTag()

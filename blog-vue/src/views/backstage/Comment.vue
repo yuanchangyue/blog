@@ -132,7 +132,7 @@ export default {
         parentId: 0,
         status: ''
       },
-      userData: JSON.parse(localStorage.getItem('user'))
+      userData: JSON.parse(sessionStorage.getItem('user'))
     }
   },
   methods: {
@@ -184,7 +184,6 @@ export default {
       this.comment.userId = this.userData.id
       this.$axios.post('/comments/list', this.comment).then(_ => {
         this.setPageValue(_.data)
-        console.info(_.data)
       })
     },
     setPageValue (value) {

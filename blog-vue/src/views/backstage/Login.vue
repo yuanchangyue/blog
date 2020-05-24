@@ -9,16 +9,16 @@
             </el-row>
             <el-row style="width: 380px;padding: 30px 30px 30px 50px;">
               <h2 style="text-align: left">登录</h2>
-              <el-form>
-                <el-form-item>
+              <el-form :model="form" :rules="rules" ref="form">
+                <el-form-item prop="name">
                   <el-input v-model="form.name" prefix-icon="el-icon-user" placeholder="请输入用户名"/>
                 </el-form-item>
-                <el-form-item>
+                <el-form-item prop="password">
                   <el-input type="password" v-model="form.password" prefix-icon="el-icon-lock"
                             placeholder="请输入密码"/>
                 </el-form-item>
                 <el-form-item>
-                  <el-button style="width: 100%;" @click="login()" type="primary">登录</el-button>
+                  <el-button style="width: 100%;" @click="login('form')" type="primary">登录</el-button>
                 </el-form-item>
                 <p class="toregister">没有账号？点击马上
                   <router-link to="/register" style="color: #409EFF;text-underline-style: none">注册</router-link>
@@ -46,27 +46,43 @@ export default {
         name: '',
         password: ''
       },
-      bgImg: require('../../assets/login-bg.jpg')
+      bgImg: require('../../assets/login-bg.jpg'),
+      rules: {
+        name: [
+          { required: true, message: '请输入用户名', trigger: 'blur' },
+          { min: 2, max: 32, message: '用户名长度在 3 到 32 个字符', trigger: 'blur' }
+        ],
+        password: [
+          { required: true, message: '请输入密码', trigger: 'blur' },
+          { min: 3, max: 32, message: '长度在 3 到 32 个字符', trigger: 'blur' }
+        ]
+      }
     }
   },
   methods: {
-    login () {
-      var formData = {
-        username: this.form.name,
-        password: this.form.password
-      }
-      this.$axios.post('/user/login', formData).then(_ => {
-        console.info(_.data)
-        var routerItem = _.data.data.routerVOS
-        var menu = _.data.data.menuVos
-        var user = _.data.data.userDTO
-        localStorage.setItem('user', JSON.stringify(user))
-        localStorage.setItem('router', JSON.stringify(routerItem))
-        localStorage.setItem('menu', JSON.stringify(menu))
-        this.$notify.success(this.form.name + '登陆成功')
-        this.$router.push('/blog/index')
-      }).catch(err => {
-        this.$message.error('登陆失败， 原因：' + err.data.msg)
+    login (form) {
+      this.$refs[form].validate((valid) => {
+        if (valid) {
+          var formData = {
+            username: this.form.name,
+            password: this.form.password
+          }
+          this.$axios.post('/user/login', formData).then(_ => {
+            var routerItem = _.data.data.routerVOS
+            var menu = _.data.data.menuVos
+            var user = _.data.data.userDTO
+            sessionStorage.setItem('user', JSON.stringify(user))
+            sessionStorage.setItem('router', JSON.stringify(routerItem))
+            sessionStorage.setItem('menu', JSON.stringify(menu))
+            this.$notify.success(this.form.name + '登陆成功')
+            this.$router.push('/blog/index')
+          }).catch(err => {
+            this.$message.error('登陆失败， 原因：' + err.data.msg)
+          })
+        } else {
+          this.$message.error('登陆失败，请正确填写信息')
+          return false
+        }
       })
     }
   }

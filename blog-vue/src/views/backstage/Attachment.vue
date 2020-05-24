@@ -165,7 +165,6 @@ export default {
     },
     initType () {
       this.$axios.get('/attachment/type').then(value => {
-        console.info(value.data.data)
         this.attachmentTypeList = value.data.data
       })
     },

@@ -25,8 +25,8 @@
     </header>
     <section v-if="banner" class="banner" :style="{backgroundImage:`url(${require('../assets/'+bg)})`}">
       <div class="banner-box">
-        <p class="banner-title" data-aos="fade-up">{{title}}</p>
-        <a class="explore-btn" data-aos="fade-up" data-aos-delay="200" href="#content">{{btn}} <i
+        <p class="banner-title" >{{title}}</p>
+        <a class="explore-btn" href="#content">{{btn}} <i
           class="el-icon-bottom"></i></a>
       </div>
     </section>
@@ -39,14 +39,14 @@ export default {
   name: 'Header',
   data () {
     return {
-      userData: JSON.parse(localStorage.getItem('user')),
+      userData: JSON.parse(sessionStorage.getItem('user')),
       query: ''
     }
   },
   methods: {
     logout () {
       this.$axios.get('/user/logout').then(_ => {
-        localStorage.clear()
+        sessionStorage.clear()
         this.$router.replace({ path: '/blog/viewpoint' })
       })
     },
@@ -56,7 +56,7 @@ export default {
     },
     queryPost () {
       this.$axios.get('/query/full/' + this.query).then(value => {
-        localStorage.setItem('queryItem', JSON.stringify(value.data.data))
+        sessionStorage.setItem('queryItem', JSON.stringify(value.data.data))
         this.$router.replace({ path: '/blog/query' })
       })
     }
@@ -171,7 +171,7 @@ export default {
 
   .banner {
     position: relative;
-    width: 90%;
+    width: 100%;
     height: 100vh;
     background-size: cover;
   }
@@ -201,6 +201,7 @@ export default {
     font-size: 16px;
     transition: .2s ease-in;
     width: 0;
+    font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
   }
 
   header ul .search-box:hover {
@@ -216,7 +217,7 @@ export default {
   .banner-box {
     position: absolute;
     top: 50%;
-    left: 10%;
+    left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
     transition: .3s ease-in-out;

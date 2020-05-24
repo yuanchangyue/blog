@@ -69,7 +69,7 @@ export default {
   components: { HeaderBar, FrontFooter },
   data () {
     return {
-      queryResult: JSON.parse(localStorage.getItem('queryItem')),
+      queryResult: JSON.parse(sessionStorage.getItem('queryItem')),
       defaultBg: require('../../assets/login-bg.jpg')
     }
   },
@@ -78,7 +78,7 @@ export default {
       return 'http://localhost:8089/' + url
     },
     toPost (id) {
-      localStorage.setItem('userPostId', id)
+      sessionStorage.setItem('userPostId', id)
       this.$router.push({ name: 'UserPostPage', params: { postId: id } })
     },
     subStringToContent (str) {
@@ -88,12 +88,11 @@ export default {
       this.$router.push({ name: 'PostPage', params: { postId: id } })
     },
     moreSite (id) {
-      localStorage.setItem('siteId', id)
+      sessionStorage.setItem('siteId', id)
       this.$router.push({ name: 'SitePage', params: { siteId: id } })
     }
   },
   mounted () {
-    console.info(this.queryResult)
   }
 }
 </script>
@@ -126,7 +125,7 @@ export default {
 
   .post-summary >>> .highlight,
   .post-title >>> .highlight {
-    background: #b10406;
+    background: #409EFF;
     color: white;
     padding: 5px;
   }

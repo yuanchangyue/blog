@@ -3,10 +3,14 @@
     <TopNav/>
     <BreadCrumb :bread1="bread.firstBread" :bread2="bread.secondBread"/>
     <div class="content-warp" style="v-height:100%;">
-      <el-input v-model="form.title" style="min-width: 600px;margin-bottom: 10px" placeholder="请输入文章的标题"/>
+      <el-form ref="form" :model="form" :rules="rules">
+        <el-form-item prop="title">
+      <el-input v-model="form.title"  style="min-width: 600px;margin-bottom: 10px" placeholder="请输入文章的标题"/>
+        </el-form-item>
+      </el-form>
       <mavon-editor v-model="form.originalContent" ref="md" @change="change" style="min-height: 600px;margin-bottom: 10px"/>
       <el-row type="flex" justify="end">
-        <el-button type="danger" plain icon="el-icon-edit" @click="saveDraft">移至草稿箱</el-button>
+<!--        <el-button type="danger" plain icon="el-icon-edit" @click="saveDraft('form')">移至草稿箱</el-button>-->
         <el-button type="primary" icon="el-icon-upload" @click="drawer = true">发表文章</el-button>
       </el-row>
       <el-drawer
@@ -16,11 +20,11 @@
         :direction="direction"
         :before-close="handleClose">
         <div>
-          <el-form class="drawer-form" ref="form" label-width="80px">
+          <el-form class="drawer-form" ref="form" label-width="80px" :model="form" :rules="rules">
             <el-form-item label="创建时间">
               <el-date-picker v-bind:disabled="disable" type="date" placeholder="选择日期" v-model="form.createTime" style="width: 100%;"></el-date-picker>
             </el-form-item>
-            <el-form-item label="分类目录">
+            <el-form-item label="分类目录" prop="categoryIds">
               <el-select v-model="form.categoryIds" placeholder="请选择分类" style="width: 100%;" multiple>
                 <el-option  v-for="item in categoryList"
                             :key="item.id"
@@ -28,9 +32,8 @@
                             :value="item.id">
                 </el-option>
               </el-select>
-              <div class="prompt-form">* 类别不能空</div>
             </el-form-item>
-            <el-form-item label="文章标签">
+            <el-form-item label="文章标签" prop="tagIds">
               <el-select v-model="form.tagIds" placeholder="请选择标签" style="width: 100%;" multiple>
                 <el-option  v-for="item in tagList"
                             :key="item.id"
@@ -38,12 +41,11 @@
                             :value="item.id">
                 </el-option>
               </el-select>
-              <div class="prompt-form">* 标签不能空</div>
             </el-form-item>
             <el-form-item label="访问密码">
               <el-input type="password" v-model="form.password" show-password v-bind:placeholder="passwordHind"></el-input>
             </el-form-item>
-            <el-form-item label="文章备注">
+            <el-form-item label="文章备注" prop="summary">
               <el-input type="textarea" v-model="form.summary" placeholder="请输入文章的备注"></el-input>
             </el-form-item>
             <el-form-item label="开启评价">
@@ -56,8 +58,8 @@
               <el-image :src="imgSrc" :fit="fit" style="width: 100%;height: 200px;" @click="innerDrawer = true"></el-image>
             </div>
             <el-row type="flex" justify="end">
-              <el-button icon="el-icon-edit" @click="saveDraft">移至草稿箱</el-button>
-              <el-button icon="el-icon-upload" type="primary" @click="submit">发布</el-button>
+              <el-button icon="el-icon-edit" @click="saveDraft('form')">移至草稿箱</el-button>
+              <el-button icon="el-icon-upload" type="primary" @click="submit('form')">发布</el-button>
             </el-row>
           </el-form>
         </div>
@@ -131,6 +133,20 @@ export default {
         status: 0,
         thumbnail: ''
       },
+      rules: {
+        summary: [
+          { required: true, message: '请输入简介内容', trigger: 'blur' }
+        ],
+        categoryIds: [
+          { type: 'array', required: true, message: '请至少选择一个分类', trigger: 'change' }
+        ],
+        tagIds: [
+          { type: 'array', required: true, message: '请至少选择一个标签', trigger: 'change' }
+        ],
+        title: [
+          { required: true, message: '文章标题不能为空', trigger: 'blur' }
+        ]
+      },
       imgSrc: require('../../assets/empty.svg'),
       updateId: '',
       disable: false,
@@ -160,52 +176,65 @@ export default {
     change (value, render) {
       this.form.formatContent = render
     },
-    saveDraft () {
-      var formData = this.form
-      this.form.status = 1
-      this.$axios.post('/post', formData).then(value => {
-        console.info(value)
-        this.$notify({
-          title: '成功',
-          message: '文章已经移至草稿箱',
-          type: 'success'
-        })
-        this.$router.push({ path: '/management/postlist' })
-      }).catch(_ => {
+    saveDraft (formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          var formData = this.form
+          this.form.status = 1
+          this.$axios.post('/post', formData).then(value => {
+            this.$notify({
+              title: '成功',
+              message: '文章已经移至草稿箱',
+              type: 'success'
+            })
+            this.$router.push({ path: '/management/postlist' })
+          }).catch(_ => {
+          })
+        } else {
+          this.$message.error('请输入有效的信息!')
+          return false
+        }
       })
     },
-    submit () {
-      if (this.isInsert) {
-        this.$axios.post('/post', this.form).then(_ => {
-          this.$notify({
-            title: '成功',
-            message: '文章发布成功',
-            type: 'success'
-          })
-          this.$router.push({ path: '/management/postlist' })
-        }).catch(_ => {
-          this.$notify({
-            title: '警告',
-            message: '文章发布失败',
-            type: 'warning'
-          })
-        })
-      } else {
-        this.$axios.put('/post/' + this.updateId, this.form).then(_ => {
-          this.$notify({
-            title: '成功',
-            message: '文章编辑成功',
-            type: 'success'
-          })
-          this.$router.push({ path: '/management/postlist' })
-        }).catch(_ => {
-          this.$notify({
-            title: '警告',
-            message: '文章编辑失败',
-            type: 'warning'
-          })
-        })
-      }
+    submit (formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          if (this.isInsert) {
+            this.$axios.post('/post', this.form).then(_ => {
+              this.$notify({
+                title: '成功',
+                message: '文章发布成功',
+                type: 'success'
+              })
+              this.$router.push({ path: '/management/postlist' })
+            }).catch(_ => {
+              this.$notify({
+                title: '警告',
+                message: '文章发布失败',
+                type: 'warning'
+              })
+            })
+          } else {
+            this.$axios.put('/post/' + this.updateId, this.form).then(_ => {
+              this.$notify({
+                title: '成功',
+                message: '文章编辑成功',
+                type: 'success'
+              })
+              this.$router.push({ path: '/management/postlist' })
+            }).catch(_ => {
+              this.$notify({
+                title: '警告',
+                message: '文章编辑失败',
+                type: 'warning'
+              })
+            })
+          }
+        } else {
+          this.$message.error('请输入有效的信息!')
+          return false
+        }
+      })
     },
     handleClose (done) {
       this.$confirm('确认取消发布文章吗？')
@@ -248,7 +277,6 @@ export default {
     },
     initList () {
       this.$axios.get('/attachment?pageSize=' + this.pageSize).then(value => {
-        console.info(value.data)
         this.setPageValue(value)
       })
     },
@@ -277,7 +305,6 @@ export default {
       this.passwordHind = '********'
       this.$axios.get('/post/' + this.updateId).then(value => {
         var data = value.data
-        console.info(data)
         if (data.code === 200) {
           this.disable = true
           this.form.title = data.data.title

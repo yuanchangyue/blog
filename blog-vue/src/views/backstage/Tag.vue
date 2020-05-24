@@ -9,17 +9,15 @@
                         <div slot="header">
                             <span>{{ title }}</span>
                         </div>
-                        <el-form>
-                            <el-form-item label="标签名称:">
-                                <el-input type="text" v-model="form.name" placeholder="请输入标签名称" size="small"/>
-                                <div class="prompt-form">* 名称不能空,长度不能超过6</div>
+                        <el-form :model="form" :rules="rules" ref="form">
+                            <el-form-item label="标签名称:" prop="name">
+                                <el-input type="text" v-model="form.name" placeholder="请输入标签名称"/>
                             </el-form-item>
-                            <el-form-item label="标签别名:">
-                                <el-input type="text" v-model="form.slugName" placeholder="请输入标签别名" size="small"/>
-                                <div class="prompt-form">* 别名不能空,长度不能超过10,不能重复</div>
+                            <el-form-item label="标签别名:" prop="slugName">
+                                <el-input type="text" v-model="form.slugName" placeholder="请输入标签别名"/>
                             </el-form-item>
                             <el-form-item>
-                                <el-button type="primary" size="small" @click="createAndUpdate">{{ button }}</el-button>
+                                <el-button type="primary" size="small" @click="createAndUpdate('form')">{{ button }}</el-button>
                                 <el-button v-if="!isInsert" size="small" @click="returnInsert">返回添加</el-button>
                             </el-form-item>
                         </el-form>
@@ -68,6 +66,16 @@ export default {
       form: {
         name: '',
         slugName: ''
+      },
+      rules: {
+        name: [
+          { required: true, message: '请输入标签名称', trigger: 'blur' },
+          { max: 8, message: '长度不能超过8个字符', trigger: 'blur' }
+        ],
+        slugName: [
+          { required: true, message: '请输入标签别名', trigger: 'blur' },
+          { max: 10, message: '长度不能超过10个字符', trigger: 'blur' }
+        ]
       }
     }
   },
@@ -111,21 +119,32 @@ export default {
       this.button = '立即创建'
       this.isInsert = true
     },
-    createAndUpdate () {
-      var formData = {
-        name: this.form.name,
-        slugName: this.form.slugName
-      }
-      if (this.isInsert) {
-        this.$axios.post('/tag', formData).then(value => {
-          this.$notify.success('新增' + value.data.name + '标签成功!')
-          this.showTagList()
-        }).catch(_ => {})
-      } else {
-        this.$axios.put('/tag/' + this.currentTagId, formData).then(_ => {
-          this.$notify.success('修改标签成功!')
-        }).catch(_ => {})
-      }
+    createAndUpdate (formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          alert('submit!')
+          var formData = {
+            name: this.form.name,
+            slugName: this.form.slugName
+          }
+          if (this.isInsert) {
+            this.$axios.post('/tag', formData).then(value => {
+              this.$notify.success('新增' + value.data.name + '标签成功!')
+              this.showTagList()
+            }).catch(_ => {
+            })
+          } else {
+            this.$axios.put('/tag/' + this.currentTagId, formData).then(_ => {
+              this.$notify.success('修改标签成功!')
+              this.showTagList()
+            }).catch(_ => {
+            })
+          }
+        } else {
+          this.$message.error('请输入有效的信息!')
+          return false
+        }
+      })
     }
   }
 }

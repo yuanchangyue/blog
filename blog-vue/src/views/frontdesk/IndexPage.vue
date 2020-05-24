@@ -1,11 +1,11 @@
 <template>
   <div class="blog-all" id="blog-all" style="width: 100%;background: #f4f4f4">
-    <header-bar title="记录生活" btn="开始" :banner="true" bg="work.jpg"/>
+    <header-bar title="纵横正有凌云笔" btn="开始" :banner="true" bg="index.jpg"/>
     <div class="content" id="content">
       <!--最新文章-->
-      <section id="last-blog" data-aos="fade-up">
+      <section id="last-blog">
         <div class="container">
-          <h1 class="model-title">最新文章</h1>
+          <h1 class="model-title" id="model-title">最新文章</h1>
           <div class="owl-carousel owl-theme blog-post">
             <article class="blog-content" v-for="post in latestPost" :key="post.id">
               <img :src="handlerUrl(post.thumbnail)">
@@ -13,7 +13,6 @@
                 <h3 v-text="post.title"></h3>
               </div>
               <button class="btn btn-blog" @click="toPost(post.id)">更多</button>
-              <span class="post-user" v-text="'来自：'+post.userDTO.username"></span>
               <span class="post-time" v-text="dateFormat(post.editTime)"></span>
             </article>
           </div>
@@ -27,11 +26,11 @@
       <section class="container">
         <div class="site-content">
           <div class="posts">
-            <div class="posts-content" data-aos="zoom-in" v-for="p in postData" :key="p.id">
+            <div class="posts-content" v-for="p in postData" :key="p.id">
               <div class="post-image">
                 <div>
-                  <img v-if="p.thumbnail!==''" :src="handlerUrl(p.thumbnail)" alt="">
-                  <img v-else :src="defaultBg" alt="">
+                  <img v-if="p.thumbnail!==''" @click="toPost(p.id)" :src="handlerUrl(p.thumbnail)" alt="">
+                  <img v-else :src="defaultBg" @click="toPost(p.id)" alt="">
                 </div>
               </div>
               <div class="post-info">
@@ -74,18 +73,14 @@
               <div class="posts-content" data-aos="zoom-in" :data-aos-delay="index*100" v-for="(p,index) in collectionData" :key="p.id">
                 <div class="post-image">
                   <div>
-                    <img v-if="p.crawlerPost!=null" :src="p.crawlerPost.headpic" alt="">
-                    <img v-else :src="handlerUrl(p.post.thumbnail)" alt="">
+                    <img v-if="p.crawlerPost!=null" @click="toPage(p.crawlerPost.id)" :src="p.crawlerPost.headpic" alt="">
+                    <img v-if="p.post!=null" @click="toPost(p.post.id)" :src="handlerUrl(p.post.thumbnail)" alt="">
                   </div>
                   <div class="post-info flex-row">
-                    <span><i class="el-icon-user-solid"
-                             v-text="p.crawlerPost!=null?p.crawlerPost.siteName:p.post.userDTO.username"></i></span>
-                    <span><i class="el-icon-data-board">&nbsp;&nbsp;{{p.createTime}}</i></span>
+                    <span><i class="el-icon-user-solid" v-text="p.crawlerPost!=null?p.crawlerPost.siteName:p.post.userDTO.username"></i></span>
+                    <a href="#" v-if="p.crawlerPost!=null" @click="toPage(p.crawlerPost.id)" v-text="p.crawlerPost.title"></a>
+                    <a href="#" v-if="p.post!=null" @click="toPost(p.post.id)" v-text="p.post.title"></a>
                   </div>
-                </div>
-                <div class="post-info">
-                  <a href="#" v-if="p.crawlerPost!=null" @click="toPage(p.crawlerPost.id)" v-text="p.crawlerPost.title"></a>
-                  <a href="#" v-else @click="toPost(p.post.id)" v-text="p.post.title"></a>
                 </div>
               </div>
             </div>
@@ -104,7 +99,7 @@
       </div>
     <FrontFooter/>
     </div>
-    <el-backtop></el-backtop>
+    <el-backtop/>
   </div>
 </template>
 
@@ -133,9 +128,9 @@ export default {
       collectionData: [],
       pageTotal: 0,
       currentPage: 0,
-      pageSize: 3,
+      pageSize: 4,
       loading: true,
-      userData: JSON.parse(localStorage.getItem('user')),
+      userData: JSON.parse(sessionStorage.getItem('user')),
       nullBg: require('../../assets/not_found.svg'),
       defaultBg: require('../../assets/login-bg.jpg')
     }
@@ -148,7 +143,6 @@ export default {
       })
     },
     setPageValue (value) {
-      console.info(value.data.list)
       this.postData = value.data.list
       this.pageTotal = value.data.total
       this.pageSize = value.data.pageSize
@@ -163,7 +157,6 @@ export default {
     getLatestPostList () {
       this.$axios.get('/post/latest').then(value => {
         this.latestPost = value.data.data
-        console.info(this.latestPost)
         this.$nextTick(function () {
           this.initCarousel()
         })
@@ -186,9 +179,9 @@ export default {
     },
     getCollectionList () {
       this.loading = true
-      this.$axios.get('/collection/list?userId=' + this.userData.id).then(value => {
-        console.info(value.data.data.list)
+      this.$axios.get('/collection/list?userId=' + this.userData.id + '&pageSize=3').then(value => {
         this.collectionData = value.data.data.list
+        console.info('this.collectionData' + value.data)
         this.loading = false
       })
     },
@@ -196,16 +189,16 @@ export default {
       this.loading = true
       this.$axios.get('/subscription/' + this.userData.id).then(_ => {
         this.subscriptionData = _.data.data.list
-        console.info(this.subscriptionData)
+        // console.info(this.subscriptionData)
         this.loading = false
       })
     },
     toPost (id) {
-      localStorage.setItem('userPostId', id)
+      sessionStorage.setItem('userPostId', id)
       this.$router.push({ name: 'UserPostPage', params: { postId: id } })
     },
     moreSite (id) {
-      localStorage.setItem('siteId', id)
+      sessionStorage.setItem('siteId', id)
       this.$router.push({ name: 'SitePage', params: { siteId: id } })
     },
     handlerUrl (url) {
@@ -215,11 +208,11 @@ export default {
       return str.substr(0, 200)
     },
     gotoTag (id) {
-      localStorage.setItem('tagId', id)
+      sessionStorage.setItem('tagId', id)
       this.$router.push({ name: 'TagPage', params: { tagId: id, userId: this.userData.id } })
     },
     toCate (id) {
-      localStorage.setItem('cateId', id)
+      sessionStorage.setItem('cateId', id)
       this.$router.push({ name: 'CatePage', params: { cateId: id, userId: this.userData.id } })
     },
     toPage (id) {
@@ -298,16 +291,16 @@ export default {
     margin: 0 .5rem;
   }
 
-  .site-content .posts-content > .post-image .post-info {
-    position: absolute;
-    bottom: 0;
-    left: 5vw;
-    background: #292C30;
-    padding: 1rem;
-    border-radius: 3rem;
-    color: black;
-    font-weight: 700;
-  }
+  /*.site-content .posts-content > .post-image .post-info {*/
+  /*  position: absolute;*/
+  /*  bottom: 0;*/
+  /*  left: 0;*/
+  /*  background: #292C30;*/
+  /*  padding: 1rem;*/
+  /*  border-radius: 3rem;*/
+  /*  color: black;*/
+  /*  font-weight: 700;*/
+  /*}*/
 
   .site-content .posts-content > .post-image > div {
     overflow: hidden;
@@ -318,6 +311,7 @@ export default {
     height: 400px;
     object-fit: cover;
     transition: 0.6s linear;
+    cursor: pointer;
   }
 
   .site-content .posts-content > .post-image img:hover {
@@ -360,7 +354,11 @@ export default {
     font-weight: 700;
   }
 
+  .site-content > .side-bar .collection-post{
+
+  }
   .site-content > .side-bar .collection-post .posts-content {
+    position: revert;
     padding: 1rem 0;
   }
 
@@ -371,7 +369,6 @@ export default {
   .site-content > .side-bar .collection-post .post-info {
     padding: .4rem .1rem !important;
     bottom: 0 !important;
-    left: 1.5rem !important;
     border-radius: 0 !important;
     background: #fff !important;
   }
@@ -382,7 +379,8 @@ export default {
 
   .site-content > .side-bar .collection-post .posts-content img {
     width: 100%;
-    height: auto !important;
+    height: 180px !important;
+    object-fit: cover;
   }
 
   .site-content > .side-bar .tags .tags-list {
@@ -474,19 +472,20 @@ export default {
     justify-content: center;
   }
 
-  .site-list .sites .sites img {
-    width: 100%;
+  .site-list .sites .site-img img {
+    width: 120px;
     height: auto;
   }
 
-  .site-list .sites .sites {
+  .site-list .sites .site-img {
+    width: 120px;
     position: relative;
     overflow: hidden;
-    width: 10rem;
-    height: 10rem;
+    height: 120px;
     border-radius: 50%;
     margin: 1rem 2rem;
     transition: .3s linear;
+    text-align: center;
     cursor: pointer;
   }
 

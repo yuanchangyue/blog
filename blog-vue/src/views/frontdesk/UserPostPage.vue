@@ -2,14 +2,14 @@
   <div class="blog-all" style="width: 100%;background: #f4f4f4;">
     <header-bar/>
     <div class="post-top">
-      <span style="color: #939598;font-weight: 700" v-text="'由' + postObj.userDTO.username + '编写'"></span>
+      <span v-if="postObj.userDTO.username!==undefined" style="color: #939598;font-weight: 700" v-text="'由' + postObj.userDTO.username + '编写'"></span>
       <h1 v-text="postObj.title"></h1>
     </div>
     <div class="content" id="content">
       <div class="container">
         <div class="content-box">
           <div class="post-box">
-            <ul class="side-bar">
+            <ul class="side-bar" id="side-bar">
               <li class="side-bar-li" @click="like">
                 <font-awesome-icon :icon="['fa','heart']"></font-awesome-icon>&nbsp;
                 <span>{{postObj.likes}}</span>
@@ -34,7 +34,7 @@
                 </el-col>
                 <el-col :span="14">
                   <p style="padding: 0;margin: 0;" v-text="post.title"></p>
-                  <summary style="color: #909399;font-size: 12px;line-height: 20px"
+                  <summary v-if="post.userDTO.username!==undefined" style="color: #909399;font-size: 12px;line-height: 20px"
                            v-text="'来自：'+post.userDTO.username"></summary>
                   <summary style="color: #909399;font-size: 12px;line-height: 20px"
                            v-text="dateFormat(post.editTime)"></summary>
@@ -64,8 +64,8 @@
         </div>
         <div class="login-comment" v-if="userData!=null">
           <div>
-            <el-avatar class="user-comment-avatar" :src="handlerUrl(userData.avatar)" :size="50"></el-avatar>
-            <span v-text="userData.username"/>
+            <el-avatar class="user-comment-avatar" :src="handlerUrl(userData.avatar)" :size="60"></el-avatar>
+            <h5 style="text-align: center" v-if="userData.username!==undefined"  v-text="userData.username"/>
           </div>
           <div class="edit-comment">
             <el-input class="comment-input" v-model="post.content" rows="8" type="textarea"
@@ -83,10 +83,10 @@
           </div>
           <div style="width: 100%;">
             <div style="display: flex;align-items: center">
-              <h3 v-text="c.commentDTO.username" style="margin-right: 10px;"></h3>
-              <span style="font-size: 12px" v-text="dateFormat(c.createTime)"></span>
+              <h4 v-if="c.commentDTO.username!==undefined"  v-text="c.commentDTO.username" style="margin-right: 10px;"></h4>
             </div>
-            <summary v-text="c.content"/>
+            <p v-text="c.content"></p>
+            <p style="font-size: 12px" v-text="dateFormat(c.createTime)"></p>
           </div>
         </div>
       </el-card>
@@ -121,21 +121,21 @@ export default {
       latestPost: [],
       comment: [],
       loading: true,
-      userData: JSON.parse(localStorage.getItem('user')),
+      userData: JSON.parse(sessionStorage.getItem('user')),
       collection: {
         userId: '',
         postId: ''
       },
       collectionStatus: false,
       normalStatus: 'side-bar-li',
-      checkStatus: 'side-bar-li-hover'
+      checkStatus: 'side-bar-li-hover',
+      commentY: 0
     }
   },
   components: { HeaderBar, FrontFooter },
   methods: {
     getPost () {
       this.$axios.get('/post/' + this.post.postId).then(value => {
-        console.info(value.data.data.userDTO)
         this.post.userId = value.data.data.userDTO.id
         this.postObj = value.data.data
         this.loading = false
@@ -143,7 +143,6 @@ export default {
       this.check()
     },
     getComment: function () {
-      console.info('userDTO' + this.postObj)
       this.$axios.get('/comments', {
         params: {
           pageIndex: this.post.pageIndex,
@@ -155,7 +154,6 @@ export default {
           userId: this.post.userId
         }
       }).then(value => {
-        console.info(value.data)
         this.comment = value.data.data.list
       })
     },
@@ -175,7 +173,7 @@ export default {
     },
     toPost (id) {
       this.loading = true
-      localStorage.setItem('userPostId', id)
+      sessionStorage.setItem('userPostId', id)
       this.post.postId = id
       window.location.reload()
     },
@@ -204,11 +202,11 @@ export default {
       return moment(d).format('YYYY-MM-DD')
     },
     gotoTag (id) {
-      localStorage.setItem('tagId', id)
+      sessionStorage.setItem('tagId', id)
       this.$router.push({ name: 'TagPage', params: { tagId: id, userId: this.userData.id } })
     },
     toCate (id) {
-      localStorage.setItem('cateId', id)
+      sessionStorage.setItem('cateId', id)
       this.$router.push({ name: 'CatePage', params: { cateId: id, userId: this.userData.id } })
     },
     like () {
@@ -224,12 +222,10 @@ export default {
       this.collection.userId = this.userData.id
       this.collection.postId = this.post.postId
       this.$axios.post('/collection/check', this.collection).then(_ => {
-        console.info(_.data.data)
         this.collectionStatus = _.data.data
       })
     },
     collect () {
-      console.info(this.userData)
       if (this.userData == null) {
         this.$message.error('登陆后才可以收藏该文章')
         return
@@ -243,7 +239,6 @@ export default {
         this.collection.userId = this.userData.id
         this.collection.postId = this.post.postId
         this.$axios.post('/collection', this.collection).then(_ => {
-          console.info(_.data.data.id)
           this.userPostId = _.data.data.id
           this.$notify.success('收藏成功')
           this.check()
@@ -252,7 +247,7 @@ export default {
     }
   },
   created () {
-    this.post.postId = localStorage.getItem('userPostId')
+    this.post.postId = sessionStorage.getItem('userPostId')
     this.getPost()
     this.showTagList()
     this.showCategory()
@@ -260,10 +255,27 @@ export default {
     this.getComment()
   },
   mounted: function () {
+    let top = 0
+    setTimeout(() => {
+      let comment = document.getElementById('comment-box')
+      console.info('comment' + comment)
+      if (comment !== null) {
+        let boundingClientRect = comment.getBoundingClientRect()
+        top = boundingClientRect.top - 400
+      }
+    }, 1000)
     window.addEventListener('scroll', function () {
-      var scrollTop = document.documentElement.scrollTop || document.body.scrollTop
-      var content = document.getElementById('content')
-      content.classList.toggle('content-toggle', scrollTop > 0)
+      let scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+      let content = document.getElementById('content')
+      if (content !== null) {
+        content.classList.toggle('content-toggle', scrollTop > 0)
+        let sideBar = document.getElementById('side-bar')
+        if (scrollTop >= top) {
+          sideBar.style.opacity = 0
+        } else {
+          sideBar.style.opacity = 1
+        }
+      }
     })
   }
 }
@@ -328,12 +340,13 @@ export default {
   .side-bar {
     text-align: center;
     position: fixed;
-    top: 10%;
-    left: 400px;
+    top: 40%;
+    left: 450px;
     -webkit-transform: translateY(30%);
     transform: translateY(30%);
     z-index: 90;
-    display: none;
+    opacity: 1;
+    transition:all .3s linear;
   }
 
   .side-bar .side-bar-li {
@@ -386,6 +399,7 @@ export default {
 
   .edit-comment {
     width: 100%;
+    margin-left: 20px;
   }
 
   .comment-input {
@@ -533,12 +547,15 @@ export default {
     }
   }
 
-  @media only screen and (max-width: 750px) {
+  @media only screen and (max-width: 1350px) {
     .content {
       width: 90%;
     }
     .post-top {
       width: 90%;
+    }
+    .side-bar{
+      display: none;
     }
     .comment-box{
       max-width: 400px;

@@ -15,7 +15,7 @@
       <div class="container">
         <section id="blog-loading">
           <article data-aos="zoom-in-up" class="post-panel" v-for="(p) in postList" :key="p.id">
-            <img :src="p.headpic" v-show="p.headpic!==''&&p.headpic!==null" alt="">
+            <img @click="toPost(p.id)" :src="p.headpic" v-show="p.headpic!==''&&p.headpic!==null" alt="">
             <h2>
               <a class="post-info" @click="toPage(p.id)" v-text="p.title" href="#"></a>
             </h2>
@@ -56,7 +56,7 @@ export default {
   data () {
     return {
       site: {
-        id: '',
+        id: 0,
         pageIndex: 1,
         pageSize: 20
       },
@@ -65,12 +65,13 @@ export default {
       siteHeadImg: [],
       siteObj: '',
       loading: true,
-      userData: JSON.parse(localStorage.getItem('user')),
+      userData: JSON.parse(sessionStorage.getItem('user')),
       subscript: {
-        userId: '',
-        siteId: ''
+        userId: 0,
+        siteId: 0
       },
-      no_columns: 3
+      no_columns: 3,
+      isCancel: true
     }
   },
   methods: {
@@ -123,27 +124,42 @@ export default {
       }
       this.subscript.userId = this.userData.id
       this.subscript.siteId = id
-      this.$axios.post('/subscription', this.subscript).then(_ => {
-        if (_.data.code === 200) {
-          this.$notify.success(_.data.data)
-          this.subscriptText = '已经订阅'
-        }
-      }).catch(_ => {
-        this.$notify.warning('订阅失败！')
-      })
+      if (!this.isCancel) {
+        this.$axios.post('/subscription', this.subscript).then(_ => {
+          if (_.data.code === 200) {
+            this.$notify.success(_.data.data)
+            this.subscriptText = '已经收藏'
+            this.checkSubscribe()
+          }
+        }).catch(_ => {
+          this.$notify.warning('收藏失败！')
+        })
+      } else {
+        this.$axios.post('/subscription/remove', this.subscript).then(_ => {
+          if (_.data.code === 200) {
+            this.$notify.success(_.data.data)
+            this.subscriptText = '收藏'
+            this.checkSubscribe()
+          }
+        })
+      }
     },
     checkSubscribe () {
       if (this.userData == null) {
-        this.subscriptText = '订阅'
+        this.subscriptText = '收藏'
+        this.isCancel = false
       }
       this.subscript.userId = this.userData.id
       this.$axios.post('/subscription/check', this.subscript).then(_ => {
         if (_.data.data === false) {
-          this.subscriptText = '订阅'
+          this.subscriptText = '收藏'
+          this.isCancel = false
         } else {
-          this.subscriptText = '已经订阅'
+          this.subscriptText = '已经收藏'
+          this.isCancel = true
         }
       })
+      console.info(this.isCancel)
     },
     initPostCard: function () {
       this.$nextTick(function () {
@@ -158,7 +174,7 @@ export default {
     }
   },
   created () {
-    this.site.id = localStorage.getItem('siteId')
+    this.site.id = sessionStorage.getItem('siteId')
     this.getPostList()
     this.getSite()
   },
@@ -167,8 +183,6 @@ export default {
       var scrollTop = document.documentElement.scrollTop || document.body.scrollTop
       var content = document.getElementById('content')
       content.classList.toggle('content-toggle', scrollTop > 0)
-      console.info(scrollTop)
-      console.info(content)
     })
   }
 }

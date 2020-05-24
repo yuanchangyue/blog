@@ -132,7 +132,7 @@ export default {
   },
   methods: {
     moreSite (id) {
-      localStorage.setItem('siteId', id)
+      sessionStorage.setItem('siteId', id)
       this.$router.push({ name: 'SitePage', params: { siteId: id } })
     },
     getlist () {
@@ -140,7 +140,6 @@ export default {
         if (value.data.code === 200) {
           this.setPageValue(value.data)
           this.cateData = value.data.data.crawlerPostCates
-          console.info(this.cateData)
         }
       })
     },
@@ -148,8 +147,6 @@ export default {
       return moment(d).format('YYYY-MM-DD h:mm:ss a')
     },
     handleCurrentChange (val) {
-      console.info('handleCurrentChange' + val)
-      console.info('handleCurrentChange' + this.currentPage)
       if (val) {
         this.currentPage = val
       }
@@ -158,13 +155,11 @@ export default {
       })
     },
     handleSizeChange (val) {
-      console.info('handleSizeChange->' + val)
       this.pageSize = val
       this.handleCurrentChange()
     },
     setPageValue (value) {
       this.siteData = value.data.siteVOPageInfo.list
-      console.info(this.siteData)
       this.pageTotal = value.data.siteVOPageInfo.total
       this.pageSize = value.data.siteVOPageInfo.pageSize
       this.currentPage = value.data.siteVOPageInfo.pageNum

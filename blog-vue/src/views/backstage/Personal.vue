@@ -55,30 +55,30 @@
           <el-tabs type="border-card">
             <el-tab-pane label="基本资料">
               <div class="personal-basic">
-                <el-form ref="form" :model="userForm" size="small">
-                  <el-form-item label="用户名称">
+                <el-form ref="userForm" :model="userForm" size="small" :rules="rules" >
+                  <el-form-item label="用户名称" prop="username">
                     <el-input prefix-icon="el-icon-user-solid" v-model="userForm.username"/>
                   </el-form-item>
-                  <el-form-item label="用户昵称">
+                  <el-form-item label="用户昵称" prop="nickname">
                     <el-input prefix-icon="el-icon-user-solid" v-model="userForm.nickname"/>
                   </el-form-item>
-                  <el-form-item label="用户邮箱">
+                  <el-form-item label="用户邮箱" prop="email">
                     <el-input prefix-icon="el-icon-message" v-model="userForm.email"/>
                   </el-form-item>
-                  <el-form-item label="简介">
+                  <el-form-item label="简介" prop="description">
                     <el-input prefix-icon="el-icon-message" v-model="userForm.description"/>
                   </el-form-item>
                 </el-form>
-                <el-button type="primary" @click="updateUser">更新</el-button>
+                <el-button type="primary" @click="updateUser('userForm')">更新</el-button>
               </div>
             </el-tab-pane>
             <el-tab-pane label="修改密码">
-              <el-form ref="form" :model="userPasswordForm" size="small">
-                <el-form-item label="旧密码">
+              <el-form ref="userPasswordForm" :rules="rule2" :model="userPasswordForm" size="small">
+                <el-form-item label="旧密码" prop="oldPassword">
                   <el-input type="password" show-password prefix-icon="el-icon-lock"
                             v-model="userPasswordForm.oldPassword" placeholder="请输入旧密码"/>
                 </el-form-item>
-                <el-form-item label="新密码">
+                <el-form-item label="新密码" prop="newPassword">
                   <el-input type="password" show-password prefix-icon="el-icon-lock"
                             v-model="userPasswordForm.newPassword" placeholder="请输入新密码"/>
                 </el-form-item>
@@ -87,7 +87,7 @@
                             v-model="userPasswordForm.againPassword" placeholder="请再一次输入新密码"/>
                 </el-form-item>
               </el-form>
-              <el-button type="primary" @click="updatePassword">修改密码</el-button>
+              <el-button type="primary" @click="updatePassword('userPasswordForm')">修改密码</el-button>
             </el-tab-pane>
           </el-tabs>
         </el-col>
@@ -154,6 +154,38 @@ export default {
         email: '',
         description: ''
       },
+      rules: {
+        username: [
+          { required: true, message: '请输入用户名称', trigger: 'blur' },
+          { min: 3, max: 32, message: '长度在 3 到 32 个字符', trigger: 'blur' }
+        ],
+        nickname: [
+          { required: true, message: '请输入用户昵称', trigger: 'blur' },
+          { min: 3, max: 32, message: '长度在 3 到 32 个字符', trigger: 'blur' }
+        ],
+        description: [
+          { required: true, message: '请输入介绍', trigger: 'blur' },
+          { max: 1032, message: '长度不能超过1023个字符', trigger: 'blur' }
+        ],
+        email: [
+          { required: true, message: '请输入邮箱', trigger: 'blur' },
+          { type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }
+        ]
+      },
+      rule2: {
+        oldPassword: [
+          { required: true, message: '请输入旧密码', trigger: 'blur' },
+          { min: 3, max: 32, message: '长度在 3 到 32 个字符', trigger: 'blur' }
+        ],
+        newPassword: [
+          { required: true, message: '请输入新密码', trigger: 'blur' },
+          { min: 3, max: 32, message: '长度在 3 到 32 个字符', trigger: 'blur' }
+        ],
+        newAgainPassword: [
+          { required: true, message: '请第二次输入密码', trigger: 'blur' },
+          { min: 3, max: 32, message: '长度在 3 到 32 个字符', trigger: 'blur' }
+        ]
+      },
       userPasswordForm: {
         userId: '',
         oldPassword: '',
@@ -200,16 +232,30 @@ export default {
       this.pageSize = value.data.pageSize
       this.currentPage = value.data.pageNum
     },
-    updateUser () {
-      this.$axios.put('/user', this.userForm).then(_ => {
-        this.$notify.success('用户信息更新成功')
-        this.showUser()
+    updateUser (formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          this.$axios.put('/user', this.userForm).then(_ => {
+            this.$notify.success('用户信息更新成功')
+            this.showUser()
+          })
+        } else {
+          this.$message.error('请输入有效的信息!')
+          return false
+        }
       })
     },
-    updatePassword () {
-      this.$axios.post('/user/modifypw', qs.stringify(this.userPasswordForm)).then(_ => {
-        this.$notify.success('密码更新成功，请重新登陆！')
-        this.logout()
+    updatePassword (formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          this.$axios.post('/user/modifypw', qs.stringify(this.userPasswordForm)).then(_ => {
+            this.$notify.success('密码更新成功，请重新登陆！')
+            this.logout()
+          })
+        } else {
+          this.$message.error('请输入有效的信息!')
+          return false
+        }
       })
     },
     logout () {

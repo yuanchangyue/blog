@@ -14,7 +14,7 @@
       </div>
     </div>
     <FrontFooter/>
-    <el-backtop></el-backtop>
+    <el-backtop/>
   </div>
 </template>
 
@@ -30,7 +30,7 @@ export default {
         id: ''
       },
       postObj: '',
-      userData: JSON.parse(localStorage.getItem('user')),
+      userData: JSON.parse(sessionStorage.getItem('user')),
       collection: {
         userId: '',
         crawlerPostId: ''
@@ -52,12 +52,10 @@ export default {
       this.collection.userId = this.userData.id
       this.collection.crawlerPostId = this.post.id
       this.$axios.post('/collection/check', this.collection).then(_ => {
-        console.info(_.data.data)
         this.collectionStatus = _.data.data
       })
     },
     collect () {
-      console.info(this.userData)
       if (this.userData == null) {
         this.$message.error('登陆后才可以收藏该文章')
         return
@@ -71,7 +69,6 @@ export default {
         this.collection.userId = this.userData.id
         this.collection.crawlerPostId = this.post.id
         this.$axios.post('/collection', this.collection).then(_ => {
-          console.info(_.data.data.id)
           this.$notify.success('收藏成功')
           this.check()
         })
@@ -88,7 +85,7 @@ export default {
 <style scoped>
 
   .content {
-    width: 60%;
+    max-width: 800px;
     height: 100%;
     margin: 15rem auto;
     background: #ffffff;
@@ -106,7 +103,7 @@ export default {
 
   .side-bar {
     position: fixed;
-    left: 200px;
+    left: 400px;
     top: 400px;
     list-style: none;
   }

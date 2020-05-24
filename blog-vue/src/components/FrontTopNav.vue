@@ -1,7 +1,6 @@
 <template >
-  <div class="blog-all" style="width: 100%;background: #ffffff;">
-    <nav class="nav">
-      <div style="width: 60%;display: flex;">
+  <nav class="nav">
+    <div style="width: 60%;display: flex;">
       <el-col class="logo">LOGO</el-col>
       <el-col class="link">
         <el-link class="link-text" href="/blog/index">Blog</el-link>
@@ -15,9 +14,8 @@
           </button>
         </form>
       </el-col>
-      </div>
-    </nav>
-  </div>
+    </div>
+  </nav>
 </template>
 
 <script>
@@ -25,13 +23,13 @@ export default {
   name: 'FrontTopNav',
   data () {
     return {
-      userData: JSON.parse(localStorage.getItem('user'))
+      userData: JSON.parse(sessionStorage.getItem('user'))
     }
   },
   methods: {
     logout () {
       this.$axios.get('/user/logout').then(_ => {
-        localStorage.clear()
+        sessionStorage.clear()
         this.$router.replace({ path: '/blog/viewpoint' })
       })
     }

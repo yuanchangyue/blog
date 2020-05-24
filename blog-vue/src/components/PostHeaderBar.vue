@@ -11,7 +11,7 @@
         <li>
           <div class="search-box">
             <input class="search-input" type="text" placeholder="搜索一下">
-            <a href="#" @click="queryFull">
+            <a href="#">
               <i class="el-icon-search"/>
             </a>
           </div>
@@ -32,13 +32,13 @@ export default {
   name: 'Header',
   data () {
     return {
-      userData: JSON.parse(localStorage.getItem('user'))
+      userData: JSON.parse(sessionStorage.getItem('user'))
     }
   },
   methods: {
     logout () {
       this.$axios.get('/user/logout').then(_ => {
-        localStorage.clear()
+        sessionStorage.clear()
         this.$router.replace({ path: '/blog/viewpoint' })
       })
     },
@@ -51,7 +51,9 @@ export default {
     window.addEventListener('scroll', function () {
       var scrollTop = document.documentElement.scrollTop || document.body.scrollTop
       var header = document.querySelector('header')
-      header.classList.toggle('sticky', scrollTop > 0)
+      if (header !== null) {
+        header.classList.toggle('sticky', scrollTop > 0)
+      }
     })
   }
 }

@@ -24,14 +24,11 @@ axios.interceptors.response.use(function (response) {
     return response
   }
   if (response.data.code === '300') {
-    console.info(response.data.data)
     router.push('/login')
   } else if (response.data.code === 1001) {
-    console.info('参数出错：' + response.data.msg)
     Notification.error(response.data.msg)
     return Promise.reject(response)
   } else if (response.data.code !== 200) {
-    console.info(response.data)
     Message.error(response.data.msg)
     return Promise.reject(response)
   }

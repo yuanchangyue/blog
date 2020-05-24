@@ -93,19 +93,19 @@
                 </el-tag>
                 </template>
               </el-table-column>
-              <el-table-column
-                prop="address"
-                label="评价"
-                show-overflow-tooltip>
-              </el-table-column>
-              <el-table-column
-                prop="visits"
-                label="访问"
-                show-overflow-tooltip>
-                <template slot-scope="scope">
-                  <el-badge v-bind:value="scope.row.visits" class="item" type="primary" ></el-badge>
-                </template>
-              </el-table-column>
+<!--              <el-table-column-->
+<!--                prop="address"-->
+<!--                label="评价"-->
+<!--                show-overflow-tooltip>-->
+<!--              </el-table-column>-->
+<!--              <el-table-column-->
+<!--                prop="visits"-->
+<!--                label="访问"-->
+<!--                show-overflow-tooltip>-->
+<!--                <template slot-scope="scope">-->
+<!--                  <el-badge v-bind:value="scope.row.visits" class="item" type="primary" ></el-badge>-->
+<!--                </template>-->
+<!--              </el-table-column>-->
               <el-table-column
                 label="发布时间"
                 show-overflow-tooltip>
@@ -214,14 +214,12 @@ export default {
     },
     showTagList () {
       this.$axios.get('/tag/list').then(value => {
-        console.info(value.data)
         this.tagData = value.data.data
       }).catch(_ => {
       })
     },
     showCategory () {
       this.$axios.get('/category/list').then(value => {
-        console.info(value.data)
         this.categoryData = value.data.data
       }).catch(_ => {
       })
@@ -243,7 +241,6 @@ export default {
     },
     submit () {
       this.$axios.post('/post/query', this.form).then(value => {
-        console.info(value.data)
         this.tableData = value.data.list
       }).catch(_ => {})
     },
